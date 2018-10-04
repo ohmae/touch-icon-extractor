@@ -7,6 +7,7 @@
 
 package net.mm2d.touchicon
 
+import android.graphics.Point
 import org.hamcrest.Matchers.`is`
 import org.junit.Assert.assertThat
 import org.junit.Test
@@ -23,31 +24,31 @@ class IconInfoTest {
     fun inferSizeFromUrl() {
         assertThat(IconInfo.inferSizeFromUrl(
                 "https://www.example.com/apple-touch-icon-48x48.png"),
-                `is`(48 to 48))
+                `is`(Point(48, 48)))
         assertThat(IconInfo.inferSizeFromUrl(
                 "https://www.example.com/apple-touch-icon48x48.png"),
-                `is`(48 to 48))
+                `is`(Point(48, 48)))
         assertThat(IconInfo.inferSizeFromUrl(
                 "https://www.example.com/apple-touch-icon_48x48.png"),
-                `is`(48 to 48))
+                `is`(Point(48, 48)))
         assertThat(IconInfo.inferSizeFromUrl(
                 "https://www.example.com/apple-touch-icon2-48x48.png"),
-                `is`(48 to 48))
+                `is`(Point(48, 48)))
         assertThat(IconInfo.inferSizeFromUrl(
                 "https://www.example.com/apple-touch-iconx2-48x48.png"),
-                `is`(48 to 48))
+                `is`(Point(48, 48)))
         assertThat(IconInfo.inferSizeFromUrl(
                 "https://www.example.com/apple-touch-icon.48x48.png"),
-                `is`(48 to 48))
+                `is`(Point(48, 48)))
         assertThat(IconInfo.inferSizeFromUrl(
                 "https://www.example.com/apple-touch-icon.4Bx48.png"),
-                `is`(0 to 0))
+                `is`(Point(0, 0)))
     }
 
     @Test
     fun inferSizeFromSizes() {
-        assertThat(IconInfo.inferSizeFromSizes("48x48"), `is`(48 to 48))
-        assertThat(IconInfo.inferSizeFromSizes("1024x1024"), `is`(1024 to 1024))
-        assertThat(IconInfo.inferSizeFromSizes("0x1B"), `is`(0 to 0))
+        assertThat(IconInfo.inferSizeFromSizes("48x48"), `is`(Point(48, 48)))
+        assertThat(IconInfo.inferSizeFromSizes("1024x1024"), `is`(Point(1024, 1024)))
+        assertThat(IconInfo.inferSizeFromSizes("0x1B"), `is`(Point(0, 0)))
     }
 }

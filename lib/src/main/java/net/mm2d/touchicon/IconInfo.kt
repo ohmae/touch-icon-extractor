@@ -7,6 +7,7 @@
 
 package net.mm2d.touchicon
 
+import android.graphics.Point
 import android.os.Parcel
 import android.os.Parcelable
 import android.os.Parcelable.Creator
@@ -30,9 +31,9 @@ data class IconInfo(
             parcel.readString()!!
     )
 
-    fun inferSize(): Pair<Int, Int> {
+    fun inferSize(): Point {
         val size = inferSizeFromSizes(sizes)
-        if (size.first != 0 && size.second != 0) {
+        if (size.x != 0 && size.y != 0) {
             return size
         }
         return inferSizeFromUrl(url)
@@ -59,21 +60,21 @@ data class IconInfo(
             return arrayOfNulls(size)
         }
 
-        fun inferSizeFromUrl(url: String): Pair<Int, Int> {
+        fun inferSizeFromUrl(url: String): Point {
             val fileName = url.substring(url.lastIndexOf('/'))
             val matcher = Pattern.compile("\\d+x\\d+").matcher(fileName)
             if (!matcher.find()) {
-                return 0 to 0
+                return Point(0, 0)
             }
             return inferSizeFromSizes(matcher.group())
         }
 
-        fun inferSizeFromSizes(sizes: String): Pair<Int, Int> {
+        fun inferSizeFromSizes(sizes: String): Point {
             val part = sizes.split('x')
             if (part.size == 2) {
-                return (part[0].toIntOrNull() ?: 0) to (part[1].toIntOrNull() ?: 0)
+                return Point(part[0].toIntOrNull() ?: 0, part[1].toIntOrNull() ?: 0)
             }
-            return 0 to 0
+            return Point(0, 0)
         }
     }
 }
