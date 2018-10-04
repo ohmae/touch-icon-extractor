@@ -24,7 +24,7 @@ import java.io.InputStream
  */
 class TouchIconExtractor(private val client: OkHttpClient) {
     var userAgent: String = ""
-    var fetchLimit: Int = DEFAULT_LIMIT_SIZE
+    var downloadLimit: Int = DEFAULT_LIMIT_SIZE
     var headers: Map<String, String> = emptyMap()
 
     fun extract(siteUrl: String): List<IconInfo> {
@@ -65,9 +65,12 @@ class TouchIconExtractor(private val client: OkHttpClient) {
         val request = builder.build()
         val response = client.newCall(request).execute()
         if (!response.hasHtml()) return ""
-        val stream = response.body() ?: return ""
-        stream.byteStream().use {
-            return fetchHead(it, fetchLimit)
+        val body = response.body() ?: return ""
+        if (downloadLimit <= 0) {
+            return body.string()
+        }
+        body.byteStream().use {
+            return fetchHead(it, downloadLimit)
         }
     }
 
