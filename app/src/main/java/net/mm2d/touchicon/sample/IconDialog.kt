@@ -85,12 +85,14 @@ class IconDialog : DialogFragment() {
             holder.rel.text = iconInfo.rel.value
             holder.type.text = iconInfo.type
             holder.url.text = iconInfo.url
+            val size = iconInfo.inferSize()
+            holder.imageSizes.text = "(${size.x}x${size.y})"
             Single.fromCallable { downloadIcon(iconInfo.url) }
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
                         if (holder.itemView.tag == iconInfo) {
-                            holder.imageSizes.text = "${it.width}x${it.height}"
+                            holder.imageSizes.text = "${it.width}x${it.height} (${size.x}x${size.y})"
                             holder.icon.setImageBitmap(it)
                         }
                     }, {})
@@ -110,7 +112,7 @@ class IconDialog : DialogFragment() {
 
     private class IconViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val icon: ImageView = view.findViewById(R.id.icon)
-        val imageSizes: TextView = view.findViewById(R.id.image_sizes)
+        val imageSizes: TextView = view.findViewById(R.id.image_size)
         val sizes: TextView = view.findViewById(R.id.sizes)
         val rel: TextView = view.findViewById(R.id.rel)
         val type: TextView = view.findViewById(R.id.type)
