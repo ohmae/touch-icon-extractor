@@ -13,6 +13,7 @@ package net.mm2d.touchicon
 enum class Rel(val value: String) {
     ICON("icon"),
     APPLE_TOUCH_ICON("apple-touch-icon"),
+    APPLE_TOUCH_ICON_PRECOMPOSED("apple-touch-icon-precomposed"),
     SHORTCUT_ICON("shortcut icon"),
     ;
 
