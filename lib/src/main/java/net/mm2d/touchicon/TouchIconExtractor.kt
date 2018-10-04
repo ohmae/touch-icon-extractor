@@ -23,6 +23,7 @@ import java.io.InputStream
  */
 class TouchIconExtractor(private val client: OkHttpClient) {
     var userAgent: String = ""
+    var fetchLimit: Int = DEFAULT_LIMIT_SIZE
 
     fun extract(siteUrl: String): List<IconInfo> {
         val html = fetchHead(siteUrl)
@@ -59,7 +60,7 @@ class TouchIconExtractor(private val client: OkHttpClient) {
         if (!response.hasHtml()) return ""
         val stream = response.body() ?: return ""
         stream.byteStream().use {
-            return fetchHead(it, FETCH_SIZE)
+            return fetchHead(it, fetchLimit)
         }
     }
 
@@ -89,7 +90,7 @@ class TouchIconExtractor(private val client: OkHttpClient) {
 
     companion object {
         const val BUFFER_SIZE = 1024
-        const val FETCH_SIZE = 1024 * 64
+        const val DEFAULT_LIMIT_SIZE = 1024 * 64
 
         private fun makeAbsoluteUrl(baseUrl: String, url: String): String {
             return when {
