@@ -17,11 +17,14 @@ import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentActivity
 import android.support.v7.app.AlertDialog
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -36,15 +39,28 @@ import java.io.IOException
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 class IconDialog : DialogFragment() {
-    val compositeDisposable = CompositeDisposable()
+    private val extractor = TouchIconExtractorHolder.extractor
+    private val compositeDisposable = CompositeDisposable()
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val act = activity!!
         val arg = arguments!!
+        val title = arg.getString(KEY_TITLE)!!
         val siteUrl = arg.getString(KEY_SITE_URL)!!
-        val icons: List<IconInfo> = arg.getParcelableArrayList(KEY_ICON_LIST)!!
+        val view = act.layoutInflater.inflate(R.layout.dialog_icon, act.window.decorView as ViewGroup, false)
+        view.findViewById<TextView>(R.id.site_url).text = siteUrl
+        val progressBar: ProgressBar = view.findViewById(R.id.progress_bar)
+        val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(act)
+        recyclerView.addItemDecoration(DividerItemDecoration(act, DividerItemDecoration.VERTICAL))
+        Single.fromCallable { extractor.extract(siteUrl) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doFinally { progressBar.visibility = View.GONE }
+                .subscribe({ recyclerView.adapter = IconListAdapter(act, it) }, {})
+                .addTo(compositeDisposable)
         return AlertDialog.Builder(act)
-                .setTitle(siteUrl)
-                .setAdapter(IconListAdapter(act, icons)) { _, _ -> }
+                .setTitle(title)
+                .setView(view)
                 .create()
     }
 
@@ -53,24 +69,32 @@ class IconDialog : DialogFragment() {
         compositeDisposable.dispose()
     }
 
-    private inner class IconListAdapter(private val context: Context, private val list: List<IconInfo>) : BaseAdapter() {
+    private inner class IconListAdapter(context: Context, private val list: List<IconInfo>) : RecyclerView.Adapter<IconViewHolder>() {
         private val inflater = LayoutInflater.from(context)
+        override fun onCreateViewHolder(parent: ViewGroup, type: Int): IconViewHolder {
+            return IconViewHolder(inflater.inflate(R.layout.li_icon, parent, false))
+        }
+
+        override fun getItemCount(): Int = list.size
+
         @SuppressLint("SetTextI18n")
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            val iconInfo = getItem(position)
-            val view = inflateView(R.layout.li_icon, convertView, parent)
-            val imageView: ImageView = view.findViewById(R.id.icon)
+        override fun onBindViewHolder(holder: IconViewHolder, position: Int) {
+            val iconInfo = list[position]
+            holder.itemView.tag = iconInfo
+            holder.sizes.text = iconInfo.sizes
+            holder.rel.text = iconInfo.rel.value
+            holder.type.text = iconInfo.type
+            holder.url.text = iconInfo.url
             Single.fromCallable { downloadIcon(iconInfo.url) }
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .doOnSuccess { view.findViewById<TextView>(R.id.realSizes).text = "image size: ${it.width}x${it.height}" }
-                    .subscribe({ imageView.setImageBitmap(it) }, {})
+                    .subscribe({
+                        if (holder.itemView.tag == iconInfo) {
+                            holder.imageSizes.text = "${it.width}x${it.height}"
+                            holder.icon.setImageBitmap(it)
+                        }
+                    }, {})
                     .addTo(compositeDisposable)
-            view.findViewById<TextView>(R.id.sizes).text = "sizes: ${iconInfo.sizes}"
-            view.findViewById<TextView>(R.id.rel).text = "rel: ${iconInfo.rel.value}"
-            view.findViewById<TextView>(R.id.type).text = "type: ${iconInfo.type}"
-            view.findViewById<TextView>(R.id.url).text = "url: ${iconInfo.url}"
-            return view
         }
 
         private fun downloadIcon(url: String): Bitmap {
@@ -82,35 +106,31 @@ class IconDialog : DialogFragment() {
             val bin = response.body()?.bytes() ?: throw IOException()
             return BitmapFactory.decodeByteArray(bin, 0, bin.size) ?: throw IOException()
         }
+    }
 
-        private fun inflateView(layout: Int, convertView: View?, parent: ViewGroup): View =
-                convertView ?: inflater.inflate(layout, parent, false)
-
-        override fun getCount(): Int = list.size
-
-        override fun getItem(position: Int): IconInfo = list[position]
-
-        override fun getItemId(position: Int): Long = position.toLong()
+    private class IconViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val icon: ImageView = view.findViewById(R.id.icon)
+        val imageSizes: TextView = view.findViewById(R.id.image_sizes)
+        val sizes: TextView = view.findViewById(R.id.sizes)
+        val rel: TextView = view.findViewById(R.id.rel)
+        val type: TextView = view.findViewById(R.id.type)
+        val url: TextView = view.findViewById(R.id.url)
     }
 
     companion object {
+        private const val KEY_TITLE = "KEY_TITLE"
         private const val KEY_SITE_URL = "KEY_SITE_URL"
-        private const val KEY_ICON_LIST = "KEY_ICON_LIST"
 
-        fun show(activity: FragmentActivity, title: String, icons: List<IconInfo>) {
-            newInstance(title, icons).show(activity.supportFragmentManager, "")
+        fun show(activity: FragmentActivity, title: String, siteUrl: String) {
+            IconDialog().also {
+                it.arguments = makeArgument(title, siteUrl)
+            }.show(activity.supportFragmentManager, "")
         }
 
-        private fun newInstance(siteUrl: String, icons: List<IconInfo>): IconDialog {
-            return IconDialog().also {
-                it.arguments = makeArgument(siteUrl, icons)
-            }
-        }
-
-        private fun makeArgument(siteUrl: String, icons: List<IconInfo>): Bundle {
+        private fun makeArgument(title: String, siteUrl: String): Bundle {
             return Bundle().also {
+                it.putString(KEY_TITLE, title)
                 it.putString(KEY_SITE_URL, siteUrl)
-                it.putParcelableArrayList(KEY_ICON_LIST, ArrayList(icons))
             }
         }
     }

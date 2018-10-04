@@ -12,23 +12,12 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.disposables.Disposables
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
-import net.mm2d.touchicon.TouchIconExtractor
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 class MainActivity : AppCompatActivity() {
-    val extractor by lazy {
-        TouchIconExtractor(OkHttpClientHolder.client)
-    }
-    var disposable: Disposable = Disposables.disposed()
-
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,21 +31,10 @@ class MainActivity : AppCompatActivity() {
         webView.webChromeClient = WebChromeClient()
         webView.webViewClient = WebViewClient()
         webView.loadUrl("https://m.yahoo.co.jp/")
-        extractor.userAgent = webView.settings.userAgentString
+        TouchIconExtractorHolder.extractor.userAgent = webView.settings.userAgentString
         fab.setOnClickListener {
-            disposable.dispose()
-            val url = webView.url
-            disposable = Single
-                    .fromCallable { extractor.extract(url) }
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ IconDialog.show(this, url, it) }, {})
+            IconDialog.show(this, webView.title, webView.url)
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        disposable.dispose()
     }
 
     override fun onBackPressed() {

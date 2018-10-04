@@ -1,61 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
+    android:layout_height="wrap_content"
     >
 
     <ImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/realSizes"
+        android:id="@+id/title_image_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="image size:"
         android:textColor="@color/text"
         android:textSize="12sp"
-        tools:text="image size: 48x48"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon" />
+
+    <TextView
+        android:id="@+id/image_sizes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/text_strong"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/title_image_size"
+        app:layout_constraintTop_toBottomOf="@+id/icon"
+        tools:text="image size: 48x48" />
+
+    <TextView
+        android:id="@+id/title_sizes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="sizes:"
+        android:textColor="@color/text"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_image_size" />
 
     <TextView
         android:id="@+id/sizes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
         android:textColor="@color/text"
         android:textSize="12sp"
-        tools:text="sizes: 48x48"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/title_image_size"
+        app:layout_constraintTop_toBottomOf="@+id/image_sizes"
+        tools:text="sizes: 48x48" />
+
+    <TextView
+        android:id="@+id/title_rel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="rel:"
+        android:textColor="@color/text"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_sizes" />
 
     <TextView
         android:id="@+id/rel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
         android:textColor="@color/text"
         android:textSize="12sp"
-        tools:text="rel: apple-touch-icon"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/title_image_size"
+        app:layout_constraintTop_toBottomOf="@+id/sizes"
+        tools:text="rel: apple-touch-icon" />
 
+
+    <TextView
+        android:id="@+id/title_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="type:"
+        android:textColor="@color/text"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_rel" />
 
     <TextView
         android:id="@+id/type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
         android:textColor="@color/text"
         android:textSize="12sp"
-        tools:text="type: "
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/title_image_size"
+        app:layout_constraintTop_toBottomOf="@+id/rel"
+        tools:text="type: " />
+
+    <TextView
+        android:id="@+id/title_url"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="url:"
+        android:textColor="@color/text"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_type" />
 
     <TextView
         android:id="@+id/url"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:paddingBottom="8dp"
         android:textColor="@color/text"
         android:textSize="12sp"
-        tools:text="url: "
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/title_image_size"
+        app:layout_constraintTop_toBottomOf="@+id/type"
+        tools:text="https://developer.android.com/reference/android/support/v7/widget/DividerItemDecoration" />
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
