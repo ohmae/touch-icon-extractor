@@ -10,6 +10,7 @@ package net.mm2d.touchicon
 import android.net.Uri
 import android.support.annotation.VisibleForTesting
 import android.webkit.URLUtil
+import okhttp3.Headers
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -24,6 +25,7 @@ import java.io.InputStream
 class TouchIconExtractor(private val client: OkHttpClient) {
     var userAgent: String = ""
     var fetchLimit: Int = DEFAULT_LIMIT_SIZE
+    var headers: Map<String, String> = emptyMap()
 
     fun extract(siteUrl: String): List<IconInfo> {
         val html = fetchHead(siteUrl)
@@ -51,12 +53,17 @@ class TouchIconExtractor(private val client: OkHttpClient) {
     }
 
     private fun fetchHead(url: String): String {
-        val request: Request = Request.Builder()
+        val builder = Request.Builder()
                 .get()
-                .header("User-Agent", userAgent)
                 .url(url)
-                .build()
-        val response: Response = client.newCall(request).execute()
+        if (userAgent.isNotEmpty()) {
+            builder.header("User-Agent", userAgent)
+        }
+        if (headers.isNotEmpty()) {
+            builder.headers(Headers.of(headers))
+        }
+        val request = builder.build()
+        val response = client.newCall(request).execute()
         if (!response.hasHtml()) return ""
         val stream = response.body() ?: return ""
         stream.byteStream().use {
