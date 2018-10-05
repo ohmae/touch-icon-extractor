@@ -64,14 +64,13 @@ class TouchIconExtractor(private val client: OkHttpClient) {
         }
         val request = builder.build()
         val response = client.newCall(request).execute()
-        if (!response.hasHtml()) return ""
-        val body = response.body() ?: return ""
-        if (downloadLimit <= 0) {
-            return body.string()
-        }
-        body.byteStream().use {
-            return fetchHead(it, downloadLimit)
-        }
+        response.body()?.use {
+            if (!response.hasHtml()) return ""
+            if (downloadLimit <= 0) {
+                return it.string()
+            }
+            return fetchHead(it.byteStream(), downloadLimit)
+        } ?: return ""
     }
 
     private fun Response.hasHtml(): Boolean {
