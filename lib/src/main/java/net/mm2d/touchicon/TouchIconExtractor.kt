@@ -76,7 +76,8 @@ class TouchIconExtractor(private val client: OkHttpClient) {
     private fun Response.hasHtml(): Boolean {
         if (!isSuccessful) return false
         val type = header("Content-Type") ?: return false
-        return type.contains("text/html", true)
+        return type.contains("text/html", true) ||
+                type.contains("application/xhtml+xml", true)
     }
 
     private fun fetchHead(stream: InputStream, limit: Int): String {
