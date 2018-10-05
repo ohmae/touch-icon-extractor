@@ -60,6 +60,7 @@ data class IconInfo(
             return arrayOfNulls(size)
         }
 
+        @JvmStatic
         fun inferSizeFromUrl(url: String): Point {
             val fileName = url.substring(url.lastIndexOf('/'))
             val matcher = Pattern.compile("\\d+x\\d+").matcher(fileName)
@@ -69,6 +70,7 @@ data class IconInfo(
             return inferSizeFromSizes(matcher.group())
         }
 
+        @JvmStatic
         fun inferSizeFromSizes(sizes: String): Point {
             val part = sizes.split('x')
             if (part.size == 2) {
