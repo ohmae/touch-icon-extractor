@@ -27,20 +27,20 @@ class TouchIconExtractor(private val client: OkHttpClient) {
     var headers: Map<String, String> = emptyMap()
     var downloadLimit: Int = DEFAULT_LIMIT_SIZE
 
-    fun extract(siteUrl: String): List<IconInfo> {
+    fun extract(siteUrl: String): List<LinkIcon> {
         val html = fetchHead(siteUrl)
         if (html.isEmpty()) return emptyList()
         return extract(siteUrl, html)
     }
 
     @VisibleForTesting
-    internal fun extract(siteUrl: String, html: String): List<IconInfo> {
+    internal fun extract(siteUrl: String, html: String): List<LinkIcon> {
         return Jsoup.parse(html).getElementsByTag("link")
                 .mapNotNull { createIconInfo(siteUrl, it) }
                 .toList()
     }
 
-    private fun createIconInfo(siteUrl: String, linkElement: Element): IconInfo? {
+    private fun createIconInfo(siteUrl: String, linkElement: Element): LinkIcon? {
         val rel = Rel.of(linkElement.attr("rel")) ?: return null
         val href = linkElement.attr("href")
         if (href.isEmpty()) {
@@ -49,7 +49,7 @@ class TouchIconExtractor(private val client: OkHttpClient) {
         val url = makeAbsoluteUrl(siteUrl, href)
         val sizes = linkElement.attr("sizes")
         val type = linkElement.attr("type")
-        return IconInfo(rel, url, sizes, type, siteUrl)
+        return LinkIcon(rel, url, sizes, type, siteUrl)
     }
 
     private fun fetchHead(url: String): String {

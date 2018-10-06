@@ -16,7 +16,7 @@ import java.util.regex.Pattern
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-data class IconInfo(
+data class LinkIcon(
         val rel: Rel,
         val url: String,
         val sizes: String,
@@ -51,12 +51,12 @@ data class IconInfo(
         return 0
     }
 
-    companion object CREATOR : Creator<IconInfo> {
-        override fun createFromParcel(parcel: Parcel): IconInfo {
-            return IconInfo(parcel)
+    companion object CREATOR : Creator<LinkIcon> {
+        override fun createFromParcel(parcel: Parcel): LinkIcon {
+            return LinkIcon(parcel)
         }
 
-        override fun newArray(size: Int): Array<IconInfo?> {
+        override fun newArray(size: Int): Array<LinkIcon?> {
             return arrayOfNulls(size)
         }
 

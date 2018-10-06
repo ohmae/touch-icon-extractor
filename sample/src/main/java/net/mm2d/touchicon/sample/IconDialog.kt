@@ -31,7 +31,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
-import net.mm2d.touchicon.IconInfo
+import net.mm2d.touchicon.LinkIcon
 import okhttp3.Request
 import java.io.IOException
 
@@ -69,7 +69,7 @@ class IconDialog : DialogFragment() {
         compositeDisposable.dispose()
     }
 
-    private inner class IconListAdapter(context: Context, private val list: List<IconInfo>) : RecyclerView.Adapter<IconViewHolder>() {
+    private inner class IconListAdapter(context: Context, private val list: List<LinkIcon>) : RecyclerView.Adapter<IconViewHolder>() {
         private val inflater = LayoutInflater.from(context)
         override fun onCreateViewHolder(parent: ViewGroup, type: Int): IconViewHolder {
             return IconViewHolder(inflater.inflate(R.layout.li_icon, parent, false))
