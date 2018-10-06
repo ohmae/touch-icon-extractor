@@ -57,7 +57,8 @@ internal class ExtractFromHtml(private val extractor: TouchIconExtractor) {
                 return it.string()
             }
             return fetchHeaderPart(it.byteStream(), downloadLimit)
-        } ?: return ""
+        }
+        return ""
     }
 
     private fun Response.hasHtml(): Boolean {
