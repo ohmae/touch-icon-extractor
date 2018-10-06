@@ -24,8 +24,8 @@ import java.io.InputStream
  */
 class TouchIconExtractor(private val client: OkHttpClient) {
     var userAgent: String = ""
-    var downloadLimit: Int = DEFAULT_LIMIT_SIZE
     var headers: Map<String, String> = emptyMap()
+    var downloadLimit: Int = DEFAULT_LIMIT_SIZE
 
     fun extract(siteUrl: String): List<IconInfo> {
         val html = fetchHead(siteUrl)
@@ -102,7 +102,8 @@ class TouchIconExtractor(private val client: OkHttpClient) {
         const val BUFFER_SIZE = 1024
         const val DEFAULT_LIMIT_SIZE = 1024 * 64
 
-        private fun makeAbsoluteUrl(baseUrl: String, url: String): String {
+        @VisibleForTesting
+        internal fun makeAbsoluteUrl(baseUrl: String, url: String): String {
             return when {
                 URLUtil.isNetworkUrl(url) -> url
                 url.startsWith("//") -> (Uri.parse(baseUrl).scheme ?: "https") + ":" + url
@@ -110,7 +111,7 @@ class TouchIconExtractor(private val client: OkHttpClient) {
                         .buildUpon()
                         .clearQuery()
                         .fragment(null)
-                        .path(makePath(baseUrl, url))
+                        .path(makePath(baseUrl, url).normalize())
                         .build()
                         .toString()
             }
@@ -128,6 +129,33 @@ class TouchIconExtractor(private val client: OkHttpClient) {
             return if (pos > 0) {
                 basePath.substring(0, pos + 1) + url
             } else url
+        }
+
+        @VisibleForTesting
+        internal fun String.normalize(): String {
+            val list = split('/')
+                    .filter { it.isNotEmpty() && it != "." }
+            val ignore = BooleanArray(list.size)
+            for (i in 0 until list.size) {
+                if (list[i] != "..") continue
+                ignore[i] = true
+                var index = i - 1
+                while (index >= 0) {
+                    if (!ignore[index]) {
+                        ignore[index] = true
+                        break
+                    }
+                    index--
+                }
+                if (index < 0) {
+                    return this
+                }
+            }
+            val suffix = if (last() == '/') "/" else ""
+            return list.asSequence()
+                    .withIndex()
+                    .filter { !ignore[it.index] }
+                    .joinToString("/", "/", suffix) { it.value }
         }
     }
 }
