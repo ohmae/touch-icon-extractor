@@ -52,7 +52,7 @@ class IconDialog : DialogFragment() {
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(act)
         recyclerView.addItemDecoration(DividerItemDecoration(act, DividerItemDecoration.VERTICAL))
-        Single.fromCallable { extractor.extract(siteUrl) }
+        Single.fromCallable { extractor.fromHtml(siteUrl) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally { progressBar.visibility = View.GONE }

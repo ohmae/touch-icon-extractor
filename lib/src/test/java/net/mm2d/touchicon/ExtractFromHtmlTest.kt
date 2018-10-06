@@ -7,11 +7,11 @@
 
 package net.mm2d.touchicon
 
-import okhttp3.OkHttpClient
 import org.hamcrest.Matchers.`is`
 import org.junit.Assert.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mockito.mock
 import org.robolectric.RobolectricTestRunner
 
 /**
@@ -19,11 +19,11 @@ import org.robolectric.RobolectricTestRunner
  */
 @RunWith(RobolectricTestRunner::class)
 @Suppress("TestFunctionName")
-class TouchIconExtractorTest {
+class ExtractFromHtmlTest {
     @Test
     fun extract_icon() {
-        val extractor = TouchIconExtractor(OkHttpClient())
-        val result = extractor.extract("https://www.example.com/",
+        val extract = ExtractFromHtml(mock(TouchIconExtractor::class.java))
+        val result = extract.invoke("https://www.example.com/",
                 """
                     <html><head>
                     <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
@@ -38,8 +38,8 @@ class TouchIconExtractorTest {
 
     @Test
     fun extract_shortcut_icon() {
-        val extractor = TouchIconExtractor(OkHttpClient())
-        val result = extractor.extract("https://www.example.com/",
+        val extract = ExtractFromHtml(mock(TouchIconExtractor::class.java))
+        val result = extract.invoke("https://www.example.com/",
                 """
                     <html><head>
                     <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
@@ -54,8 +54,8 @@ class TouchIconExtractorTest {
 
     @Test
     fun extract_apple_touch_icon() {
-        val extractor = TouchIconExtractor(OkHttpClient())
-        val result = extractor.extract("https://www.example.com/",
+        val extract = ExtractFromHtml(mock(TouchIconExtractor::class.java))
+        val result = extract.invoke("https://www.example.com/",
                 """
                     <html><head>
                     <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
@@ -70,8 +70,8 @@ class TouchIconExtractorTest {
 
     @Test
     fun extract_apple_touch_icon_precomposed() {
-        val extractor = TouchIconExtractor(OkHttpClient())
-        val result = extractor.extract("https://www.example.com/",
+        val extract = ExtractFromHtml(mock(TouchIconExtractor::class.java))
+        val result = extract.invoke("https://www.example.com/",
                 """
                     <html><head>
                     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/apple-touch-icon-57x57.png">
@@ -86,8 +86,8 @@ class TouchIconExtractorTest {
 
     @Test
     fun extract_omitted_scheme() {
-        val extractor = TouchIconExtractor(OkHttpClient())
-        val result = extractor.extract("https://www.example.com/",
+        val extract = ExtractFromHtml(mock(TouchIconExtractor::class.java))
+        val result = extract.invoke("https://www.example.com/",
                 """
                     <html><head>
                     <link rel="apple-touch-icon" sizes="57x57" href="//www.example.com/apple-touch-icon-57x57.png">
@@ -102,8 +102,8 @@ class TouchIconExtractorTest {
 
     @Test
     fun extract_broken() {
-        val extractor = TouchIconExtractor(OkHttpClient())
-        val result = extractor.extract("https://www.example.com/",
+        val extract = ExtractFromHtml(mock(TouchIconExtractor::class.java))
+        val result = extract.invoke("https://www.example.com/",
                 """
                     <html><head>
                     <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
