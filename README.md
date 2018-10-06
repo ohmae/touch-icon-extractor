@@ -23,7 +23,7 @@ repositories {
 Add dependencies, as following.
 ```gradle
 dependencies {
-    implementation 'net.mm2d:touchicon:0.0.2'
+    implementation 'net.mm2d:touchicon:0.0.3'
 }
 ```
 
@@ -32,7 +32,7 @@ dependencies {
 ```kotlin
 val extractor = TouchIconExtractor(OkHttpClient())  // initialize with OkHttpClient instance
 extractor.userAgent = "user agent string"           // option: set User-Agent
-extractor.headers = mapOf("Cookie" to "hoge=fuga")  // option: set additonal HTTP header
+extractor.headers = mapOf("Cookie" to "hoge=fuga")  // option: set additional HTTP header
 extractor.downloadLimit = 10_000                    // option: set download limit (default 64kB). <= 0 means no limit 
 ...
 Single.fromCallable { extractor.extract(url) }      // Do not call from the Main thread
@@ -43,9 +43,8 @@ Single.fromCallable { extractor.extract(url) }      // Do not call from the Main
         }, {})
 ```
 
-# Dependent library
+# Dependent OSS
 
-## library
 - [Kotlin](https://kotlinlang.org/)
 - [Android Support Library](https://developer.android.com/topic/libraries/support-library/)
   - support-annotations
