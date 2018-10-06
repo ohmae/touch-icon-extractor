@@ -38,11 +38,11 @@ class TouchIconExtractor(private val client: OkHttpClient) {
     @VisibleForTesting
     internal fun extract(siteUrl: String, html: String): List<LinkIcon> {
         return Jsoup.parse(html).getElementsByTag("link")
-                .mapNotNull { createIconInfo(siteUrl, it) }
+                .mapNotNull { createLinkIcon(siteUrl, it) }
                 .toList()
     }
 
-    private fun createIconInfo(siteUrl: String, linkElement: Element): LinkIcon? {
+    private fun createLinkIcon(siteUrl: String, linkElement: Element): LinkIcon? {
         val rel = Rel.of(linkElement.attr("rel")) ?: return null
         val href = linkElement.attr("href")
         if (href.isEmpty()) {
@@ -50,8 +50,8 @@ class TouchIconExtractor(private val client: OkHttpClient) {
         }
         val url = makeAbsoluteUrl(siteUrl, href)
         val sizes = linkElement.attr("sizes")
-        val type = linkElement.attr("type")
-        return LinkIcon(rel, url, sizes, type)
+        val mimeType = linkElement.attr("type")
+        return LinkIcon(rel, url, sizes, mimeType)
     }
 
     private fun fetchHead(url: String): String {
