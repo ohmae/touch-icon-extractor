@@ -54,17 +54,22 @@ class TouchIconExtractor(private val client: OkHttpClient) {
         return LinkIcon(rel, url, sizes, mimeType)
     }
 
-    private fun fetchHead(url: String): String {
-        val builder = Request.Builder()
-                .get()
-                .url(url)
+    private fun Request.Builder.appendHeader(): Request.Builder {
         if (userAgent.isNotEmpty()) {
-            builder.header("User-Agent", userAgent)
+            header("User-Agent", userAgent)
         }
         if (headers.isNotEmpty()) {
-            builder.headers(Headers.of(headers))
+            headers(Headers.of(headers))
         }
-        val request = builder.build()
+        return this
+    }
+
+    private fun fetchHead(url: String): String {
+        val request = Request.Builder()
+                .get()
+                .url(url)
+                .appendHeader()
+                .build()
         val response = client.newCall(request).execute()
         response.body()?.use {
             if (!response.hasHtml()) return ""
