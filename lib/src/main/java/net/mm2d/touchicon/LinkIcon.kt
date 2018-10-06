@@ -20,7 +20,7 @@ data class LinkIcon(
         val rel: Rel,
         val url: String,
         val sizes: String,
-        val type: String,
+        val mimeType: String,
         val siteUrl: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -43,7 +43,7 @@ data class LinkIcon(
         parcel.writeString(rel.value)
         parcel.writeString(url)
         parcel.writeString(sizes)
-        parcel.writeString(type)
+        parcel.writeString(mimeType)
         parcel.writeString(siteUrl)
     }
 

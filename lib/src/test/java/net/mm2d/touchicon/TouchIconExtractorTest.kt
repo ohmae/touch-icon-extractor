@@ -33,7 +33,7 @@ class TouchIconExtractorTest {
         assertThat(result.rel, `is`(Rel.ICON))
         assertThat(result.url, `is`("https://www.example.com/favicon.ico"))
         assertThat(result.sizes, `is`(""))
-        assertThat(result.type, `is`("image/vnd.microsoft.icon"))
+        assertThat(result.mimeType, `is`("image/vnd.microsoft.icon"))
         assertThat(result.siteUrl, `is`("https://www.example.com/"))
     }
 
@@ -50,7 +50,7 @@ class TouchIconExtractorTest {
         assertThat(result.rel, `is`(Rel.SHORTCUT_ICON))
         assertThat(result.url, `is`("https://www.example.com/favicon.ico"))
         assertThat(result.sizes, `is`(""))
-        assertThat(result.type, `is`("image/vnd.microsoft.icon"))
+        assertThat(result.mimeType, `is`("image/vnd.microsoft.icon"))
         assertThat(result.siteUrl, `is`("https://www.example.com/"))
     }
 
@@ -67,7 +67,7 @@ class TouchIconExtractorTest {
         assertThat(result.rel, `is`(Rel.APPLE_TOUCH_ICON))
         assertThat(result.url, `is`("https://www.example.com/apple-touch-icon-57x57.png"))
         assertThat(result.sizes, `is`("57x57"))
-        assertThat(result.type, `is`(""))
+        assertThat(result.mimeType, `is`(""))
         assertThat(result.siteUrl, `is`("https://www.example.com/"))
     }
 
@@ -84,7 +84,7 @@ class TouchIconExtractorTest {
         assertThat(result.rel, `is`(Rel.APPLE_TOUCH_ICON_PRECOMPOSED))
         assertThat(result.url, `is`("https://www.example.com/apple-touch-icon-57x57.png"))
         assertThat(result.sizes, `is`("57x57"))
-        assertThat(result.type, `is`(""))
+        assertThat(result.mimeType, `is`(""))
         assertThat(result.siteUrl, `is`("https://www.example.com/"))
     }
 
@@ -101,7 +101,7 @@ class TouchIconExtractorTest {
         assertThat(result.rel, `is`(Rel.APPLE_TOUCH_ICON))
         assertThat(result.url, `is`("https://www.example.com/apple-touch-icon-57x57.png"))
         assertThat(result.sizes, `is`("57x57"))
-        assertThat(result.type, `is`(""))
+        assertThat(result.mimeType, `is`(""))
         assertThat(result.siteUrl, `is`("https://www.example.com/"))
     }
 
@@ -118,7 +118,7 @@ class TouchIconExtractorTest {
         assertThat(result.rel, `is`(Rel.APPLE_TOUCH_ICON))
         assertThat(result.url, `is`("https://www.example.com/apple-touch-icon-57x57.png"))
         assertThat(result.sizes, `is`("57x57"))
-        assertThat(result.type, `is`(""))
+        assertThat(result.mimeType, `is`(""))
         assertThat(result.siteUrl, `is`("https://www.example.com/"))
     }
 

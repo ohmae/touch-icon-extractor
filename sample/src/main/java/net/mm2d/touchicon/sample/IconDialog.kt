@@ -83,7 +83,7 @@ class IconDialog : DialogFragment() {
             holder.itemView.tag = iconInfo
             holder.sizes.text = iconInfo.sizes
             holder.rel.text = iconInfo.rel.value
-            holder.type.text = iconInfo.type
+            holder.type.text = iconInfo.mimeType
             holder.url.text = iconInfo.url
             val size = iconInfo.inferSize()
             holder.imageSizes.text = "(${size.x}x${size.y})"
