@@ -20,12 +20,10 @@ data class LinkIcon(
         val rel: Rel,
         val url: String,
         val sizes: String,
-        val mimeType: String,
-        val siteUrl: String
+        val mimeType: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
             Rel.of(parcel.readString())!!,
-            parcel.readString()!!,
             parcel.readString()!!,
             parcel.readString()!!,
             parcel.readString()!!
@@ -44,7 +42,6 @@ data class LinkIcon(
         parcel.writeString(url)
         parcel.writeString(sizes)
         parcel.writeString(mimeType)
-        parcel.writeString(siteUrl)
     }
 
     override fun describeContents(): Int {

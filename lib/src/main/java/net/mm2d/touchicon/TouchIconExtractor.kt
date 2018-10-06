@@ -49,7 +49,7 @@ class TouchIconExtractor(private val client: OkHttpClient) {
         val url = makeAbsoluteUrl(siteUrl, href)
         val sizes = linkElement.attr("sizes")
         val type = linkElement.attr("type")
-        return LinkIcon(rel, url, sizes, type, siteUrl)
+        return LinkIcon(rel, url, sizes, type)
     }
 
     private fun fetchHead(url: String): String {
