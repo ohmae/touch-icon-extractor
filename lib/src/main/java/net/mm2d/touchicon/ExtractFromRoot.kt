@@ -82,7 +82,8 @@ internal class ExtractFromRoot(private val extractor: TouchIconExtractor) {
 
     private fun createRootIcon(response: Response, url: String, tryData: TryData): RootIcon? {
         if (!response.isSuccessful) return null
-        val type = response.header("Content-Type") ?: ""
+        val type = response.header("Content-Type") ?: return null
+        if (!type.contains("image", true)) return null
         val length = response.header("Content-Length")?.toIntOrNull() ?: -1
         return RootIcon(tryData.rel, url, tryData.sizes, type, tryData.precomposed, length)
     }
