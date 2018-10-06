@@ -7,6 +7,7 @@
 
 package net.mm2d.touchicon
 
+import android.net.Uri
 import android.support.annotation.VisibleForTesting
 import okhttp3.Headers
 import okhttp3.OkHttpClient
@@ -105,8 +106,70 @@ class TouchIconExtractor(private val client: OkHttpClient) {
         return String(output.toByteArray())
     }
 
+    data class TryData(
+            val rel: Rel,
+            val name: String,
+            val sizes: String,
+            val precomposed: Boolean
+    )
+
+    fun extractFromRoot(siteUrl: String, withPrecomposed: Boolean = true, sizes: List<String> = emptyList()): List<RootIcon> {
+        val base = Uri.parse(siteUrl)
+                .buildUpon()
+                .path(null)
+                .fragment(null)
+                .clearQuery()
+        return createTryDataList(withPrecomposed, sizes)
+                .mapNotNull {
+                    try {
+                        tryFetch(base, it)
+                    } catch (e: Exception) {
+                        null
+                    }
+                }
+    }
+
+    private fun createTryDataList(withPrecomposed: Boolean, sizes: List<String>): List<TryData> {
+        val result: MutableList<TryData> = mutableListOf()
+        sizes.forEach {
+            if (withPrecomposed) {
+                result.add(TryData(Rel.APPLE_TOUCH_ICON_PRECOMPOSED, "$APPLE_TOUCH_ICON-$it-$PRECOMPOSED.$PNG", it, true))
+            }
+            result.add(TryData(Rel.APPLE_TOUCH_ICON, "$APPLE_TOUCH_ICON-$it.$PNG", it, false))
+        }
+        if (withPrecomposed) {
+            result.add(TryData(Rel.APPLE_TOUCH_ICON_PRECOMPOSED, "$APPLE_TOUCH_ICON-$PRECOMPOSED.$PNG", "", true))
+        }
+        result.add(TryData(Rel.APPLE_TOUCH_ICON, "$APPLE_TOUCH_ICON.$PNG", "", false))
+        result.add(TryData(Rel.ICON, FAVICON_ICO, "", false))
+        return result
+    }
+
+    private fun tryFetch(baseUri: Uri.Builder, tryData: TryData): RootIcon? {
+        val url = baseUri.path(tryData.name).build().toString()
+        val request = Request.Builder()
+                .head()
+                .url(url)
+                .appendHeader()
+                .build()
+        val response = client.newCall(request).execute()
+        try {
+            if (!response.isSuccessful) return null
+            val type = response.header("Content-Type") ?: ""
+            val length = response.header("Content-Length")?.toIntOrNull() ?: -1
+            return RootIcon(tryData.rel, url, tryData.sizes, type, tryData.precomposed, length)
+        } finally {
+            response.body()?.close()
+        }
+    }
+
     companion object {
         const val BUFFER_SIZE = 1024
         const val DEFAULT_LIMIT_SIZE = 1024 * 64
+
+        const val FAVICON_ICO = "favicon.ico"
+        const val APPLE_TOUCH_ICON = "apple-touch-icon"
+        const val PNG = "png"
+        const val PRECOMPOSED = "precomposed"
     }
 }
