@@ -11,9 +11,9 @@ package net.mm2d.touchicon
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 enum class Rel(val value: String) {
-    ICON("icon"),
-    APPLE_TOUCH_ICON("apple-touch-icon"),
     APPLE_TOUCH_ICON_PRECOMPOSED("apple-touch-icon-precomposed"),
+    APPLE_TOUCH_ICON("apple-touch-icon"),
+    ICON("icon"),
     SHORTCUT_ICON("shortcut icon"),
     ;
 
