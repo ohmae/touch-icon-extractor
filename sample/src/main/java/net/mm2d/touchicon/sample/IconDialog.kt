@@ -31,6 +31,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
+import net.mm2d.touchicon.Icon
 import net.mm2d.touchicon.LinkIcon
 import okhttp3.Request
 import java.io.IOException
@@ -52,11 +53,19 @@ class IconDialog : DialogFragment() {
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(act)
         recyclerView.addItemDecoration(DividerItemDecoration(act, DividerItemDecoration.VERTICAL))
+        val adapter = IconListAdapter(act)
+        recyclerView.adapter = adapter
         Single.fromCallable { extractor.fromHtml(siteUrl) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally { progressBar.visibility = View.GONE }
-                .subscribe({ recyclerView.adapter = IconListAdapter(act, it) }, {})
+                .subscribe({ adapter.add(it) }, {})
+                .addTo(compositeDisposable)
+        Single.fromCallable { extractor.listFromRoot(siteUrl, true, listOf("120x120")) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doFinally { progressBar.visibility = View.GONE }
+                .subscribe({ adapter.add(it) }, {})
                 .addTo(compositeDisposable)
         return AlertDialog.Builder(act)
                 .setTitle(title)
@@ -69,54 +78,93 @@ class IconDialog : DialogFragment() {
         compositeDisposable.dispose()
     }
 
-    private inner class IconListAdapter(context: Context, private val list: List<LinkIcon>) : RecyclerView.Adapter<IconViewHolder>() {
+    private inner class IconListAdapter(context: Context) : RecyclerView.Adapter<IconViewHolder>() {
+        private val list: MutableList<Icon> = mutableListOf()
         private val inflater = LayoutInflater.from(context)
         override fun onCreateViewHolder(parent: ViewGroup, type: Int): IconViewHolder {
-            return IconViewHolder(inflater.inflate(R.layout.li_icon, parent, false))
+            return if (type == 0) {
+                LinkIconViewHolder(inflater.inflate(R.layout.li_link_icon, parent, false))
+            } else {
+                RootIconViewHolder(inflater.inflate(R.layout.li_root_icon, parent, false))
+            }
+        }
+
+        fun add(icons: List<Icon>) {
+            list.addAll(icons)
+            notifyDataSetChanged()
+        }
+
+        override fun getItemViewType(position: Int): Int = when (list[position]) {
+            is LinkIcon -> 0
+            else -> 1
         }
 
         override fun getItemCount(): Int = list.size
 
         @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: IconViewHolder, position: Int) {
-            val iconInfo = list[position]
-            holder.itemView.tag = iconInfo
-            holder.sizes.text = iconInfo.sizes
-            holder.rel.text = iconInfo.rel.value
-            holder.type.text = iconInfo.mimeType
-            holder.url.text = iconInfo.url
-            val size = iconInfo.inferSize()
-            holder.imageSizes.text = "(${size.x}x${size.y})"
-            Single.fromCallable { downloadIcon(iconInfo.url) }
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({
-                        if (holder.itemView.tag == iconInfo) {
-                            holder.imageSizes.text = "${it.width}x${it.height} (${size.x}x${size.y})"
-                            holder.icon.setImageBitmap(it)
-                        }
-                    }, {})
-                    .addTo(compositeDisposable)
-        }
-
-        private fun downloadIcon(url: String): Bitmap {
-            val request = Request.Builder().get().url(url).build()
-            val response = OkHttpClientHolder.client.newCall(request).execute()
-            if (!response.isSuccessful) {
-                throw IOException()
-            }
-            val bin = response.body()?.bytes() ?: throw IOException()
-            return BitmapFactory.decodeByteArray(bin, 0, bin.size) ?: throw IOException()
+            holder.apply(list[position])
         }
     }
 
-    private class IconViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    private abstract class IconViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        abstract fun apply(iconInfo: Icon)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private inner class LinkIconViewHolder(view: View) : IconViewHolder(view) {
         val icon: ImageView = view.findViewById(R.id.icon)
         val imageSizes: TextView = view.findViewById(R.id.image_size)
         val sizes: TextView = view.findViewById(R.id.sizes)
         val rel: TextView = view.findViewById(R.id.rel)
         val type: TextView = view.findViewById(R.id.type)
         val url: TextView = view.findViewById(R.id.url)
+        override fun apply(iconInfo: Icon) {
+            itemView.tag = iconInfo
+            sizes.text = iconInfo.sizes
+            rel.text = iconInfo.rel.value
+            type.text = iconInfo.mimeType
+            url.text = iconInfo.url
+            val size = iconInfo.inferSize()
+            imageSizes.text = "(${size.x}x${size.y})"
+            Single.fromCallable { downloadIcon(iconInfo.url) }
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        if (itemView.tag == iconInfo) {
+                            imageSizes.text = "${it.width}x${it.height} (${size.x}x${size.y})"
+                            icon.setImageBitmap(it)
+                        }
+                    }, {})
+                    .addTo(compositeDisposable)
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private inner class RootIconViewHolder(view: View) : IconViewHolder(view) {
+        val icon: ImageView = view.findViewById(R.id.icon)
+        val imageSizes: TextView = view.findViewById(R.id.image_size)
+        val sizes: TextView = view.findViewById(R.id.sizes)
+        val length: TextView = view.findViewById(R.id.length)
+        val type: TextView = view.findViewById(R.id.type)
+        val url: TextView = view.findViewById(R.id.url)
+        override fun apply(iconInfo: Icon) {
+            itemView.tag = iconInfo
+            sizes.text = iconInfo.sizes
+            length.text = iconInfo.length.toString()
+            type.text = iconInfo.mimeType
+            url.text = iconInfo.url
+            Single.fromCallable { downloadIcon(iconInfo.url) }
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        if (itemView.tag == iconInfo) {
+                            imageSizes.text = "${it.width}x${it.height}"
+                            icon.setImageBitmap(it)
+                        }
+                    }, {})
+                    .addTo(compositeDisposable)
+        }
     }
 
     companion object {
@@ -134,6 +182,16 @@ class IconDialog : DialogFragment() {
                 it.putString(KEY_TITLE, title)
                 it.putString(KEY_SITE_URL, siteUrl)
             }
+        }
+
+        private fun downloadIcon(url: String): Bitmap {
+            val request = Request.Builder().get().url(url).build()
+            val response = OkHttpClientHolder.client.newCall(request).execute()
+            if (!response.isSuccessful) {
+                throw IOException()
+            }
+            val bin = response.body()?.bytes() ?: throw IOException()
+            return BitmapFactory.decodeByteArray(bin, 0, bin.size) ?: throw IOException()
         }
     }
 }

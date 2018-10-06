@@ -6,4 +6,5 @@
     <color name="text">#000000</color>
     <color name="text_weak">#666666</color>
     <color name="text_strong">#304FFE</color>
+    <color name="bg_root">#ECEFF1</color>
 </resources>
