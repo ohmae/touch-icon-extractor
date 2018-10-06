@@ -121,4 +121,37 @@ class TouchIconExtractorTest {
         assertThat(result.type, `is`(""))
         assertThat(result.siteUrl, `is`("https://www.example.com/"))
     }
+
+    @Test
+    fun makeAbsoluteUrl() {
+        assertThat(makeAbsoluteUrl("https://www.example.com/foo/bar.html", "/icon.png"),
+                `is`("https://www.example.com/icon.png"))
+        assertThat(makeAbsoluteUrl("https://www.example.com/foo/bar.html", "icon.png"),
+                `is`("https://www.example.com/foo/icon.png"))
+        assertThat(makeAbsoluteUrl("https://www.example.com/foo/bar.html?a=b&c=d", "icon.png"),
+                `is`("https://www.example.com/foo/icon.png"))
+        assertThat(makeAbsoluteUrl("https://www.example.com/foo/bar.html#index", "icon.png"),
+                `is`("https://www.example.com/foo/icon.png"))
+        assertThat(makeAbsoluteUrl("https://www.example.com/foo/bar.html", "//www.example.net/icon.png"),
+                `is`("https://www.example.net/icon.png"))
+        assertThat(makeAbsoluteUrl("http://www.example.com/foo/bar.html", "//www.example.net/icon.png"),
+                `is`("http://www.example.net/icon.png"))
+    }
+
+    @Test
+    fun normalize() {
+        assertThat("/".normalize(), `is`("/"))
+        assertThat("./".normalize(), `is`("/"))
+        assertThat("a".normalize(), `is`("/a"))
+        assertThat("a/b".normalize(), `is`("/a/b"))
+        assertThat("/a/b".normalize(), `is`("/a/b"))
+        assertThat("/a/b/".normalize(), `is`("/a/b/"))
+        assertThat("/a/b/./".normalize(), `is`("/a/b/"))
+        assertThat("/a/b/./c".normalize(), `is`("/a/b/c"))
+        assertThat("/a/b/c/../".normalize(), `is`("/a/b/"))
+        assertThat("/a/b/c/../d".normalize(), `is`("/a/b/d"))
+        assertThat("/a/b/c/./../d".normalize(), `is`("/a/b/d"))
+        assertThat("/a/b/c/../../d".normalize(), `is`("/a/d"))
+        assertThat("/a/../b/c/../d".normalize(), `is`("/b/d"))
+    }
 }
