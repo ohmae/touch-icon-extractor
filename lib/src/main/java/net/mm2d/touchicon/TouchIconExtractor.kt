@@ -26,7 +26,11 @@ class TouchIconExtractor(private val client: OkHttpClient) {
     var downloadLimit: Int = DEFAULT_LIMIT_SIZE
 
     fun extract(siteUrl: String): List<LinkIcon> {
-        val html = fetchHead(siteUrl)
+        val html = try {
+            fetchHead(siteUrl)
+        } catch (e: Exception) {
+            ""
+        }
         if (html.isEmpty()) return emptyList()
         return extract(siteUrl, html)
     }
