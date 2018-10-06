@@ -22,7 +22,7 @@ internal class ExtractFromHtml(private val extractor: TouchIconExtractor) {
 
     internal fun invoke(siteUrl: String): List<LinkIcon> {
         val html = try {
-            fetchHead(siteUrl)
+            fetchHeaderPart(siteUrl)
         } catch (e: Exception) {
             ""
         }
@@ -49,14 +49,14 @@ internal class ExtractFromHtml(private val extractor: TouchIconExtractor) {
         return LinkIcon(rel, url, sizes, mimeType)
     }
 
-    private fun fetchHead(url: String): String {
+    private fun fetchHeaderPart(url: String): String {
         val response = extractor.executeGet(url)
         response.body()?.use {
             if (!response.hasHtml()) return ""
             if (downloadLimit <= 0) {
                 return it.string()
             }
-            return fetchHead(it.byteStream(), downloadLimit)
+            return fetchHeaderPart(it.byteStream(), downloadLimit)
         } ?: return ""
     }
 
@@ -67,12 +67,13 @@ internal class ExtractFromHtml(private val extractor: TouchIconExtractor) {
                 type.contains("application/xhtml+xml", true)
     }
 
-    private fun fetchHead(stream: InputStream, limit: Int): String {
+    private fun fetchHeaderPart(stream: InputStream, limit: Int): String {
         val output = ByteArrayOutputStream()
         val buffer = ByteArray(BUFFER_SIZE)
         var remain = limit
         while (true) {
-            val size = stream.read(buffer, 0, if (remain > BUFFER_SIZE) BUFFER_SIZE else remain)
+            val fetchSize = if (remain > BUFFER_SIZE) BUFFER_SIZE else remain
+            val size = stream.read(buffer, 0, fetchSize)
             if (size < 0) {
                 break
             }
