@@ -115,8 +115,8 @@ extractor.fromDomain(url, true, listOf("120x120", "72x72"))
 The trial order is as follows
 1. "apple-touch-icon-120x120-precomposed.png"
 1. "apple-touch-icon-120x120.png"
-1. "apple-touch-icon-80x80-precomposed.png"
-1. "apple-touch-icon-80x80.png"
+1. "apple-touch-icon-72x72-precomposed.png"
+1. "apple-touch-icon-72x72.png"
 1. "apple-touch-icon-precomposed.png"
 1. "apple-touch-icon.png"
 1. "favicon.ico"
