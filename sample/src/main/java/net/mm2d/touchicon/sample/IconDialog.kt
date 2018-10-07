@@ -26,6 +26,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import com.bumptech.glide.request.target.Target
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -90,8 +91,9 @@ class IconDialog : DialogFragment() {
         }
 
         fun add(icons: List<Icon>) {
+            val positionStart = list.size
             list.addAll(icons)
-            notifyDataSetChanged()
+            notifyItemRangeInserted(positionStart, icons.size)
         }
 
         override fun getItemViewType(position: Int): Int = when (list[position]) {
@@ -112,7 +114,7 @@ class IconDialog : DialogFragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    private inner class LinkIconViewHolder(view: View) : IconViewHolder(view) {
+    private class LinkIconViewHolder(view: View) : IconViewHolder(view) {
         val icon: ImageView = view.findViewById(R.id.icon)
         val imageSizes: TextView = view.findViewById(R.id.image_size)
         val sizes: TextView = view.findViewById(R.id.sizes)
@@ -127,21 +129,18 @@ class IconDialog : DialogFragment() {
             url.text = iconInfo.url
             val size = iconInfo.inferSize()
             imageSizes.text = "(${size.x}x${size.y})"
-            Single.fromCallable { downloadIcon(iconInfo.url) }
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({
-                        if (itemView.tag == iconInfo) {
-                            imageSizes.text = "${it.width}x${it.height} (${size.x}x${size.y})"
-                            icon.setImageBitmap(it)
-                        }
-                    }, {})
-                    .addTo(compositeDisposable)
+            GlideApp.with(itemView)
+                    .load(iconInfo.url)
+                    .override(Target.SIZE_ORIGINAL)
+                    .into(icon)
+                    .getSize { width, height ->
+                        imageSizes.text = "${width}x${height} (${size.x}x${size.y})"
+                    }
         }
     }
 
     @SuppressLint("SetTextI18n")
-    private inner class RootIconViewHolder(view: View) : IconViewHolder(view) {
+    private class RootIconViewHolder(view: View) : IconViewHolder(view) {
         val icon: ImageView = view.findViewById(R.id.icon)
         val imageSizes: TextView = view.findViewById(R.id.image_size)
         val sizes: TextView = view.findViewById(R.id.sizes)
@@ -154,16 +153,13 @@ class IconDialog : DialogFragment() {
             length.text = iconInfo.length.toString()
             type.text = iconInfo.mimeType
             url.text = iconInfo.url
-            Single.fromCallable { downloadIcon(iconInfo.url) }
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({
-                        if (itemView.tag == iconInfo) {
-                            imageSizes.text = "${it.width}x${it.height}"
-                            icon.setImageBitmap(it)
-                        }
-                    }, {})
-                    .addTo(compositeDisposable)
+            GlideApp.with(itemView)
+                    .load(iconInfo.url)
+                    .override(Target.SIZE_ORIGINAL)
+                    .into(icon)
+                    .getSize { width, height ->
+                        imageSizes.text = "${width}x${height}"
+                    }
         }
     }
 

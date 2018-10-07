@@ -155,6 +155,7 @@ This is for debugging and verification, **strongly not recommended for use in pr
 - [RxJava2](https://github.com/ReactiveX/RxJava)
   - [RxAndroid](https://github.com/ReactiveX/RxAndroid)
   - [RxKotlin](https://github.com/ReactiveX/RxKotlin)
+- [Glide](https://bumptech.github.io/glide/)
 
 ## Author
 大前 良介 (OHMAE Ryosuke)
