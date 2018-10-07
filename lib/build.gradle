@@ -49,6 +49,11 @@ dependencies {
     testImplementation 'org.robolectric:robolectric:3.7.1'
 }
 
+dokka {
+    outputFormat = 'gfm'
+    outputDirectory = "../docs/dokka"
+}
+
 bintray {
     user = project.hasProperty('bintray_user') ? bintray_user : ''
     key = project.hasProperty('bintray_key') ? bintray_key : ''

@@ -13,23 +13,51 @@ import android.os.Parcelable
 import android.os.Parcelable.Creator
 
 /**
+ * Icon information associated with the Web page.
+ *
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 data class PageIcon(
+        /**
+         * Relationship between icon and page.
+         *
+         * rel attribute value of the link tag.
+         */
         override val rel: Relationship,
+        /**
+         * Icon url.
+         */
         override val url: String,
+        /**
+         * Size information, assumed format is (width)x(height). e.g. "80x80".
+         *
+         * Value of sizes attribute. often blank.
+         */
         override val sizes: String,
+        /**
+         * Icon MIME type. e.g. "image/png"
+         *
+         * Value of type attribute. often blank.
+         */
         override val mimeType: String,
+        /**
+         * true if this is for a precomposed touch icon.
+         *
+         * The same meaning that the value of [rel] is [Relationship.APPLE_TOUCH_ICON_PRECOMPOSED]
+         */
         override val precomposed: Boolean = rel == Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
+        /**
+         * Icon file length.
+         *
+         * Negative value means unknown. and in this class always -1.
+         */
         override val length: Int = -1
 ) : Icon, Parcelable {
-    constructor(parcel: Parcel) : this(
-            Relationship.of(parcel.readString())!!,
-            parcel.readString()!!,
-            parcel.readString()!!,
-            parcel.readString()!!
-    )
-
+    /**
+     * Infer display size of this icon from sizes value.
+     *
+     * if fail to infer from sizes, try to infer from url.
+     */
     override fun inferSize(): Point {
         val size = inferSizeFromSizes(sizes)
         if (size.x != 0 && size.y != 0) {
@@ -37,6 +65,13 @@ data class PageIcon(
         }
         return inferSizeFromUrl(url)
     }
+
+    constructor(parcel: Parcel) : this(
+            Relationship.of(parcel.readString())!!,
+            parcel.readString()!!,
+            parcel.readString()!!,
+            parcel.readString()!!
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(rel.value)

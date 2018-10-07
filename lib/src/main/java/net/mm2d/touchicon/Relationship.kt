@@ -8,6 +8,10 @@
 package net.mm2d.touchicon
 
 /**
+ * enum of relationship between icon and page.
+ *
+ * Express the value of rel of the link tag.
+ *
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 enum class Relationship(val value: String) {
@@ -18,7 +22,7 @@ enum class Relationship(val value: String) {
     ;
 
     companion object {
-        fun of(value: String?): Relationship? {
+        internal fun of(value: String?): Relationship? {
             return values().find { it.value.equals(value, true) }
         }
     }
