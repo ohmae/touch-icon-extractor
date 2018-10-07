@@ -61,7 +61,7 @@ class IconDialog : DialogFragment() {
                 .doFinally { progressBar.visibility = View.GONE }
                 .subscribe({ adapter.add(it) }, {})
                 .addTo(compositeDisposable)
-        Single.fromCallable { extractor.listFromRoot(siteUrl, true, listOf("120x120")) }
+        Single.fromCallable { extractor.listFromDomain(siteUrl, true, listOf("120x120")) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally { progressBar.visibility = View.GONE }

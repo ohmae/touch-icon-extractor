@@ -14,7 +14,7 @@ import android.os.Parcelable.Creator
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-data class RootIcon(
+data class DomainIcon(
         override val rel: Rel,
         override val url: String,
         override val sizes: String,
@@ -45,12 +45,12 @@ data class RootIcon(
         return 0
     }
 
-    companion object CREATOR : Creator<RootIcon> {
-        override fun createFromParcel(parcel: Parcel): RootIcon {
-            return RootIcon(parcel)
+    companion object CREATOR : Creator<DomainIcon> {
+        override fun createFromParcel(parcel: Parcel): DomainIcon {
+            return DomainIcon(parcel)
         }
 
-        override fun newArray(size: Int): Array<RootIcon?> {
+        override fun newArray(size: Int): Array<DomainIcon?> {
             return arrayOfNulls(size)
         }
     }

@@ -13,14 +13,14 @@ import okhttp3.Response
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-internal class ExtractFromRoot(private val extractor: TouchIconExtractor) {
+internal class ExtractFromDomain(private val extractor: TouchIconExtractor) {
     private fun makeBaseBuilder(siteUrl: String) = Uri.parse(siteUrl)
             .buildUpon()
             .path(null)
             .fragment(null)
             .clearQuery()
 
-    fun invoke(siteUrl: String, withPrecomposed: Boolean, sizes: List<String>): RootIcon? {
+    fun invoke(siteUrl: String, withPrecomposed: Boolean, sizes: List<String>): DomainIcon? {
         val base = makeBaseBuilder(siteUrl)
         createTryDataList(withPrecomposed, sizes).forEach {
             try {
@@ -32,7 +32,7 @@ internal class ExtractFromRoot(private val extractor: TouchIconExtractor) {
         return null
     }
 
-    fun invokeWithDownload(siteUrl: String, withPrecomposed: Boolean, sizes: List<String>): Pair<RootIcon, ByteArray>? {
+    fun invokeWithDownload(siteUrl: String, withPrecomposed: Boolean, sizes: List<String>): Pair<DomainIcon, ByteArray>? {
         val base = makeBaseBuilder(siteUrl)
         createTryDataList(withPrecomposed, sizes).forEach {
             try {
@@ -44,7 +44,7 @@ internal class ExtractFromRoot(private val extractor: TouchIconExtractor) {
         return null
     }
 
-    fun list(siteUrl: String, withPrecomposed: Boolean, sizes: List<String>): List<RootIcon> {
+    fun list(siteUrl: String, withPrecomposed: Boolean, sizes: List<String>): List<DomainIcon> {
         val base = makeBaseBuilder(siteUrl)
         return createTryDataList(withPrecomposed, sizes)
                 .mapNotNull {
@@ -56,7 +56,7 @@ internal class ExtractFromRoot(private val extractor: TouchIconExtractor) {
                 }
     }
 
-    private fun tryHead(baseUri: Uri.Builder, tryData: TryData): RootIcon? {
+    private fun tryHead(baseUri: Uri.Builder, tryData: TryData): DomainIcon? {
         val url = makeUrl(baseUri, tryData)
         val response = extractor.executeHead(url)
         try {
@@ -66,7 +66,7 @@ internal class ExtractFromRoot(private val extractor: TouchIconExtractor) {
         }
     }
 
-    private fun tryGet(baseUri: Uri.Builder, tryData: TryData): Pair<RootIcon, ByteArray>? {
+    private fun tryGet(baseUri: Uri.Builder, tryData: TryData): Pair<DomainIcon, ByteArray>? {
         val url = makeUrl(baseUri, tryData)
         val response = extractor.executeGet(url)
         response.body()?.use {
@@ -80,12 +80,12 @@ internal class ExtractFromRoot(private val extractor: TouchIconExtractor) {
         return baseUri.path(tryData.name).build().toString()
     }
 
-    private fun createRootIcon(response: Response, url: String, tryData: TryData): RootIcon? {
+    private fun createRootIcon(response: Response, url: String, tryData: TryData): DomainIcon? {
         if (!response.isSuccessful) return null
         val type = response.header("Content-Type") ?: return null
         if (!type.contains("image", true)) return null
         val length = response.header("Content-Length")?.toIntOrNull() ?: -1
-        return RootIcon(tryData.rel, url, tryData.sizes, type, tryData.precomposed, length)
+        return DomainIcon(tryData.rel, url, tryData.sizes, type, tryData.precomposed, length)
     }
 
     private data class TryData(

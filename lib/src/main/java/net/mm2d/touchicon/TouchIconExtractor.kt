@@ -17,7 +17,7 @@ import okhttp3.Response
  */
 class TouchIconExtractor(private val client: OkHttpClient) {
     private val fromHtml = ExtractFromHtml(this)
-    private val fromRoot = ExtractFromRoot(this)
+    private val fromDomain = ExtractFromDomain(this)
     var userAgent: String = ""
     var headers: Map<String, String> = emptyMap()
     var downloadLimit: Int
@@ -58,15 +58,15 @@ class TouchIconExtractor(private val client: OkHttpClient) {
         return fromHtml.invoke(siteUrl)
     }
 
-    fun fromRoot(siteUrl: String, withPrecomposed: Boolean = true, sizes: List<String> = emptyList()): RootIcon? {
-        return fromRoot.invoke(siteUrl, withPrecomposed, sizes)
+    fun fromDomain(siteUrl: String, withPrecomposed: Boolean = true, sizes: List<String> = emptyList()): DomainIcon? {
+        return fromDomain.invoke(siteUrl, withPrecomposed, sizes)
     }
 
-    fun fromRootWithDownload(siteUrl: String, withPrecomposed: Boolean = true, sizes: List<String> = emptyList()): Pair<RootIcon, ByteArray>? {
-        return fromRoot.invokeWithDownload(siteUrl, withPrecomposed, sizes)
+    fun fromDomainWithDownload(siteUrl: String, withPrecomposed: Boolean = true, sizes: List<String> = emptyList()): Pair<DomainIcon, ByteArray>? {
+        return fromDomain.invokeWithDownload(siteUrl, withPrecomposed, sizes)
     }
 
-    fun listFromRoot(siteUrl: String, withPrecomposed: Boolean = true, sizes: List<String> = emptyList()): List<RootIcon> {
-        return fromRoot.list(siteUrl, withPrecomposed, sizes)
+    fun listFromDomain(siteUrl: String, withPrecomposed: Boolean = true, sizes: List<String> = emptyList()): List<DomainIcon> {
+        return fromDomain.list(siteUrl, withPrecomposed, sizes)
     }
 }
