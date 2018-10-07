@@ -121,6 +121,11 @@ The trial order is
 There are methods to gather all the information (`TouchIconExtractor#listFromDomain()`)
 This is for debugging and verification, **strongly not recommended for use in production environment**.
 
+## API document
+
+I am writing documentation comments using KDoc.
+[The generated API document is here](docs/dokka/lib/index.md).
+
 ## Dependent OSS
 
 - [Kotlin](https://kotlinlang.org/)
