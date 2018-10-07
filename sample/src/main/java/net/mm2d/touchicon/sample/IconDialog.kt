@@ -12,7 +12,8 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentActivity
@@ -26,6 +27,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -34,8 +38,6 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import net.mm2d.touchicon.Icon
 import net.mm2d.touchicon.PageIcon
-import okhttp3.Request
-import java.io.IOException
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
@@ -132,10 +134,8 @@ class IconDialog : DialogFragment() {
             GlideApp.with(itemView)
                     .load(iconInfo.url)
                     .override(Target.SIZE_ORIGINAL)
+                    .addListener(bitmapHook { imageSizes.text = "${it.width}x${it.height} (${size.x}x${size.y})" })
                     .into(icon)
-                    .getSize { width, height ->
-                        imageSizes.text = "${width}x${height} (${size.x}x${size.y})"
-                    }
         }
     }
 
@@ -156,10 +156,8 @@ class IconDialog : DialogFragment() {
             GlideApp.with(itemView)
                     .load(iconInfo.url)
                     .override(Target.SIZE_ORIGINAL)
+                    .addListener(bitmapHook { imageSizes.text = "${it.width}x${it.height}" })
                     .into(icon)
-                    .getSize { width, height ->
-                        imageSizes.text = "${width}x${height}"
-                    }
         }
     }
 
@@ -180,14 +178,19 @@ class IconDialog : DialogFragment() {
             }
         }
 
-        private fun downloadIcon(url: String): Bitmap {
-            val request = Request.Builder().get().url(url).build()
-            val response = OkHttpClientHolder.client.newCall(request).execute()
-            if (!response.isSuccessful) {
-                throw IOException()
+        private fun bitmapHook(callback: ((bitmap: Bitmap) -> Unit)): RequestListener<Drawable?> {
+            return object : RequestListener<Drawable?> {
+                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable?>?, isFirstResource: Boolean): Boolean {
+                    return false
+                }
+
+                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable?>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                    if (resource is BitmapDrawable) {
+                        callback(resource.bitmap)
+                    }
+                    return false
+                }
             }
-            val bin = response.body()?.bytes() ?: throw IOException()
-            return BitmapFactory.decodeByteArray(bin, 0, bin.size) ?: throw IOException()
         }
     }
 }
