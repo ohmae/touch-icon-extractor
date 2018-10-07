@@ -15,13 +15,13 @@ Express the value of rel of the link tag.
 
 | Name | Summary |
 |---|---|
-| [APPLE_TOUCH_ICON_PRECOMPOSED](-a-p-p-l-e_-t-o-u-c-h_-i-c-o-n_-p-r-e-c-o-m-p-o-s-e-d.md) |  |
-| [APPLE_TOUCH_ICON](-a-p-p-l-e_-t-o-u-c-h_-i-c-o-n.md) |  |
-| [ICON](-i-c-o-n.md) |  |
-| [SHORTCUT_ICON](-s-h-o-r-t-c-u-t_-i-c-o-n.md) |  |
+| [APPLE_TOUCH_ICON_PRECOMPOSED](-a-p-p-l-e_-t-o-u-c-h_-i-c-o-n_-p-r-e-c-o-m-p-o-s-e-d.md) | This expresses that the rel value of the link tag is "apple-touch-icon-precomposed". |
+| [APPLE_TOUCH_ICON](-a-p-p-l-e_-t-o-u-c-h_-i-c-o-n.md) | This expresses that the rel value of the link tag is "apple-touch-icon". |
+| [ICON](-i-c-o-n.md) | This expresses that the rel value of the link tag is "icon". |
+| [SHORTCUT_ICON](-s-h-o-r-t-c-u-t_-i-c-o-n.md) | This expresses that the rel value of the link tag is "shortcut icon". |
 
 ### Properties
 
 | Name | Summary |
 |---|---|
-| [value](value.md) | `val value: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
+| [value](value.md) | `val value: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)<br>Raw value of rel. |

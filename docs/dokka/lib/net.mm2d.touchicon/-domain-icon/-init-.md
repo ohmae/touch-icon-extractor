@@ -6,6 +6,33 @@
 
 Icon information associated with the Web site domain.
 
+e.g.
+Assuming that the URL of the site is https://www.example.com/index.html
+
+When the file name is "apple-touch-icon-120x120-precomposed.png",
+the following values are stored
+
+```
+rel=ICON
+url=https://www.example.com/favicon.ico
+sizes=120x120
+mimeType=image/x-icon   <- Content-Type value of the response from the server
+precomposed=false
+length=99999            <- Content-Length value of the response from the server
+```
+
+When the file name is "favicon.con",
+the following values are stored
+
+```
+rel=ICON
+url=https://www.example.com/favicon.ico
+sizes=                  <- empty
+mimeType=image/x-icon   <- Content-Type value of the response from the server
+precomposed=false
+length=99999            <- Content-Length value of the response from the server
+```
+
 **Author**
 [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
 

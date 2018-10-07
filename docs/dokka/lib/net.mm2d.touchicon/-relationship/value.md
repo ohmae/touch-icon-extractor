@@ -3,3 +3,6 @@
 # value
 
 `val value: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
+
+Raw value of rel.
+
