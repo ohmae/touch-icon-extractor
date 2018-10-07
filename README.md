@@ -35,7 +35,7 @@ extractor.userAgent = "user agent string"           // option: set User-Agent
 extractor.headers = mapOf("Cookie" to "hoge=fuga")  // option: set additional HTTP header
 extractor.downloadLimit = 10_000                    // option: set download limit (default 64kB). <= 0 means no limit 
 ...
-Single.fromCallable { extractor.extract(url) }      // Do not call from the Main thread
+Single.fromCallable { extractor.fromPage(url) }      // Do not call from the Main thread
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({ 
