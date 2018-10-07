@@ -8,6 +8,10 @@
 
 This is a library for android for extracting apple-touch-icon information from the website.
 
+## Screenshots
+
+This app is included as a [sample module](sample) in this repository.
+
 |![](readme/screenshot1.png)|![](readme/screenshot2.png)|![](readme/screenshot3.png)|
 |-|-|-|
 
