@@ -89,7 +89,7 @@ internal class ExtractFromDomain(private val extractor: TouchIconExtractor) {
     }
 
     private data class TryData(
-            val rel: Rel,
+            val rel: Relationship,
             val name: String,
             val sizes: String,
             val precomposed: Boolean
@@ -99,15 +99,15 @@ internal class ExtractFromDomain(private val extractor: TouchIconExtractor) {
         val result: MutableList<TryData> = mutableListOf()
         sizes.forEach {
             if (withPrecomposed) {
-                result.add(TryData(Rel.APPLE_TOUCH_ICON_PRECOMPOSED, "$APPLE_TOUCH_ICON-$it-$PRECOMPOSED.$PNG", it, true))
+                result.add(TryData(Relationship.APPLE_TOUCH_ICON_PRECOMPOSED, "$APPLE_TOUCH_ICON-$it-$PRECOMPOSED.$PNG", it, true))
             }
-            result.add(TryData(Rel.APPLE_TOUCH_ICON, "$APPLE_TOUCH_ICON-$it.$PNG", it, false))
+            result.add(TryData(Relationship.APPLE_TOUCH_ICON, "$APPLE_TOUCH_ICON-$it.$PNG", it, false))
         }
         if (withPrecomposed) {
-            result.add(TryData(Rel.APPLE_TOUCH_ICON_PRECOMPOSED, "$APPLE_TOUCH_ICON-$PRECOMPOSED.$PNG", "", true))
+            result.add(TryData(Relationship.APPLE_TOUCH_ICON_PRECOMPOSED, "$APPLE_TOUCH_ICON-$PRECOMPOSED.$PNG", "", true))
         }
-        result.add(TryData(Rel.APPLE_TOUCH_ICON, "$APPLE_TOUCH_ICON.$PNG", "", false))
-        result.add(TryData(Rel.ICON, FAVICON_ICO, "", false))
+        result.add(TryData(Relationship.APPLE_TOUCH_ICON, "$APPLE_TOUCH_ICON.$PNG", "", false))
+        result.add(TryData(Relationship.ICON, FAVICON_ICO, "", false))
         return result
     }
 

@@ -10,7 +10,7 @@ package net.mm2d.touchicon
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-enum class Rel(val value: String) {
+enum class Relationship(val value: String) {
     APPLE_TOUCH_ICON_PRECOMPOSED("apple-touch-icon-precomposed"),
     APPLE_TOUCH_ICON("apple-touch-icon"),
     ICON("icon"),
@@ -18,7 +18,7 @@ enum class Rel(val value: String) {
     ;
 
     companion object {
-        fun of(value: String?): Rel? {
+        fun of(value: String?): Relationship? {
             return values().find { it.value.equals(value, true) }
         }
     }

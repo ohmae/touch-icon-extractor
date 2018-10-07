@@ -13,7 +13,7 @@ import android.graphics.Point
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 interface Icon {
-    val rel: Rel
+    val rel: Relationship
     val url: String
     val sizes: String
     val mimeType: String

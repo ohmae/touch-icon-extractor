@@ -16,15 +16,15 @@ import android.os.Parcelable.Creator
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 data class PageIcon(
-        override val rel: Rel,
+        override val rel: Relationship,
         override val url: String,
         override val sizes: String,
         override val mimeType: String,
-        override val precomposed: Boolean = rel == Rel.APPLE_TOUCH_ICON_PRECOMPOSED,
+        override val precomposed: Boolean = rel == Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
         override val length: Int = -1
 ) : Icon, Parcelable {
     constructor(parcel: Parcel) : this(
-            Rel.of(parcel.readString())!!,
+            Relationship.of(parcel.readString())!!,
             parcel.readString()!!,
             parcel.readString()!!,
             parcel.readString()!!

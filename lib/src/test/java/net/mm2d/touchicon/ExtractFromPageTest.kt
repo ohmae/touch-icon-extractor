@@ -30,7 +30,7 @@ class ExtractFromPageTest {
                     </head></html>
                 """.trimIndent()
         )[0]
-        assertThat(result.rel, `is`(Rel.ICON))
+        assertThat(result.rel, `is`(Relationship.ICON))
         assertThat(result.url, `is`("https://www.example.com/favicon.ico"))
         assertThat(result.sizes, `is`(""))
         assertThat(result.mimeType, `is`("image/vnd.microsoft.icon"))
@@ -46,7 +46,7 @@ class ExtractFromPageTest {
                     </head></html>
                 """.trimIndent()
         )[0]
-        assertThat(result.rel, `is`(Rel.SHORTCUT_ICON))
+        assertThat(result.rel, `is`(Relationship.SHORTCUT_ICON))
         assertThat(result.url, `is`("https://www.example.com/favicon.ico"))
         assertThat(result.sizes, `is`(""))
         assertThat(result.mimeType, `is`("image/vnd.microsoft.icon"))
@@ -62,7 +62,7 @@ class ExtractFromPageTest {
                     </head></html>
                 """.trimIndent()
         )[0]
-        assertThat(result.rel, `is`(Rel.APPLE_TOUCH_ICON))
+        assertThat(result.rel, `is`(Relationship.APPLE_TOUCH_ICON))
         assertThat(result.url, `is`("https://www.example.com/apple-touch-icon-57x57.png"))
         assertThat(result.sizes, `is`("57x57"))
         assertThat(result.mimeType, `is`(""))
@@ -78,7 +78,7 @@ class ExtractFromPageTest {
                     </head></html>
                 """.trimIndent()
         )[0]
-        assertThat(result.rel, `is`(Rel.APPLE_TOUCH_ICON_PRECOMPOSED))
+        assertThat(result.rel, `is`(Relationship.APPLE_TOUCH_ICON_PRECOMPOSED))
         assertThat(result.url, `is`("https://www.example.com/apple-touch-icon-57x57.png"))
         assertThat(result.sizes, `is`("57x57"))
         assertThat(result.mimeType, `is`(""))
@@ -94,7 +94,7 @@ class ExtractFromPageTest {
                     </head></html>
                 """.trimIndent()
         )[0]
-        assertThat(result.rel, `is`(Rel.APPLE_TOUCH_ICON))
+        assertThat(result.rel, `is`(Relationship.APPLE_TOUCH_ICON))
         assertThat(result.url, `is`("https://www.example.com/apple-touch-icon-57x57.png"))
         assertThat(result.sizes, `is`("57x57"))
         assertThat(result.mimeType, `is`(""))
@@ -110,7 +110,7 @@ class ExtractFromPageTest {
                     </hea
                 """.trimIndent()
         )[0]
-        assertThat(result.rel, `is`(Rel.APPLE_TOUCH_ICON))
+        assertThat(result.rel, `is`(Relationship.APPLE_TOUCH_ICON))
         assertThat(result.url, `is`("https://www.example.com/apple-touch-icon-57x57.png"))
         assertThat(result.sizes, `is`("57x57"))
         assertThat(result.mimeType, `is`(""))

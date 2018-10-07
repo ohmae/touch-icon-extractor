@@ -15,7 +15,7 @@ import android.os.Parcelable.Creator
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 data class DomainIcon(
-        override val rel: Rel,
+        override val rel: Relationship,
         override val url: String,
         override val sizes: String,
         override val mimeType: String,
@@ -23,7 +23,7 @@ data class DomainIcon(
         override val length: Int
 ) : Icon, Parcelable {
     constructor(parcel: Parcel) : this(
-            Rel.of(parcel.readString())!!,
+            Relationship.of(parcel.readString())!!,
             parcel.readString()!!,
             parcel.readString()!!,
             parcel.readString()!!,

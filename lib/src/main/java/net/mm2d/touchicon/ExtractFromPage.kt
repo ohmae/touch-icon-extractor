@@ -38,7 +38,7 @@ internal class ExtractFromPage(private val extractor: TouchIconExtractor) {
     }
 
     private fun createLinkIcon(siteUrl: String, linkElement: Element): PageIcon? {
-        val rel = Rel.of(linkElement.attr("rel")) ?: return null
+        val rel = Relationship.of(linkElement.attr("rel")) ?: return null
         val href = linkElement.attr("href")
         if (href.isEmpty()) {
             return null
