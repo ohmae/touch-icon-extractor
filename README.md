@@ -47,7 +47,7 @@ Single.fromCallable { extractor.fromPage(url) }     // Do not call from the Main
 ## Operating principle
    
 There are two kinds of methods for specifying the WebClip icon.
-This library is compatible with both.
+This library supports both.
 
 ### Icon associated with the HTML file
 
@@ -86,18 +86,21 @@ By doing the following
 extractor.fromDomain(url)
 ```
 
-In order of
+It checks whether or not the file exists, and returns the information if it exists.
+
+The trial order is as follows
 1. "apple-touch-icon-precomposed.png"
 1. "apple-touch-icon.png"
 1. "favicon.ico"
-It checks whether or not the file exists, and returns the information if it exists.
+
+If the file exists, the subsequent files will not be checked.
 
 If you do not need precomposed, do the following
 
 ```kotlin
 extractor.fromDomain(url, false)
 ```
-The trial order is 
+The trial order is as follows
 1. "apple-touch-icon.png"
 1. "favicon.ico"
 
@@ -109,7 +112,7 @@ When describing as follows
 extractor.fromDomain(url, true, listOf("120x120", "72x72"))
 ```
 
-The trial order is 
+The trial order is as follows
 1. "apple-touch-icon-120x120-precomposed.png"
 1. "apple-touch-icon-120x120.png"
 1. "apple-touch-icon-80x80-precomposed.png"
