@@ -20,7 +20,7 @@ import android.os.Parcelable.Creator
  *
  * When the HTML tag is
  * ```html
- * link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png" sizes="120x120">
+ * <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png" sizes="120x120">
  * ```
  * the following values are stored
  * ```
