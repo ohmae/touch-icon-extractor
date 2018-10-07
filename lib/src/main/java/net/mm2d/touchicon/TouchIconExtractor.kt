@@ -16,14 +16,14 @@ import okhttp3.Response
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 class TouchIconExtractor(private val client: OkHttpClient) {
-    private val fromHtml = ExtractFromHtml(this)
+    private val fromPage = ExtractFromPage(this)
     private val fromDomain = ExtractFromDomain(this)
     var userAgent: String = ""
     var headers: Map<String, String> = emptyMap()
     var downloadLimit: Int
-        get() = fromHtml.downloadLimit
+        get() = fromPage.downloadLimit
         set(value) {
-            fromHtml.downloadLimit = value
+            fromPage.downloadLimit = value
         }
 
     internal fun executeHead(url: String): Response {
@@ -54,8 +54,8 @@ class TouchIconExtractor(private val client: OkHttpClient) {
         return this
     }
 
-    fun fromHtml(siteUrl: String): List<LinkIcon> {
-        return fromHtml.invoke(siteUrl)
+    fun fromPage(siteUrl: String): List<PageIcon> {
+        return fromPage.invoke(siteUrl)
     }
 
     fun fromDomain(siteUrl: String, withPrecomposed: Boolean = true, sizes: List<String> = emptyList()): DomainIcon? {

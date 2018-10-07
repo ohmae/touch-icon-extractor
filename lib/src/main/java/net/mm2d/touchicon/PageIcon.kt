@@ -15,7 +15,7 @@ import android.os.Parcelable.Creator
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-data class LinkIcon(
+data class PageIcon(
         override val rel: Rel,
         override val url: String,
         override val sizes: String,
@@ -49,12 +49,12 @@ data class LinkIcon(
         return 0
     }
 
-    companion object CREATOR : Creator<LinkIcon> {
-        override fun createFromParcel(parcel: Parcel): LinkIcon {
-            return LinkIcon(parcel)
+    companion object CREATOR : Creator<PageIcon> {
+        override fun createFromParcel(parcel: Parcel): PageIcon {
+            return PageIcon(parcel)
         }
 
-        override fun newArray(size: Int): Array<LinkIcon?> {
+        override fun newArray(size: Int): Array<PageIcon?> {
             return arrayOfNulls(size)
         }
     }

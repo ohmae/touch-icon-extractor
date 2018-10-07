@@ -17,10 +17,10 @@ import java.io.InputStream
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-internal class ExtractFromHtml(private val extractor: TouchIconExtractor) {
+internal class ExtractFromPage(private val extractor: TouchIconExtractor) {
     var downloadLimit: Int = DEFAULT_LIMIT_SIZE
 
-    internal fun invoke(siteUrl: String): List<LinkIcon> {
+    internal fun invoke(siteUrl: String): List<PageIcon> {
         val html = try {
             fetchHeaderPart(siteUrl)
         } catch (e: Exception) {
@@ -31,13 +31,13 @@ internal class ExtractFromHtml(private val extractor: TouchIconExtractor) {
     }
 
     @VisibleForTesting
-    internal fun invoke(siteUrl: String, html: String): List<LinkIcon> {
+    internal fun invoke(siteUrl: String, html: String): List<PageIcon> {
         return Jsoup.parse(html).getElementsByTag("link")
                 .mapNotNull { createLinkIcon(siteUrl, it) }
                 .toList()
     }
 
-    private fun createLinkIcon(siteUrl: String, linkElement: Element): LinkIcon? {
+    private fun createLinkIcon(siteUrl: String, linkElement: Element): PageIcon? {
         val rel = Rel.of(linkElement.attr("rel")) ?: return null
         val href = linkElement.attr("href")
         if (href.isEmpty()) {
@@ -46,7 +46,7 @@ internal class ExtractFromHtml(private val extractor: TouchIconExtractor) {
         val url = makeAbsoluteUrl(siteUrl, href)
         val sizes = linkElement.attr("sizes")
         val mimeType = linkElement.attr("type")
-        return LinkIcon(rel, url, sizes, mimeType)
+        return PageIcon(rel, url, sizes, mimeType)
     }
 
     private fun fetchHeaderPart(url: String): String {

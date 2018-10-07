@@ -32,7 +32,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import net.mm2d.touchicon.Icon
-import net.mm2d.touchicon.LinkIcon
+import net.mm2d.touchicon.PageIcon
 import okhttp3.Request
 import java.io.IOException
 
@@ -55,7 +55,7 @@ class IconDialog : DialogFragment() {
         recyclerView.addItemDecoration(DividerItemDecoration(act, DividerItemDecoration.VERTICAL))
         val adapter = IconListAdapter(act)
         recyclerView.adapter = adapter
-        Single.fromCallable { extractor.fromHtml(siteUrl) }
+        Single.fromCallable { extractor.fromPage(siteUrl) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally { progressBar.visibility = View.GONE }
@@ -95,7 +95,7 @@ class IconDialog : DialogFragment() {
         }
 
         override fun getItemViewType(position: Int): Int = when (list[position]) {
-            is LinkIcon -> 0
+            is PageIcon -> 0
             else -> 1
         }
 
