@@ -112,9 +112,9 @@ internal class ExtractFromDomain(private val extractor: TouchIconExtractor) {
     }
 
     companion object {
-        const val FAVICON_ICO = "favicon.ico"
-        const val APPLE_TOUCH_ICON = "apple-touch-icon"
-        const val PNG = "png"
-        const val PRECOMPOSED = "precomposed"
+        private const val FAVICON_ICO = "favicon.ico"
+        private const val APPLE_TOUCH_ICON = "apple-touch-icon"
+        private const val PNG = "png"
+        private const val PRECOMPOSED = "precomposed"
     }
 }

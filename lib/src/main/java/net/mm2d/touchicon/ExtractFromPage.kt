@@ -88,7 +88,7 @@ internal class ExtractFromPage(private val extractor: TouchIconExtractor) {
     }
 
     companion object {
-        const val BUFFER_SIZE = 1024
-        const val DEFAULT_LIMIT_SIZE = 1024 * 64
+        private const val BUFFER_SIZE = 1024
+        private const val DEFAULT_LIMIT_SIZE = 1024 * 64
     }
 }
