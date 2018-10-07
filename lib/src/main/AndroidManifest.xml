@@ -1,4 +1,1 @@
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.mm2d.touchicon"
-    />
+<manifest package="net.mm2d.touchicon"/>
