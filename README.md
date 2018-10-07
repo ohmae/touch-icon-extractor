@@ -48,6 +48,11 @@ Single.fromCallable { extractor.fromPage(url) }     // Do not call from the Main
         }, {})
 ```
 
+## API document
+
+I am writing documentation comments using KDoc.
+[The generated API document is here](docs/dokka/lib/index.md).
+
 ## Operating principle
    
 There are two kinds of methods for specifying the WebClip icon.
@@ -96,9 +101,9 @@ It checks whether or not the file exists, and returns the information if it exis
 
 The order of checking the existence of the icon is as follows
 
-1. "apple-touch-icon-precomposed.png"
-2. "apple-touch-icon.png"
-3. "favicon.ico"
+1. apple-touch-icon-precomposed.png
+2. apple-touch-icon.png
+3. favicon.ico
 
 If the file exists, the subsequent files will not be checked.
 
@@ -109,8 +114,8 @@ extractor.fromDomain(url, false)
 ```
 
 The order of checking the existence of the icon is as follows
-1. "apple-touch-icon.png"
-1. "favicon.ico"
+1. apple-touch-icon.png
+1. favicon.ico
 
 Sometimes the size information is included in the name, such as "apple-touch-icon-120x120.png"
 
@@ -121,21 +126,16 @@ extractor.fromDomain(url, true, listOf("120x120", "72x72"))
 ```
 
 The order of checking the existence of the icon is as follows
-1. "apple-touch-icon-120x120-precomposed.png"
-1. "apple-touch-icon-120x120.png"
-1. "apple-touch-icon-72x72-precomposed.png"
-1. "apple-touch-icon-72x72.png"
-1. "apple-touch-icon-precomposed.png"
-1. "apple-touch-icon.png"
-1. "favicon.ico"
+1. apple-touch-icon-120x120-precomposed.png
+1. apple-touch-icon-120x120.png
+1. apple-touch-icon-72x72-precomposed.png
+1. apple-touch-icon-72x72.png
+1. apple-touch-icon-precomposed.png
+1. apple-touch-icon.png
+1. favicon.ico
 
 There are methods to gather all the information (`TouchIconExtractor#listFromDomain()`)
 This is for debugging and verification, **strongly not recommended for use in production environment**.
-
-## API document
-
-I am writing documentation comments using KDoc.
-[The generated API document is here](docs/dokka/lib/index.md).
 
 ## Dependent OSS
 
