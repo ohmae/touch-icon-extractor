@@ -82,7 +82,9 @@ Parse it, create an `PageIcon` instance, and return it as a result.
 
 Simply putting a file with a fixed name like "favicon.ico" in the root of the domain.
 Whether an icon exists or not is not known unless HTTP communication is actually performed.
+
 This is an inefficient method, but there are Web sites that are still deployed in this way.
+You should try only if you can not get it by the method in the previous section
 
 By doing the following
 
