@@ -39,12 +39,12 @@ extractor.userAgent = "user agent string"           // option: set User-Agent
 extractor.headers = mapOf("Cookie" to "hoge=fuga")  // option: set additional HTTP header
 extractor.downloadLimit = 10_000                    // option: set download limit (default 64kB).
                                                     // <= 0 means no limit 
-...
+//...
 Single.fromCallable { extractor.fromPage(url) }     // Do not call from the Main thread
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({ 
-            ...
+            //...
         }, {})
 ```
 
@@ -53,9 +53,9 @@ Single.fromCallable { extractor.fromPage(url) }     // Do not call from the Main
 There are two kinds of methods for specifying the WebClip icon.
 This library supports both.
 
-### Icon associated with the HTML file
+### Icon associated with the wab page
 
-Describe the following description in the HTML header.
+Specify the following description in the HTML header.
 
 ```html
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -64,7 +64,7 @@ Describe the following description in the HTML header.
 <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png" sizes="80x80">
 ```
 
-If you want this information, do the following
+If you want this information, write the following
 
 ```kotlin
 extractor.fromPage(url)
@@ -81,12 +81,12 @@ Parse it, create an `PageIcon` instance, and return it as a result.
 ### Icon associated with the Domain
 
 Simply putting a file with a fixed name like "favicon.ico" in the root of the domain.
-Whether an icon exists or not is not known unless HTTP communication is actually performed.
+Whether an icon exists or not can not be known until you try HTTP communication.
 
-This is an inefficient method, but there are Web sites that are still deployed in this way.
+This is an inefficient, but there are Web sites that are still deployed in this way.
 You should try only if you can not get it by the method in the previous section
 
-By doing the following
+If you want this information, write the following
 
 ```kotlin
 extractor.fromDomain(url)
@@ -94,31 +94,33 @@ extractor.fromDomain(url)
 
 It checks whether or not the file exists, and returns the information if it exists.
 
-The trial order is as follows
+The order of checking the existence of the icon is as follows
+
 1. "apple-touch-icon-precomposed.png"
-1. "apple-touch-icon.png"
-1. "favicon.ico"
+2. "apple-touch-icon.png"
+3. "favicon.ico"
 
 If the file exists, the subsequent files will not be checked.
 
-If you do not need precomposed, do the following
+If you do not need precomposed, write the following
 
 ```kotlin
 extractor.fromDomain(url, false)
 ```
-The trial order is as follows
+
+The order of checking the existence of the icon is as follows
 1. "apple-touch-icon.png"
 1. "favicon.ico"
 
 Sometimes the size information is included in the name, such as "apple-touch-icon-120x120.png"
 
-When describing as follows
+When write as follows
 
 ```kotlin
 extractor.fromDomain(url, true, listOf("120x120", "72x72"))
 ```
 
-The trial order is as follows
+The order of checking the existence of the icon is as follows
 1. "apple-touch-icon-120x120-precomposed.png"
 1. "apple-touch-icon-120x120.png"
 1. "apple-touch-icon-72x72-precomposed.png"
