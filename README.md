@@ -135,7 +135,7 @@ The order of checking the existence of the icon is as follows
 1. favicon.ico
 
 There are methods to gather all the information (`TouchIconExtractor#listFromDomain()`)
-This is for debugging and verification, **strongly not recommended for use in production environment**.
+This is for debugging and verification, **strongly recommended not to use in production.**.
 
 ## Dependent OSS
 
