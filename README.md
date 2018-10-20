@@ -69,7 +69,7 @@ Specify the following description in the HTML header.
 <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png" sizes="80x80">
 ```
 
-If you want this information, write the following
+If you want this information, as following
 
 ```kotlin
 extractor.fromPage(url)
@@ -91,7 +91,7 @@ Whether an icon exists or not can not be known until you try HTTP communication.
 This is an inefficient, but there are Web sites that are still deployed in this way.
 You should try only if you can not get it by the method in the previous section
 
-If you want this information, write the following
+If you want this information, as following
 
 ```kotlin
 extractor.fromDomain(url)
@@ -107,7 +107,7 @@ The order of checking the existence of the icon is as follows
 
 If the file exists, the subsequent files will not be checked.
 
-If you do not need precomposed, write the following
+If you do not need precomposed, as following
 
 ```kotlin
 extractor.fromDomain(url, false)
@@ -119,7 +119,7 @@ The order of checking the existence of the icon is as follows
 
 Sometimes the size information is included in the name, such as "apple-touch-icon-120x120.png"
 
-When write as follows
+When
 
 ```kotlin
 extractor.fromDomain(url, true, listOf("120x120", "72x72"))
@@ -127,12 +127,12 @@ extractor.fromDomain(url, true, listOf("120x120", "72x72"))
 
 The order of checking the existence of the icon is as follows
 1. apple-touch-icon-120x120-precomposed.png
-1. apple-touch-icon-120x120.png
-1. apple-touch-icon-72x72-precomposed.png
-1. apple-touch-icon-72x72.png
-1. apple-touch-icon-precomposed.png
-1. apple-touch-icon.png
-1. favicon.ico
+2. apple-touch-icon-120x120.png
+3. apple-touch-icon-72x72-precomposed.png
+4. apple-touch-icon-72x72.png
+5. apple-touch-icon-precomposed.png
+6. apple-touch-icon.png
+7. favicon.ico
 
 There are methods to gather all the information (`TouchIconExtractor#listFromDomain()`)
 This is for debugging and verification, **strongly recommended not to use in production.**.
