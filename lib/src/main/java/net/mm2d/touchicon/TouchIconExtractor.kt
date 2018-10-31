@@ -7,6 +7,7 @@
 
 package net.mm2d.touchicon
 
+import android.support.annotation.WorkerThread
 import okhttp3.Headers
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -89,6 +90,7 @@ class TouchIconExtractor(private val client: OkHttpClient) {
      * @param siteUrl
      * URL of analysis target page
      */
+    @WorkerThread
     fun fromPage(siteUrl: String): List<PageIcon> {
         return fromPage.invoke(siteUrl)
     }
@@ -116,6 +118,7 @@ class TouchIconExtractor(private val client: OkHttpClient) {
      * @param sizes
      * Specify this when appending size (e.g. 80x80) to apple-touch-icon. Default is empty.
      */
+    @WorkerThread
     fun fromDomain(siteUrl: String, withPrecomposed: Boolean = true, sizes: List<String> = emptyList()): DomainIcon? {
         return fromDomain.invoke(siteUrl, withPrecomposed, sizes)
     }
@@ -142,6 +145,7 @@ class TouchIconExtractor(private val client: OkHttpClient) {
      * @param sizes
      * Specify this when appending size (e.g. 80x80) to apple-touch-icon. Default is empty.
      */
+    @WorkerThread
     fun fromDomainWithDownload(siteUrl: String, withPrecomposed: Boolean = true, sizes: List<String> = emptyList()): Pair<DomainIcon, ByteArray>? {
         return fromDomain.invokeWithDownload(siteUrl, withPrecomposed, sizes)
     }
@@ -165,6 +169,7 @@ class TouchIconExtractor(private val client: OkHttpClient) {
      * @param sizes
      * Specify this when appending size (e.g. 80x80) to apple-touch-icon. Default is empty.
      */
+    @WorkerThread
     fun listFromDomain(siteUrl: String, withPrecomposed: Boolean = true, sizes: List<String> = emptyList()): List<DomainIcon> {
         return fromDomain.list(siteUrl, withPrecomposed, sizes)
     }
