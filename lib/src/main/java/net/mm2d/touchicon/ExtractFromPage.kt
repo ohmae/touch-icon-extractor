@@ -33,11 +33,11 @@ internal class ExtractFromPage(private val extractor: TouchIconExtractor) {
     @VisibleForTesting
     internal fun invoke(siteUrl: String, html: String): List<PageIcon> {
         return Jsoup.parse(html).getElementsByTag("link")
-                .mapNotNull { createLinkIcon(siteUrl, it) }
+                .mapNotNull { createPageIcon(siteUrl, it) }
                 .toList()
     }
 
-    private fun createLinkIcon(siteUrl: String, linkElement: Element): PageIcon? {
+    private fun createPageIcon(siteUrl: String, linkElement: Element): PageIcon? {
         val rel = Relationship.of(linkElement.attr("rel")) ?: return null
         val href = linkElement.attr("href")
         if (href.isEmpty()) {

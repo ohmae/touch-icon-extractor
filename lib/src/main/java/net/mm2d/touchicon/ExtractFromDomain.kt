@@ -60,7 +60,7 @@ internal class ExtractFromDomain(private val extractor: TouchIconExtractor) {
         val url = makeUrl(baseUri, tryData)
         val response = extractor.executeHead(url)
         try {
-            return createRootIcon(response, url, tryData)
+            return createDomainIcon(response, url, tryData)
         } finally {
             response.body()?.close()
         }
@@ -70,7 +70,7 @@ internal class ExtractFromDomain(private val extractor: TouchIconExtractor) {
         val url = makeUrl(baseUri, tryData)
         val response = extractor.executeGet(url)
         response.body()?.use {
-            val icon = createRootIcon(response, url, tryData) ?: return null
+            val icon = createDomainIcon(response, url, tryData) ?: return null
             return icon to it.bytes()
         }
         return null
@@ -80,7 +80,7 @@ internal class ExtractFromDomain(private val extractor: TouchIconExtractor) {
         return baseUri.path(tryData.name).build().toString()
     }
 
-    private fun createRootIcon(response: Response, url: String, tryData: TryData): DomainIcon? {
+    private fun createDomainIcon(response: Response, url: String, tryData: TryData): DomainIcon? {
         if (!response.isSuccessful) return null
         val type = response.header("Content-Type") ?: return null
         if (!type.contains("image", true)) return null
