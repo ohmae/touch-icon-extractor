@@ -8,6 +8,7 @@
 package net.mm2d.touchicon
 
 import android.net.Uri
+import android.support.annotation.VisibleForTesting
 import okhttp3.Response
 
 /**
@@ -88,14 +89,16 @@ internal class ExtractFromDomain(private val http: HttpClientWrapper) {
         return DomainIcon(tryData.rel, url, tryData.sizes, type, tryData.precomposed, length)
     }
 
-    private data class TryData(
+    @VisibleForTesting
+    internal data class TryData(
             val rel: Relationship,
             val name: String,
             val sizes: String,
             val precomposed: Boolean
     )
 
-    private fun createTryDataList(withPrecomposed: Boolean, sizes: List<String>): List<TryData> {
+    @VisibleForTesting
+    internal fun createTryDataList(withPrecomposed: Boolean, sizes: List<String>): List<TryData> {
         val result: MutableList<TryData> = mutableListOf()
         sizes.forEach {
             if (withPrecomposed) {
