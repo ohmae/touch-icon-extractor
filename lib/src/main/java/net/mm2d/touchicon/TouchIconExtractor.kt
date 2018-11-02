@@ -8,10 +8,7 @@
 package net.mm2d.touchicon
 
 import android.support.annotation.WorkerThread
-import okhttp3.Headers
 import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
 
 /**
  * Extract information of WebClip icon such as Apple Touch Icon or favicon related to the URL.
@@ -24,21 +21,30 @@ import okhttp3.Response
  *
  * @param client An instance of OkHttpClient to use for internal communication.
  */
-class TouchIconExtractor(private val client: OkHttpClient) {
-    private val fromPage = ExtractFromPage(this)
-    private val fromDomain = ExtractFromDomain(this)
+class TouchIconExtractor(client: OkHttpClient) {
+    private val http = HttpClientWrapper(client)
+    private val fromPage = ExtractFromPage(http)
+    private val fromDomain = ExtractFromDomain(http)
     /**
      * Specify the value of User-Agent used for HTTP communication.
      *
      * It takes precedence over specification in [headers].
      */
-    var userAgent: String = ""
+    var userAgent: String
+        get() = http.userAgent
+        set(value) {
+            http.userAgent = value
+        }
     /**
      * Specify the HTTP communication header.
      *
      * User-Agent can also be specified, but [userAgent] takes precedence.
      */
-    var headers: Map<String, String> = emptyMap()
+    var headers: Map<String, String>
+        get() = http.headers
+        set(value) {
+            http.headers = value
+        }
     /**
      * Specify the maximum download size when downloading HTML file.
      *
@@ -50,34 +56,6 @@ class TouchIconExtractor(private val client: OkHttpClient) {
         set(value) {
             fromPage.downloadLimit = value
         }
-
-    internal fun executeHead(url: String): Response {
-        val request = Request.Builder()
-                .head()
-                .url(url)
-                .appendHeader()
-                .build()
-        return client.newCall(request).execute()
-    }
-
-    internal fun executeGet(url: String): Response {
-        val request = Request.Builder()
-                .get()
-                .url(url)
-                .appendHeader()
-                .build()
-        return client.newCall(request).execute()
-    }
-
-    private fun Request.Builder.appendHeader(): Request.Builder {
-        if (headers.isNotEmpty()) {
-            headers(Headers.of(headers))
-        }
-        if (userAgent.isNotEmpty()) {
-            header("User-Agent", userAgent)
-        }
-        return this
-    }
 
     /**
      * Analyzes the HTML of the designated URL and extract the icon information specified by the link tag.

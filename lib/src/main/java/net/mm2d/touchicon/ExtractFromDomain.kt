@@ -13,7 +13,7 @@ import okhttp3.Response
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-internal class ExtractFromDomain(private val extractor: TouchIconExtractor) {
+internal class ExtractFromDomain(private val http: HttpClientWrapper) {
     private fun makeBaseBuilder(siteUrl: String) = Uri.parse(siteUrl)
             .buildUpon()
             .path(null)
@@ -58,7 +58,7 @@ internal class ExtractFromDomain(private val extractor: TouchIconExtractor) {
 
     private fun tryHead(baseUri: Uri.Builder, tryData: TryData): DomainIcon? {
         val url = makeUrl(baseUri, tryData)
-        val response = extractor.executeHead(url)
+        val response = http.head(url)
         try {
             return createDomainIcon(response, url, tryData)
         } finally {
@@ -68,7 +68,7 @@ internal class ExtractFromDomain(private val extractor: TouchIconExtractor) {
 
     private fun tryGet(baseUri: Uri.Builder, tryData: TryData): Pair<DomainIcon, ByteArray>? {
         val url = makeUrl(baseUri, tryData)
-        val response = extractor.executeGet(url)
+        val response = http.get(url)
         response.body()?.use {
             val icon = createDomainIcon(response, url, tryData) ?: return null
             return icon to it.bytes()

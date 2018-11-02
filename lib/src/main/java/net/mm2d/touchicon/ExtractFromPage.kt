@@ -17,7 +17,7 @@ import java.io.InputStream
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-internal class ExtractFromPage(private val extractor: TouchIconExtractor) {
+internal class ExtractFromPage(private val http: HttpClientWrapper) {
     var downloadLimit: Int = DEFAULT_LIMIT_SIZE
 
     internal fun invoke(siteUrl: String): List<PageIcon> {
@@ -50,7 +50,7 @@ internal class ExtractFromPage(private val extractor: TouchIconExtractor) {
     }
 
     private fun fetchHeaderPart(url: String): String {
-        val response = extractor.executeGet(url)
+        val response = http.get(url)
         response.body()?.use {
             if (!response.hasHtml()) return ""
             if (downloadLimit <= 0) {

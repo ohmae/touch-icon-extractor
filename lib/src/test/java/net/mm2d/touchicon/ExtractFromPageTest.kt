@@ -22,7 +22,7 @@ import org.robolectric.RobolectricTestRunner
 class ExtractFromPageTest {
     @Test
     fun extract_icon() {
-        val extract = ExtractFromPage(mock(TouchIconExtractor::class.java))
+        val extract = ExtractFromPage(mock(HttpClientWrapper::class.java))
         val result = extract.invoke("https://www.example.com/",
                 """
                     <html><head>
@@ -38,7 +38,7 @@ class ExtractFromPageTest {
 
     @Test
     fun extract_shortcut_icon() {
-        val extract = ExtractFromPage(mock(TouchIconExtractor::class.java))
+        val extract = ExtractFromPage(mock(HttpClientWrapper::class.java))
         val result = extract.invoke("https://www.example.com/",
                 """
                     <html><head>
@@ -54,7 +54,7 @@ class ExtractFromPageTest {
 
     @Test
     fun extract_apple_touch_icon() {
-        val extract = ExtractFromPage(mock(TouchIconExtractor::class.java))
+        val extract = ExtractFromPage(mock(HttpClientWrapper::class.java))
         val result = extract.invoke("https://www.example.com/",
                 """
                     <html><head>
@@ -70,7 +70,7 @@ class ExtractFromPageTest {
 
     @Test
     fun extract_apple_touch_icon_precomposed() {
-        val extract = ExtractFromPage(mock(TouchIconExtractor::class.java))
+        val extract = ExtractFromPage(mock(HttpClientWrapper::class.java))
         val result = extract.invoke("https://www.example.com/",
                 """
                     <html><head>
@@ -86,7 +86,7 @@ class ExtractFromPageTest {
 
     @Test
     fun extract_omitted_scheme() {
-        val extract = ExtractFromPage(mock(TouchIconExtractor::class.java))
+        val extract = ExtractFromPage(mock(HttpClientWrapper::class.java))
         val result = extract.invoke("https://www.example.com/",
                 """
                     <html><head>
@@ -102,7 +102,7 @@ class ExtractFromPageTest {
 
     @Test
     fun extract_broken() {
-        val extract = ExtractFromPage(mock(TouchIconExtractor::class.java))
+        val extract = ExtractFromPage(mock(HttpClientWrapper::class.java))
         val result = extract.invoke("https://www.example.com/",
                 """
                     <html><head>
