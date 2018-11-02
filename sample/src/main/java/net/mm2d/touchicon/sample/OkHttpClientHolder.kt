@@ -13,5 +13,7 @@ import okhttp3.OkHttpClient
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 object OkHttpClientHolder {
-    val client = OkHttpClient()
+    val client: OkHttpClient = OkHttpClient.Builder()
+            .cookieJar(WebViewCookieJar)
+            .build()
 }
