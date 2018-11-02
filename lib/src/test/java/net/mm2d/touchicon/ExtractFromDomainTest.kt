@@ -7,17 +7,109 @@
 
 package net.mm2d.touchicon
 
+import okhttp3.OkHttpClient
+import okhttp3.mockwebserver.Dispatcher
+import okhttp3.mockwebserver.MockResponse
+import okhttp3.mockwebserver.MockWebServer
+import okhttp3.mockwebserver.RecordedRequest
 import org.hamcrest.Matchers.`is`
 import org.junit.Assert.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mockito
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
+@RunWith(RobolectricTestRunner::class)
+@Config(shadows = [NetworkSecurityPolicyShadow::class])
+@Suppress("TestFunctionName")
 class ExtractFromDomainTest {
     @Test
-    fun createTryDataList() {
+    fun invoke_success_precomposed() {
+        var count = 0
+        val server = MockWebServer()
+        server.setDispatcher(object : Dispatcher() {
+            override fun dispatch(request: RecordedRequest?): MockResponse {
+                count++
+                if (request?.method != "HEAD") {
+                    return MockResponse().setResponseCode(404)
+                }
+                return when (request.path) {
+                    "/apple-touch-icon-precomposed.png" -> MockResponse()
+                            .setResponseCode(200)
+                            .addHeader("Content-Type", "image/png")
+                    else -> MockResponse().setResponseCode(404)
+                }
+            }
+        })
+        server.start()
+        val extract = ExtractFromDomain(HttpClientWrapper(OkHttpClient()))
+        val icon = extract.invoke(server.url("index.html").toString(), true, emptyList())
+        server.shutdown()
+        assertThat(icon?.mimeType, `is`("image/png"))
+        assertThat(icon?.url, `is`(server.url("apple-touch-icon-precomposed.png").toString()))
+        assertThat(count, `is`(1))
+    }
+
+    @Test
+    fun invoke_success_touch_icon() {
+        var count = 0
+        val server = MockWebServer()
+        server.setDispatcher(object : Dispatcher() {
+            override fun dispatch(request: RecordedRequest?): MockResponse {
+                count++
+                if (request?.method != "HEAD") {
+                    return MockResponse().setResponseCode(404)
+                }
+                return when (request.path) {
+                    "/apple-touch-icon.png" -> MockResponse()
+                            .setResponseCode(200)
+                            .addHeader("Content-Type", "image/png")
+                    else -> MockResponse().setResponseCode(404)
+                }
+            }
+        })
+        server.start()
+        val extract = ExtractFromDomain(HttpClientWrapper(OkHttpClient()))
+        val icon = extract.invoke(server.url("index.html").toString(), true, emptyList())
+        server.shutdown()
+        assertThat(icon?.mimeType, `is`("image/png"))
+        assertThat(icon?.url, `is`(server.url("apple-touch-icon.png").toString()))
+        assertThat(count, `is`(2))
+    }
+
+    @Test
+    fun invoke_success_favicon() {
+        var count = 0
+        val server = MockWebServer()
+        server.setDispatcher(object : Dispatcher() {
+            override fun dispatch(request: RecordedRequest?): MockResponse {
+                count++
+                if (request?.method != "HEAD") {
+                    return MockResponse().setResponseCode(404)
+                }
+                return when (request.path) {
+                    "/favicon.ico" -> MockResponse()
+                            .setResponseCode(200)
+                            .addHeader("Content-Type", "image/x-icon")
+                    else -> MockResponse().setResponseCode(404)
+                }
+            }
+        })
+        server.start()
+        val extract = ExtractFromDomain(HttpClientWrapper(OkHttpClient()))
+        val icon = extract.invoke(server.url("index.html").toString(), true, emptyList())
+        server.shutdown()
+        assertThat(icon?.mimeType, `is`("image/x-icon"))
+        assertThat(icon?.url, `is`(server.url("favicon.ico").toString()))
+        assertThat(count, `is`(3))
+    }
+
+    @Test
+    fun createTryDataList_full() {
         val extract = ExtractFromDomain(Mockito.mock(HttpClientWrapper::class.java))
         val list = extract.createTryDataList(true, listOf("120x120", "80x80"))
         assertThat(list.size, `is`(7))
@@ -59,7 +151,7 @@ class ExtractFromDomainTest {
     }
 
     @Test
-    fun createTryDataList1() {
+    fun createTryDataList_size_1_with_precomposed() {
         val extract = ExtractFromDomain(Mockito.mock(HttpClientWrapper::class.java))
         val list = extract.createTryDataList(true, listOf("80x80"))
         assertThat(list.size, `is`(5))
@@ -76,7 +168,7 @@ class ExtractFromDomainTest {
     }
 
     @Test
-    fun createTryDataList2() {
+    fun createTryDataList_size_2_without_precomposed() {
         val extract = ExtractFromDomain(Mockito.mock(HttpClientWrapper::class.java))
         val list = extract.createTryDataList(false, listOf("120x120", "80x80"))
         assertThat(list.size, `is`(4))
@@ -91,7 +183,7 @@ class ExtractFromDomainTest {
     }
 
     @Test
-    fun createTryDataList3() {
+    fun createTryDataList_size_empty_with_precomposed() {
         val extract = ExtractFromDomain(Mockito.mock(HttpClientWrapper::class.java))
         val list = extract.createTryDataList(true, emptyList())
         assertThat(list.size, `is`(3))
@@ -104,7 +196,7 @@ class ExtractFromDomainTest {
     }
 
     @Test
-    fun createTryDataList4() {
+    fun createTryDataList_size_empty_without_precomposed() {
         val extract = ExtractFromDomain(Mockito.mock(HttpClientWrapper::class.java))
         val list = extract.createTryDataList(false, emptyList())
         assertThat(list.size, `is`(2))
