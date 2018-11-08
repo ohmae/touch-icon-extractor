@@ -48,6 +48,9 @@ interface Icon {
 
     /**
      * Infer display size of this icon.
+     *
+     * Infer based on [sizes] or [url].
+     * If x or y is -1, it means fail to infer.
      */
     fun inferSize(): Point
 }

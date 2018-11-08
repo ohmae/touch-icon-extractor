@@ -84,14 +84,20 @@ data class PageIcon(
      */
     override val length: Int = -1
 ) : Icon, Parcelable {
+    private var _size: Point? = null
     /**
      * Infer display size of this icon from sizes value.
      *
      * if fail to infer from sizes, try to infer from url.
      */
     override fun inferSize(): Point {
+        _size?.let { return it }
+        return inferSizeInner().also { _size = it }
+    }
+
+    private fun inferSizeInner(): Point {
         val size = inferSizeFromSizes(sizes)
-        if (size.x != 0 && size.y != 0) {
+        if (size.x > 0 && size.y > 0) {
             return size
         }
         return inferSizeFromUrl(url)

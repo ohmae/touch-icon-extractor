@@ -13,6 +13,15 @@ import java.util.regex.Pattern
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
+
+/**
+ * Infer size from url.
+ *
+ * If x or y is -1, it means fail to infer.
+ *
+ * Extract size section from file name and parse it.
+ * e.g. "apple-touch-icon-120x120-precomposed.png" -> (120,120)
+ */
 internal fun inferSizeFromUrl(url: String): Point {
     val fileName = url.substring(url.lastIndexOf('/'))
     val matcher = Pattern.compile("\\d+x\\d+").matcher(fileName)
@@ -22,6 +31,13 @@ internal fun inferSizeFromUrl(url: String): Point {
     return inferSizeFromSizes(matcher.group())
 }
 
+/**
+ * Infer size from sizes attribute.
+ *
+ * If x or y is -1, it means fail to infer.
+ *
+ * Assumed format is (width)x(height). e.g. "80x80".
+ */
 internal fun inferSizeFromSizes(sizes: String): Point {
     val part = sizes.split('x')
     if (part.size == 2) {

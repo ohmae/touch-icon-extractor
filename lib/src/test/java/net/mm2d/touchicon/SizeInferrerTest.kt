@@ -19,7 +19,7 @@ import org.robolectric.RobolectricTestRunner
  */
 @RunWith(RobolectricTestRunner::class)
 @Suppress("TestFunctionName")
-class IconTest {
+class SizeInferrerTest {
     @Test
     fun inferSizeFromUrl() {
         assertThat(
@@ -62,7 +62,7 @@ class IconTest {
             inferSizeFromUrl(
                 "https://www.example.com/apple-touch-icon.4Bx48.png"
             ),
-            `is`(Point(0, 0))
+            `is`(Point(-1, -1))
         )
     }
 
@@ -70,6 +70,6 @@ class IconTest {
     fun inferSizeFromSizes() {
         assertThat(inferSizeFromSizes("48x48"), `is`(Point(48, 48)))
         assertThat(inferSizeFromSizes("1024x1024"), `is`(Point(1024, 1024)))
-        assertThat(inferSizeFromSizes("0x1B"), `is`(Point(0, 0)))
+        assertThat(inferSizeFromSizes("A0x1B"), `is`(Point(-1, -1)))
     }
 }

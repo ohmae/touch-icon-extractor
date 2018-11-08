@@ -7,6 +7,7 @@
 
 package net.mm2d.touchicon
 
+import android.graphics.Point
 import android.os.Parcel
 import android.os.Parcelable
 import android.os.Parcelable.Creator
@@ -80,10 +81,14 @@ data class DomainIcon(
      */
     override val length: Int
 ) : Icon, Parcelable {
+    private var _size: Point? = null
     /**
      * Infer display size of this icon from sizes value.
      */
-    override fun inferSize() = inferSizeFromSizes(sizes)
+    override fun inferSize(): Point {
+        _size?.let { return it }
+        return inferSizeFromSizes(sizes).also { _size = it }
+    }
 
     constructor(parcel: Parcel) : this(
         Relationship.of(parcel.readString())!!,
