@@ -33,8 +33,8 @@ internal class ExtractFromPage(private val http: HttpClientWrapper) {
     @VisibleForTesting
     internal fun invoke(siteUrl: String, html: String): List<PageIcon> {
         return Jsoup.parse(html).getElementsByTag("link")
-                .mapNotNull { createPageIcon(siteUrl, it) }
-                .toList()
+            .mapNotNull { createPageIcon(siteUrl, it) }
+            .toList()
     }
 
     private fun createPageIcon(siteUrl: String, linkElement: Element): PageIcon? {

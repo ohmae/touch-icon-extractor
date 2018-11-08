@@ -42,43 +42,43 @@ import android.os.Parcelable.Creator
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 data class DomainIcon(
-        /**
-         * Relationship between icon and page.
-         *
-         * This is pseudo information and determined based on the file name.
-         *
-         * - "favicon.ico" -> [Relationship.ICON]
-         * - "apple-touch-icon.png" -> [Relationship.APPLE_TOUCH_ICON]
-         * - "apple-touch-icon-precomposed.png" -> [Relationship.APPLE_TOUCH_ICON_PRECOMPOSED]
-         */
-        override val rel: Relationship,
-        /**
-         * Icon url.
-         */
-        override val url: String,
-        /**
-         * Size information, assumed format is (width)x(height). e.g. "80x80".
-         *
-         * When size is specified by argument, its value is stored.
-         */
-        override val sizes: String,
-        /**
-         * Icon MIME type. e.g. "image/png"
-         *
-         * "Content-Type" value of HTTP header.
-         */
-        override val mimeType: String,
-        /**
-         * true if this is for a precomposed touch icon.
-         */
-        override val precomposed: Boolean,
-        /**
-         * Icon file length.
-         *
-         * "Content-Length" value of HTTP header.
-         * Negative value means unknown.
-         */
-        override val length: Int
+    /**
+     * Relationship between icon and page.
+     *
+     * This is pseudo information and determined based on the file name.
+     *
+     * - "favicon.ico" -> [Relationship.ICON]
+     * - "apple-touch-icon.png" -> [Relationship.APPLE_TOUCH_ICON]
+     * - "apple-touch-icon-precomposed.png" -> [Relationship.APPLE_TOUCH_ICON_PRECOMPOSED]
+     */
+    override val rel: Relationship,
+    /**
+     * Icon url.
+     */
+    override val url: String,
+    /**
+     * Size information, assumed format is (width)x(height). e.g. "80x80".
+     *
+     * When size is specified by argument, its value is stored.
+     */
+    override val sizes: String,
+    /**
+     * Icon MIME type. e.g. "image/png"
+     *
+     * "Content-Type" value of HTTP header.
+     */
+    override val mimeType: String,
+    /**
+     * true if this is for a precomposed touch icon.
+     */
+    override val precomposed: Boolean,
+    /**
+     * Icon file length.
+     *
+     * "Content-Length" value of HTTP header.
+     * Negative value means unknown.
+     */
+    override val length: Int
 ) : Icon, Parcelable {
     /**
      * Infer display size of this icon from sizes value.
@@ -86,12 +86,13 @@ data class DomainIcon(
     override fun inferSize() = inferSizeFromSizes(sizes)
 
     constructor(parcel: Parcel) : this(
-            Relationship.of(parcel.readString())!!,
-            parcel.readString()!!,
-            parcel.readString()!!,
-            parcel.readString()!!,
-            parcel.readByte() != 0.toByte(),
-            parcel.readInt())
+        Relationship.of(parcel.readString())!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readByte() != 0.toByte(),
+        parcel.readInt()
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(rel.value)

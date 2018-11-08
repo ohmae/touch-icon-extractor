@@ -15,10 +15,10 @@ package net.mm2d.touchicon
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 enum class Relationship(
-        /**
-         * Raw value of rel.
-         */
-        val value: String
+    /**
+     * Raw value of rel.
+     */
+    val value: String
 ) {
     /**
      * This expresses that the rel value of the link tag is "apple-touch-icon-precomposed".

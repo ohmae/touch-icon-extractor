@@ -16,10 +16,10 @@ import okhttp3.Response
  */
 internal class ExtractFromDomain(private val http: HttpClientWrapper) {
     private fun makeBaseBuilder(siteUrl: String) = Uri.parse(siteUrl)
-            .buildUpon()
-            .path(null)
-            .fragment(null)
-            .clearQuery()
+        .buildUpon()
+        .path(null)
+        .fragment(null)
+        .clearQuery()
 
     fun invoke(siteUrl: String, withPrecomposed: Boolean, sizes: List<String>): DomainIcon? {
         val base = makeBaseBuilder(siteUrl)
@@ -33,7 +33,11 @@ internal class ExtractFromDomain(private val http: HttpClientWrapper) {
         return null
     }
 
-    fun invokeWithDownload(siteUrl: String, withPrecomposed: Boolean, sizes: List<String>): Pair<DomainIcon, ByteArray>? {
+    fun invokeWithDownload(
+        siteUrl: String,
+        withPrecomposed: Boolean,
+        sizes: List<String>
+    ): Pair<DomainIcon, ByteArray>? {
         val base = makeBaseBuilder(siteUrl)
         createTryDataList(withPrecomposed, sizes).forEach {
             try {
@@ -48,13 +52,13 @@ internal class ExtractFromDomain(private val http: HttpClientWrapper) {
     fun list(siteUrl: String, withPrecomposed: Boolean, sizes: List<String>): List<DomainIcon> {
         val base = makeBaseBuilder(siteUrl)
         return createTryDataList(withPrecomposed, sizes)
-                .mapNotNull {
-                    try {
-                        tryHead(base, it)
-                    } catch (e: Exception) {
-                        null
-                    }
+            .mapNotNull {
+                try {
+                    tryHead(base, it)
+                } catch (e: Exception) {
+                    null
                 }
+            }
     }
 
     private fun tryHead(baseUri: Uri.Builder, tryData: TryData): DomainIcon? {
@@ -91,10 +95,10 @@ internal class ExtractFromDomain(private val http: HttpClientWrapper) {
 
     @VisibleForTesting
     internal data class TryData(
-            val rel: Relationship,
-            val name: String,
-            val sizes: String,
-            val precomposed: Boolean
+        val rel: Relationship,
+        val name: String,
+        val sizes: String,
+        val precomposed: Boolean
     )
 
     @VisibleForTesting
@@ -102,12 +106,33 @@ internal class ExtractFromDomain(private val http: HttpClientWrapper) {
         val result: MutableList<TryData> = mutableListOf()
         sizes.forEach {
             if (withPrecomposed) {
-                result.add(TryData(Relationship.APPLE_TOUCH_ICON_PRECOMPOSED, "$APPLE_TOUCH_ICON-$it-$PRECOMPOSED.$PNG", it, true))
+                result.add(
+                    TryData(
+                        Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
+                        "$APPLE_TOUCH_ICON-$it-$PRECOMPOSED.$PNG",
+                        it,
+                        true
+                    )
+                )
             }
-            result.add(TryData(Relationship.APPLE_TOUCH_ICON, "$APPLE_TOUCH_ICON-$it.$PNG", it, false))
+            result.add(
+                TryData(
+                    Relationship.APPLE_TOUCH_ICON,
+                    "$APPLE_TOUCH_ICON-$it.$PNG",
+                    it,
+                    false
+                )
+            )
         }
         if (withPrecomposed) {
-            result.add(TryData(Relationship.APPLE_TOUCH_ICON_PRECOMPOSED, "$APPLE_TOUCH_ICON-$PRECOMPOSED.$PNG", "", true))
+            result.add(
+                TryData(
+                    Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
+                    "$APPLE_TOUCH_ICON-$PRECOMPOSED.$PNG",
+                    "",
+                    true
+                )
+            )
         }
         result.add(TryData(Relationship.APPLE_TOUCH_ICON, "$APPLE_TOUCH_ICON.$PNG", "", false))
         result.add(TryData(Relationship.ICON, FAVICON_ICO, "", false))

@@ -31,19 +31,19 @@ internal class HttpClientWrapper(private val client: OkHttpClient) {
 
     internal fun head(url: String): Response {
         val request = Request.Builder()
-                .head()
-                .url(url)
-                .appendHeader()
-                .build()
+            .head()
+            .url(url)
+            .appendHeader()
+            .build()
         return client.newCall(request).execute()
     }
 
     internal fun get(url: String): Response {
         val request = Request.Builder()
-                .get()
-                .url(url)
-                .appendHeader()
-                .build()
+            .get()
+            .url(url)
+            .appendHeader()
+            .build()
         return client.newCall(request).execute()
     }
 

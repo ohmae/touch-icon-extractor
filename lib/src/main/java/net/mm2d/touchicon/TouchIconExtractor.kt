@@ -97,7 +97,11 @@ class TouchIconExtractor(client: OkHttpClient) {
      * Specify this when appending size (e.g. 80x80) to apple-touch-icon. Default is empty.
      */
     @WorkerThread
-    fun fromDomain(siteUrl: String, withPrecomposed: Boolean = true, sizes: List<String> = emptyList()): DomainIcon? {
+    fun fromDomain(
+        siteUrl: String,
+        withPrecomposed: Boolean = true,
+        sizes: List<String> = emptyList()
+    ): DomainIcon? {
         return fromDomain.invoke(siteUrl, withPrecomposed, sizes)
     }
 
@@ -124,7 +128,11 @@ class TouchIconExtractor(client: OkHttpClient) {
      * Specify this when appending size (e.g. 80x80) to apple-touch-icon. Default is empty.
      */
     @WorkerThread
-    fun fromDomainWithDownload(siteUrl: String, withPrecomposed: Boolean = true, sizes: List<String> = emptyList()): Pair<DomainIcon, ByteArray>? {
+    fun fromDomainWithDownload(
+        siteUrl: String,
+        withPrecomposed: Boolean = true,
+        sizes: List<String> = emptyList()
+    ): Pair<DomainIcon, ByteArray>? {
         return fromDomain.invokeWithDownload(siteUrl, withPrecomposed, sizes)
     }
 
@@ -148,7 +156,11 @@ class TouchIconExtractor(client: OkHttpClient) {
      * Specify this when appending size (e.g. 80x80) to apple-touch-icon. Default is empty.
      */
     @WorkerThread
-    fun listFromDomain(siteUrl: String, withPrecomposed: Boolean = true, sizes: List<String> = emptyList()): List<DomainIcon> {
+    fun listFromDomain(
+        siteUrl: String,
+        withPrecomposed: Boolean = true,
+        sizes: List<String> = emptyList()
+    ): List<DomainIcon> {
         return fromDomain.list(siteUrl, withPrecomposed, sizes)
     }
 }
