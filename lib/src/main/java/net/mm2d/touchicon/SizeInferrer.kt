@@ -14,6 +14,8 @@ import java.util.regex.Pattern
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 
+private val INVALID_VALUE = Point(-1, -1)
+
 /**
  * Infer size from url.
  *
@@ -23,10 +25,14 @@ import java.util.regex.Pattern
  * e.g. "apple-touch-icon-120x120-precomposed.png" -> (120,120)
  */
 internal fun inferSizeFromUrl(url: String): Point {
-    val fileName = url.substring(url.lastIndexOf('/'))
+    val startOfFileName = url.lastIndexOf('/')
+    if (startOfFileName < 0 || startOfFileName >= url.length - 1) {
+        return INVALID_VALUE
+    }
+    val fileName = url.substring(startOfFileName + 1)
     val matcher = Pattern.compile("\\d+x\\d+").matcher(fileName)
     if (!matcher.find()) {
-        return Point(-1, -1)
+        return INVALID_VALUE
     }
     return inferSizeFromSizes(matcher.group())
 }
@@ -43,5 +49,5 @@ internal fun inferSizeFromSizes(sizes: String): Point {
     if (part.size == 2) {
         return Point(part[0].toIntOrNull() ?: -1, part[1].toIntOrNull() ?: -1)
     }
-    return Point(-1, -1)
+    return INVALID_VALUE
 }

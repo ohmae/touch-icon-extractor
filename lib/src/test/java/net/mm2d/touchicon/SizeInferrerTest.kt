@@ -30,6 +30,12 @@ class SizeInferrerTest {
         )
         assertThat(
             inferSizeFromUrl(
+                "https://www.example.com/48x48.png"
+            ),
+            `is`(Point(48, 48))
+        )
+        assertThat(
+            inferSizeFromUrl(
                 "https://www.example.com/apple-touch-icon48x48.png"
             ),
             `is`(Point(48, 48))
@@ -61,6 +67,18 @@ class SizeInferrerTest {
         assertThat(
             inferSizeFromUrl(
                 "https://www.example.com/apple-touch-icon.4Bx48.png"
+            ),
+            `is`(Point(-1, -1))
+        )
+        assertThat(
+            inferSizeFromUrl(
+                "https://www.example.com/"
+            ),
+            `is`(Point(-1, -1))
+        )
+        assertThat(
+            inferSizeFromUrl(
+                ""
             ),
             `is`(Point(-1, -1))
         )
