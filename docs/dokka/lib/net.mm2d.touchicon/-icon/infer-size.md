@@ -6,3 +6,6 @@
 
 Infer display size of this icon.
 
+Infer based on [sizes](sizes.md) or [url](url.md).
+If x or y is -1, it means fail to infer.
+

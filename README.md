@@ -27,7 +27,7 @@ repositories {
 Add dependencies, as following.
 ```gradle
 dependencies {
-    implementation 'net.mm2d:touchicon:0.1.0'
+    implementation 'net.mm2d:touchicon:0.2.0'
 }
 ```
 
