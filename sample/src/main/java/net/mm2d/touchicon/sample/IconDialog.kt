@@ -50,7 +50,11 @@ class IconDialog : DialogFragment() {
         val arg = arguments!!
         val title = arg.getString(KEY_TITLE)!!
         val siteUrl = arg.getString(KEY_SITE_URL)!!
-        val view = act.layoutInflater.inflate(R.layout.dialog_icon, act.window.decorView as ViewGroup, false)
+        val view = act.layoutInflater.inflate(
+            R.layout.dialog_icon,
+            act.window.decorView as ViewGroup,
+            false
+        )
         view.findViewById<TextView>(R.id.site_url).text = siteUrl
         val progressBar: ProgressBar = view.findViewById(R.id.progress_bar)
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
@@ -59,21 +63,21 @@ class IconDialog : DialogFragment() {
         val adapter = IconListAdapter(act)
         recyclerView.adapter = adapter
         Single.fromCallable { extractor.fromPage(siteUrl) }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doFinally { progressBar.visibility = View.GONE }
-                .subscribe({ adapter.add(it) }, {})
-                .addTo(compositeDisposable)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doFinally { progressBar.visibility = View.GONE }
+            .subscribe({ adapter.add(it) }, {})
+            .addTo(compositeDisposable)
         Single.fromCallable { extractor.listFromDomain(siteUrl, true, listOf("120x120")) }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doFinally { progressBar.visibility = View.GONE }
-                .subscribe({ adapter.add(it) }, {})
-                .addTo(compositeDisposable)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doFinally { progressBar.visibility = View.GONE }
+            .subscribe({ adapter.add(it) }, {})
+            .addTo(compositeDisposable)
         return AlertDialog.Builder(act)
-                .setTitle(title)
-                .setView(view)
-                .create()
+            .setTitle(title)
+            .setView(view)
+            .create()
     }
 
     override fun onDismiss(dialog: DialogInterface?) {
@@ -132,10 +136,12 @@ class IconDialog : DialogFragment() {
             val size = iconInfo.inferSize()
             imageSizes.text = "(${size.x}x${size.y})"
             GlideApp.with(itemView)
-                    .load(iconInfo.url)
-                    .override(Target.SIZE_ORIGINAL)
-                    .addListener(bitmapHook { imageSizes.text = "${it.width}x${it.height} (${size.x}x${size.y})" })
-                    .into(icon)
+                .load(iconInfo.url)
+                .override(Target.SIZE_ORIGINAL)
+                .addListener(bitmapHook {
+                    imageSizes.text = "${it.width}x${it.height} (${size.x}x${size.y})"
+                })
+                .into(icon)
         }
     }
 
@@ -154,10 +160,10 @@ class IconDialog : DialogFragment() {
             type.text = iconInfo.mimeType
             url.text = iconInfo.url
             GlideApp.with(itemView)
-                    .load(iconInfo.url)
-                    .override(Target.SIZE_ORIGINAL)
-                    .addListener(bitmapHook { imageSizes.text = "${it.width}x${it.height}" })
-                    .into(icon)
+                .load(iconInfo.url)
+                .override(Target.SIZE_ORIGINAL)
+                .addListener(bitmapHook { imageSizes.text = "${it.width}x${it.height}" })
+                .into(icon)
         }
     }
 
@@ -180,11 +186,22 @@ class IconDialog : DialogFragment() {
 
         private fun bitmapHook(callback: ((bitmap: Bitmap) -> Unit)): RequestListener<Drawable?> {
             return object : RequestListener<Drawable?> {
-                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable?>?, isFirstResource: Boolean): Boolean {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable?>?,
+                    isFirstResource: Boolean
+                ): Boolean {
                     return false
                 }
 
-                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable?>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable?>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
                     if (resource is BitmapDrawable) {
                         callback(resource.bitmap)
                     }

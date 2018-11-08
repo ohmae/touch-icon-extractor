@@ -101,10 +101,10 @@ class MainActivity : AppCompatActivity() {
 
         private fun makeSearchUrl(query: String): String {
             return Uri.parse(YAHOO_SEARCH_URL)
-                    .buildUpon()
-                    .appendQueryParameter(YAHOO_SEARCH_QUERY_KEY, query)
-                    .build()
-                    .toString()
+                .buildUpon()
+                .appendQueryParameter(YAHOO_SEARCH_QUERY_KEY, query)
+                .build()
+                .toString()
         }
     }
 }

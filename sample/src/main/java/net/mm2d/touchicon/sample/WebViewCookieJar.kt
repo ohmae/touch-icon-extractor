@@ -31,7 +31,7 @@ object WebViewCookieJar : CookieJar {
             return emptyList()
         }
         return cookie.split(";")
-                .filter { it.isNotBlank() }
-                .mapNotNull { Cookie.parse(url, it) }
+            .filter { it.isNotBlank() }
+            .mapNotNull { Cookie.parse(url, it) }
     }
 }

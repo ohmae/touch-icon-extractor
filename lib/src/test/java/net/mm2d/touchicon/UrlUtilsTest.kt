@@ -7,8 +7,8 @@
 
 package net.mm2d.touchicon
 
-import org.hamcrest.Matchers
-import org.junit.Assert
+import org.hamcrest.Matchers.`is`
+import org.junit.Assert.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -21,34 +21,46 @@ import org.robolectric.RobolectricTestRunner
 class UrlUtilsTest {
     @Test
     fun makeAbsoluteUrl() {
-        Assert.assertThat(makeAbsoluteUrl("https://www.example.com/foo/bar.html", "/icon.png"),
-                Matchers.`is`("https://www.example.com/icon.png"))
-        Assert.assertThat(makeAbsoluteUrl("https://www.example.com/foo/bar.html", "icon.png"),
-                Matchers.`is`("https://www.example.com/foo/icon.png"))
-        Assert.assertThat(makeAbsoluteUrl("https://www.example.com/foo/bar.html?a=b&c=d", "icon.png"),
-                Matchers.`is`("https://www.example.com/foo/icon.png"))
-        Assert.assertThat(makeAbsoluteUrl("https://www.example.com/foo/bar.html#index", "icon.png"),
-                Matchers.`is`("https://www.example.com/foo/icon.png"))
-        Assert.assertThat(makeAbsoluteUrl("https://www.example.com/foo/bar.html", "//www.example.net/icon.png"),
-                Matchers.`is`("https://www.example.net/icon.png"))
-        Assert.assertThat(makeAbsoluteUrl("http://www.example.com/foo/bar.html", "//www.example.net/icon.png"),
-                Matchers.`is`("http://www.example.net/icon.png"))
+        assertThat(
+            makeAbsoluteUrl("https://www.example.com/foo/bar.html", "/icon.png"),
+            `is`("https://www.example.com/icon.png")
+        )
+        assertThat(
+            makeAbsoluteUrl("https://www.example.com/foo/bar.html", "icon.png"),
+            `is`("https://www.example.com/foo/icon.png")
+        )
+        assertThat(
+            makeAbsoluteUrl("https://www.example.com/foo/bar.html?a=b&c=d", "icon.png"),
+            `is`("https://www.example.com/foo/icon.png")
+        )
+        assertThat(
+            makeAbsoluteUrl("https://www.example.com/foo/bar.html#index", "icon.png"),
+            `is`("https://www.example.com/foo/icon.png")
+        )
+        assertThat(
+            makeAbsoluteUrl("https://www.example.com/foo/bar.html", "//www.example.net/icon.png"),
+            `is`("https://www.example.net/icon.png")
+        )
+        assertThat(
+            makeAbsoluteUrl("http://www.example.com/foo/bar.html", "//www.example.net/icon.png"),
+            `is`("http://www.example.net/icon.png")
+        )
     }
 
     @Test
     fun normalizePath() {
-        Assert.assertThat("/".normalizePath(), Matchers.`is`("/"))
-        Assert.assertThat("./".normalizePath(), Matchers.`is`("/"))
-        Assert.assertThat("a".normalizePath(), Matchers.`is`("/a"))
-        Assert.assertThat("a/b".normalizePath(), Matchers.`is`("/a/b"))
-        Assert.assertThat("/a/b".normalizePath(), Matchers.`is`("/a/b"))
-        Assert.assertThat("/a/b/".normalizePath(), Matchers.`is`("/a/b/"))
-        Assert.assertThat("/a/b/./".normalizePath(), Matchers.`is`("/a/b/"))
-        Assert.assertThat("/a/b/./c".normalizePath(), Matchers.`is`("/a/b/c"))
-        Assert.assertThat("/a/b/c/../".normalizePath(), Matchers.`is`("/a/b/"))
-        Assert.assertThat("/a/b/c/../d".normalizePath(), Matchers.`is`("/a/b/d"))
-        Assert.assertThat("/a/b/c/./../d".normalizePath(), Matchers.`is`("/a/b/d"))
-        Assert.assertThat("/a/b/c/../../d".normalizePath(), Matchers.`is`("/a/d"))
-        Assert.assertThat("/a/../b/c/../d".normalizePath(), Matchers.`is`("/b/d"))
+        assertThat("/".normalizePath(), `is`("/"))
+        assertThat("./".normalizePath(), `is`("/"))
+        assertThat("a".normalizePath(), `is`("/a"))
+        assertThat("a/b".normalizePath(), `is`("/a/b"))
+        assertThat("/a/b".normalizePath(), `is`("/a/b"))
+        assertThat("/a/b/".normalizePath(), `is`("/a/b/"))
+        assertThat("/a/b/./".normalizePath(), `is`("/a/b/"))
+        assertThat("/a/b/./c".normalizePath(), `is`("/a/b/c"))
+        assertThat("/a/b/c/../".normalizePath(), `is`("/a/b/"))
+        assertThat("/a/b/c/../d".normalizePath(), `is`("/a/b/d"))
+        assertThat("/a/b/c/./../d".normalizePath(), `is`("/a/b/d"))
+        assertThat("/a/b/c/../../d".normalizePath(), `is`("/a/d"))
+        assertThat("/a/../b/c/../d".normalizePath(), `is`("/b/d"))
     }
 }

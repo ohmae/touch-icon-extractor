@@ -22,27 +22,48 @@ import org.robolectric.RobolectricTestRunner
 class IconTest {
     @Test
     fun inferSizeFromUrl() {
-        assertThat(inferSizeFromUrl(
-                "https://www.example.com/apple-touch-icon-48x48.png"),
-                `is`(Point(48, 48)))
-        assertThat(inferSizeFromUrl(
-                "https://www.example.com/apple-touch-icon48x48.png"),
-                `is`(Point(48, 48)))
-        assertThat(inferSizeFromUrl(
-                "https://www.example.com/apple-touch-icon_48x48.png"),
-                `is`(Point(48, 48)))
-        assertThat(inferSizeFromUrl(
-                "https://www.example.com/apple-touch-icon2-48x48.png"),
-                `is`(Point(48, 48)))
-        assertThat(inferSizeFromUrl(
-                "https://www.example.com/apple-touch-iconx2-48x48.png"),
-                `is`(Point(48, 48)))
-        assertThat(inferSizeFromUrl(
-                "https://www.example.com/apple-touch-icon.48x48.png"),
-                `is`(Point(48, 48)))
-        assertThat(inferSizeFromUrl(
-                "https://www.example.com/apple-touch-icon.4Bx48.png"),
-                `is`(Point(0, 0)))
+        assertThat(
+            inferSizeFromUrl(
+                "https://www.example.com/apple-touch-icon-48x48.png"
+            ),
+            `is`(Point(48, 48))
+        )
+        assertThat(
+            inferSizeFromUrl(
+                "https://www.example.com/apple-touch-icon48x48.png"
+            ),
+            `is`(Point(48, 48))
+        )
+        assertThat(
+            inferSizeFromUrl(
+                "https://www.example.com/apple-touch-icon_48x48.png"
+            ),
+            `is`(Point(48, 48))
+        )
+        assertThat(
+            inferSizeFromUrl(
+                "https://www.example.com/apple-touch-icon2-48x48.png"
+            ),
+            `is`(Point(48, 48))
+        )
+        assertThat(
+            inferSizeFromUrl(
+                "https://www.example.com/apple-touch-iconx2-48x48.png"
+            ),
+            `is`(Point(48, 48))
+        )
+        assertThat(
+            inferSizeFromUrl(
+                "https://www.example.com/apple-touch-icon.48x48.png"
+            ),
+            `is`(Point(48, 48))
+        )
+        assertThat(
+            inferSizeFromUrl(
+                "https://www.example.com/apple-touch-icon.4Bx48.png"
+            ),
+            `is`(Point(0, 0))
+        )
     }
 
     @Test

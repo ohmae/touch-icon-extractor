@@ -39,8 +39,8 @@ class ExtractFromDomainTest {
                 }
                 return when (request.path) {
                     "/apple-touch-icon-precomposed.png" -> MockResponse()
-                            .setResponseCode(200)
-                            .addHeader("Content-Type", "image/png")
+                        .setResponseCode(200)
+                        .addHeader("Content-Type", "image/png")
                     else -> MockResponse().setResponseCode(404)
                 }
             }
@@ -66,8 +66,8 @@ class ExtractFromDomainTest {
                 }
                 return when (request.path) {
                     "/apple-touch-icon.png" -> MockResponse()
-                            .setResponseCode(200)
-                            .addHeader("Content-Type", "image/png")
+                        .setResponseCode(200)
+                        .addHeader("Content-Type", "image/png")
                     else -> MockResponse().setResponseCode(404)
                 }
             }
@@ -93,8 +93,8 @@ class ExtractFromDomainTest {
                 }
                 return when (request.path) {
                     "/favicon.ico" -> MockResponse()
-                            .setResponseCode(200)
-                            .addHeader("Content-Type", "image/x-icon")
+                        .setResponseCode(200)
+                        .addHeader("Content-Type", "image/x-icon")
                     else -> MockResponse().setResponseCode(404)
                 }
             }

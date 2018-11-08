@@ -14,6 +14,6 @@ import okhttp3.OkHttpClient
  */
 object OkHttpClientHolder {
     val client: OkHttpClient = OkHttpClient.Builder()
-            .cookieJar(WebViewCookieJar)
-            .build()
+        .cookieJar(WebViewCookieJar)
+        .build()
 }
