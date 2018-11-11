@@ -18,7 +18,11 @@ enum class Relationship(
     /**
      * Raw value of rel.
      */
-    val value: String
+    val value: String,
+    /**
+     * Priority to expect quality.
+     */
+    val priority: Int
 ) {
     /**
      * This expresses that the rel value of the link tag is "apple-touch-icon-precomposed".
@@ -29,7 +33,7 @@ enum class Relationship(
      * <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png" sizes="80x80">
      * ```
      */
-    APPLE_TOUCH_ICON_PRECOMPOSED("apple-touch-icon-precomposed"),
+    APPLE_TOUCH_ICON_PRECOMPOSED("apple-touch-icon-precomposed", 3),
     /**
      * This expresses that the rel value of the link tag is "apple-touch-icon".
      *
@@ -39,7 +43,7 @@ enum class Relationship(
      * <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="57x57">
      * ```
      */
-    APPLE_TOUCH_ICON("apple-touch-icon"),
+    APPLE_TOUCH_ICON("apple-touch-icon", 2),
     /**
      * This expresses that the rel value of the link tag is "icon".
      *
@@ -49,7 +53,7 @@ enum class Relationship(
      * <link rel="icon" href="/favicon.ico" type="image/x-icon">
      * ```
      */
-    ICON("icon"),
+    ICON("icon", 1),
     /**
      * This expresses that the rel value of the link tag is "shortcut icon".
      *
@@ -62,7 +66,7 @@ enum class Relationship(
      * <link rel="shortcut icon" href="/favicon.ico">
      * ```
      */
-    SHORTCUT_ICON("shortcut icon"),
+    SHORTCUT_ICON("shortcut icon", 0),
     ;
 
     companion object {

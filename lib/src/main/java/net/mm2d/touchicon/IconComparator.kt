@@ -28,16 +28,23 @@ package net.mm2d.touchicon
  */
 object IconComparator {
     /**
+     * Comparator based on size.
+     */
+    val SIZE = compareBy<Icon> { it.inferArea() }
+
+    /**
+     * Comparator based on quality inferred from relationship.
+     */
+    val REL = compareBy<Icon> { it.rel.priority }
+
+    /**
      * Comparator for order by size -> rel
      *
      * Size is based on width x height.
      * The priority order of relationship is
      * APPLE_TOUCH_ICON_PRECOMPOSED > APPLE_TOUCH_ICON > ICON > SHORTCUT_ICON
      */
-    val SIZE_REL = Comparator<Icon> { icon1, icon2 ->
-        val result = evaluateSize(icon1) - evaluateSize(icon2)
-        if (result != 0) result else evaluateRelationship(icon1) - evaluateRelationship(icon2)
-    }
+    val SIZE_REL = compareBy<Icon> { it.inferArea() }.thenBy { it.rel.priority }
 
     /**
      * Comparator for order by rel -> size
@@ -46,20 +53,5 @@ object IconComparator {
      * APPLE_TOUCH_ICON_PRECOMPOSED > APPLE_TOUCH_ICON > ICON > SHORTCUT_ICON
      * Size is based on width x height.
      */
-    val REL_SIZE = Comparator<Icon> { icon1, icon2 ->
-        val result = evaluateRelationship(icon1) - evaluateRelationship(icon2)
-        if (result != 0) result else evaluateSize(icon1) - evaluateSize(icon2)
-    }
-
-    private fun evaluateSize(icon: Icon): Int {
-        val size = icon.inferSize()
-        return if (size.x > 0 && size.y > 0) size.x * size.y else 0
-    }
-
-    private fun evaluateRelationship(icon: Icon): Int = when (icon.rel) {
-        Relationship.APPLE_TOUCH_ICON_PRECOMPOSED -> 3
-        Relationship.APPLE_TOUCH_ICON -> 2
-        Relationship.ICON -> 1
-        Relationship.SHORTCUT_ICON -> 0
-    }
+    val REL_SIZE = compareBy<Icon> { it.rel.priority }.thenBy { it.inferArea() }
 }
