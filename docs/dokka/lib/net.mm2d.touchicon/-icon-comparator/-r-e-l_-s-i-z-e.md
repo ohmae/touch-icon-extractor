@@ -2,7 +2,7 @@
 
 # REL_SIZE
 
-`val REL_SIZE: `[`Comparator`](https://developer.android.com/reference/java/util/Comparator.html)`<`[`Icon`](../-icon/index.md)`>`
+`val REL_SIZE: `[`Comparator`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparator/index.html)`<`[`Icon`](../-icon/index.md)`>`
 
 Comparator for order by rel -&gt; size
 

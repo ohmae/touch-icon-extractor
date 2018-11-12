@@ -24,4 +24,5 @@ Express the value of rel of the link tag.
 
 | Name | Summary |
 |---|---|
+| [priority](priority.md) | `val priority: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)<br>Priority to expect quality. |
 | [value](value.md) | `val value: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)<br>Raw value of rel. |

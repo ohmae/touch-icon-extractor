@@ -24,6 +24,7 @@ Icon information interface.
 
 | Name | Summary |
 |---|---|
+| [inferArea](infer-area.md) | `open fun inferArea(): `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)<br>Infer area of this icon. |
 | [inferSize](infer-size.md) | `abstract fun inferSize(): `[`Point`](https://developer.android.com/reference/android/graphics/Point.html)<br>Infer display size of this icon. |
 
 ### Inheritors
