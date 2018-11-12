@@ -7,7 +7,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 
 def versionMajor = 0
 def versionMinor = 2
-def versionPatch = 0
+def versionPatch = 1
 def packageName = 'net.mm2d'
 def libraryId = 'touchicon'
 def siteUrl = 'https://github.com/ohmae/touch-icon-extractor'
