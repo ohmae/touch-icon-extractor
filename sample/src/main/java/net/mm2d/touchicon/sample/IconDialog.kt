@@ -134,12 +134,13 @@ class IconDialog : DialogFragment() {
             type.text = iconInfo.mimeType
             url.text = iconInfo.url
             val size = iconInfo.inferSize()
-            imageSizes.text = "(${size.x}x${size.y})"
+            val inferSize = if (size.x > 0 && size.y > 0) "(${size.x}x${size.y})" else "(uncertain)"
+            imageSizes.text = inferSize
             GlideApp.with(itemView)
                 .load(iconInfo.url)
                 .override(Target.SIZE_ORIGINAL)
                 .addListener(bitmapHook {
-                    imageSizes.text = "${it.width}x${it.height} (${size.x}x${size.y})"
+                    imageSizes.text = "${it.width}x${it.height} $inferSize"
                 })
                 .into(icon)
         }
