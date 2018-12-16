@@ -17,6 +17,29 @@ Checks the existence of the icon in order,
 and returns the information when judging that the icon exists.
 Processing is interrupted at the stage of finding the icon, and no confirmation is made on it after that
 
+The order of checking the existence of the icon is as follows
+
+In case of `withPrecomposed` is false and `sizes` is not specify.
+
+1. apple-touch-icon.png
+2. favicon.ico
+
+In case of `withPrecomposed` is true and `sizes` is not specify.
+
+1. apple-touch-icon-precomposed.png
+2. apple-touch-icon.png
+3. favicon.ico
+
+In case of `withPrecomposed` is true and `sizes` is `listOf("120x120", "72x72")`
+
+1. apple-touch-icon-120x120-precomposed.png
+2. apple-touch-icon-120x120.png
+3. apple-touch-icon-72x72-precomposed.png
+4. apple-touch-icon-72x72.png
+5. apple-touch-icon-precomposed.png
+6. apple-touch-icon.png
+7. favicon.ico
+
 ### Parameters
 
 `siteUrl` - URL of analysis target page
