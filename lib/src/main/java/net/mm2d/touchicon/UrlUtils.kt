@@ -8,8 +8,8 @@
 package net.mm2d.touchicon
 
 import android.net.Uri
-import android.support.annotation.VisibleForTesting
 import android.webkit.URLUtil
+import androidx.annotation.VisibleForTesting
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)

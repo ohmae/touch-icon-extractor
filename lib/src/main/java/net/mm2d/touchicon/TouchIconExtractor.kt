@@ -7,7 +7,7 @@
 
 package net.mm2d.touchicon
 
-import android.support.annotation.WorkerThread
+import androidx.annotation.WorkerThread
 import okhttp3.OkHttpClient
 
 /**

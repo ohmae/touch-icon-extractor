@@ -8,7 +8,7 @@
 package net.mm2d.touchicon
 
 import android.net.Uri
-import android.support.annotation.VisibleForTesting
+import androidx.annotation.VisibleForTesting
 import okhttp3.Response
 
 /**

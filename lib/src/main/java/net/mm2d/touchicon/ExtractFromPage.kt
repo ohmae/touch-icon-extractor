@@ -7,7 +7,7 @@
 
 package net.mm2d.touchicon
 
-import android.support.annotation.VisibleForTesting
+import androidx.annotation.VisibleForTesting
 import okhttp3.Response
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
