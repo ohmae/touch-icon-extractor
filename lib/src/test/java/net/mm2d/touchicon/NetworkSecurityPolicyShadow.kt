@@ -27,8 +27,8 @@ class NetworkSecurityPolicyShadow {
         @Implementation
         fun getInstance(): NetworkSecurityPolicy {
             try {
-                val shadow = Class.forName("android.security.NetworkSecurityPolicy")
-                return shadow.newInstance() as NetworkSecurityPolicy
+                return Class.forName("android.security.NetworkSecurityPolicy")
+                    .newInstance() as NetworkSecurityPolicy
             } catch (e: Exception) {
                 throw AssertionError()
             }

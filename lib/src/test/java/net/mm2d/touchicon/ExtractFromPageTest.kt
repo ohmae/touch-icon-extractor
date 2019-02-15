@@ -7,12 +7,11 @@
 
 package net.mm2d.touchicon
 
-import org.hamcrest.Matchers.`is`
-import org.junit.Assert.assertThat
+import io.mockk.mockk
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.mock
 import org.robolectric.RobolectricTestRunner
+import kotlin.test.assertEquals
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
@@ -22,7 +21,7 @@ import org.robolectric.RobolectricTestRunner
 class ExtractFromPageTest {
     @Test
     fun extract_icon() {
-        val extract = ExtractFromPage(mock(HttpClientWrapper::class.java))
+        val extract = ExtractFromPage(mockk())
         val result = extract.invoke(
             "https://www.example.com/",
             """
@@ -31,15 +30,15 @@ class ExtractFromPageTest {
             </head></html>
             """.trimIndent()
         )[0]
-        assertThat(result.rel, `is`(Relationship.ICON))
-        assertThat(result.url, `is`("https://www.example.com/favicon.ico"))
-        assertThat(result.sizes, `is`(""))
-        assertThat(result.mimeType, `is`("image/vnd.microsoft.icon"))
+        assertEquals(result.rel, Relationship.ICON)
+        assertEquals(result.url, "https://www.example.com/favicon.ico")
+        assertEquals(result.sizes, "")
+        assertEquals(result.mimeType, "image/vnd.microsoft.icon")
     }
 
     @Test
     fun extract_shortcut_icon() {
-        val extract = ExtractFromPage(mock(HttpClientWrapper::class.java))
+        val extract = ExtractFromPage(mockk())
         val result = extract.invoke(
             "https://www.example.com/",
             """
@@ -48,15 +47,15 @@ class ExtractFromPageTest {
             </head></html>
             """.trimIndent()
         )[0]
-        assertThat(result.rel, `is`(Relationship.SHORTCUT_ICON))
-        assertThat(result.url, `is`("https://www.example.com/favicon.ico"))
-        assertThat(result.sizes, `is`(""))
-        assertThat(result.mimeType, `is`("image/vnd.microsoft.icon"))
+        assertEquals(result.rel, Relationship.SHORTCUT_ICON)
+        assertEquals(result.url, "https://www.example.com/favicon.ico")
+        assertEquals(result.sizes, "")
+        assertEquals(result.mimeType, "image/vnd.microsoft.icon")
     }
 
     @Test
     fun extract_apple_touch_icon() {
-        val extract = ExtractFromPage(mock(HttpClientWrapper::class.java))
+        val extract = ExtractFromPage(mockk())
         val result = extract.invoke(
             "https://www.example.com/",
             """
@@ -65,15 +64,15 @@ class ExtractFromPageTest {
             </head></html>
             """.trimIndent()
         )[0]
-        assertThat(result.rel, `is`(Relationship.APPLE_TOUCH_ICON))
-        assertThat(result.url, `is`("https://www.example.com/apple-touch-icon-57x57.png"))
-        assertThat(result.sizes, `is`("57x57"))
-        assertThat(result.mimeType, `is`(""))
+        assertEquals(result.rel, Relationship.APPLE_TOUCH_ICON)
+        assertEquals(result.url, "https://www.example.com/apple-touch-icon-57x57.png")
+        assertEquals(result.sizes, "57x57")
+        assertEquals(result.mimeType, "")
     }
 
     @Test
     fun extract_apple_touch_icon_precomposed() {
-        val extract = ExtractFromPage(mock(HttpClientWrapper::class.java))
+        val extract = ExtractFromPage(mockk())
         val result = extract.invoke(
             "https://www.example.com/",
             """
@@ -82,15 +81,15 @@ class ExtractFromPageTest {
             </head></html>
             """.trimIndent()
         )[0]
-        assertThat(result.rel, `is`(Relationship.APPLE_TOUCH_ICON_PRECOMPOSED))
-        assertThat(result.url, `is`("https://www.example.com/apple-touch-icon-57x57.png"))
-        assertThat(result.sizes, `is`("57x57"))
-        assertThat(result.mimeType, `is`(""))
+        assertEquals(result.rel, Relationship.APPLE_TOUCH_ICON_PRECOMPOSED)
+        assertEquals(result.url, "https://www.example.com/apple-touch-icon-57x57.png")
+        assertEquals(result.sizes, "57x57")
+        assertEquals(result.mimeType, "")
     }
 
     @Test
     fun extract_omitted_scheme() {
-        val extract = ExtractFromPage(mock(HttpClientWrapper::class.java))
+        val extract = ExtractFromPage(mockk())
         val result = extract.invoke(
             "https://www.example.com/",
             """
@@ -99,15 +98,15 @@ class ExtractFromPageTest {
             </head></html>
             """.trimIndent()
         )[0]
-        assertThat(result.rel, `is`(Relationship.APPLE_TOUCH_ICON))
-        assertThat(result.url, `is`("https://www.example.com/apple-touch-icon-57x57.png"))
-        assertThat(result.sizes, `is`("57x57"))
-        assertThat(result.mimeType, `is`(""))
+        assertEquals(result.rel, Relationship.APPLE_TOUCH_ICON)
+        assertEquals(result.url, "https://www.example.com/apple-touch-icon-57x57.png")
+        assertEquals(result.sizes, "57x57")
+        assertEquals(result.mimeType, "")
     }
 
     @Test
     fun extract_broken() {
-        val extract = ExtractFromPage(mock(HttpClientWrapper::class.java))
+        val extract = ExtractFromPage(mockk())
         val result = extract.invoke(
             "https://www.example.com/",
             """
@@ -116,9 +115,9 @@ class ExtractFromPageTest {
             </hea
             """.trimIndent()
         )[0]
-        assertThat(result.rel, `is`(Relationship.APPLE_TOUCH_ICON))
-        assertThat(result.url, `is`("https://www.example.com/apple-touch-icon-57x57.png"))
-        assertThat(result.sizes, `is`("57x57"))
-        assertThat(result.mimeType, `is`(""))
+        assertEquals(result.rel, Relationship.APPLE_TOUCH_ICON)
+        assertEquals(result.url, "https://www.example.com/apple-touch-icon-57x57.png")
+        assertEquals(result.sizes, "57x57")
+        assertEquals(result.mimeType, "")
     }
 }

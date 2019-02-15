@@ -8,11 +8,10 @@
 package net.mm2d.touchicon
 
 import android.graphics.Point
-import org.hamcrest.Matchers.`is`
-import org.junit.Assert.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import kotlin.test.assertEquals
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
@@ -22,72 +21,72 @@ import org.robolectric.RobolectricTestRunner
 class SizeInferrerTest {
     @Test
     fun inferSizeFromUrl() {
-        assertThat(
+        assertEquals(
             inferSizeFromUrl(
                 "https://www.example.com/apple-touch-icon-48x48.png"
             ),
-            `is`(Point(48, 48))
+            Point(48, 48)
         )
-        assertThat(
+        assertEquals(
             inferSizeFromUrl(
                 "https://www.example.com/48x48.png"
             ),
-            `is`(Point(48, 48))
+            Point(48, 48)
         )
-        assertThat(
+        assertEquals(
             inferSizeFromUrl(
                 "https://www.example.com/apple-touch-icon48x48.png"
             ),
-            `is`(Point(48, 48))
+            Point(48, 48)
         )
-        assertThat(
+        assertEquals(
             inferSizeFromUrl(
                 "https://www.example.com/apple-touch-icon_48x48.png"
             ),
-            `is`(Point(48, 48))
+            Point(48, 48)
         )
-        assertThat(
+        assertEquals(
             inferSizeFromUrl(
                 "https://www.example.com/apple-touch-icon2-48x48.png"
             ),
-            `is`(Point(48, 48))
+            Point(48, 48)
         )
-        assertThat(
+        assertEquals(
             inferSizeFromUrl(
                 "https://www.example.com/apple-touch-iconx2-48x48.png"
             ),
-            `is`(Point(48, 48))
+            Point(48, 48)
         )
-        assertThat(
+        assertEquals(
             inferSizeFromUrl(
                 "https://www.example.com/apple-touch-icon.48x48.png"
             ),
-            `is`(Point(48, 48))
+            Point(48, 48)
         )
-        assertThat(
+        assertEquals(
             inferSizeFromUrl(
                 "https://www.example.com/apple-touch-icon.4Bx48.png"
             ),
-            `is`(Point(-1, -1))
+            Point(-1, -1)
         )
-        assertThat(
+        assertEquals(
             inferSizeFromUrl(
                 "https://www.example.com/"
             ),
-            `is`(Point(-1, -1))
+            Point(-1, -1)
         )
-        assertThat(
+        assertEquals(
             inferSizeFromUrl(
                 ""
             ),
-            `is`(Point(-1, -1))
+            Point(-1, -1)
         )
     }
 
     @Test
     fun inferSizeFromSizes() {
-        assertThat(inferSizeFromSizes("48x48"), `is`(Point(48, 48)))
-        assertThat(inferSizeFromSizes("1024x1024"), `is`(Point(1024, 1024)))
-        assertThat(inferSizeFromSizes("A0x1B"), `is`(Point(-1, -1)))
+        assertEquals(inferSizeFromSizes("48x48"), Point(48, 48))
+        assertEquals(inferSizeFromSizes("1024x1024"), Point(1024, 1024))
+        assertEquals(inferSizeFromSizes("A0x1B"), Point(-1, -1))
     }
 }

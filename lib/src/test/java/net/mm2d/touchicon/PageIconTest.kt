@@ -8,11 +8,10 @@
 package net.mm2d.touchicon
 
 import android.graphics.Point
-import org.hamcrest.Matchers.`is`
-import org.junit.Assert.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import kotlin.test.assertEquals
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
@@ -22,41 +21,41 @@ import org.robolectric.RobolectricTestRunner
 class PageIconTest {
     @Test
     fun inferSize() {
-        assertThat(
+        assertEquals(
             PageIcon(
                 rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                 mimeType = "image/png",
                 sizes = "50x50",
                 url = "http://example.com/icon-40x40.png"
             ).inferSize(),
-            `is`(Point(50, 50))
+            Point(50, 50)
         )
-        assertThat(
+        assertEquals(
             PageIcon(
                 rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                 mimeType = "image/png",
                 sizes = "50x50",
                 url = "http://example.com/icon.png"
             ).inferSize(),
-            `is`(Point(50, 50))
+            Point(50, 50)
         )
-        assertThat(
+        assertEquals(
             PageIcon(
                 rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                 mimeType = "image/png",
                 sizes = "0x5C",
                 url = "http://example.com/icon-40x40.png"
             ).inferSize(),
-            `is`(Point(40, 40))
+            Point(40, 40)
         )
-        assertThat(
+        assertEquals(
             PageIcon(
                 rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                 mimeType = "image/png",
                 sizes = "0x5C",
                 url = "http://example.com/icon.png"
             ).inferSize(),
-            `is`(Point(-1, -1))
+            Point(-1, -1)
         )
     }
 }
