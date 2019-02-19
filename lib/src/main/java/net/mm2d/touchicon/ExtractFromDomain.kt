@@ -14,7 +14,9 @@ import okhttp3.Response
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-internal class ExtractFromDomain(private val http: HttpClientWrapper) {
+internal class ExtractFromDomain(
+    private val http: HttpClientWrapper
+) {
     private fun makeBaseBuilder(siteUrl: String) = Uri.parse(siteUrl)
         .buildUpon()
         .path(null)

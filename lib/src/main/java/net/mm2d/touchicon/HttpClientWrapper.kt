@@ -15,7 +15,9 @@ import okhttp3.Response
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-internal class HttpClientWrapper(private val client: OkHttpClient) {
+internal class HttpClientWrapper(
+    private val client: OkHttpClient
+) {
     /**
      * Specify the value of User-Agent used for HTTP communication.
      *
