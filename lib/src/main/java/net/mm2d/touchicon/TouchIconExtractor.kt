@@ -18,12 +18,14 @@ import androidx.annotation.WorkerThread
  * Initialize the instance.
  * It is necessary to specify an instance of OkHttpClient to be used for communication.
  *
- * @param client An instance of OkHttpClient to use for internal communication.
+ * @param http An instance of HttpClient to use for internal communication.
+ * @param parser An instance of HtmlParser to use for HTML parse.
  */
 class TouchIconExtractor(
-    private val http: HttpClient
+    private val http: HttpClient,
+    parser: HtmlParser
 ) {
-    private val fromPage = ExtractFromPage(http)
+    private val fromPage = ExtractFromPage(http, parser)
     private val fromDomain = ExtractFromDomain(http)
     /**
      * Specify the value of User-Agent used for HTTP communication.

@@ -8,14 +8,13 @@
 package net.mm2d.touchicon
 
 import androidx.annotation.VisibleForTesting
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Element
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 internal class ExtractFromPage(
-    private val http: HttpClient
+    private val http: HttpClient,
+    private val parser: HtmlParser
 ) {
     var downloadLimit: Int = DEFAULT_LIMIT_SIZE
 
@@ -31,12 +30,12 @@ internal class ExtractFromPage(
 
     @VisibleForTesting
     internal fun invoke(siteUrl: String, html: String): List<PageIcon> {
-        return Jsoup.parse(html).getElementsByTag("link")
+        return parser.extractLinkElements(html)
             .mapNotNull { createPageIcon(siteUrl, it) }
             .toList()
     }
 
-    private fun createPageIcon(siteUrl: String, linkElement: Element): PageIcon? {
+    private fun createPageIcon(siteUrl: String, linkElement: HtmlElement): PageIcon? {
         val rel = Relationship.of(linkElement.attr("rel")) ?: return null
         val href = linkElement.attr("href")
         if (href.isEmpty()) {
