@@ -8,8 +8,6 @@
 package net.mm2d.touchicon
 
 import androidx.annotation.WorkerThread
-import net.mm2d.touchicon.http.okhttp.OkHttpHttpClient
-import okhttp3.OkHttpClient
 
 /**
  * Extract information of WebClip icon such as Apple Touch Icon or favicon related to the URL.
@@ -22,8 +20,9 @@ import okhttp3.OkHttpClient
  *
  * @param client An instance of OkHttpClient to use for internal communication.
  */
-class TouchIconExtractor(client: OkHttpClient) {
-    private val http = OkHttpHttpClient(client)
+class TouchIconExtractor(
+    private val http: HttpClient
+) {
     private val fromPage = ExtractFromPage(http)
     private val fromDomain = ExtractFromDomain(http)
     /**

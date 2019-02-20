@@ -8,10 +8,11 @@
 package net.mm2d.touchicon.sample
 
 import net.mm2d.touchicon.TouchIconExtractor
+import net.mm2d.touchicon.http.okhttp.OkHttpHttpClient
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 object TouchIconExtractorHolder {
-    val extractor = TouchIconExtractor(OkHttpClientHolder.client)
+    val extractor = TouchIconExtractor(OkHttpHttpClient(OkHttpClientHolder.client))
 }
