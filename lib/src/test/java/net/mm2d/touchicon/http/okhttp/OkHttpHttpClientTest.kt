@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/MIT
  */
 
-package net.mm2d.touchicon.okhttp
+package net.mm2d.touchicon.http.okhttp
 
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.Dispatcher
