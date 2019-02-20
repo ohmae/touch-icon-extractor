@@ -9,13 +9,12 @@ package net.mm2d.touchicon
 
 import android.net.Uri
 import androidx.annotation.VisibleForTesting
-import okhttp3.Response
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 internal class ExtractFromDomain(
-    private val http: HttpClientWrapper
+    private val http: HttpClient
 ) {
     private fun makeBaseBuilder(siteUrl: String) = Uri.parse(siteUrl)
         .buildUpon()
@@ -65,30 +64,30 @@ internal class ExtractFromDomain(
 
     private fun tryHead(baseUri: Uri.Builder, tryData: TryData): DomainIcon? {
         val url = makeUrl(baseUri, tryData)
-        val response = http.head(url)
-        try {
-            return createDomainIcon(response, url, tryData)
-        } finally {
-            response.body()?.close()
+        http.head(url).use {
+            return createDomainIcon(it, url, tryData)
         }
     }
 
     private fun tryGet(baseUri: Uri.Builder, tryData: TryData): Pair<DomainIcon, ByteArray>? {
         val url = makeUrl(baseUri, tryData)
-        val response = http.get(url)
-        response.body()?.use {
-            val icon = createDomainIcon(response, url, tryData) ?: return null
-            return icon to it.bytes()
+        http.get(url).use {
+            val icon = createDomainIcon(it, url, tryData) ?: return null
+            val bytes = it.bodyBytes() ?: return null
+            return icon to bytes
         }
-        return null
     }
 
     private fun makeUrl(baseUri: Uri.Builder, tryData: TryData): String {
         return baseUri.path(tryData.name).build().toString()
     }
 
-    private fun createDomainIcon(response: Response, url: String, tryData: TryData): DomainIcon? {
-        if (!response.isSuccessful) return null
+    private fun createDomainIcon(
+        response: HttpResponse,
+        url: String,
+        tryData: TryData
+    ): DomainIcon? {
+        if (!response.isSuccess) return null
         val type = response.header("Content-Type") ?: return null
         if (!type.contains("image", true)) return null
         val length = response.header("Content-Length")?.toIntOrNull() ?: -1

@@ -8,6 +8,7 @@
 package net.mm2d.touchicon
 
 import androidx.annotation.WorkerThread
+import net.mm2d.touchicon.okhttp.OkHttpHttpClient
 import okhttp3.OkHttpClient
 
 /**
@@ -22,7 +23,7 @@ import okhttp3.OkHttpClient
  * @param client An instance of OkHttpClient to use for internal communication.
  */
 class TouchIconExtractor(client: OkHttpClient) {
-    private val http = HttpClientWrapper(client)
+    private val http = OkHttpHttpClient(client)
     private val fromPage = ExtractFromPage(http)
     private val fromDomain = ExtractFromDomain(http)
     /**

@@ -7,104 +7,72 @@
 
 package net.mm2d.touchicon
 
+import io.mockk.every
 import io.mockk.mockk
-import okhttp3.OkHttpClient
-import okhttp3.mockwebserver.Dispatcher
-import okhttp3.mockwebserver.MockResponse
-import okhttp3.mockwebserver.MockWebServer
-import okhttp3.mockwebserver.RecordedRequest
+import io.mockk.verify
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
 import kotlin.test.assertEquals
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 @RunWith(RobolectricTestRunner::class)
-@Config(shadows = [NetworkSecurityPolicyShadow::class])
 @Suppress("TestFunctionName")
 class ExtractFromDomainTest {
     @Test
     fun invoke_success_precomposed() {
-        var count = 0
-        val server = MockWebServer()
-        server.setDispatcher(object : Dispatcher() {
-            override fun dispatch(request: RecordedRequest?): MockResponse {
-                count++
-                if (request?.method != "HEAD") {
-                    return MockResponse().setResponseCode(404)
-                }
-                return when (request.path) {
-                    "/apple-touch-icon-precomposed.png" -> MockResponse()
-                        .setResponseCode(200)
-                        .addHeader("Content-Type", "image/png")
-                    else -> MockResponse().setResponseCode(404)
-                }
-            }
-        })
-        server.start()
-        val extract = ExtractFromDomain(HttpClientWrapper(OkHttpClient()))
-        val icon = extract.invoke(server.url("index.html").toString(), true, emptyList())
-        server.shutdown()
+        val baseUrl = "https://www.example.com"
+        val httpClient = mockk<HttpClient>(relaxed = true)
+        every {
+            httpClient.head("$baseUrl/apple-touch-icon-precomposed.png")
+        } returns mockk(relaxed = true) {
+            every { isSuccess } returns true
+            every { header("Content-Type") } returns "image/png"
+        }
+        val extract = ExtractFromDomain(httpClient)
+        val icon = extract.invoke("$baseUrl/index.html", true, emptyList())
         assertEquals(icon?.mimeType, "image/png")
-        assertEquals(icon?.url, server.url("apple-touch-icon-precomposed.png").toString())
-        assertEquals(count, 1)
+        verify(inverse = true) { httpClient.get(any()) }
+        verify(exactly = 1) { httpClient.head(any()) }
+        verify(exactly = 1) { httpClient.head("$baseUrl/apple-touch-icon-precomposed.png") }
     }
 
     @Test
     fun invoke_success_touch_icon() {
-        var count = 0
-        val server = MockWebServer()
-        server.setDispatcher(object : Dispatcher() {
-            override fun dispatch(request: RecordedRequest?): MockResponse {
-                count++
-                if (request?.method != "HEAD") {
-                    return MockResponse().setResponseCode(404)
-                }
-                return when (request.path) {
-                    "/apple-touch-icon.png" -> MockResponse()
-                        .setResponseCode(200)
-                        .addHeader("Content-Type", "image/png")
-                    else -> MockResponse().setResponseCode(404)
-                }
-            }
-        })
-        server.start()
-        val extract = ExtractFromDomain(HttpClientWrapper(OkHttpClient()))
-        val icon = extract.invoke(server.url("index.html").toString(), true, emptyList())
-        server.shutdown()
+        val baseUrl = "https://www.example.com"
+        val httpClient = mockk<HttpClient>(relaxed = true)
+        every {
+            httpClient.head("$baseUrl/apple-touch-icon.png")
+        } returns mockk(relaxed = true) {
+            every { isSuccess } returns true
+            every { header("Content-Type") } returns "image/png"
+        }
+        val extract = ExtractFromDomain(httpClient)
+        val icon = extract.invoke("$baseUrl/index.html", true, emptyList())
         assertEquals(icon?.mimeType, "image/png")
-        assertEquals(icon?.url, server.url("apple-touch-icon.png").toString())
-        assertEquals(count, 2)
+        verify(inverse = true) { httpClient.get(any()) }
+        verify(exactly = 2) { httpClient.head(any()) }
+        verify(exactly = 1) { httpClient.head("$baseUrl/apple-touch-icon.png") }
     }
 
     @Test
     fun invoke_success_favicon() {
-        var count = 0
-        val server = MockWebServer()
-        server.setDispatcher(object : Dispatcher() {
-            override fun dispatch(request: RecordedRequest?): MockResponse {
-                count++
-                if (request?.method != "HEAD") {
-                    return MockResponse().setResponseCode(404)
-                }
-                return when (request.path) {
-                    "/favicon.ico" -> MockResponse()
-                        .setResponseCode(200)
-                        .addHeader("Content-Type", "image/x-icon")
-                    else -> MockResponse().setResponseCode(404)
-                }
-            }
-        })
-        server.start()
-        val extract = ExtractFromDomain(HttpClientWrapper(OkHttpClient()))
-        val icon = extract.invoke(server.url("index.html").toString(), true, emptyList())
-        server.shutdown()
+        val baseUrl = "https://www.example.com"
+        val httpClient = mockk<HttpClient>(relaxed = true)
+        every {
+            httpClient.head("$baseUrl/favicon.ico")
+        } returns mockk(relaxed = true) {
+            every { isSuccess } returns true
+            every { header("Content-Type") } returns "image/x-icon"
+        }
+        val extract = ExtractFromDomain(httpClient)
+        val icon = extract.invoke("$baseUrl/index.html", true, emptyList())
         assertEquals(icon?.mimeType, "image/x-icon")
-        assertEquals(icon?.url, server.url("favicon.ico").toString())
-        assertEquals(count, 3)
+        verify(inverse = true) { httpClient.get(any()) }
+        verify(exactly = 3) { httpClient.head(any()) }
+        verify(exactly = 1) { httpClient.head("$baseUrl/favicon.ico") }
     }
 
     @Test

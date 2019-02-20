@@ -8,23 +8,20 @@
 package net.mm2d.touchicon
 
 import androidx.annotation.VisibleForTesting
-import okhttp3.Response
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
-import java.io.ByteArrayOutputStream
-import java.io.InputStream
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 internal class ExtractFromPage(
-    private val http: HttpClientWrapper
+    private val http: HttpClient
 ) {
     var downloadLimit: Int = DEFAULT_LIMIT_SIZE
 
     internal fun invoke(siteUrl: String): List<PageIcon> {
         val html = try {
-            fetchHeaderPart(siteUrl)
+            fetch(siteUrl)
         } catch (e: Exception) {
             ""
         }
@@ -51,46 +48,21 @@ internal class ExtractFromPage(
         return PageIcon(rel, url, sizes, mimeType)
     }
 
-    private fun fetchHeaderPart(url: String): String {
-        val response = http.get(url)
-        response.body()?.use {
-            if (!response.hasHtml()) return ""
-            if (downloadLimit <= 0) {
-                return it.string()
-            }
-            return fetchHeaderPart(it.byteStream(), downloadLimit)
+    private fun fetch(url: String): String {
+        http.get(url).use {
+            if (!it.hasHtml()) return ""
+            return it.bodyString(downloadLimit) ?: ""
         }
-        return ""
     }
 
-    private fun Response.hasHtml(): Boolean {
-        if (!isSuccessful) return false
+    private fun HttpResponse.hasHtml(): Boolean {
+        if (!isSuccess) return false
         val type = header("Content-Type") ?: return false
         return type.contains("text/html", true) ||
                 type.contains("application/xhtml+xml", true)
     }
 
-    private fun fetchHeaderPart(stream: InputStream, limit: Int): String {
-        val output = ByteArrayOutputStream()
-        val buffer = ByteArray(BUFFER_SIZE)
-        var remain = limit
-        while (true) {
-            val fetchSize = if (remain > BUFFER_SIZE) BUFFER_SIZE else remain
-            val size = stream.read(buffer, 0, fetchSize)
-            if (size < 0) {
-                break
-            }
-            output.write(buffer, 0, size)
-            remain -= size
-            if (remain <= 0) {
-                break
-            }
-        }
-        return String(output.toByteArray())
-    }
-
     companion object {
-        private const val BUFFER_SIZE = 1024
         private const val DEFAULT_LIMIT_SIZE = 1024 * 64
     }
 }
