@@ -50,17 +50,20 @@ internal class OkHttpHttpResponse(
     private fun ResponseBody.fetchBytes(limit: Int): ByteArray {
         val stream = byteStream()
         val output = ByteArrayOutputStream()
+        val buffer = ByteArray(BUFFER_SIZE)
         var remain = limit
         while (true) {
-            val byte = stream.read()
-            if (byte < 0) {
-                break
-            }
-            output.write(byte)
-            if (--remain <= 0) {
-                break
-            }
+            val fetchSize = if (remain > BUFFER_SIZE) BUFFER_SIZE else remain
+            val size = stream.read(buffer, 0, fetchSize)
+            if (size < 0) break
+            output.write(buffer, 0, size)
+            remain -= size
+            if (remain <= 0) break
         }
         return output.toByteArray()
+    }
+
+    companion object {
+        private const val BUFFER_SIZE = 1024
     }
 }
