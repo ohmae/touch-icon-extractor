@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-    implementation project(':lib')
+    implementation project(':touchicon')
     implementation project(':touchicon-http:okhttp')
     implementation project(':touchicon-html:jsoup')
 
