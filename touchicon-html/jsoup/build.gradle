@@ -5,7 +5,7 @@ apply plugin: 'org.jetbrains.dokka-android'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
-def libraryId = 'touchicon'
+def libraryId = 'touchicon-html-jsoup'
 
 version "${versionMajor}.${versionMinor}.${versionPatch}"
 group groupId
@@ -24,19 +24,16 @@ android {
 }
 
 dependencies {
+    implementation project(':lib')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.annotation:annotation:1.0.1'
+    implementation 'org.jsoup:jsoup:1.11.3'
 
     testImplementation 'junit:junit:4.12'
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testImplementation "io.mockk:mockk:1.9.1"
     testImplementation 'org.robolectric:robolectric:3.8'
-    testImplementation 'com.squareup.okhttp3:mockwebserver:3.11.0'
-}
-
-dokka {
-    outputFormat = 'gfm'
-    outputDirectory = "../docs/dokka"
 }
 
 bintray {

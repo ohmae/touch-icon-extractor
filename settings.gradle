@@ -1,1 +1,4 @@
-include ':sample', ':lib'
+include ':lib'
+include ':touchicon-http:okhttp'
+include ':touchicon-html:jsoup'
+include ':sample'
