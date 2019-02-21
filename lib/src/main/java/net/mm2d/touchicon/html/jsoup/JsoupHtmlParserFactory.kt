@@ -7,16 +7,15 @@
 
 package net.mm2d.touchicon.html.jsoup
 
-import net.mm2d.touchicon.HtmlElement
-import org.jsoup.nodes.Element
+import net.mm2d.touchicon.HtmlParser
 
 /**
+ * Supply HttpParser powered by Jsoup.
+ *
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-internal class JsoupHtmlElement(
-    private val element: Element
-) : HtmlElement {
-    override fun attr(name: String): String {
-        return element.attr(name)
+object JsoupHtmlParserFactory {
+    fun create(): HtmlParser {
+        return JsoupHtmlParser()
     }
 }

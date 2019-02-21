@@ -14,7 +14,7 @@ import java.io.IOException
  *
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-interface HttpClient {
+interface HttpAdapter {
     /**
      * Specify the value of User-Agent used for HTTP communication.
      *

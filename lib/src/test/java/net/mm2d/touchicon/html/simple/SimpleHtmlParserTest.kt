@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/MIT
  */
 
-package net.mm2d.touchicon.html.easy
+package net.mm2d.touchicon.html.simple
 
 import org.junit.Test
 import kotlin.test.assertEquals
@@ -13,10 +13,10 @@ import kotlin.test.assertEquals
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-class EasyHtmlParserTest {
+class SimpleHtmlParserTest {
     @Test
     fun extractLinkElements() {
-        val links = EasyHtmlParser().extractLinkElements(
+        val links = SimpleHtmlParser().extractLinkElements(
             """
             <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
             <html lang="ja">
@@ -52,7 +52,7 @@ class EasyHtmlParserTest {
 
     @Test
     fun extractLinkElements_invalid_html() {
-        val links = EasyHtmlParser().extractLinkElements(
+        val links = SimpleHtmlParser().extractLinkElements(
             """
             <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
             <html lang="ja">
@@ -85,7 +85,7 @@ class EasyHtmlParserTest {
 
     @Test
     fun extractLinkElements_non_quote_attribute() {
-        val links = EasyHtmlParser().extractLinkElements(
+        val links = SimpleHtmlParser().extractLinkElements(
             """
             <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
             <html lang="ja">

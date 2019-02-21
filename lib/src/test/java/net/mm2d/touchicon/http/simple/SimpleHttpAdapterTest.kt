@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/MIT
  */
 
-package net.mm2d.touchicon.http.url
+package net.mm2d.touchicon.http.simple
 
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
@@ -25,7 +25,7 @@ import kotlin.test.assertTrue
  */
 @RunWith(JUnit4::class)
 @Suppress("TestFunctionName")
-class UrlHttpClientTest {
+class SimpleHttpAdapterTest {
     @Test
     fun userAgent() {
         var recordedRequest: RecordedRequest? = null
@@ -38,7 +38,7 @@ class UrlHttpClientTest {
         })
         server.start()
         val userAgent = "user-agent"
-        val client = UrlHttpClient()
+        val client = SimpleHttpAdapter()
         client.userAgent = userAgent
         client.head(server.url("favicon.ico").toString())
         server.shutdown()
@@ -57,7 +57,7 @@ class UrlHttpClientTest {
         })
         server.start()
         val userAgent = "user-agent"
-        val client = UrlHttpClient()
+        val client = SimpleHttpAdapter()
         client.headers = mapOf("User-Agent" to "hogehoge", "Cache-Control" to "no-cache")
         client.userAgent = userAgent
         client.head(server.url("favicon.ico").toString())
@@ -83,7 +83,7 @@ class UrlHttpClientTest {
             }
         })
         server.start()
-        val client = UrlHttpClient()
+        val client = SimpleHttpAdapter()
         client.head(server.url("favicon.ico").toString()).use {
             assertTrue(it.isSuccess)
             assertEquals(it.header("Content-Type"), "image/png")
@@ -109,7 +109,7 @@ class UrlHttpClientTest {
             }
         })
         server.start()
-        val client = UrlHttpClient()
+        val client = SimpleHttpAdapter()
         client.get(server.url("favicon.ico").toString()).use {
             assertTrue(it.isSuccess)
             assertEquals(it.header("Content-Type"), "image/png")
@@ -135,7 +135,7 @@ class UrlHttpClientTest {
             }
         })
         server.start()
-        val client = UrlHttpClient()
+        val client = SimpleHttpAdapter()
         client.get(server.url("favicon.ico").toString()).use {
             assertEquals(it.bodyBytes(100)?.size, 100)
         }
@@ -165,7 +165,7 @@ class UrlHttpClientTest {
             }
         })
         server.start()
-        val client = UrlHttpClient()
+        val client = SimpleHttpAdapter()
         client.get(server.url("favicon.ico").toString()).use {
             assertEquals(it.bodyString(10), "1234567890")
         }

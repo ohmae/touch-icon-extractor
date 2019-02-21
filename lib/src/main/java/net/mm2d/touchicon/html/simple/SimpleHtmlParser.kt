@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/MIT
  */
 
-package net.mm2d.touchicon.html.easy
+package net.mm2d.touchicon.html.simple
 
 import net.mm2d.touchicon.HtmlElement
 import net.mm2d.touchicon.HtmlParser
@@ -13,13 +13,13 @@ import net.mm2d.touchicon.HtmlParser
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-class EasyHtmlParser : HtmlParser {
+internal class SimpleHtmlParser : HtmlParser {
     override fun extractLinkElements(html: String): List<HtmlElement> {
         return extractElementList(html).filter { it.name.equals("link", true) }
     }
 
-    private fun extractElementList(html: String): List<EasyHtmlElement> {
-        val result = mutableListOf<EasyHtmlElement>()
+    private fun extractElementList(html: String): List<SimpleHtmlElement> {
+        val result = mutableListOf<SimpleHtmlElement>()
         val a = html.toCharArray()
         var i = 0
         while (i < a.size) {
@@ -75,7 +75,7 @@ class EasyHtmlParser : HtmlParser {
                 i = attrValueEnd
                 if (quote) i++
             }
-            result.add(EasyHtmlElement(name, attrs))
+            result.add(SimpleHtmlElement(name, attrs))
             i++
         }
         return result

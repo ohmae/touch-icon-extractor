@@ -8,8 +8,8 @@
 package net.mm2d.touchicon
 
 import androidx.annotation.WorkerThread
-import net.mm2d.touchicon.html.easy.EasyHtmlParser
-import net.mm2d.touchicon.http.url.UrlHttpClient
+import net.mm2d.touchicon.html.simple.SimpleHtmlParserFactory
+import net.mm2d.touchicon.http.simple.SimpleHttpAdapterFactory
 
 /**
  * Extract information of WebClip icon such as Apple Touch Icon or favicon related to the URL.
@@ -18,26 +18,26 @@ import net.mm2d.touchicon.http.url.UrlHttpClient
  *
  * @constructor
  * Initialize the instance.
- * It is necessary to specify an instance of OkHttpClient to be used for communication.
+ * You can change HttpAdapter and HtmlParser.
  *
- * @param httpClient An instance of HttpClient to use for internal communication.
- * @param htmlParser An instance of HtmlParser to use for HTML parse.
+ * @param httpAdapter HttpAdapter to use for internal communication. if not specified use default implementation.
+ * @param htmlParser HtmlParser to use for HTML parse. if not specified use default implementation.
  */
 class TouchIconExtractor(
-    private val httpClient: HttpClient = UrlHttpClient(),
-    private val htmlParser: HtmlParser = EasyHtmlParser()
+    private val httpAdapter: HttpAdapter = SimpleHttpAdapterFactory.create(),
+    private val htmlParser: HtmlParser = SimpleHtmlParserFactory.create()
 ) {
-    private val fromPage = ExtractFromPage(httpClient, htmlParser)
-    private val fromDomain = ExtractFromDomain(httpClient)
+    private val fromPage = ExtractFromPage(httpAdapter, htmlParser)
+    private val fromDomain = ExtractFromDomain(httpAdapter)
     /**
      * Specify the value of User-Agent used for HTTP communication.
      *
      * It takes precedence over specification in [headers].
      */
     var userAgent: String
-        get() = httpClient.userAgent
+        get() = httpAdapter.userAgent
         set(value) {
-            httpClient.userAgent = value
+            httpAdapter.userAgent = value
         }
     /**
      * Specify the HTTP communication header.
@@ -45,9 +45,9 @@ class TouchIconExtractor(
      * User-Agent can also be specified, but [userAgent] takes precedence.
      */
     var headers: Map<String, String>
-        get() = httpClient.headers
+        get() = httpAdapter.headers
         set(value) {
-            httpClient.headers = value
+            httpAdapter.headers = value
         }
     /**
      * Specify the maximum download size when downloading HTML file.

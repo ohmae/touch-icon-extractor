@@ -16,7 +16,7 @@ import java.io.IOException
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-internal class OkHttpHttpResponse(
+internal class OkHttpResponse(
     private val response: Response
 ) : HttpResponse {
 

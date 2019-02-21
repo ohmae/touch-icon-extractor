@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/MIT
  */
 
-package net.mm2d.touchicon.http.url
+package net.mm2d.touchicon.http.simple
 
 import net.mm2d.touchicon.HttpResponse
 import java.io.ByteArrayOutputStream
@@ -15,7 +15,7 @@ import java.net.HttpURLConnection
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-class UrlHttpResponse(
+internal class SimpleHttpResponse(
     private val connection: HttpURLConnection
 ) : HttpResponse {
     override val isSuccess: Boolean = connection.responseCode in 200 until 300

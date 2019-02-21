@@ -13,8 +13,8 @@ import androidx.annotation.VisibleForTesting
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 internal class ExtractFromPage(
-    private val http: HttpClient,
-    private val parser: HtmlParser
+    private val httpAdapter: HttpAdapter,
+    private val htmlParser: HtmlParser
 ) {
     var downloadLimit: Int = DEFAULT_LIMIT_SIZE
 
@@ -30,7 +30,7 @@ internal class ExtractFromPage(
 
     @VisibleForTesting
     internal fun invoke(siteUrl: String, html: String): List<PageIcon> {
-        return parser.extractLinkElements(html)
+        return htmlParser.extractLinkElements(html)
             .mapNotNull { createPageIcon(siteUrl, it) }
             .toList()
     }
@@ -48,7 +48,7 @@ internal class ExtractFromPage(
     }
 
     private fun fetch(url: String): String {
-        http.get(url).use {
+        httpAdapter.get(url).use {
             if (!it.hasHtml()) return ""
             return it.bodyString(downloadLimit) ?: ""
         }

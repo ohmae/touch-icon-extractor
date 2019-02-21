@@ -5,14 +5,14 @@
  * http://opensource.org/licenses/MIT
  */
 
-package net.mm2d.touchicon.html.easy
+package net.mm2d.touchicon.html.simple
 
 import net.mm2d.touchicon.HtmlElement
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-data class EasyHtmlElement(
+internal data class SimpleHtmlElement(
     val name: String,
     private val attrs: List<Pair<String, String>>
 ) : HtmlElement {

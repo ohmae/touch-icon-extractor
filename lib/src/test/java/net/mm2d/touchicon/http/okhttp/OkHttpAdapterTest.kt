@@ -27,7 +27,7 @@ import kotlin.test.assertTrue
 
 @RunWith(JUnit4::class)
 @Suppress("TestFunctionName")
-class OkHttpHttpClientTest {
+class OkHttpAdapterTest {
     @Test
     fun userAgent() {
         var recordedRequest: RecordedRequest? = null
@@ -40,7 +40,7 @@ class OkHttpHttpClientTest {
         })
         server.start()
         val userAgent = "user-agent"
-        val client = OkHttpHttpClient(OkHttpClient())
+        val client = OkHttpAdapter(OkHttpClient())
         client.userAgent = userAgent
         client.head(server.url("favicon.ico").toString())
         server.shutdown()
@@ -59,7 +59,7 @@ class OkHttpHttpClientTest {
         })
         server.start()
         val userAgent = "user-agent"
-        val client = OkHttpHttpClient(OkHttpClient())
+        val client = OkHttpAdapter(OkHttpClient())
         client.headers = mapOf("User-Agent" to "hogehoge", "Cache-Control" to "no-cache")
         client.userAgent = userAgent
         client.head(server.url("favicon.ico").toString())
@@ -85,7 +85,7 @@ class OkHttpHttpClientTest {
             }
         })
         server.start()
-        val client = OkHttpHttpClient(OkHttpClient())
+        val client = OkHttpAdapter(OkHttpClient())
         client.head(server.url("favicon.ico").toString()).use {
             assertTrue(it.isSuccess)
             assertEquals(it.header("Content-Type"), "image/png")
@@ -111,7 +111,7 @@ class OkHttpHttpClientTest {
             }
         })
         server.start()
-        val client = OkHttpHttpClient(OkHttpClient())
+        val client = OkHttpAdapter(OkHttpClient())
         client.get(server.url("favicon.ico").toString()).use {
             assertTrue(it.isSuccess)
             assertEquals(it.header("Content-Type"), "image/png")
@@ -137,7 +137,7 @@ class OkHttpHttpClientTest {
             }
         })
         server.start()
-        val client = OkHttpHttpClient(OkHttpClient())
+        val client = OkHttpAdapter(OkHttpClient())
         client.get(server.url("favicon.ico").toString()).use {
             assertEquals(it.bodyBytes(100)?.size, 100)
         }
@@ -167,7 +167,7 @@ class OkHttpHttpClientTest {
             }
         })
         server.start()
-        val client = OkHttpHttpClient(OkHttpClient())
+        val client = OkHttpAdapter(OkHttpClient())
         client.get(server.url("favicon.ico").toString()).use {
             assertEquals(it.bodyString(10), "1234567890")
         }

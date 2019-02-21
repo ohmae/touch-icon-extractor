@@ -14,7 +14,7 @@ import org.jsoup.Jsoup
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-class JsoupHtmlParser : HtmlParser {
+internal class JsoupHtmlParser : HtmlParser {
     override fun extractLinkElements(html: String): List<HtmlElement> {
         return Jsoup.parse(html).getElementsByTag("link")
             .map { JsoupHtmlElement(it) }
