@@ -8,6 +8,8 @@
 package net.mm2d.touchicon
 
 import androidx.annotation.WorkerThread
+import net.mm2d.touchicon.html.easy.EasyHtmlParser
+import net.mm2d.touchicon.http.url.UrlHttpClient
 
 /**
  * Extract information of WebClip icon such as Apple Touch Icon or favicon related to the URL.
@@ -18,24 +20,24 @@ import androidx.annotation.WorkerThread
  * Initialize the instance.
  * It is necessary to specify an instance of OkHttpClient to be used for communication.
  *
- * @param http An instance of HttpClient to use for internal communication.
- * @param parser An instance of HtmlParser to use for HTML parse.
+ * @param httpClient An instance of HttpClient to use for internal communication.
+ * @param htmlParser An instance of HtmlParser to use for HTML parse.
  */
 class TouchIconExtractor(
-    private val http: HttpClient,
-    parser: HtmlParser
+    private val httpClient: HttpClient = UrlHttpClient(),
+    private val htmlParser: HtmlParser = EasyHtmlParser()
 ) {
-    private val fromPage = ExtractFromPage(http, parser)
-    private val fromDomain = ExtractFromDomain(http)
+    private val fromPage = ExtractFromPage(httpClient, htmlParser)
+    private val fromDomain = ExtractFromDomain(httpClient)
     /**
      * Specify the value of User-Agent used for HTTP communication.
      *
      * It takes precedence over specification in [headers].
      */
     var userAgent: String
-        get() = http.userAgent
+        get() = httpClient.userAgent
         set(value) {
-            http.userAgent = value
+            httpClient.userAgent = value
         }
     /**
      * Specify the HTTP communication header.
@@ -43,9 +45,9 @@ class TouchIconExtractor(
      * User-Agent can also be specified, but [userAgent] takes precedence.
      */
     var headers: Map<String, String>
-        get() = http.headers
+        get() = httpClient.headers
         set(value) {
-            http.headers = value
+            httpClient.headers = value
         }
     /**
      * Specify the maximum download size when downloading HTML file.

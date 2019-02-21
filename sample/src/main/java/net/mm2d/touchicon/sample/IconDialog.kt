@@ -43,18 +43,21 @@ import net.mm2d.touchicon.PageIcon
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 class IconDialog : DialogFragment() {
-    private val extractor = TouchIconExtractorHolder.extractor
     private val compositeDisposable = CompositeDisposable()
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val act = activity!!
         val arg = arguments!!
         val title = arg.getString(KEY_TITLE)!!
         val siteUrl = arg.getString(KEY_SITE_URL)!!
+        val local = arg.getBoolean(KEY_LOCAL)
         val view = act.layoutInflater.inflate(
             R.layout.dialog_icon,
             act.window.decorView as ViewGroup,
             false
         )
+        val extractor =
+            if (local) ExtractorHolder.local
+            else ExtractorHolder.library
         view.findViewById<TextView>(R.id.site_url).text = siteUrl
         val progressBar: ProgressBar = view.findViewById(R.id.progress_bar)
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
@@ -171,17 +174,19 @@ class IconDialog : DialogFragment() {
     companion object {
         private const val KEY_TITLE = "KEY_TITLE"
         private const val KEY_SITE_URL = "KEY_SITE_URL"
+        private const val KEY_LOCAL = "KEY_LOCAL"
 
-        fun show(activity: FragmentActivity, title: String, siteUrl: String) {
+        fun show(activity: FragmentActivity, title: String, siteUrl: String, local: Boolean) {
             IconDialog().also {
-                it.arguments = makeArgument(title, siteUrl)
+                it.arguments = makeArgument(title, siteUrl, local)
             }.show(activity.supportFragmentManager, "")
         }
 
-        private fun makeArgument(title: String, siteUrl: String): Bundle {
+        private fun makeArgument(title: String, siteUrl: String, local: Boolean): Bundle {
             return Bundle().also {
                 it.putString(KEY_TITLE, title)
                 it.putString(KEY_SITE_URL, siteUrl)
+                it.putBoolean(KEY_LOCAL, local)
             }
         }
 

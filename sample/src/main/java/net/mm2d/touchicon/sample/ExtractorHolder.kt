@@ -9,14 +9,15 @@ package net.mm2d.touchicon.sample
 
 import net.mm2d.touchicon.TouchIconExtractor
 import net.mm2d.touchicon.html.jsoup.JsoupHtmlParser
-import net.mm2d.touchicon.http.url.UrlHttpClient
+import net.mm2d.touchicon.http.okhttp.OkHttpHttpClient
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-object TouchIconExtractorHolder {
-    val extractor = TouchIconExtractor(
-        UrlHttpClient(),
-        JsoupHtmlParser()
+object ExtractorHolder {
+    val local = TouchIconExtractor()
+    val library = TouchIconExtractor(
+        httpClient = OkHttpHttpClient(OkHttpClientHolder.client),
+        htmlParser = JsoupHtmlParser()
     )
 }

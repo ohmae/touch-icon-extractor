@@ -29,7 +29,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setUpWebView()
         fab.setOnClickListener {
-            IconDialog.show(this, web_view.title, web_view.url)
+            IconDialog.show(this, web_view.title, web_view.url, true)
+        }
+        fab2.setOnClickListener {
+            IconDialog.show(this, web_view.title, web_view.url, false)
         }
         val url = extractUrlToLoad(intent)
         if (url.isNotEmpty()) {
@@ -80,7 +83,8 @@ class MainActivity : AppCompatActivity() {
                 progress_bar.visibility = View.INVISIBLE
             }
         }
-        TouchIconExtractorHolder.extractor.userAgent = web_view.settings.userAgentString
+        ExtractorHolder.local.userAgent = web_view.settings.userAgentString
+        ExtractorHolder.library.userAgent = web_view.settings.userAgentString
     }
 
     companion object {
