@@ -27,14 +27,16 @@ repositories {
 Add dependencies, as following.
 ```gradle
 dependencies {
-    implementation 'net.mm2d:touchicon:0.2.1'
+    implementation 'net.mm2d:touchicon:0.3.0'
+    implementation 'net.mm2d:touchicon-http-okhttp:0.3.0' // If use OkHttp for HTTP access
+    implementation 'net.mm2d:touchicon-html-jsoup:0.3.0'  // If use Jsoup for HTML parse
 }
 ```
 
 ### Sample code
 
 ```kotlin
-val extractor = TouchIconExtractor(OkHttpClient())  // initialize with OkHttpClient instance
+val extractor = TouchIconExtractor()                // initialize
 extractor.userAgent = "user agent string"           // option: set User-Agent
 extractor.headers = mapOf("Cookie" to "hoge=fuga")  // option: set additional HTTP header
 extractor.downloadLimit = 10_000                    // option: set download limit (default 64kB).
@@ -48,10 +50,23 @@ Single.fromCallable { extractor.fromPage(url) }     // Do not call from the Main
         }, {})
 ```
 
-## API document
+By default, this use HttpUrlConnection for HTTP access.
+If you want to use OkHttp, use touchicon-http-okhttp module.
 
-I am writing documentation comments using KDoc.
-[The generated API document is here](docs/dokka/lib/index.md).
+```
+val extractor = TouchIconExtractor(
+    httpAdapter = OkHttpAdapterFactory.create(OkHttpClient())
+)
+```
+
+And, this use a simple in-house parser for HTML parsing.
+If you want to use Jsoup, use touchicon-html-jsoup module.
+
+```
+val extractor = TouchIconExtractor(
+    htmlParser = JsoupHtmlParserFactory.create()
+)
+```
 
 ## Operating principle
    
@@ -137,13 +152,31 @@ The order of checking the existence of the icon is as follows
 There are methods to gather all the information (`TouchIconExtractor#listFromDomain()`)
 This is for debugging and verification, **strongly recommended not to use in production.**.
 
+## API document
+
+I am writing documentation comments using KDoc.
+
+- [touchicon](docs/dokka/touchicon/index.md)
+- [touchicon-http-okhttp](docs/dokka/touchicon-http/okhttp/index.md)
+- [touchicon-html-jsoup](docs/dokka/touchicon-html/jsoup/index.md)
+
 ## Dependent OSS
+
+### touchicon
 
 - [Kotlin](https://kotlinlang.org/)
 - [Android Support Library](https://developer.android.com/topic/libraries/support-library/)
   - support-annotations
-- [Jsoup](https://jsoup.org/)
+
+### touchicon-http-okhttp
+
+- [Kotlin](https://kotlinlang.org/)
 - [OkHttp3](https://square.github.io/okhttp/)
+
+### touchicon-html-jsoup
+
+- [Kotlin](https://kotlinlang.org/)
+- [Jsoup](https://jsoup.org/)
 
 ### sample app
 - [Kotlin](https://kotlinlang.org/)
