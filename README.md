@@ -165,8 +165,8 @@ I am writing documentation comments using KDoc.
 ### touchicon
 
 - [Kotlin](https://kotlinlang.org/)
-- [Android Support Library](https://developer.android.com/topic/libraries/support-library/)
-  - support-annotations
+- [Android Jetpack](https://developer.android.com/jetpack/)
+  - androidx.annotation:annotation
 
 ### touchicon-http-okhttp
 
@@ -181,10 +181,10 @@ I am writing documentation comments using KDoc.
 ### sample app
 - [Kotlin](https://kotlinlang.org/)
 - [Android Support Library](https://developer.android.com/topic/libraries/support-library/)
-  - support-v4
-  - appcompat-v7
-  - design
-  - constraint
+  - androidx.legacy:legacy-support-v4
+  - androidx.appcompat:appcompat
+  - androidx.constraintlayout:constraintlayout
+  - com.google.android.material:material
 - [RxJava2](https://github.com/ReactiveX/RxJava)
   - [RxAndroid](https://github.com/ReactiveX/RxAndroid)
   - [RxKotlin](https://github.com/ReactiveX/RxKotlin)
