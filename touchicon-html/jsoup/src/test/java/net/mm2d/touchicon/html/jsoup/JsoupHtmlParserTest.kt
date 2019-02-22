@@ -15,8 +15,8 @@ import kotlin.test.assertEquals
  */
 class JsoupHtmlParserTest {
     @Test
-    fun extractLinkElements() {
-        val links = JsoupHtmlParser().extractLinkElements(
+    fun extractLinkTags() {
+        val links = JsoupHtmlParser().extractLinkTags(
             """
             <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
             <html lang="ja">
@@ -51,8 +51,8 @@ class JsoupHtmlParserTest {
     }
 
     @Test
-    fun extractLinkElements_invalid_html() {
-        val links = JsoupHtmlParser().extractLinkElements(
+    fun extractLinkTags_invalid_html() {
+        val links = JsoupHtmlParser().extractLinkTags(
             """
             <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
             <html lang="ja">
@@ -84,8 +84,8 @@ class JsoupHtmlParserTest {
     }
 
     @Test
-    fun extractLinkElements_non_quote_attribute() {
-        val links = JsoupHtmlParser().extractLinkElements(
+    fun extractLinkTags_non_quote_attribute() {
+        val links = JsoupHtmlParser().extractLinkTags(
             """
             <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
             <html lang="ja">

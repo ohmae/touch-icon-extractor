@@ -22,18 +22,18 @@ internal class SimpleHttpAdapter : HttpAdapter {
 
     @Throws(IOException::class)
     override fun head(url: String): HttpResponse {
-        val connection = createConnection(url)
-        connection.requestMethod = "HEAD"
-        connection.connect()
-        return SimpleHttpResponse(connection)
+        return SimpleHttpResponse(createConnection(url).also {
+            it.requestMethod = "HEAD"
+            it.connect()
+        })
     }
 
     @Throws(IOException::class)
     override fun get(url: String): HttpResponse {
-        val connection = createConnection(url)
-        connection.requestMethod = "GET"
-        connection.connect()
-        return SimpleHttpResponse(connection)
+        return SimpleHttpResponse(createConnection(url).also {
+            it.requestMethod = "GET"
+            it.connect()
+        })
     }
 
     private fun createConnection(url: String): HttpURLConnection {

@@ -16,6 +16,11 @@ import okhttp3.OkHttpClient
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 object OkHttpAdapterFactory {
+    /**
+     * Create HttpAdapter instance
+     *
+     * @return instance
+     */
     fun create(client: OkHttpClient): HttpAdapter {
         return OkHttpAdapter(client)
     }

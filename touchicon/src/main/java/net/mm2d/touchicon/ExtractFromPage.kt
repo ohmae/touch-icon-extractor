@@ -30,20 +30,20 @@ internal class ExtractFromPage(
 
     @VisibleForTesting
     internal fun invoke(siteUrl: String, html: String): List<PageIcon> {
-        return htmlParser.extractLinkElements(html)
+        return htmlParser.extractLinkTags(html)
             .mapNotNull { createPageIcon(siteUrl, it) }
             .toList()
     }
 
-    private fun createPageIcon(siteUrl: String, linkElement: HtmlElement): PageIcon? {
-        val rel = Relationship.of(linkElement.attr("rel")) ?: return null
-        val href = linkElement.attr("href")
+    private fun createPageIcon(siteUrl: String, linkTag: HtmlTag): PageIcon? {
+        val rel = Relationship.of(linkTag.attr("rel")) ?: return null
+        val href = linkTag.attr("href")
         if (href.isEmpty()) {
             return null
         }
         val url = makeAbsoluteUrl(siteUrl, href)
-        val sizes = linkElement.attr("sizes")
-        val mimeType = linkElement.attr("type")
+        val sizes = linkTag.attr("sizes")
+        val mimeType = linkTag.attr("type")
         return PageIcon(rel, url, sizes, mimeType)
     }
 

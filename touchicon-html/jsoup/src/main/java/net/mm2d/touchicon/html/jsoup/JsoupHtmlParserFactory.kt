@@ -15,6 +15,11 @@ import net.mm2d.touchicon.HtmlParser
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 object JsoupHtmlParserFactory {
+    /**
+     * Create HttpParser instance
+     *
+     * @return instance
+     */
     fun create(): HtmlParser {
         return JsoupHtmlParser()
     }

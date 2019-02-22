@@ -15,8 +15,8 @@ import kotlin.test.assertEquals
  */
 class SimpleHtmlParserTest {
     @Test
-    fun extractLinkElements() {
-        val links = SimpleHtmlParser().extractLinkElements(
+    fun extractLinkTags() {
+        val links = SimpleHtmlParser().extractLinkTags(
             """
             <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
             <html lang="ja">
@@ -51,8 +51,8 @@ class SimpleHtmlParserTest {
     }
 
     @Test
-    fun extractLinkElements_invalid_html() {
-        val links = SimpleHtmlParser().extractLinkElements(
+    fun extractLinkTags_invalid_html() {
+        val links = SimpleHtmlParser().extractLinkTags(
             """
             <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
             <html lang="ja">
@@ -84,8 +84,8 @@ class SimpleHtmlParserTest {
     }
 
     @Test
-    fun extractLinkElements_non_quote_attribute() {
-        val links = SimpleHtmlParser().extractLinkElements(
+    fun extractLinkTags_non_quote_attribute() {
+        val links = SimpleHtmlParser().extractLinkTags(
             """
             <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
             <html lang="ja">

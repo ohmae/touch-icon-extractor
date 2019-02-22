@@ -8,8 +8,15 @@
 package net.mm2d.touchicon
 
 /**
+ * Html Parser Interface.
+ *
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 interface HtmlParser {
-    fun extractLinkElements(html: String): List<HtmlElement>
+    /**
+     * Extract the link tag information.
+     *
+     * @return link tags
+     */
+    fun extractLinkTags(html: String): List<HtmlTag>
 }

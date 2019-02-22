@@ -12,6 +12,7 @@ import okhttp3.Response
 import okhttp3.ResponseBody
 import java.io.ByteArrayOutputStream
 import java.io.IOException
+import kotlin.math.min
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
@@ -19,7 +20,6 @@ import java.io.IOException
 internal class OkHttpResponse(
     private val response: Response
 ) : HttpResponse {
-
     override val isSuccess: Boolean
         get() = response.isSuccessful
 
@@ -53,7 +53,7 @@ internal class OkHttpResponse(
         val buffer = ByteArray(BUFFER_SIZE)
         var remain = limit
         while (true) {
-            val fetchSize = if (remain > BUFFER_SIZE) BUFFER_SIZE else remain
+            val fetchSize = min(buffer.size, remain)
             val size = stream.read(buffer, 0, fetchSize)
             if (size < 0) break
             output.write(buffer, 0, size)

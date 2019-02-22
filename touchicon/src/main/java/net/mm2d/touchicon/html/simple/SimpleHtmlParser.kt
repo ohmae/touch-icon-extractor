@@ -7,19 +7,19 @@
 
 package net.mm2d.touchicon.html.simple
 
-import net.mm2d.touchicon.HtmlElement
 import net.mm2d.touchicon.HtmlParser
+import net.mm2d.touchicon.HtmlTag
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 internal class SimpleHtmlParser : HtmlParser {
-    override fun extractLinkElements(html: String): List<HtmlElement> {
+    override fun extractLinkTags(html: String): List<HtmlTag> {
         return extractElementList(html).filter { it.name.equals("link", true) }
     }
 
-    private fun extractElementList(html: String): List<SimpleHtmlElement> {
-        val result = mutableListOf<SimpleHtmlElement>()
+    private fun extractElementList(html: String): List<SimpleHtmlTag> {
+        val result = mutableListOf<SimpleHtmlTag>()
         val a = html.toCharArray()
         var i = 0
         while (i < a.size) {
@@ -28,30 +28,30 @@ internal class SimpleHtmlParser : HtmlParser {
                 continue
             }
             if (match(a, i + 1, "!--")) {
-                i = skipComment(a, i + 4)
+                i = skip(a, i + 4) { match(a, it, "-->") }
                 continue
             }
             if (a.size > i + 1 && a[i + 1] == '/') {
-                i = skipEndTag(a, i + 2)
+                i = skip(a, i + 2) { a[it] == '>' }
                 continue
             }
             i++
-            val nameEnd = skipName(a, i)
-            if (nameEnd == i || nameEnd >= a.size) {
+            val tagNameEnd = skip(a, i) { !a[it].isLetterOrDigit() }
+            if (tagNameEnd == i || tagNameEnd >= a.size) {
                 continue
             }
-            val name = String(a, i, nameEnd - i)
-            if (!a[nameEnd].isWhitespace() && a[nameEnd] != '/' && a[nameEnd] != '>') {
+            val tagName = String(a, i, tagNameEnd - i)
+            if (!a[tagNameEnd].isWhitespace() && a[tagNameEnd] != '/' && a[tagNameEnd] != '>') {
                 continue
             }
-            i = nameEnd
+            i = tagNameEnd
             val attrs = mutableListOf<Pair<String, String>>()
             while (i < a.size) {
-                i = skipSpace(a, i)
+                i = skip(a, i) { !a[it].isWhitespace() }
                 if (a[i] == '/' || a[i] == '>') {
                     break
                 }
-                val attrNameEnd = skipName(a, i)
+                val attrNameEnd = skip(a, i) { !a[it].isLetterOrDigit() }
                 if (attrNameEnd == i || attrNameEnd >= a.size || a[attrNameEnd] != '=') {
                     break
                 }
@@ -65,7 +65,7 @@ internal class SimpleHtmlParser : HtmlParser {
                     i++
                     skipQuoteValue(a, i, c)
                 } else {
-                    skipNonQuoteValue(a, i)
+                    skip(a, i) { a[it].isWhitespace() || a[it] == '>' }
                 }
                 if (attrValueEnd == i || attrValueEnd >= a.size) {
                     break
@@ -75,7 +75,7 @@ internal class SimpleHtmlParser : HtmlParser {
                 i = attrValueEnd
                 if (quote) i++
             }
-            result.add(SimpleHtmlElement(name, attrs))
+            result.add(SimpleHtmlTag(tagName, attrs))
             i++
         }
         return result
@@ -88,26 +88,6 @@ internal class SimpleHtmlParser : HtmlParser {
             if (a[offset + i] != p[i]) return false
         }
         return true
-    }
-
-    private fun skipComment(a: CharArray, start: Int): Int {
-        return skip(a, start) { match(a, it, "-->") }
-    }
-
-    private fun skipEndTag(a: CharArray, start: Int): Int {
-        return skip(a, start) { a[it] == '>' }
-    }
-
-    private fun skipSpace(a: CharArray, start: Int): Int {
-        return skip(a, start) { !a[it].isWhitespace() }
-    }
-
-    private fun skipName(a: CharArray, start: Int): Int {
-        return skip(a, start) { !a[it].isLetterOrDigit() }
-    }
-
-    private fun skipNonQuoteValue(a: CharArray, start: Int): Int {
-        return skip(a, start) { a[it].isWhitespace() || a[it] == '>' }
     }
 
     private inline fun skip(a: CharArray, start: Int, breakCondition: (Int) -> Boolean): Int {

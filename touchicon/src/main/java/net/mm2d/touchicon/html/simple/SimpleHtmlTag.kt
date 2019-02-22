@@ -7,15 +7,15 @@
 
 package net.mm2d.touchicon.html.simple
 
-import net.mm2d.touchicon.HtmlElement
+import net.mm2d.touchicon.HtmlTag
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-internal data class SimpleHtmlElement(
+internal data class SimpleHtmlTag(
     val name: String,
     private val attrs: List<Pair<String, String>>
-) : HtmlElement {
+) : HtmlTag {
     override fun attr(name: String): String {
         return attrs.find { it.first.equals(name, true) }?.second ?: ""
     }

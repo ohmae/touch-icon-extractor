@@ -8,8 +8,16 @@
 package net.mm2d.touchicon
 
 /**
+ * Represent HTML element.
+ *
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-interface HtmlElement {
+interface HtmlTag {
+    /**
+     * Return attribute value.
+     *
+     * @param name attribute name
+     * @return attribute value, or empty string if not found
+     */
     fun attr(name: String): String
 }

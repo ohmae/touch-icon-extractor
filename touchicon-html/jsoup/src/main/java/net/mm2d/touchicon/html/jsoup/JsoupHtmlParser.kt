@@ -7,16 +7,16 @@
 
 package net.mm2d.touchicon.html.jsoup
 
-import net.mm2d.touchicon.HtmlElement
 import net.mm2d.touchicon.HtmlParser
+import net.mm2d.touchicon.HtmlTag
 import org.jsoup.Jsoup
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 internal class JsoupHtmlParser : HtmlParser {
-    override fun extractLinkElements(html: String): List<HtmlElement> {
+    override fun extractLinkTags(html: String): List<HtmlTag> {
         return Jsoup.parse(html).getElementsByTag("link")
-            .map { JsoupHtmlElement(it) }
+            .map { JsoupHtmlTag(it) }
     }
 }

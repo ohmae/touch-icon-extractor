@@ -15,6 +15,11 @@ import net.mm2d.touchicon.HttpAdapter
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 object SimpleHttpAdapterFactory {
+    /**
+     * Create HttpAdapter instance
+     *
+     * @return instance
+     */
     fun create(): HttpAdapter {
         return SimpleHttpAdapter()
     }
