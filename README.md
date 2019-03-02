@@ -53,7 +53,7 @@ Single.fromCallable { extractor.fromPage(url) }     // Do not call from the Main
 By default, this use HttpUrlConnection for HTTP access.
 If you want to use OkHttp, use touchicon-http-okhttp module.
 
-```
+```kotlin
 val extractor = TouchIconExtractor(
     httpAdapter = OkHttpAdapterFactory.create(OkHttpClient())
 )
@@ -62,7 +62,7 @@ val extractor = TouchIconExtractor(
 And, this use a simple in-house parser for HTML parsing.
 If you want to use Jsoup, use touchicon-html-jsoup module.
 
-```
+```kotlin
 val extractor = TouchIconExtractor(
     htmlParser = JsoupHtmlParserFactory.create()
 )
