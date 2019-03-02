@@ -7,10 +7,10 @@
 
 package net.mm2d.touchicon
 
+import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import kotlin.test.assertEquals
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
@@ -71,15 +71,15 @@ class IconComparatorTest {
             )
         )
         val sorted = list.sortedWith(IconComparator.SIZE_REL)
-        assertEquals(sorted[0].url, "8")
-        assertEquals(sorted[1].url, "6")
-        assertEquals(sorted[2].url, "4")
-        assertEquals(sorted[3].url, "2")
-        assertEquals(sorted[4].url, "7")
-        assertEquals(sorted[5].url, "5")
-        assertEquals(sorted[6].url, "3")
-        assertEquals(sorted[7].url, "1")
-        assertEquals(list.maxWith(IconComparator.SIZE_REL)?.url, "1")
+        assertThat(sorted[0].url).isEqualTo("8")
+        assertThat(sorted[1].url).isEqualTo("6")
+        assertThat(sorted[2].url).isEqualTo("4")
+        assertThat(sorted[3].url).isEqualTo("2")
+        assertThat(sorted[4].url).isEqualTo("7")
+        assertThat(sorted[5].url).isEqualTo("5")
+        assertThat(sorted[6].url).isEqualTo("3")
+        assertThat(sorted[7].url).isEqualTo("1")
+        assertThat(list.maxWith(IconComparator.SIZE_REL)?.url).isEqualTo("1")
     }
 
     @Test
@@ -135,15 +135,15 @@ class IconComparatorTest {
             )
         )
         val sorted = list.sortedWith(IconComparator.REL_SIZE)
-        assertEquals(sorted[0].url, "8")
-        assertEquals(sorted[1].url, "7")
-        assertEquals(sorted[2].url, "6")
-        assertEquals(sorted[3].url, "5")
-        assertEquals(sorted[4].url, "4")
-        assertEquals(sorted[5].url, "3")
-        assertEquals(sorted[6].url, "2")
-        assertEquals(sorted[7].url, "1")
-        assertEquals(list.maxWith(IconComparator.SIZE_REL)?.url, "1")
+        assertThat(sorted[0].url).isEqualTo("8")
+        assertThat(sorted[1].url).isEqualTo("7")
+        assertThat(sorted[2].url).isEqualTo("6")
+        assertThat(sorted[3].url).isEqualTo("5")
+        assertThat(sorted[4].url).isEqualTo("4")
+        assertThat(sorted[5].url).isEqualTo("3")
+        assertThat(sorted[6].url).isEqualTo("2")
+        assertThat(sorted[7].url).isEqualTo("1")
+        assertThat(list.maxWith(IconComparator.SIZE_REL)?.url).isEqualTo("1")
     }
 
     @Test
@@ -175,10 +175,10 @@ class IconComparatorTest {
             )
         )
         val sorted = list.sortedWith(IconComparator.SIZE_REL)
-        assertEquals(sorted[0].url, "4")
-        assertEquals(sorted[1].url, "2")
-        assertEquals(sorted[2].url, "3")
-        assertEquals(sorted[3].url, "1")
+        assertThat(sorted[0].url).isEqualTo("4")
+        assertThat(sorted[1].url).isEqualTo("2")
+        assertThat(sorted[2].url).isEqualTo("3")
+        assertThat(sorted[3].url).isEqualTo("1")
     }
 
     @Test
@@ -210,14 +210,14 @@ class IconComparatorTest {
             )
         )
         val sorted1 = list.sortedWith(IconComparator.SIZE_REL)
-        assertEquals(sorted1[0].url, "1")
-        assertEquals(sorted1[1].url, "2")
-        assertEquals(sorted1[2].url, "3")
-        assertEquals(sorted1[3].url, "4")
+        assertThat(sorted1[0].url).isEqualTo("1")
+        assertThat(sorted1[1].url).isEqualTo("2")
+        assertThat(sorted1[2].url).isEqualTo("3")
+        assertThat(sorted1[3].url).isEqualTo("4")
         val sorted2 = list.sortedWith(IconComparator.REL_SIZE)
-        assertEquals(sorted2[0].url, "4")
-        assertEquals(sorted2[1].url, "3")
-        assertEquals(sorted2[2].url, "2")
-        assertEquals(sorted2[3].url, "1")
+        assertThat(sorted2[0].url).isEqualTo("4")
+        assertThat(sorted2[1].url).isEqualTo("3")
+        assertThat(sorted2[2].url).isEqualTo("2")
+        assertThat(sorted2[3].url).isEqualTo("1")
     }
 }

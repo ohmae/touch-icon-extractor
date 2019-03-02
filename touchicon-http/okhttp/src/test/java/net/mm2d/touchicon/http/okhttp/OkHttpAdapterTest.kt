@@ -7,6 +7,7 @@
 
 package net.mm2d.touchicon.http.okhttp
 
+import com.google.common.truth.Truth.assertThat
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
@@ -17,9 +18,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import java.io.ByteArrayInputStream
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
@@ -44,7 +42,7 @@ class OkHttpAdapterTest {
         client.userAgent = userAgent
         client.head(server.url("favicon.ico").toString())
         server.shutdown()
-        assertEquals(recordedRequest?.getHeader("User-Agent"), userAgent)
+        assertThat(recordedRequest?.getHeader("User-Agent")).isEqualTo(userAgent)
     }
 
     @Test
@@ -64,8 +62,8 @@ class OkHttpAdapterTest {
         client.userAgent = userAgent
         client.head(server.url("favicon.ico").toString())
         server.shutdown()
-        assertEquals(recordedRequest?.getHeader("User-Agent"), userAgent)
-        assertEquals(recordedRequest?.getHeader("Cache-Control"), "no-cache")
+        assertThat(recordedRequest?.getHeader("User-Agent")).isEqualTo(userAgent)
+        assertThat(recordedRequest?.getHeader("Cache-Control")).isEqualTo("no-cache")
     }
 
     @Test
@@ -87,10 +85,10 @@ class OkHttpAdapterTest {
         server.start()
         val client = OkHttpAdapter(OkHttpClient())
         client.head(server.url("favicon.ico").toString()).use {
-            assertTrue(it.isSuccess)
-            assertEquals(it.header("Content-Type"), "image/png")
+            assertThat(it.isSuccess).isTrue()
+            assertThat(it.header("Content-Type")).isEqualTo("image/png")
         }
-        assertFalse(client.get(server.url("favicon.ico").toString()).isSuccess)
+        assertThat(client.get(server.url("favicon.ico").toString()).isSuccess).isFalse()
         server.shutdown()
     }
 
@@ -113,10 +111,10 @@ class OkHttpAdapterTest {
         server.start()
         val client = OkHttpAdapter(OkHttpClient())
         client.get(server.url("favicon.ico").toString()).use {
-            assertTrue(it.isSuccess)
-            assertEquals(it.header("Content-Type"), "image/png")
+            assertThat(it.isSuccess).isTrue()
+            assertThat(it.header("Content-Type")).isEqualTo("image/png")
         }
-        assertFalse(client.head(server.url("favicon.ico").toString()).isSuccess)
+        assertThat(client.head(server.url("favicon.ico").toString()).isSuccess).isFalse()
         server.shutdown()
     }
 
@@ -139,13 +137,13 @@ class OkHttpAdapterTest {
         server.start()
         val client = OkHttpAdapter(OkHttpClient())
         client.get(server.url("favicon.ico").toString()).use {
-            assertEquals(it.bodyBytes(100)?.size, 100)
+            assertThat(it.bodyBytes(100)).hasLength(100)
         }
         client.get(server.url("favicon.ico").toString()).use {
-            assertEquals(it.bodyBytes(2048)?.size, 1024)
+            assertThat(it.bodyBytes(2048)).hasLength(1024)
         }
         client.get(server.url("favicon.ico").toString()).use {
-            assertEquals(it.bodyBytes()?.size, 1024)
+            assertThat(it.bodyBytes()).hasLength(1024)
         }
         server.shutdown()
     }
@@ -169,10 +167,10 @@ class OkHttpAdapterTest {
         server.start()
         val client = OkHttpAdapter(OkHttpClient())
         client.get(server.url("favicon.ico").toString()).use {
-            assertEquals(it.bodyString(10), "1234567890")
+            assertThat(it.bodyString(10)).isEqualTo("1234567890")
         }
         client.get(server.url("favicon.ico").toString()).use {
-            assertEquals(it.bodyString(), "12345678901234567890")
+            assertThat(it.bodyString()).isEqualTo("12345678901234567890")
         }
         server.shutdown()
     }

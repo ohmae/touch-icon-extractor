@@ -7,12 +7,12 @@
 
 package net.mm2d.touchicon
 
+import com.google.common.truth.Truth.assertThat
 import io.mockk.mockk
 import net.mm2d.touchicon.html.simple.SimpleHtmlParser
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import kotlin.test.assertEquals
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
@@ -31,10 +31,10 @@ class ExtractFromPageTest {
             </head></html>
             """.trimIndent()
         )[0]
-        assertEquals(result.rel, Relationship.ICON)
-        assertEquals(result.url, "https://www.example.com/favicon.ico")
-        assertEquals(result.sizes, "")
-        assertEquals(result.mimeType, "image/vnd.microsoft.icon")
+        assertThat(result.rel).isEqualTo(Relationship.ICON)
+        assertThat(result.url).isEqualTo("https://www.example.com/favicon.ico")
+        assertThat(result.sizes).isEqualTo("")
+        assertThat(result.mimeType).isEqualTo("image/vnd.microsoft.icon")
     }
 
     @Test
@@ -48,10 +48,10 @@ class ExtractFromPageTest {
             </head></html>
             """.trimIndent()
         )[0]
-        assertEquals(result.rel, Relationship.SHORTCUT_ICON)
-        assertEquals(result.url, "https://www.example.com/favicon.ico")
-        assertEquals(result.sizes, "")
-        assertEquals(result.mimeType, "image/vnd.microsoft.icon")
+        assertThat(result.rel).isEqualTo(Relationship.SHORTCUT_ICON)
+        assertThat(result.url).isEqualTo("https://www.example.com/favicon.ico")
+        assertThat(result.sizes).isEqualTo("")
+        assertThat(result.mimeType).isEqualTo("image/vnd.microsoft.icon")
     }
 
     @Test
@@ -65,10 +65,10 @@ class ExtractFromPageTest {
             </head></html>
             """.trimIndent()
         )[0]
-        assertEquals(result.rel, Relationship.APPLE_TOUCH_ICON)
-        assertEquals(result.url, "https://www.example.com/apple-touch-icon-57x57.png")
-        assertEquals(result.sizes, "57x57")
-        assertEquals(result.mimeType, "")
+        assertThat(result.rel).isEqualTo(Relationship.APPLE_TOUCH_ICON)
+        assertThat(result.url).isEqualTo("https://www.example.com/apple-touch-icon-57x57.png")
+        assertThat(result.sizes).isEqualTo("57x57")
+        assertThat(result.mimeType).isEqualTo("")
     }
 
     @Test
@@ -82,10 +82,10 @@ class ExtractFromPageTest {
             </head></html>
             """.trimIndent()
         )[0]
-        assertEquals(result.rel, Relationship.APPLE_TOUCH_ICON_PRECOMPOSED)
-        assertEquals(result.url, "https://www.example.com/apple-touch-icon-57x57.png")
-        assertEquals(result.sizes, "57x57")
-        assertEquals(result.mimeType, "")
+        assertThat(result.rel).isEqualTo(Relationship.APPLE_TOUCH_ICON_PRECOMPOSED)
+        assertThat(result.url).isEqualTo("https://www.example.com/apple-touch-icon-57x57.png")
+        assertThat(result.sizes).isEqualTo("57x57")
+        assertThat(result.mimeType).isEqualTo("")
     }
 
     @Test
@@ -99,10 +99,10 @@ class ExtractFromPageTest {
             </head></html>
             """.trimIndent()
         )[0]
-        assertEquals(result.rel, Relationship.APPLE_TOUCH_ICON)
-        assertEquals(result.url, "https://www.example.com/apple-touch-icon-57x57.png")
-        assertEquals(result.sizes, "57x57")
-        assertEquals(result.mimeType, "")
+        assertThat(result.rel).isEqualTo(Relationship.APPLE_TOUCH_ICON)
+        assertThat(result.url).isEqualTo("https://www.example.com/apple-touch-icon-57x57.png")
+        assertThat(result.sizes).isEqualTo("57x57")
+        assertThat(result.mimeType).isEqualTo("")
     }
 
     @Test
@@ -116,9 +116,9 @@ class ExtractFromPageTest {
             </hea
             """.trimIndent()
         )[0]
-        assertEquals(result.rel, Relationship.APPLE_TOUCH_ICON)
-        assertEquals(result.url, "https://www.example.com/apple-touch-icon-57x57.png")
-        assertEquals(result.sizes, "57x57")
-        assertEquals(result.mimeType, "")
+        assertThat(result.rel).isEqualTo(Relationship.APPLE_TOUCH_ICON)
+        assertThat(result.url).isEqualTo("https://www.example.com/apple-touch-icon-57x57.png")
+        assertThat(result.sizes).isEqualTo("57x57")
+        assertThat(result.mimeType).isEqualTo("")
     }
 }
