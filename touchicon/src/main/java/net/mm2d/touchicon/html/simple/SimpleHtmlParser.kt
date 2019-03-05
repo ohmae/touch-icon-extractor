@@ -35,7 +35,7 @@ internal class SimpleHtmlParser : HtmlParser {
                 i = skip(a, i + 2) { a[it] == '>' }
                 continue
             }
-            val tagNameEnd = skip(a, ++i) { !a[it].isLetterOrDigit() }
+            val tagNameEnd = skip(a, ++i) { !a[it].isNameCharacter() }
             if (tagNameEnd == i || tagNameEnd >= a.size) {
                 continue
             }
@@ -50,7 +50,7 @@ internal class SimpleHtmlParser : HtmlParser {
                 if (a[i] == '/' || a[i] == '>') {
                     break
                 }
-                val attrNameEnd = skip(a, i) { !a[it].isLetterOrDigit() }
+                val attrNameEnd = skip(a, i) { !a[it].isNameCharacter() }
                 if (attrNameEnd == i || attrNameEnd >= a.size) break
                 val attrName = String(a, i, attrNameEnd - i)
                 i = attrNameEnd
@@ -79,6 +79,10 @@ internal class SimpleHtmlParser : HtmlParser {
             i++
         }
         return result
+    }
+
+    private fun Char.isNameCharacter() : Boolean {
+        return this.isLetterOrDigit() || ":-_.".contains(this)
     }
 
     private fun match(a: CharArray, offset: Int, pattern: String): Boolean {
