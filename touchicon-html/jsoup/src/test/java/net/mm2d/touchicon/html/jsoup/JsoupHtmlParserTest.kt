@@ -14,6 +14,33 @@ import org.junit.Test
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 class JsoupHtmlParserTest {
+    private val expected = listOf(
+        mapOf(
+            "rel" to "icon",
+            "href" to "/favicon.ico",
+            "type" to "image/vnd.microsoft.icon"
+        ),
+        mapOf(
+            "rel" to "shortcut icon",
+            "href" to "/favicon.ico",
+            "type" to "image/vnd.microsoft.icon"
+        ),
+        mapOf(
+            "rel" to "apple-touch-icon",
+            "href" to "/apple-touch-icon-57x57.png",
+            "sizes" to "57x57"
+        ),
+        mapOf(
+            "rel" to "apple-touch-icon-precomposed",
+            "href" to "/apple-touch-icon-57x57.png",
+            "sizes" to "57x57"
+        ),
+        mapOf(
+            "rel" to "apple-touch-icon",
+            "href" to "//www.example.com/apple-touch-icon-57x57.png",
+            "sizes" to "57x57"
+        )
+    )
     @Test
     fun extractLinkTags() {
         val links = JsoupHtmlParser().extractLinkTags(
@@ -33,21 +60,11 @@ class JsoupHtmlParserTest {
             """.trimIndent()
         )
         assertThat(links).hasSize(5)
-        assertThat(links[0].attr("rel")).isEqualTo("icon")
-        assertThat(links[0].attr("href")).isEqualTo("/favicon.ico")
-        assertThat(links[0].attr("type")).isEqualTo("image/vnd.microsoft.icon")
-        assertThat(links[1].attr("rel")).isEqualTo("shortcut icon")
-        assertThat(links[1].attr("href")).isEqualTo("/favicon.ico")
-        assertThat(links[1].attr("type")).isEqualTo("image/vnd.microsoft.icon")
-        assertThat(links[2].attr("rel")).isEqualTo("apple-touch-icon")
-        assertThat(links[2].attr("href")).isEqualTo("/apple-touch-icon-57x57.png")
-        assertThat(links[2].attr("sizes")).isEqualTo("57x57")
-        assertThat(links[3].attr("rel")).isEqualTo("apple-touch-icon-precomposed")
-        assertThat(links[3].attr("href")).isEqualTo("/apple-touch-icon-57x57.png")
-        assertThat(links[3].attr("sizes")).isEqualTo("57x57")
-        assertThat(links[4].attr("rel")).isEqualTo("apple-touch-icon")
-        assertThat(links[4].attr("href")).isEqualTo("//www.example.com/apple-touch-icon-57x57.png")
-        assertThat(links[4].attr("sizes")).isEqualTo("57x57")
+        expected.forEachIndexed { index, map ->
+            map.forEach { key, value ->
+                assertThat(links[index].attr(key)).isEqualTo(value)
+            }
+        }
     }
 
     @Test
@@ -66,21 +83,11 @@ class JsoupHtmlParserTest {
             """.trimIndent()
         )
         assertThat(links).hasSize(5)
-        assertThat(links[0].attr("rel")).isEqualTo("icon")
-        assertThat(links[0].attr("href")).isEqualTo("/favicon.ico")
-        assertThat(links[0].attr("type")).isEqualTo("image/vnd.microsoft.icon")
-        assertThat(links[1].attr("rel")).isEqualTo("shortcut icon")
-        assertThat(links[1].attr("href")).isEqualTo("/favicon.ico")
-        assertThat(links[1].attr("type")).isEqualTo("image/vnd.microsoft.icon")
-        assertThat(links[2].attr("rel")).isEqualTo("apple-touch-icon")
-        assertThat(links[2].attr("href")).isEqualTo("/apple-touch-icon-57x57.png")
-        assertThat(links[2].attr("sizes")).isEqualTo("57x57")
-        assertThat(links[3].attr("rel")).isEqualTo("apple-touch-icon-precomposed")
-        assertThat(links[3].attr("href")).isEqualTo("/apple-touch-icon-57x57.png")
-        assertThat(links[3].attr("sizes")).isEqualTo("57x57")
-        assertThat(links[4].attr("rel")).isEqualTo("apple-touch-icon")
-        assertThat(links[4].attr("href")).isEqualTo("//www.example.com/apple-touch-icon-57x57.png")
-        assertThat(links[4].attr("sizes")).isEqualTo("57x57")
+        expected.forEachIndexed { index, map ->
+            map.forEach { key, value ->
+                assertThat(links[index].attr(key)).isEqualTo(value)
+            }
+        }
     }
 
     @Test
@@ -91,27 +98,21 @@ class JsoupHtmlParserTest {
             <html lang="ja">
             <head>
             <link rel=icon href=/favicon.ico type=image/vnd.microsoft.icon>
-            <link rel=shortcut_icon href=/favicon.ico type=image/vnd.microsoft.icon>
+            <link rel=shortcut icon href=/favicon.ico type=image/vnd.microsoft.icon>
             <link rel=apple-touch-icon sizes=57x57 href=/apple-touch-icon-57x57.png>
             <link rel=apple-touch-icon-precomposed sizes=57x57 href=/apple-touch-icon-57x57.png>
             <link rel=apple-touch-icon sizes=57x57 href=//www.example.com/apple-touch-icon-57x57.png>
             """.trimIndent()
         )
         assertThat(links).hasSize(5)
-        assertThat(links[0].attr("rel")).isEqualTo("icon")
-        assertThat(links[0].attr("href")).isEqualTo("/favicon.ico")
-        assertThat(links[0].attr("type")).isEqualTo("image/vnd.microsoft.icon")
-        assertThat(links[1].attr("rel")).isEqualTo("shortcut_icon")
-        assertThat(links[1].attr("href")).isEqualTo("/favicon.ico")
-        assertThat(links[1].attr("type")).isEqualTo("image/vnd.microsoft.icon")
-        assertThat(links[2].attr("rel")).isEqualTo("apple-touch-icon")
-        assertThat(links[2].attr("href")).isEqualTo("/apple-touch-icon-57x57.png")
-        assertThat(links[2].attr("sizes")).isEqualTo("57x57")
-        assertThat(links[3].attr("rel")).isEqualTo("apple-touch-icon-precomposed")
-        assertThat(links[3].attr("href")).isEqualTo("/apple-touch-icon-57x57.png")
-        assertThat(links[3].attr("sizes")).isEqualTo("57x57")
-        assertThat(links[4].attr("rel")).isEqualTo("apple-touch-icon")
-        assertThat(links[4].attr("href")).isEqualTo("//www.example.com/apple-touch-icon-57x57.png")
-        assertThat(links[4].attr("sizes")).isEqualTo("57x57")
+        expected.forEachIndexed { index, map ->
+            map.forEach { key, value ->
+                if (index == 1 && key == "rel") {
+                    assertThat(links[index].attr(key)).isEqualTo("shortcut")
+                } else {
+                    assertThat(links[index].attr(key)).isEqualTo(value)
+                }
+            }
+        }
     }
 }
