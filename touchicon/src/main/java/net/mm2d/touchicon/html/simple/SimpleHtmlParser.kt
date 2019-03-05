@@ -27,16 +27,15 @@ internal class SimpleHtmlParser : HtmlParser {
                 i++
                 continue
             }
-            if (match(a, i + 1, "!--")) {
+            if (match(a, i + 1, "!--")) { // skip comment
                 i = skip(a, i + 4) { match(a, it, "-->") }
                 continue
             }
-            if (a.size > i + 1 && a[i + 1] == '/') {
+            if (a.size > i + 1 && a[i + 1] == '/') { // skip close tag
                 i = skip(a, i + 2) { a[it] == '>' }
                 continue
             }
-            i++
-            val tagNameEnd = skip(a, i) { !a[it].isLetterOrDigit() }
+            val tagNameEnd = skip(a, ++i) { !a[it].isLetterOrDigit() }
             if (tagNameEnd == i || tagNameEnd >= a.size) {
                 continue
             }
@@ -52,18 +51,19 @@ internal class SimpleHtmlParser : HtmlParser {
                     break
                 }
                 val attrNameEnd = skip(a, i) { !a[it].isLetterOrDigit() }
-                if (attrNameEnd == i || attrNameEnd >= a.size || a[attrNameEnd] != '=') {
-                    break
-                }
+                if (attrNameEnd == i || attrNameEnd >= a.size) break
                 val attrName = String(a, i, attrNameEnd - i)
-                i = attrNameEnd + 1
-                if (i >= a.size) break
+                i = attrNameEnd
+                if (a[i] != '=') {
+                    attrs.add(attrName to "")
+                    continue
+                }
+                if (++i >= a.size) break
                 val c = a[i]
-                if (c.isWhitespace()) break
+                if (c.isWhitespace()) continue
                 val quote = c == '"' || c == '\''
                 val attrValueEnd = if (quote) {
-                    i++
-                    skipQuoteValue(a, i, c)
+                    skipQuoteValue(a, ++i, c)
                 } else {
                     skip(a, i) { a[it].isWhitespace() || a[it] == '>' }
                 }
