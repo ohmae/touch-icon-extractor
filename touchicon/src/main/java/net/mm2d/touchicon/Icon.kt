@@ -7,8 +7,6 @@
 
 package net.mm2d.touchicon
 
-import android.graphics.Point
-
 /**
  * Icon information interface.
  *
@@ -52,13 +50,13 @@ interface Icon {
      * Infer based on [sizes] or [url].
      * If x or y is -1, it means fail to infer.
      */
-    fun inferSize(): Point
+    fun inferSize(): Size
 
     /**
      * Infer area of this icon.
      */
     fun inferArea(): Int {
         val size = inferSize()
-        return if (size.x > 0 && size.y > 0) size.x * size.y else 0
+        return if (size.width > 0 && size.height > 0) size.width * size.height else 0
     }
 }

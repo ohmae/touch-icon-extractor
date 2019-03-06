@@ -7,7 +7,6 @@
 
 package net.mm2d.touchicon
 
-import android.graphics.Point
 import android.os.Parcel
 import android.os.Parcelable
 import android.os.Parcelable.Creator
@@ -84,20 +83,20 @@ data class PageIcon(
      */
     override val length: Int = -1
 ) : Icon, Parcelable {
-    private var _size: Point? = null
+    private var _size: Size? = null
     /**
      * Infer display size of this icon from sizes value.
      *
      * if fail to infer from sizes, try to infer from url.
      */
-    override fun inferSize(): Point {
+    override fun inferSize(): Size {
         _size?.let { return it }
         return inferSizeInner().also { _size = it }
     }
 
-    private fun inferSizeInner(): Point {
+    private fun inferSizeInner(): Size {
         val size = inferSizeFromSizes(sizes)
-        if (size.x > 0 && size.y > 0) {
+        if (size.width > 0 && size.height > 0) {
             return size
         }
         return inferSizeFromUrl(url)

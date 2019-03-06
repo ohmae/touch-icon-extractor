@@ -152,6 +152,17 @@ The order of checking the existence of the icon is as follows
 There are methods to gather all the information (`TouchIconExtractor#listFromDomain()`)
 This is for debugging and verification, **strongly recommended not to use in production.**.
 
+### Comparison of icons
+
+Often you can get more than one icon.
+Which is the most appropriate icon depends on the application, but this library provides several Comparator.
+
+```kotlin
+val icons = extractor.fromDomain(url, true, listOf("120x120", "72x72"))
+val bestIcon1 = icons.maxWith(IconComparator.SIZE)     // Compare by size. (the largest icon is the best)
+val bestIcon2 = icons.maxWith(IconComparator.REL_SIZE) // Compare by rel, if same, compare by size
+```
+
 ## API document
 
 I am writing documentation comments using KDoc.
