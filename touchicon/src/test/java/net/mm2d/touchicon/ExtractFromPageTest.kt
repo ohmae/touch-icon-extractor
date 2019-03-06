@@ -9,7 +9,7 @@ package net.mm2d.touchicon
 
 import com.google.common.truth.Truth.assertThat
 import io.mockk.mockk
-import net.mm2d.touchicon.html.simple.SimpleHtmlParser
+import net.mm2d.touchicon.html.simple.SimpleHtmlParserAdapterFactory
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -22,7 +22,7 @@ import org.robolectric.RobolectricTestRunner
 class ExtractFromPageTest {
     @Test
     fun extract_icon() {
-        val extract = ExtractFromPage(mockk(), SimpleHtmlParser())
+        val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
         val result = extract.invoke(
             "https://www.example.com/",
             """
@@ -39,7 +39,7 @@ class ExtractFromPageTest {
 
     @Test
     fun extract_shortcut_icon() {
-        val extract = ExtractFromPage(mockk(), SimpleHtmlParser())
+        val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
         val result = extract.invoke(
             "https://www.example.com/",
             """
@@ -56,7 +56,7 @@ class ExtractFromPageTest {
 
     @Test
     fun extract_apple_touch_icon() {
-        val extract = ExtractFromPage(mockk(), SimpleHtmlParser())
+        val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
         val result = extract.invoke(
             "https://www.example.com/",
             """
@@ -73,7 +73,7 @@ class ExtractFromPageTest {
 
     @Test
     fun extract_apple_touch_icon_precomposed() {
-        val extract = ExtractFromPage(mockk(), SimpleHtmlParser())
+        val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
         val result = extract.invoke(
             "https://www.example.com/",
             """
@@ -90,7 +90,7 @@ class ExtractFromPageTest {
 
     @Test
     fun extract_omitted_scheme() {
-        val extract = ExtractFromPage(mockk(), SimpleHtmlParser())
+        val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
         val result = extract.invoke(
             "https://www.example.com/",
             """
@@ -107,7 +107,7 @@ class ExtractFromPageTest {
 
     @Test
     fun extract_broken() {
-        val extract = ExtractFromPage(mockk(), SimpleHtmlParser())
+        val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
         val result = extract.invoke(
             "https://www.example.com/",
             """

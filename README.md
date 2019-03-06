@@ -64,7 +64,7 @@ If you want to use Jsoup, use touchicon-html-jsoup module.
 
 ```kotlin
 val extractor = TouchIconExtractor(
-    htmlParser = JsoupHtmlParserFactory.create()
+    htmlParser = JsoupHtmlParserAdapterFactory.create()
 )
 ```
 

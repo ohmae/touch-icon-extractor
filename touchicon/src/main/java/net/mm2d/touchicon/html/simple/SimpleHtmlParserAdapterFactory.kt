@@ -5,22 +5,22 @@
  * http://opensource.org/licenses/MIT
  */
 
-package net.mm2d.touchicon.html.jsoup
+package net.mm2d.touchicon.html.simple
 
-import net.mm2d.touchicon.HtmlParser
+import net.mm2d.touchicon.HtmlParserAdapter
 
 /**
- * Supply HttpParser powered by Jsoup.
+ * Supply default HttpParser implementation.
  *
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-object JsoupHtmlParserFactory {
+object SimpleHtmlParserAdapterFactory {
     /**
      * Create HttpParser instance
      *
      * @return instance
      */
-    fun create(): HtmlParser {
-        return JsoupHtmlParser()
+    fun create(): HtmlParserAdapter {
+        return SimpleHtmlParserAdapter()
     }
 }

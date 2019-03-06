@@ -14,7 +14,7 @@ import androidx.annotation.VisibleForTesting
  */
 internal class ExtractFromPage(
     private val httpClient: HttpClientAdapter,
-    private val htmlParser: HtmlParser
+    private val htmlParser: HtmlParserAdapter
 ) {
     var downloadLimit: Int = DEFAULT_LIMIT_SIZE
 

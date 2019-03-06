@@ -8,7 +8,7 @@
 package net.mm2d.touchicon
 
 import androidx.annotation.WorkerThread
-import net.mm2d.touchicon.html.simple.SimpleHtmlParserFactory
+import net.mm2d.touchicon.html.simple.SimpleHtmlParserAdapterFactory
 import net.mm2d.touchicon.http.simple.SimpleHttpClientAdapterFactory
 
 /**
@@ -18,14 +18,14 @@ import net.mm2d.touchicon.http.simple.SimpleHttpClientAdapterFactory
  *
  * @constructor
  * Initialize the instance.
- * You can change HttpClientAdapter and HtmlParser.
+ * You can change HttpClientAdapter and HtmlParserAdapter.
  *
  * @param httpClient HttpClientAdapter to use for internal communication. if not specified use default implementation.
- * @param htmlParser HtmlParser to use for HTML parse. if not specified use default implementation.
+ * @param htmlParser HtmlParserAdapter to use for HTML parse. if not specified use default implementation.
  */
 class TouchIconExtractor(
     private val httpClient: HttpClientAdapter = SimpleHttpClientAdapterFactory.create(),
-    private val htmlParser: HtmlParser = SimpleHtmlParserFactory.create()
+    private val htmlParser: HtmlParserAdapter = SimpleHtmlParserAdapterFactory.create()
 ) {
     private val fromPage = ExtractFromPage(httpClient, htmlParser)
     private val fromDomain = ExtractFromDomain(httpClient)

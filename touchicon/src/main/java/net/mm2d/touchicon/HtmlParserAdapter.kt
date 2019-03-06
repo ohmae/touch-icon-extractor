@@ -12,7 +12,7 @@ package net.mm2d.touchicon
  *
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-interface HtmlParser {
+interface HtmlParserAdapter {
     /**
      * Extract the link tag information.
      *

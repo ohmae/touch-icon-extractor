@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/MIT
  */
 
-package net.mm2d.touchicon.html.simple
+package net.mm2d.touchicon.html.jsoup
 
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
@@ -13,7 +13,7 @@ import org.junit.Test
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-class SimpleHtmlParserTest {
+class JsoupHtmlParserAdapterTest {
     private val expected = listOf(
         mapOf(
             "rel" to "icon",
@@ -41,9 +41,10 @@ class SimpleHtmlParserTest {
             "sizes" to "57x57"
         )
     )
+
     @Test
     fun extractLinkTags() {
-        val links = SimpleHtmlParser().extractLinkTags(
+        val links = JsoupHtmlParserAdapter().extractLinkTags(
             """
             <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
             <html lang="ja">
@@ -69,7 +70,7 @@ class SimpleHtmlParserTest {
 
     @Test
     fun extractLinkTags_invalid_html() {
-        val links = SimpleHtmlParser().extractLinkTags(
+        val links = JsoupHtmlParserAdapter().extractLinkTags(
             """
             <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
             <html lang="ja">
@@ -79,7 +80,7 @@ class SimpleHtmlParserTest {
             <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png"/>
             <!-- <link rel="icon"> -->
             <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/apple-touch-icon-57x57.png">
-            <link rel="apple-touch-icon" sizes="57x57" href="//www.example.com/apple-touch-icon-57x57.png"" ""
+            <link rel="apple-touch-icon" sizes="57x57" href="//www.example.com/apple-touch-icon-57x57.png">
             """.trimIndent()
         )
         assertThat(links).hasSize(5)
@@ -92,7 +93,7 @@ class SimpleHtmlParserTest {
 
     @Test
     fun extractLinkTags_non_quote_attribute() {
-        val links = SimpleHtmlParser().extractLinkTags(
+        val links = JsoupHtmlParserAdapter().extractLinkTags(
             """
             <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
             <html lang="ja">
@@ -116,4 +117,3 @@ class SimpleHtmlParserTest {
         }
     }
 }
-

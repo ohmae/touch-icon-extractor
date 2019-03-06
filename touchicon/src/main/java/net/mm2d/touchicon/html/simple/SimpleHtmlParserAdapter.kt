@@ -7,13 +7,13 @@
 
 package net.mm2d.touchicon.html.simple
 
-import net.mm2d.touchicon.HtmlParser
+import net.mm2d.touchicon.HtmlParserAdapter
 import net.mm2d.touchicon.HtmlTag
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-internal class SimpleHtmlParser : HtmlParser {
+internal class SimpleHtmlParserAdapter : HtmlParserAdapter {
     override fun extractLinkTags(html: String): List<HtmlTag> {
         return extractElementList(html).filter { it.name.equals("link", true) }
     }
@@ -81,7 +81,7 @@ internal class SimpleHtmlParser : HtmlParser {
         return result
     }
 
-    private fun Char.isNameCharacter() : Boolean {
+    private fun Char.isNameCharacter(): Boolean {
         return this.isLetterOrDigit() || ":-_.".contains(this)
     }
 

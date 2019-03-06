@@ -8,7 +8,7 @@
 package net.mm2d.touchicon.sample
 
 import net.mm2d.touchicon.TouchIconExtractor
-import net.mm2d.touchicon.html.jsoup.JsoupHtmlParserFactory
+import net.mm2d.touchicon.html.jsoup.JsoupAdapterFactory
 import net.mm2d.touchicon.http.okhttp.OkHttpAdapterFactory
 
 /**
@@ -18,6 +18,6 @@ object ExtractorHolder {
     val local = TouchIconExtractor()
     val library = TouchIconExtractor(
         httpClient = OkHttpAdapterFactory.create(OkHttpClientHolder.client),
-        htmlParser = JsoupHtmlParserFactory.create()
+        htmlParser = JsoupAdapterFactory.create()
     )
 }
