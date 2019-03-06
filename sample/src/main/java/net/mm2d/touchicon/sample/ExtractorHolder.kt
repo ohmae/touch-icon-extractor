@@ -17,7 +17,7 @@ import net.mm2d.touchicon.http.okhttp.OkHttpAdapterFactory
 object ExtractorHolder {
     val local = TouchIconExtractor()
     val library = TouchIconExtractor(
-        httpAdapter = OkHttpAdapterFactory.create(OkHttpClientHolder.client),
+        httpClient = OkHttpAdapterFactory.create(OkHttpClientHolder.client),
         htmlParser = JsoupHtmlParserFactory.create()
     )
 }

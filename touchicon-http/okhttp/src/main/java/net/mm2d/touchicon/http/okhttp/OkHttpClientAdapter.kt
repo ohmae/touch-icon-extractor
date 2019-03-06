@@ -7,7 +7,7 @@
 
 package net.mm2d.touchicon.http.okhttp
 
-import net.mm2d.touchicon.HttpAdapter
+import net.mm2d.touchicon.HttpClientAdapter
 import net.mm2d.touchicon.HttpResponse
 import okhttp3.Headers
 import okhttp3.OkHttpClient
@@ -17,9 +17,9 @@ import java.io.IOException
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-internal class OkHttpAdapter(
+internal class OkHttpClientAdapter(
     private val client: OkHttpClient
-) : HttpAdapter {
+) : HttpClientAdapter {
     override var userAgent: String = ""
     override var headers: Map<String, String> = emptyMap()
 

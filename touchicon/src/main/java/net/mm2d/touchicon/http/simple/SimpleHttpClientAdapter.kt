@@ -7,7 +7,7 @@
 
 package net.mm2d.touchicon.http.simple
 
-import net.mm2d.touchicon.HttpAdapter
+import net.mm2d.touchicon.HttpClientAdapter
 import net.mm2d.touchicon.HttpResponse
 import java.io.IOException
 import java.net.HttpURLConnection
@@ -16,7 +16,7 @@ import java.net.URL
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-internal class SimpleHttpAdapter : HttpAdapter {
+internal class SimpleHttpClientAdapter : HttpClientAdapter {
     override var userAgent: String = ""
     override var headers: Map<String, String> = emptyMap()
 

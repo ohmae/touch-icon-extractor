@@ -24,55 +24,55 @@ class ExtractFromDomainTest {
     @Test
     fun invoke_success_precomposed() {
         val baseUrl = "https://www.example.com"
-        val httpAdapter = mockk<HttpAdapter>(relaxed = true)
+        val httpClient = mockk<HttpClientAdapter>(relaxed = true)
         every {
-            httpAdapter.head("$baseUrl/apple-touch-icon-precomposed.png")
+            httpClient.head("$baseUrl/apple-touch-icon-precomposed.png")
         } returns mockk(relaxed = true) {
             every { isSuccess } returns true
             every { header("Content-Type") } returns "image/png"
         }
-        val extract = ExtractFromDomain(httpAdapter)
+        val extract = ExtractFromDomain(httpClient)
         val icon = extract.invoke("$baseUrl/index.html", true, emptyList())
         assertThat(icon?.mimeType).isEqualTo("image/png")
-        verify(inverse = true) { httpAdapter.get(any()) }
-        verify(exactly = 1) { httpAdapter.head(any()) }
-        verify(exactly = 1) { httpAdapter.head("$baseUrl/apple-touch-icon-precomposed.png") }
+        verify(inverse = true) { httpClient.get(any()) }
+        verify(exactly = 1) { httpClient.head(any()) }
+        verify(exactly = 1) { httpClient.head("$baseUrl/apple-touch-icon-precomposed.png") }
     }
 
     @Test
     fun invoke_success_touch_icon() {
         val baseUrl = "https://www.example.com"
-        val httpAdapter = mockk<HttpAdapter>(relaxed = true)
+        val httpClient = mockk<HttpClientAdapter>(relaxed = true)
         every {
-            httpAdapter.head("$baseUrl/apple-touch-icon.png")
+            httpClient.head("$baseUrl/apple-touch-icon.png")
         } returns mockk(relaxed = true) {
             every { isSuccess } returns true
             every { header("Content-Type") } returns "image/png"
         }
-        val extract = ExtractFromDomain(httpAdapter)
+        val extract = ExtractFromDomain(httpClient)
         val icon = extract.invoke("$baseUrl/index.html", true, emptyList())
         assertThat(icon?.mimeType).isEqualTo("image/png")
-        verify(inverse = true) { httpAdapter.get(any()) }
-        verify(exactly = 2) { httpAdapter.head(any()) }
-        verify(exactly = 1) { httpAdapter.head("$baseUrl/apple-touch-icon.png") }
+        verify(inverse = true) { httpClient.get(any()) }
+        verify(exactly = 2) { httpClient.head(any()) }
+        verify(exactly = 1) { httpClient.head("$baseUrl/apple-touch-icon.png") }
     }
 
     @Test
     fun invoke_success_favicon() {
         val baseUrl = "https://www.example.com"
-        val httpAdapter = mockk<HttpAdapter>(relaxed = true)
+        val httpClient = mockk<HttpClientAdapter>(relaxed = true)
         every {
-            httpAdapter.head("$baseUrl/favicon.ico")
+            httpClient.head("$baseUrl/favicon.ico")
         } returns mockk(relaxed = true) {
             every { isSuccess } returns true
             every { header("Content-Type") } returns "image/x-icon"
         }
-        val extract = ExtractFromDomain(httpAdapter)
+        val extract = ExtractFromDomain(httpClient)
         val icon = extract.invoke("$baseUrl/index.html", true, emptyList())
         assertThat(icon?.mimeType).isEqualTo("image/x-icon")
-        verify(inverse = true) { httpAdapter.get(any()) }
-        verify(exactly = 3) { httpAdapter.head(any()) }
-        verify(exactly = 1) { httpAdapter.head("$baseUrl/favicon.ico") }
+        verify(inverse = true) { httpClient.get(any()) }
+        verify(exactly = 3) { httpClient.head(any()) }
+        verify(exactly = 1) { httpClient.head("$baseUrl/favicon.ico") }
     }
 
     @Test

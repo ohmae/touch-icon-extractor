@@ -13,7 +13,7 @@ import androidx.annotation.VisibleForTesting
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 internal class ExtractFromPage(
-    private val httpAdapter: HttpAdapter,
+    private val httpClient: HttpClientAdapter,
     private val htmlParser: HtmlParser
 ) {
     var downloadLimit: Int = DEFAULT_LIMIT_SIZE
@@ -48,7 +48,7 @@ internal class ExtractFromPage(
     }
 
     private fun fetch(url: String): String {
-        httpAdapter.get(url).use {
+        httpClient.get(url).use {
             if (!it.hasHtml()) return ""
             return it.bodyString(downloadLimit) ?: ""
         }

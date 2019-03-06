@@ -9,7 +9,7 @@ package net.mm2d.touchicon
 
 import androidx.annotation.WorkerThread
 import net.mm2d.touchicon.html.simple.SimpleHtmlParserFactory
-import net.mm2d.touchicon.http.simple.SimpleHttpAdapterFactory
+import net.mm2d.touchicon.http.simple.SimpleHttpClientAdapterFactory
 
 /**
  * Extract information of WebClip icon such as Apple Touch Icon or favicon related to the URL.
@@ -18,26 +18,26 @@ import net.mm2d.touchicon.http.simple.SimpleHttpAdapterFactory
  *
  * @constructor
  * Initialize the instance.
- * You can change HttpAdapter and HtmlParser.
+ * You can change HttpClientAdapter and HtmlParser.
  *
- * @param httpAdapter HttpAdapter to use for internal communication. if not specified use default implementation.
+ * @param httpClient HttpClientAdapter to use for internal communication. if not specified use default implementation.
  * @param htmlParser HtmlParser to use for HTML parse. if not specified use default implementation.
  */
 class TouchIconExtractor(
-    private val httpAdapter: HttpAdapter = SimpleHttpAdapterFactory.create(),
+    private val httpClient: HttpClientAdapter = SimpleHttpClientAdapterFactory.create(),
     private val htmlParser: HtmlParser = SimpleHtmlParserFactory.create()
 ) {
-    private val fromPage = ExtractFromPage(httpAdapter, htmlParser)
-    private val fromDomain = ExtractFromDomain(httpAdapter)
+    private val fromPage = ExtractFromPage(httpClient, htmlParser)
+    private val fromDomain = ExtractFromDomain(httpClient)
     /**
      * Specify the value of User-Agent used for HTTP communication.
      *
      * It takes precedence over specification in [headers].
      */
     var userAgent: String
-        get() = httpAdapter.userAgent
+        get() = httpClient.userAgent
         set(value) {
-            httpAdapter.userAgent = value
+            httpClient.userAgent = value
         }
     /**
      * Specify the HTTP communication header.
@@ -45,9 +45,9 @@ class TouchIconExtractor(
      * User-Agent can also be specified, but [userAgent] takes precedence.
      */
     var headers: Map<String, String>
-        get() = httpAdapter.headers
+        get() = httpClient.headers
         set(value) {
-            httpAdapter.headers = value
+            httpClient.headers = value
         }
     /**
      * Specify the maximum download size when downloading HTML file.

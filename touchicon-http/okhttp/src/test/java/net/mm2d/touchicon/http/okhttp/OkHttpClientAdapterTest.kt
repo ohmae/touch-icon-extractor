@@ -25,7 +25,7 @@ import java.io.ByteArrayInputStream
 
 @RunWith(JUnit4::class)
 @Suppress("TestFunctionName")
-class OkHttpAdapterTest {
+class OkHttpClientAdapterTest {
     @Test
     fun userAgent() {
         var recordedRequest: RecordedRequest? = null
@@ -38,7 +38,7 @@ class OkHttpAdapterTest {
         })
         server.start()
         val userAgent = "user-agent"
-        val client = OkHttpAdapter(OkHttpClient())
+        val client = OkHttpClientAdapter(OkHttpClient())
         client.userAgent = userAgent
         client.head(server.url("favicon.ico").toString())
         server.shutdown()
@@ -57,7 +57,7 @@ class OkHttpAdapterTest {
         })
         server.start()
         val userAgent = "user-agent"
-        val client = OkHttpAdapter(OkHttpClient())
+        val client = OkHttpClientAdapter(OkHttpClient())
         client.headers = mapOf("User-Agent" to "hogehoge", "Cache-Control" to "no-cache")
         client.userAgent = userAgent
         client.head(server.url("favicon.ico").toString())
@@ -83,7 +83,7 @@ class OkHttpAdapterTest {
             }
         })
         server.start()
-        val client = OkHttpAdapter(OkHttpClient())
+        val client = OkHttpClientAdapter(OkHttpClient())
         client.head(server.url("favicon.ico").toString()).use {
             assertThat(it.isSuccess).isTrue()
             assertThat(it.header("Content-Type")).isEqualTo("image/png")
@@ -109,7 +109,7 @@ class OkHttpAdapterTest {
             }
         })
         server.start()
-        val client = OkHttpAdapter(OkHttpClient())
+        val client = OkHttpClientAdapter(OkHttpClient())
         client.get(server.url("favicon.ico").toString()).use {
             assertThat(it.isSuccess).isTrue()
             assertThat(it.header("Content-Type")).isEqualTo("image/png")
@@ -135,7 +135,7 @@ class OkHttpAdapterTest {
             }
         })
         server.start()
-        val client = OkHttpAdapter(OkHttpClient())
+        val client = OkHttpClientAdapter(OkHttpClient())
         client.get(server.url("favicon.ico").toString()).use {
             assertThat(it.bodyBytes(100)).hasLength(100)
         }
@@ -165,7 +165,7 @@ class OkHttpAdapterTest {
             }
         })
         server.start()
-        val client = OkHttpAdapter(OkHttpClient())
+        val client = OkHttpClientAdapter(OkHttpClient())
         client.get(server.url("favicon.ico").toString()).use {
             assertThat(it.bodyString(10)).isEqualTo("1234567890")
         }

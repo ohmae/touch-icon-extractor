@@ -23,7 +23,7 @@ import java.io.ByteArrayInputStream
  */
 @RunWith(JUnit4::class)
 @Suppress("TestFunctionName")
-class SimpleHttpAdapterTest {
+class SimpleHttpClientAdapterTest {
     @Test
     fun userAgent() {
         var recordedRequest: RecordedRequest? = null
@@ -36,7 +36,7 @@ class SimpleHttpAdapterTest {
         })
         server.start()
         val userAgent = "user-agent"
-        val client = SimpleHttpAdapter()
+        val client = SimpleHttpClientAdapter()
         client.userAgent = userAgent
         client.head(server.url("favicon.ico").toString())
         server.shutdown()
@@ -55,7 +55,7 @@ class SimpleHttpAdapterTest {
         })
         server.start()
         val userAgent = "user-agent"
-        val client = SimpleHttpAdapter()
+        val client = SimpleHttpClientAdapter()
         client.headers = mapOf("User-Agent" to "hogehoge", "Cache-Control" to "no-cache")
         client.userAgent = userAgent
         client.head(server.url("favicon.ico").toString())
@@ -81,7 +81,7 @@ class SimpleHttpAdapterTest {
             }
         })
         server.start()
-        val client = SimpleHttpAdapter()
+        val client = SimpleHttpClientAdapter()
         client.head(server.url("favicon.ico").toString()).use {
             assertThat(it.isSuccess).isTrue()
             assertThat(it.header("Content-Type")).isEqualTo("image/png")
@@ -107,7 +107,7 @@ class SimpleHttpAdapterTest {
             }
         })
         server.start()
-        val client = SimpleHttpAdapter()
+        val client = SimpleHttpClientAdapter()
         client.get(server.url("favicon.ico").toString()).use {
             assertThat(it.isSuccess).isTrue()
             assertThat(it.header("Content-Type")).isEqualTo("image/png")
@@ -133,7 +133,7 @@ class SimpleHttpAdapterTest {
             }
         })
         server.start()
-        val client = SimpleHttpAdapter()
+        val client = SimpleHttpClientAdapter()
         client.get(server.url("favicon.ico").toString()).use {
             assertThat(it.bodyBytes(100)).hasLength(100)
         }
@@ -163,7 +163,7 @@ class SimpleHttpAdapterTest {
             }
         })
         server.start()
-        val client = SimpleHttpAdapter()
+        val client = SimpleHttpClientAdapter()
         client.get(server.url("favicon.ico").toString()).use {
             assertThat(it.bodyString(10)).isEqualTo("1234567890")
         }

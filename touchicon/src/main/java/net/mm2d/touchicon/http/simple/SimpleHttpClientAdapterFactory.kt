@@ -7,20 +7,20 @@
 
 package net.mm2d.touchicon.http.simple
 
-import net.mm2d.touchicon.HttpAdapter
+import net.mm2d.touchicon.HttpClientAdapter
 
 /**
- * Supply default HttpAdapter implementation.
+ * Supply default HttpClientAdapter implementation.
  *
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-object SimpleHttpAdapterFactory {
+object SimpleHttpClientAdapterFactory {
     /**
-     * Create HttpAdapter instance
+     * Create HttpClientAdapter instance
      *
      * @return instance
      */
-    fun create(): HttpAdapter {
-        return SimpleHttpAdapter()
+    fun create(): HttpClientAdapter {
+        return SimpleHttpClientAdapter()
     }
 }

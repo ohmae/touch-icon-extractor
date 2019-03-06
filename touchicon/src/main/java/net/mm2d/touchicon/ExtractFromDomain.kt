@@ -14,7 +14,7 @@ import androidx.annotation.VisibleForTesting
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 internal class ExtractFromDomain(
-    private val httpAdapter: HttpAdapter
+    private val httpClient: HttpClientAdapter
 ) {
     private fun makeBaseBuilder(siteUrl: String) = Uri.parse(siteUrl)
         .buildUpon()
@@ -64,14 +64,14 @@ internal class ExtractFromDomain(
 
     private fun tryHead(baseUri: Uri.Builder, tryData: TryData): DomainIcon? {
         val url = makeUrl(baseUri, tryData)
-        httpAdapter.head(url).use {
+        httpClient.head(url).use {
             return createDomainIcon(it, url, tryData)
         }
     }
 
     private fun tryGet(baseUri: Uri.Builder, tryData: TryData): Pair<DomainIcon, ByteArray>? {
         val url = makeUrl(baseUri, tryData)
-        httpAdapter.get(url).use {
+        httpClient.get(url).use {
             val icon = createDomainIcon(it, url, tryData) ?: return null
             val bytes = it.bodyBytes() ?: return null
             return icon to bytes

@@ -7,21 +7,21 @@
 
 package net.mm2d.touchicon.http.okhttp
 
-import net.mm2d.touchicon.HttpAdapter
+import net.mm2d.touchicon.HttpClientAdapter
 import okhttp3.OkHttpClient
 
 /**
- * Supply HttpAdapter powered by OkHttp
+ * Supply HttpClientAdapter using OkHttp
  *
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 object OkHttpAdapterFactory {
     /**
-     * Create HttpAdapter instance
+     * Create HttpClientAdapter instance
      *
      * @return instance
      */
-    fun create(client: OkHttpClient): HttpAdapter {
-        return OkHttpAdapter(client)
+    fun create(client: OkHttpClient): HttpClientAdapter {
+        return OkHttpClientAdapter(client)
     }
 }

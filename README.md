@@ -55,7 +55,7 @@ If you want to use OkHttp, use touchicon-http-okhttp module.
 
 ```kotlin
 val extractor = TouchIconExtractor(
-    httpAdapter = OkHttpAdapterFactory.create(OkHttpClient())
+    httpClient = OkHttpAdapterFactory.create(OkHttpClient())
 )
 ```
 
