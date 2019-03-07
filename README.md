@@ -27,9 +27,9 @@ repositories {
 Add dependencies, as following.
 ```gradle
 dependencies {
-    implementation 'net.mm2d:touchicon:0.3.0'
-    implementation 'net.mm2d:touchicon-http-okhttp:0.3.0' // If use OkHttp for HTTP access
-    implementation 'net.mm2d:touchicon-html-jsoup:0.3.0'  // If use Jsoup for HTML parse
+    implementation 'net.mm2d:touchicon:0.4.0'
+    implementation 'net.mm2d:touchicon-http-okhttp:0.4.0' // If use OkHttp for HTTP access
+    implementation 'net.mm2d:touchicon-html-jsoup:0.4.0'  // If use Jsoup for HTML parse
 }
 ```
 
