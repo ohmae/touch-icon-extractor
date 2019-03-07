@@ -2,7 +2,7 @@
 
 # inferSize
 
-`abstract fun inferSize(): `[`Point`](https://developer.android.com/reference/android/graphics/Point.html)
+`abstract fun inferSize(): `[`Size`](../-size/index.md)
 
 Infer display size of this icon.
 

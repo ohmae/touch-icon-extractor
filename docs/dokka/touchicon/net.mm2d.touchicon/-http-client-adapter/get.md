@@ -1,4 +1,4 @@
-[touchicon](../../index.md) / [net.mm2d.touchicon](../index.md) / [HttpAdapter](index.md) / [get](./get.md)
+[touchicon](../../index.md) / [net.mm2d.touchicon](../index.md) / [HttpClientAdapter](index.md) / [get](./get.md)
 
 # get
 

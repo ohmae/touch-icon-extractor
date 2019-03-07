@@ -2,9 +2,9 @@
 
 # create
 
-`fun create(client: OkHttpClient): HttpAdapter`
+`fun create(client: OkHttpClient): HttpClientAdapter`
 
-Create HttpAdapter instance
+Create HttpClientAdapter instance
 
 **Return**
 instance

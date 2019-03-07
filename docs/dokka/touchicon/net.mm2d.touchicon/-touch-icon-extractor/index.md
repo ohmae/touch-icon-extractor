@@ -13,7 +13,7 @@ Extract information of WebClip icon such as Apple Touch Icon or favicon related 
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `TouchIconExtractor(httpAdapter: `[`HttpAdapter`](../-http-adapter/index.md)` = SimpleHttpAdapterFactory.create(), htmlParser: `[`HtmlParser`](../-html-parser/index.md)` = SimpleHtmlParserFactory.create())`<br>Initialize the instance. You can change HttpAdapter and HtmlParser. |
+| [&lt;init&gt;](-init-.md) | `TouchIconExtractor(httpClient: `[`HttpClientAdapter`](../-http-client-adapter/index.md)` = SimpleHttpClientAdapterFactory.create(), htmlParser: `[`HtmlParserAdapter`](../-html-parser-adapter/index.md)` = SimpleHtmlParserAdapterFactory.create())`<br>Initialize the instance. You can change HttpClientAdapter and HtmlParserAdapter. |
 
 ### Properties
 

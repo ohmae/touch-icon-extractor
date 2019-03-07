@@ -1,8 +1,8 @@
-[touchicon](../../index.md) / [net.mm2d.touchicon](../index.md) / [HtmlParser](./index.md)
+[touchicon](../../index.md) / [net.mm2d.touchicon](../index.md) / [HtmlParserAdapter](./index.md)
 
-# HtmlParser
+# HtmlParserAdapter
 
-`interface HtmlParser`
+`interface HtmlParserAdapter`
 
 Html Parser Interface.
 

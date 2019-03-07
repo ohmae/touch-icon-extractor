@@ -4,7 +4,7 @@
 
 `object OkHttpAdapterFactory`
 
-Supply HttpAdapter powered by OkHttp
+Supply HttpClientAdapter using OkHttp
 
 **Author**
 [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
@@ -13,4 +13,4 @@ Supply HttpAdapter powered by OkHttp
 
 | Name | Summary |
 |---|---|
-| [create](create.md) | `fun create(client: OkHttpClient): HttpAdapter`<br>Create HttpAdapter instance |
+| [create](create.md) | `fun create(client: OkHttpClient): HttpClientAdapter`<br>Create HttpClientAdapter instance |

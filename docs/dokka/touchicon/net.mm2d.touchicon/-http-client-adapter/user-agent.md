@@ -1,4 +1,4 @@
-[touchicon](../../index.md) / [net.mm2d.touchicon](../index.md) / [HttpAdapter](index.md) / [userAgent](./user-agent.md)
+[touchicon](../../index.md) / [net.mm2d.touchicon](../index.md) / [HttpClientAdapter](index.md) / [userAgent](./user-agent.md)
 
 # userAgent
 

@@ -4,4 +4,4 @@
 
 | Name | Summary |
 |---|---|
-| [net.mm2d.touchicon.html.jsoup.JsoupHtmlParserFactory](../net.mm2d.touchicon.html.jsoup/-jsoup-html-parser-factory/index.md) | Supply HttpParser powered by Jsoup. |
+| [net.mm2d.touchicon.html.jsoup.JsoupAdapterFactory](../net.mm2d.touchicon.html.jsoup/-jsoup-adapter-factory/index.md) | Supply HttpParser using Jsoup |

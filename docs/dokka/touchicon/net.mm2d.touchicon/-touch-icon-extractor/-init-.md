@@ -2,18 +2,18 @@
 
 # &lt;init&gt;
 
-`TouchIconExtractor(httpAdapter: `[`HttpAdapter`](../-http-adapter/index.md)` = SimpleHttpAdapterFactory.create(), htmlParser: `[`HtmlParser`](../-html-parser/index.md)` = SimpleHtmlParserFactory.create())`
+`TouchIconExtractor(httpClient: `[`HttpClientAdapter`](../-http-client-adapter/index.md)` = SimpleHttpClientAdapterFactory.create(), htmlParser: `[`HtmlParserAdapter`](../-html-parser-adapter/index.md)` = SimpleHtmlParserAdapterFactory.create())`
 
 Initialize the instance.
-You can change HttpAdapter and HtmlParser.
+You can change HttpClientAdapter and HtmlParserAdapter.
 
 ### Parameters
 
-`httpAdapter` - HttpAdapter to use for internal communication. if not specified use default implementation.
+`httpClient` - HttpClientAdapter to use for internal communication. if not specified use default implementation.
 
-`htmlParser` - HtmlParser to use for HTML parse. if not specified use default implementation.
+`htmlParser` - HtmlParserAdapter to use for HTML parse. if not specified use default implementation.
 
 **Constructor**
 Initialize the instance.
-You can change HttpAdapter and HtmlParser.
+You can change HttpClientAdapter and HtmlParserAdapter.
 

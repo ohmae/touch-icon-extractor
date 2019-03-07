@@ -2,7 +2,7 @@
 
 # inferSize
 
-`fun inferSize(): `[`Point`](https://developer.android.com/reference/android/graphics/Point.html)
+`fun inferSize(): `[`Size`](../-size/index.md)
 
 Overrides [Icon.inferSize](../-icon/infer-size.md)
 

@@ -6,4 +6,4 @@
 
 | Name | Summary |
 |---|---|
-| [SimpleHttpAdapterFactory](-simple-http-adapter-factory/index.md) | `object SimpleHttpAdapterFactory`<br>Supply default HttpAdapter implementation. |
+| [SimpleHttpClientAdapterFactory](-simple-http-client-adapter-factory/index.md) | `object SimpleHttpClientAdapterFactory`<br>Supply default HttpClientAdapter implementation. |

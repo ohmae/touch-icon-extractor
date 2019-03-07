@@ -1,8 +1,8 @@
-[touchicon](../../index.md) / [net.mm2d.touchicon](../index.md) / [HttpAdapter](./index.md)
+[touchicon](../../index.md) / [net.mm2d.touchicon](../index.md) / [HttpClientAdapter](./index.md)
 
-# HttpAdapter
+# HttpClientAdapter
 
-`interface HttpAdapter`
+`interface HttpClientAdapter`
 
 Interface of HTTP Client
 

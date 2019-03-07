@@ -6,4 +6,4 @@
 
 | Name | Summary |
 |---|---|
-| [JsoupHtmlParserFactory](-jsoup-html-parser-factory/index.md) | `object JsoupHtmlParserFactory`<br>Supply HttpParser powered by Jsoup. |
+| [JsoupAdapterFactory](-jsoup-adapter-factory/index.md) | `object JsoupAdapterFactory`<br>Supply HttpParser using Jsoup |

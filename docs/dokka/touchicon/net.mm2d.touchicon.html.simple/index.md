@@ -6,4 +6,4 @@
 
 | Name | Summary |
 |---|---|
-| [SimpleHtmlParserFactory](-simple-html-parser-factory/index.md) | `object SimpleHtmlParserFactory`<br>Supply default HttpParser implementation. |
+| [SimpleHtmlParserAdapterFactory](-simple-html-parser-adapter-factory/index.md) | `object SimpleHtmlParserAdapterFactory`<br>Supply default HttpParser implementation. |

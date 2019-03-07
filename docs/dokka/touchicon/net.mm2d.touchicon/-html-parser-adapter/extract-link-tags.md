@@ -1,4 +1,4 @@
-[touchicon](../../index.md) / [net.mm2d.touchicon](../index.md) / [HtmlParser](index.md) / [extractLinkTags](./extract-link-tags.md)
+[touchicon](../../index.md) / [net.mm2d.touchicon](../index.md) / [HtmlParserAdapter](index.md) / [extractLinkTags](./extract-link-tags.md)
 
 # extractLinkTags
 

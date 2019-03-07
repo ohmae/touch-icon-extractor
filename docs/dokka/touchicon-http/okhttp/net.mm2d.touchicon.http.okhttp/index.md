@@ -6,4 +6,4 @@
 
 | Name | Summary |
 |---|---|
-| [OkHttpAdapterFactory](-ok-http-adapter-factory/index.md) | `object OkHttpAdapterFactory`<br>Supply HttpAdapter powered by OkHttp |
+| [OkHttpAdapterFactory](-ok-http-adapter-factory/index.md) | `object OkHttpAdapterFactory`<br>Supply HttpClientAdapter using OkHttp |
