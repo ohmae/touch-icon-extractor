@@ -4,6 +4,8 @@
 
 `Size(width: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, height: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`)`
 
+Icon size.
+
 **Author**
 [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
 

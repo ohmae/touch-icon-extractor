@@ -15,5 +15,5 @@
 | [IconComparator](-icon-comparator/index.md) | `object IconComparator`<br>Comparator for sorting based on quality. |
 | [PageIcon](-page-icon/index.md) | `data class PageIcon : `[`Icon`](-icon/index.md)`, `[`Parcelable`](https://developer.android.com/reference/android/os/Parcelable.html)<br>Icon information associated with the Web page. |
 | [Relationship](-relationship/index.md) | `enum class Relationship`<br>enum of relationship between icon and page. |
-| [Size](-size/index.md) | `data class Size` |
+| [Size](-size/index.md) | `data class Size`<br>Icon size. |
 | [TouchIconExtractor](-touch-icon-extractor/index.md) | `class TouchIconExtractor`<br>Extract information of WebClip icon such as Apple Touch Icon or favicon related to the URL. |

@@ -6,4 +6,5 @@
 
 | Name | Summary |
 |---|---|
+| [CookieHandler](-cookie-handler/index.md) | `interface CookieHandler`<br>Cookie Handler for SimpleHttpClientAdapter. |
 | [SimpleHttpClientAdapterFactory](-simple-http-client-adapter-factory/index.md) | `object SimpleHttpClientAdapterFactory`<br>Supply default HttpClientAdapter implementation. |

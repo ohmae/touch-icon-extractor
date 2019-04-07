@@ -2,7 +2,7 @@
 
 # create
 
-`fun create(): `[`HttpClientAdapter`](../../net.mm2d.touchicon/-http-client-adapter/index.md)
+`fun create(cookieHandler: `[`CookieHandler`](../-cookie-handler/index.md)`? = null): `[`HttpClientAdapter`](../../net.mm2d.touchicon/-http-client-adapter/index.md)
 
 Create HttpClientAdapter instance
 
