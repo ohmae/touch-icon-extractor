@@ -62,12 +62,15 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun setUpWebView() {
-        web_view.settings.javaScriptEnabled = true
-        web_view.settings.setSupportZoom(true)
-        web_view.settings.builtInZoomControls = true
-        web_view.settings.displayZoomControls = false
-        web_view.settings.useWideViewPort = true
-        web_view.settings.loadWithOverviewMode = true
+        web_view.settings.also {
+            it.javaScriptEnabled = true
+            it.setSupportZoom(true)
+            it.builtInZoomControls = true
+            it.displayZoomControls = false
+            it.useWideViewPort = true
+            it.loadWithOverviewMode = true
+            it.domStorageEnabled = true
+        }
         web_view.webChromeClient = object : WebChromeClient() {
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 progress_bar.progress = newProgress
