@@ -29,10 +29,10 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.0.2'
 
     testImplementation 'junit:junit:4.12'
-    testImplementation "com.google.truth:truth:0.43"
-    testImplementation "io.mockk:mockk:1.9.1"
+    testImplementation "com.google.truth:truth:0.44"
+    testImplementation "io.mockk:mockk:1.9.3"
     testImplementation 'org.robolectric:robolectric:3.8'
-    testImplementation 'com.squareup.okhttp3:mockwebserver:3.11.0'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:3.14.0'
 }
 
 dokka {

@@ -31,8 +31,8 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.11.3'
 
     testImplementation 'junit:junit:4.12'
-    testImplementation "com.google.truth:truth:0.43"
-    testImplementation "io.mockk:mockk:1.9.1"
+    testImplementation "com.google.truth:truth:0.44"
+    testImplementation "io.mockk:mockk:1.9.3"
     testImplementation 'org.robolectric:robolectric:3.8'
 }
 
