@@ -11,7 +11,6 @@ import net.mm2d.touchicon.HttpResponse
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.net.HttpURLConnection
-import kotlin.math.min
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
@@ -48,29 +47,21 @@ internal class SimpleHttpResponse(
     }
 
     private fun fetchBytes(stream: InputStream, limit: Int): ByteArray {
-        val result = ByteArrayOutputStream()
-        val buffer = ByteArray(BUFFER_SIZE)
         if (limit <= 0) {
-            while (true) {
-                val size = stream.read(buffer)
-                if (size < 0) break
-                result.write(buffer, 0, size)
-            }
-        } else {
-            var remain = limit
-            while (true) {
-                val requestSize = min(buffer.size, remain)
-                val size = stream.read(buffer, 0, requestSize)
-                if (size < 0) break
-                result.write(buffer, 0, size)
-                remain -= size
-                if (remain <= 0) break
-            }
+            return stream.readBytes()
+        }
+        val outputSize = maxOf(DEFAULT_BUFFER_SIZE, stream.available())
+        val result = ByteArrayOutputStream(minOf(outputSize, limit))
+        val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+        var remain = limit
+        while (true) {
+            val requestSize = minOf(buffer.size, remain)
+            val size = stream.read(buffer, 0, requestSize)
+            if (size < 0) break
+            result.write(buffer, 0, size)
+            remain -= size
+            if (remain <= 0) break
         }
         return result.toByteArray()
-    }
-
-    companion object {
-        private const val BUFFER_SIZE = 1024
     }
 }
