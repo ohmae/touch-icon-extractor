@@ -20,7 +20,7 @@ object SimpleHttpClientAdapterFactory {
      *
      * @return instance
      */
-    fun create(): HttpClientAdapter {
-        return SimpleHttpClientAdapter()
+    fun create(cookieHandler: CookieHandler? = null): HttpClientAdapter {
+        return SimpleHttpClientAdapter(cookieHandler)
     }
 }

@@ -137,7 +137,11 @@ class IconDialog : DialogFragment() {
             type.text = iconInfo.mimeType
             url.text = iconInfo.url
             val size = iconInfo.inferSize()
-            val inferSize = if (size.width > 0 && size.height > 0) "(${size.width}x${size.height})" else "(uncertain)"
+            val inferSize = if (size.width > 0 && size.height > 0) {
+                "(${size.width}x${size.height})"
+            } else {
+                "(uncertain)"
+            }
             imageSizes.text = inferSize
             GlideApp.with(itemView)
                 .load(iconInfo.url)

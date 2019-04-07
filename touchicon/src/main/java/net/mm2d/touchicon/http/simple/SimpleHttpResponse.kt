@@ -21,7 +21,7 @@ internal class SimpleHttpResponse(
     override val isSuccess: Boolean = connection.responseCode in 200 until 300
     private val inputStream: InputStream? = try {
         connection.inputStream
-    } catch (e: java.lang.Exception) {
+    } catch (e: Exception) {
         null
     }
 
