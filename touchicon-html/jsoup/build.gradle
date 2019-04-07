@@ -22,6 +22,9 @@ android {
         versionCode pj.versions.code
         versionName pj.versions.name
     }
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
 }
 
 dependencies {
@@ -33,7 +36,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation "com.google.truth:truth:0.44"
     testImplementation "io.mockk:mockk:1.9.3"
-    testImplementation 'org.robolectric:robolectric:3.8'
+    testImplementation 'org.robolectric:robolectric:4.2.1'
 }
 
 dokka {
