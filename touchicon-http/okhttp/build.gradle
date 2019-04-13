@@ -17,7 +17,7 @@ android {
     buildToolsVersion '28.0.3'
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode pj.versions.code
         versionName pj.versions.name
