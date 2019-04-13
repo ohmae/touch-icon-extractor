@@ -18,6 +18,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -64,7 +65,7 @@ class IconDialog : DialogFragment() {
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(act)
         recyclerView.addItemDecoration(DividerItemDecoration(act, DividerItemDecoration.VERTICAL))
-        val adapter = IconListAdapter(act)
+        val adapter = IconListAdapter(act, view.findViewById(R.id.transparent_switch))
         recyclerView.adapter = adapter
         Single.fromCallable { extractor.fromPage(siteUrl, true) }
             .subscribeOn(Schedulers.io())
@@ -89,14 +90,30 @@ class IconDialog : DialogFragment() {
         compositeDisposable.dispose()
     }
 
-    private inner class IconListAdapter(context: Context) : RecyclerView.Adapter<IconViewHolder>() {
+    private inner class IconListAdapter(
+        context: Context,
+        private val transparentSwitch: CompoundButton
+    ) : RecyclerView.Adapter<IconViewHolder>() {
         private val list: MutableList<Icon> = mutableListOf()
         private val inflater = LayoutInflater.from(context)
+
+        init {
+            transparentSwitch.setOnCheckedChangeListener { _, _ ->
+                notifyDataSetChanged()
+            }
+        }
+
         override fun onCreateViewHolder(parent: ViewGroup, type: Int): IconViewHolder {
             return when (type) {
                 0 -> PageIconViewHolder(inflater.inflate(R.layout.li_page_icon, parent, false))
                 1 -> WebAppIconViewHolder(inflater.inflate(R.layout.li_web_app_icon, parent, false))
-                else -> DomainIconViewHolder(inflater.inflate(R.layout.li_domain_icon, parent, false))
+                else -> DomainIconViewHolder(
+                    inflater.inflate(
+                        R.layout.li_domain_icon,
+                        parent,
+                        false
+                    )
+                )
             }
         }
 
@@ -116,12 +133,12 @@ class IconDialog : DialogFragment() {
 
         @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: IconViewHolder, position: Int) {
-            holder.apply(list[position])
+            holder.apply(list[position], transparentSwitch.isChecked)
         }
     }
 
     private abstract class IconViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        abstract fun apply(iconInfo: Icon)
+        abstract fun apply(icon: Icon, transparent: Boolean)
     }
 
     @SuppressLint("SetTextI18n")
@@ -132,7 +149,8 @@ class IconDialog : DialogFragment() {
         val rel: TextView = view.findViewById(R.id.rel)
         val type: TextView = view.findViewById(R.id.type)
         val url: TextView = view.findViewById(R.id.url)
-        override fun apply(icon: Icon) {
+        override fun apply(icon: Icon, transparent: Boolean) {
+            iconImage.setBackgroundResource(selectBackground(transparent))
             itemView.tag = icon
             sizes.text = icon.sizes
             rel.text = icon.rel.value
@@ -161,7 +179,8 @@ class IconDialog : DialogFragment() {
         val type: TextView = view.findViewById(R.id.type)
         val density: TextView = view.findViewById(R.id.density)
         val url: TextView = view.findViewById(R.id.url)
-        override fun apply(icon: Icon) {
+        override fun apply(icon: Icon, transparent: Boolean) {
+            iconImage.setBackgroundResource(selectBackground(transparent))
             itemView.tag = icon
             sizes.text = icon.sizes
             type.text = icon.mimeType
@@ -183,6 +202,7 @@ class IconDialog : DialogFragment() {
                 .into(iconImage)
         }
     }
+
     @SuppressLint("SetTextI18n")
     private class DomainIconViewHolder(view: View) : IconViewHolder(view) {
         val iconImage: ImageView = view.findViewById(R.id.icon)
@@ -191,7 +211,8 @@ class IconDialog : DialogFragment() {
         val length: TextView = view.findViewById(R.id.length)
         val type: TextView = view.findViewById(R.id.type)
         val url: TextView = view.findViewById(R.id.url)
-        override fun apply(icon: Icon) {
+        override fun apply(icon: Icon, transparent: Boolean) {
+            iconImage.setBackgroundResource(selectBackground(transparent))
             itemView.tag = icon
             sizes.text = icon.sizes
             length.text = icon.length.toString()
@@ -248,6 +269,10 @@ class IconDialog : DialogFragment() {
                     return false
                 }
             }
+        }
+
+        private fun selectBackground(transparent: Boolean): Int {
+            return if (transparent) R.drawable.bg_icon else 0
         }
     }
 }
