@@ -22,42 +22,11 @@ internal class ExtractFromPage(
     internal fun invoke(siteUrl: String, withManifest: Boolean): List<Icon> {
         val html = try {
             fetch(siteUrl)
-        } catch (e: Exception) {
+        } catch (ignored: Exception) {
             ""
         }
         if (html.isEmpty()) return emptyList()
         return extractFromHtml(siteUrl, html, withManifest)
-    }
-
-    @VisibleForTesting
-    internal fun extractFromHtml(
-        siteUrl: String,
-        html: String,
-        withManifest: Boolean
-    ): List<Icon> {
-        val linkTags = htmlParser.extractLinkTags(html)
-        if (withManifest) {
-            return linkTags.flatMap { tag ->
-                if (tag.attr("rel").equals("manifest", true)) {
-                    extractFromManifest(siteUrl, tag.attr("href"))
-                } else {
-                    createPageIcon(siteUrl, tag)?.let { listOf(it) } ?: emptyList()
-                }
-            }
-        }
-        return linkTags.mapNotNull { createPageIcon(siteUrl, it) }
-    }
-
-    private fun createPageIcon(siteUrl: String, linkTag: HtmlTag): PageIcon? {
-        val rel = Relationship.of(linkTag.attr("rel")) ?: return null
-        val href = linkTag.attr("href")
-        if (href.isEmpty()) {
-            return null
-        }
-        val url = makeAbsoluteUrl(siteUrl, href)
-        val sizes = linkTag.attr("sizes")
-        val mimeType = linkTag.attr("type")
-        return PageIcon(rel, url, sizes, mimeType)
     }
 
     private fun fetch(url: String): String {
@@ -74,11 +43,46 @@ internal class ExtractFromPage(
                 type.contains("application/xhtml+xml", true)
     }
 
-    private fun extractFromManifest(siteUrl: String, href: String): List<Icon> {
-        if (href.isEmpty()) return emptyList()
+    @VisibleForTesting
+    internal fun extractFromHtml(
+        siteUrl: String,
+        html: String,
+        withManifest: Boolean
+    ): List<Icon> {
+        if (!withManifest) {
+            return htmlParser.extractLinkTags(html)
+                .mapNotNull { createPageIcon(siteUrl, it) }
+        }
+        return htmlParser.extractLinkTags(html)
+            .flatMap { tag ->
+                if (Relationship.of(tag.attr("rel")) == Relationship.MANIFEST) {
+                    extractFromManifest(siteUrl, tag.attr("href"))
+                } else {
+                    createPageIcon(siteUrl, tag)?.let { listOf(it) }
+                } ?: emptyList()
+            }
+    }
+
+    private fun createPageIcon(siteUrl: String, linkTag: HtmlTag): PageIcon? {
+        val rel = Relationship.of(linkTag.attr("rel")) ?: return null
+        if (!rel.isIcon) return null
+        val href = linkTag.attr("href")
+        if (href.isEmpty()) return null
         val url = makeAbsoluteUrl(siteUrl, href)
-        httpClient.get(url).use {
-            return it.bodyString()?.extractFromManifestJson(url) ?: emptyList()
+        val sizes = linkTag.attr("sizes")
+        val mimeType = linkTag.attr("type")
+        return PageIcon(rel, url, sizes, mimeType)
+    }
+
+    private fun extractFromManifest(siteUrl: String, href: String): List<Icon>? {
+        if (href.isEmpty()) return null
+        val url = makeAbsoluteUrl(siteUrl, href)
+        return try {
+            httpClient.get(url).use {
+                it.bodyString()?.extractFromManifestJson(url)
+            }
+        } catch (ignored: Exception) {
+            null
         }
     }
 

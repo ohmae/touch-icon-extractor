@@ -22,7 +22,11 @@ enum class Relationship(
     /**
      * Priority to expect quality.
      */
-    val priority: Int
+    val priority: Int,
+    /**
+     * Icon tag.
+     */
+    internal val isIcon: Boolean
 ) {
     /**
      * This expresses that the rel value of the link tag is "apple-touch-icon-precomposed".
@@ -33,7 +37,7 @@ enum class Relationship(
      * <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png" sizes="80x80">
      * ```
      */
-    APPLE_TOUCH_ICON_PRECOMPOSED("apple-touch-icon-precomposed", 3),
+    APPLE_TOUCH_ICON_PRECOMPOSED("apple-touch-icon-precomposed", 3, true),
     /**
      * This expresses that the rel value of the link tag is "apple-touch-icon".
      *
@@ -43,7 +47,7 @@ enum class Relationship(
      * <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="57x57">
      * ```
      */
-    APPLE_TOUCH_ICON("apple-touch-icon", 2),
+    APPLE_TOUCH_ICON("apple-touch-icon", 2, true),
     /**
      * This expresses that the rel value of the link tag is "icon".
      *
@@ -53,7 +57,7 @@ enum class Relationship(
      * <link rel="icon" href="/favicon.ico" type="image/x-icon">
      * ```
      */
-    ICON("icon", 1),
+    ICON("icon", 1, true),
     /**
      * This expresses that the rel value of the link tag is "shortcut icon".
      *
@@ -66,8 +70,7 @@ enum class Relationship(
      * <link rel="shortcut icon" href="/favicon.ico">
      * ```
      */
-    SHORTCUT_ICON("shortcut icon", 0),
-
+    SHORTCUT_ICON("shortcut icon", 0, true),
     /**
      * Used to represent the icon described in Web App Manifest.
      *
@@ -91,12 +94,11 @@ enum class Relationship(
      * }
      * ```
      */
-    MANIFEST("manifest", 4),
+    MANIFEST("manifest", 4, false),
     ;
 
     companion object {
         private val VALUE_MAP = values()
-            .filter { it != MANIFEST }
             .map { it.value to it }
             .toMap()
 
