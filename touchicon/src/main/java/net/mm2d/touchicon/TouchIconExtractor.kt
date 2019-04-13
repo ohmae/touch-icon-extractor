@@ -71,6 +71,8 @@ class TouchIconExtractor(
      *
      * @param siteUrl
      * URL of analysis target page
+     * @param withManifest
+     * true: extract Web App Manifest icon too, if it exists. false: only from link tag
      */
     @WorkerThread
     fun fromPage(siteUrl: String, withManifest: Boolean = false): List<Icon> {
