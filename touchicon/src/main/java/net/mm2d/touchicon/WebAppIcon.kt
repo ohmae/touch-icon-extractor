@@ -17,6 +17,12 @@ data class WebAppIcon(
     override val url: String,
     override val sizes: String,
     override val mimeType: String,
+    /**
+     * pixel densities.
+     *
+     * this is an optional member.
+     * eg. "3.0"
+     */
     val density: String
 ) : Icon, Parcelable {
     override val rel: Relationship = Relationship.MANIFEST
