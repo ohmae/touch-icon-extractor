@@ -33,3 +33,4 @@ Icon information interface.
 |---|---|
 | [DomainIcon](../-domain-icon/index.md) | `data class DomainIcon : `[`Icon`](./index.md)`, `[`Parcelable`](https://developer.android.com/reference/android/os/Parcelable.html)<br>Icon information associated with the Web site domain. |
 | [PageIcon](../-page-icon/index.md) | `data class PageIcon : `[`Icon`](./index.md)`, `[`Parcelable`](https://developer.android.com/reference/android/os/Parcelable.html)<br>Icon information associated with the Web page. |
+| [WebAppIcon](../-web-app-icon/index.md) | `data class WebAppIcon : `[`Icon`](./index.md)`, `[`Parcelable`](https://developer.android.com/reference/android/os/Parcelable.html) |

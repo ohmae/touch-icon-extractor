@@ -2,7 +2,7 @@
 
 # fromPage
 
-`@WorkerThread fun fromPage(siteUrl: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`PageIcon`](../-page-icon/index.md)`>`
+`@WorkerThread fun fromPage(siteUrl: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, withManifest: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = false): `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`Icon`](../-icon/index.md)`>`
 
 Analyzes the HTML of the designated URL and extract the icon information specified by the link tag.
 
@@ -14,3 +14,5 @@ and analyze the `<link>` tag within that range.
 ### Parameters
 
 `siteUrl` - URL of analysis target page
+
+`withManifest` - true: extract Web App Manifest icon too, if it exists. false: only from link tag

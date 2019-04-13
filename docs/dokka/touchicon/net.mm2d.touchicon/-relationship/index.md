@@ -19,6 +19,7 @@ Express the value of rel of the link tag.
 | [APPLE_TOUCH_ICON](-a-p-p-l-e_-t-o-u-c-h_-i-c-o-n.md) | This expresses that the rel value of the link tag is "apple-touch-icon". |
 | [ICON](-i-c-o-n.md) | This expresses that the rel value of the link tag is "icon". |
 | [SHORTCUT_ICON](-s-h-o-r-t-c-u-t_-i-c-o-n.md) | This expresses that the rel value of the link tag is "shortcut icon". |
+| [MANIFEST](-m-a-n-i-f-e-s-t.md) | Used to represent the icon described in Web App Manifest. |
 
 ### Properties
 
