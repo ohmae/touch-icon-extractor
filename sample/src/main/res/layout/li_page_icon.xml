@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/bg_root"
-    tools:ignore="Overdraw,HardcodedText"
+    tools:ignore="HardcodedText"
     >
 
     <ImageView
@@ -15,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/bg_icon"
         android:contentDescription="icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -37,9 +37,9 @@
         android:id="@+id/image_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="0dp"
-        android:layout_marginEnd="8dp"
         android:textColor="@color/text_strong"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,9 +66,9 @@
         android:id="@+id/sizes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="0dp"
-        android:layout_marginEnd="8dp"
         android:textColor="@color/text"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,12 +79,12 @@
         />
 
     <TextView
-        android:id="@+id/title_length"
+        android:id="@+id/title_rel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="0dp"
-        android:text="length:"
+        android:text="rel:"
         android:textColor="@color/text_weak"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,12 +92,12 @@
         />
 
     <TextView
-        android:id="@+id/length"
+        android:id="@+id/rel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="0dp"
-        android:layout_marginEnd="8dp"
         android:textColor="@color/text"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -118,22 +118,22 @@
         android:textColor="@color/text_weak"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_length"
+        app:layout_constraintTop_toBottomOf="@+id/title_rel"
         />
 
     <TextView
         android:id="@+id/type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="0dp"
-        android:layout_marginEnd="8dp"
         android:textColor="@color/text"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/title_image_size"
-        app:layout_constraintTop_toBottomOf="@+id/length"
+        app:layout_constraintTop_toBottomOf="@+id/rel"
         tools:text="image/png"
         />
 
@@ -154,9 +154,9 @@
         android:id="@+id/url"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="0dp"
-        android:layout_marginEnd="8dp"
         android:paddingBottom="8dp"
         android:textColor="@color/text"
         android:textSize="12sp"

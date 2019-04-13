@@ -23,13 +23,14 @@ class ExtractFromPageTest {
     @Test
     fun extract_icon() {
         val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
-        val result = extract.invoke(
+        val result = extract.extractFromHtml(
             "https://www.example.com/",
             """
             <html><head>
             <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
             </head></html>
-            """.trimIndent()
+            """.trimIndent(),
+            false
         )[0]
         assertThat(result.rel).isEqualTo(Relationship.ICON)
         assertThat(result.url).isEqualTo("https://www.example.com/favicon.ico")
@@ -40,13 +41,14 @@ class ExtractFromPageTest {
     @Test
     fun extract_shortcut_icon() {
         val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
-        val result = extract.invoke(
+        val result = extract.extractFromHtml(
             "https://www.example.com/",
             """
             <html><head>
             <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
             </head></html>
-            """.trimIndent()
+            """.trimIndent(),
+            false
         )[0]
         assertThat(result.rel).isEqualTo(Relationship.SHORTCUT_ICON)
         assertThat(result.url).isEqualTo("https://www.example.com/favicon.ico")
@@ -57,13 +59,14 @@ class ExtractFromPageTest {
     @Test
     fun extract_apple_touch_icon() {
         val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
-        val result = extract.invoke(
+        val result = extract.extractFromHtml(
             "https://www.example.com/",
             """
             <html><head>
             <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
             </head></html>
-            """.trimIndent()
+            """.trimIndent(),
+            false
         )[0]
         assertThat(result.rel).isEqualTo(Relationship.APPLE_TOUCH_ICON)
         assertThat(result.url).isEqualTo("https://www.example.com/apple-touch-icon-57x57.png")
@@ -74,13 +77,14 @@ class ExtractFromPageTest {
     @Test
     fun extract_apple_touch_icon_precomposed() {
         val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
-        val result = extract.invoke(
+        val result = extract.extractFromHtml(
             "https://www.example.com/",
             """
             <html><head>
             <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/apple-touch-icon-57x57.png">
             </head></html>
-            """.trimIndent()
+            """.trimIndent(),
+            false
         )[0]
         assertThat(result.rel).isEqualTo(Relationship.APPLE_TOUCH_ICON_PRECOMPOSED)
         assertThat(result.url).isEqualTo("https://www.example.com/apple-touch-icon-57x57.png")
@@ -91,13 +95,14 @@ class ExtractFromPageTest {
     @Test
     fun extract_omitted_scheme() {
         val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
-        val result = extract.invoke(
+        val result = extract.extractFromHtml(
             "https://www.example.com/",
             """
             <html><head>
             <link rel="apple-touch-icon" sizes="57x57" href="//www.example.com/apple-touch-icon-57x57.png">
             </head></html>
-            """.trimIndent()
+            """.trimIndent(),
+            false
         )[0]
         assertThat(result.rel).isEqualTo(Relationship.APPLE_TOUCH_ICON)
         assertThat(result.url).isEqualTo("https://www.example.com/apple-touch-icon-57x57.png")
@@ -108,13 +113,14 @@ class ExtractFromPageTest {
     @Test
     fun extract_broken() {
         val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
-        val result = extract.invoke(
+        val result = extract.extractFromHtml(
             "https://www.example.com/",
             """
             <html><head>
             <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
             </hea
-            """.trimIndent()
+            """.trimIndent(),
+            false
         )[0]
         assertThat(result.rel).isEqualTo(Relationship.APPLE_TOUCH_ICON)
         assertThat(result.url).isEqualTo("https://www.example.com/apple-touch-icon-57x57.png")

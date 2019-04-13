@@ -73,8 +73,8 @@ class TouchIconExtractor(
      * URL of analysis target page
      */
     @WorkerThread
-    fun fromPage(siteUrl: String): List<PageIcon> {
-        return fromPage.invoke(siteUrl)
+    fun fromPage(siteUrl: String, withManifest: Boolean = false): List<Icon> {
+        return fromPage.invoke(siteUrl, withManifest)
     }
 
     /**
@@ -128,7 +128,7 @@ class TouchIconExtractor(
         siteUrl: String,
         withPrecomposed: Boolean = true,
         sizes: List<String> = emptyList()
-    ): DomainIcon? {
+    ): Icon? {
         return fromDomain.invoke(siteUrl, withPrecomposed, sizes)
     }
 
@@ -159,7 +159,7 @@ class TouchIconExtractor(
         siteUrl: String,
         withPrecomposed: Boolean = true,
         sizes: List<String> = emptyList()
-    ): Pair<DomainIcon, ByteArray>? {
+    ): Pair<Icon, ByteArray>? {
         return fromDomain.invokeWithDownload(siteUrl, withPrecomposed, sizes)
     }
 
@@ -187,7 +187,7 @@ class TouchIconExtractor(
         siteUrl: String,
         withPrecomposed: Boolean = true,
         sizes: List<String> = emptyList()
-    ): List<DomainIcon> {
+    ): List<Icon> {
         return fromDomain.list(siteUrl, withPrecomposed, sizes)
     }
 }

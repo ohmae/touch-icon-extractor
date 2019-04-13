@@ -67,11 +67,44 @@ enum class Relationship(
      * ```
      */
     SHORTCUT_ICON("shortcut icon", 0),
+
+    /**
+     * Used to represent the icon described in Web App Manifest.
+     *
+     * This is used only in [WebAppIcon].
+     *
+     * This corresponds to the following description of html/json.
+     *
+     * ```html
+     * <link rel="manifest" href="manifest.json">
+     * ```
+     *
+     * ```json
+     * {
+     *   "icons": [
+     *     {
+     *       "src": "icon.png",
+     *       "type": "image/png",
+     *       "sizes": "48x48"
+     *     }
+     *   ]
+     * }
+     * ```
+     */
+    MANIFEST("manifest", 4),
     ;
 
     companion object {
+        private val VALUE_MAP = values()
+            .filter { it != MANIFEST }
+            .map { it.value to it }
+            .toMap()
+
         internal fun of(value: String?): Relationship? {
-            return values().find { it.value.equals(value, true) }
+            if (value.isNullOrEmpty()) {
+                return null
+            }
+            return VALUE_MAP[value.toLowerCase()]
         }
     }
 }

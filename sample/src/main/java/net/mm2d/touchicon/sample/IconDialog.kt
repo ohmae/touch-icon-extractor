@@ -38,6 +38,7 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import net.mm2d.touchicon.Icon
 import net.mm2d.touchicon.PageIcon
+import net.mm2d.touchicon.WebAppIcon
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
@@ -65,7 +66,7 @@ class IconDialog : DialogFragment() {
         recyclerView.addItemDecoration(DividerItemDecoration(act, DividerItemDecoration.VERTICAL))
         val adapter = IconListAdapter(act)
         recyclerView.adapter = adapter
-        Single.fromCallable { extractor.fromPage(siteUrl) }
+        Single.fromCallable { extractor.fromPage(siteUrl, true) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doFinally { progressBar.visibility = View.GONE }
@@ -92,10 +93,10 @@ class IconDialog : DialogFragment() {
         private val list: MutableList<Icon> = mutableListOf()
         private val inflater = LayoutInflater.from(context)
         override fun onCreateViewHolder(parent: ViewGroup, type: Int): IconViewHolder {
-            return if (type == 0) {
-                LinkIconViewHolder(inflater.inflate(R.layout.li_link_icon, parent, false))
-            } else {
-                RootIconViewHolder(inflater.inflate(R.layout.li_root_icon, parent, false))
+            return when (type) {
+                0 -> PageIconViewHolder(inflater.inflate(R.layout.li_page_icon, parent, false))
+                1 -> WebAppIconViewHolder(inflater.inflate(R.layout.li_web_app_icon, parent, false))
+                else -> DomainIconViewHolder(inflater.inflate(R.layout.li_domain_icon, parent, false))
             }
         }
 
@@ -107,7 +108,8 @@ class IconDialog : DialogFragment() {
 
         override fun getItemViewType(position: Int): Int = when (list[position]) {
             is PageIcon -> 0
-            else -> 1
+            is WebAppIcon -> 1
+            else -> 2
         }
 
         override fun getItemCount(): Int = list.size
@@ -123,20 +125,20 @@ class IconDialog : DialogFragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    private class LinkIconViewHolder(view: View) : IconViewHolder(view) {
-        val icon: ImageView = view.findViewById(R.id.icon)
+    private class PageIconViewHolder(view: View) : IconViewHolder(view) {
+        val iconImage: ImageView = view.findViewById(R.id.icon)
         val imageSizes: TextView = view.findViewById(R.id.image_size)
         val sizes: TextView = view.findViewById(R.id.sizes)
         val rel: TextView = view.findViewById(R.id.rel)
         val type: TextView = view.findViewById(R.id.type)
         val url: TextView = view.findViewById(R.id.url)
-        override fun apply(iconInfo: Icon) {
-            itemView.tag = iconInfo
-            sizes.text = iconInfo.sizes
-            rel.text = iconInfo.rel.value
-            type.text = iconInfo.mimeType
-            url.text = iconInfo.url
-            val size = iconInfo.inferSize()
+        override fun apply(icon: Icon) {
+            itemView.tag = icon
+            sizes.text = icon.sizes
+            rel.text = icon.rel.value
+            type.text = icon.mimeType
+            url.text = icon.url
+            val size = icon.inferSize()
             val inferSize = if (size.width > 0 && size.height > 0) {
                 "(${size.width}x${size.height})"
             } else {
@@ -144,34 +146,62 @@ class IconDialog : DialogFragment() {
             }
             imageSizes.text = inferSize
             GlideApp.with(itemView)
-                .load(iconInfo.url)
+                .load(icon.url)
                 .override(Target.SIZE_ORIGINAL)
-                .addListener(bitmapHook {
-                    imageSizes.text = "${it.width}x${it.height} $inferSize"
-                })
-                .into(icon)
+                .addListener(bitmapHook { imageSizes.text = "${it.width}x${it.height} $inferSize" })
+                .into(iconImage)
         }
     }
 
     @SuppressLint("SetTextI18n")
-    private class RootIconViewHolder(view: View) : IconViewHolder(view) {
-        val icon: ImageView = view.findViewById(R.id.icon)
+    private class WebAppIconViewHolder(view: View) : IconViewHolder(view) {
+        val iconImage: ImageView = view.findViewById(R.id.icon)
+        val imageSizes: TextView = view.findViewById(R.id.image_size)
+        val sizes: TextView = view.findViewById(R.id.sizes)
+        val type: TextView = view.findViewById(R.id.type)
+        val density: TextView = view.findViewById(R.id.density)
+        val url: TextView = view.findViewById(R.id.url)
+        override fun apply(icon: Icon) {
+            itemView.tag = icon
+            sizes.text = icon.sizes
+            type.text = icon.mimeType
+            url.text = icon.url
+            if (icon is WebAppIcon) {
+                density.text = icon.density
+            }
+            val size = icon.inferSize()
+            val inferSize = if (size.width > 0 && size.height > 0) {
+                "(${size.width}x${size.height})"
+            } else {
+                "(uncertain)"
+            }
+            imageSizes.text = inferSize
+            GlideApp.with(itemView)
+                .load(icon.url)
+                .override(Target.SIZE_ORIGINAL)
+                .addListener(bitmapHook { imageSizes.text = "${it.width}x${it.height} $inferSize" })
+                .into(iconImage)
+        }
+    }
+    @SuppressLint("SetTextI18n")
+    private class DomainIconViewHolder(view: View) : IconViewHolder(view) {
+        val iconImage: ImageView = view.findViewById(R.id.icon)
         val imageSizes: TextView = view.findViewById(R.id.image_size)
         val sizes: TextView = view.findViewById(R.id.sizes)
         val length: TextView = view.findViewById(R.id.length)
         val type: TextView = view.findViewById(R.id.type)
         val url: TextView = view.findViewById(R.id.url)
-        override fun apply(iconInfo: Icon) {
-            itemView.tag = iconInfo
-            sizes.text = iconInfo.sizes
-            length.text = iconInfo.length.toString()
-            type.text = iconInfo.mimeType
-            url.text = iconInfo.url
+        override fun apply(icon: Icon) {
+            itemView.tag = icon
+            sizes.text = icon.sizes
+            length.text = icon.length.toString()
+            type.text = icon.mimeType
+            url.text = icon.url
             GlideApp.with(itemView)
-                .load(iconInfo.url)
+                .load(icon.url)
                 .override(Target.SIZE_ORIGINAL)
                 .addListener(bitmapHook { imageSizes.text = "${it.width}x${it.height}" })
-                .into(icon)
+                .into(iconImage)
         }
     }
 
