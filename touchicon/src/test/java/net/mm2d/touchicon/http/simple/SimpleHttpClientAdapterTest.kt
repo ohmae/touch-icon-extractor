@@ -28,12 +28,12 @@ class SimpleHttpClientAdapterTest {
     fun userAgent() {
         var recordedRequest: RecordedRequest? = null
         val server = MockWebServer()
-        server.setDispatcher(object : Dispatcher() {
+        server.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest?): MockResponse {
                 recordedRequest = request
                 return MockResponse().setResponseCode(200)
             }
-        })
+        }
         server.start()
         val userAgent = "user-agent"
         val client = SimpleHttpClientAdapter()
@@ -47,12 +47,12 @@ class SimpleHttpClientAdapterTest {
     fun headers() {
         var recordedRequest: RecordedRequest? = null
         val server = MockWebServer()
-        server.setDispatcher(object : Dispatcher() {
+        server.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest?): MockResponse {
                 recordedRequest = request
                 return MockResponse().setResponseCode(200)
             }
-        })
+        }
         server.start()
         val userAgent = "user-agent"
         val client = SimpleHttpClientAdapter()
@@ -67,7 +67,7 @@ class SimpleHttpClientAdapterTest {
     @Test
     fun head() {
         val server = MockWebServer()
-        server.setDispatcher(object : Dispatcher() {
+        server.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest?): MockResponse {
                 if (request?.method != "HEAD") {
                     return MockResponse().setResponseCode(404)
@@ -79,7 +79,7 @@ class SimpleHttpClientAdapterTest {
                     else -> MockResponse().setResponseCode(404)
                 }
             }
-        })
+        }
         server.start()
         val client = SimpleHttpClientAdapter()
         client.head(server.url("favicon.ico").toString()).use {
@@ -93,7 +93,7 @@ class SimpleHttpClientAdapterTest {
     @Test
     fun get() {
         val server = MockWebServer()
-        server.setDispatcher(object : Dispatcher() {
+        server.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest?): MockResponse {
                 if (request?.method != "GET") {
                     return MockResponse().setResponseCode(404)
@@ -105,7 +105,7 @@ class SimpleHttpClientAdapterTest {
                     else -> MockResponse().setResponseCode(404)
                 }
             }
-        })
+        }
         server.start()
         val client = SimpleHttpClientAdapter()
         client.get(server.url("favicon.ico").toString()).use {
@@ -119,7 +119,7 @@ class SimpleHttpClientAdapterTest {
     @Test
     fun get_limit_bytes() {
         val server = MockWebServer()
-        server.setDispatcher(object : Dispatcher() {
+        server.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest?): MockResponse {
                 if (request?.method != "GET") {
                     return MockResponse().setResponseCode(404)
@@ -131,7 +131,7 @@ class SimpleHttpClientAdapterTest {
                     else -> MockResponse().setResponseCode(404)
                 }
             }
-        })
+        }
         server.start()
         val client = SimpleHttpClientAdapter()
         client.get(server.url("favicon.ico").toString()).use {
@@ -149,7 +149,7 @@ class SimpleHttpClientAdapterTest {
     @Test
     fun get_limit_string() {
         val server = MockWebServer()
-        server.setDispatcher(object : Dispatcher() {
+        server.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest?): MockResponse {
                 if (request?.method != "GET") {
                     return MockResponse().setResponseCode(404)
@@ -161,7 +161,7 @@ class SimpleHttpClientAdapterTest {
                     else -> MockResponse().setResponseCode(404)
                 }
             }
-        })
+        }
         server.start()
         val client = SimpleHttpClientAdapter()
         client.get(server.url("favicon.ico").toString()).use {

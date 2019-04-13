@@ -62,7 +62,7 @@ class JsoupHtmlParserAdapterTest {
         )
         assertThat(links).hasSize(5)
         expected.forEachIndexed { index, map ->
-            map.forEach { key, value ->
+            map.forEach { (key, value) ->
                 assertThat(links[index].attr(key)).isEqualTo(value)
             }
         }
@@ -85,7 +85,7 @@ class JsoupHtmlParserAdapterTest {
         )
         assertThat(links).hasSize(5)
         expected.forEachIndexed { index, map ->
-            map.forEach { key, value ->
+            map.forEach { (key, value) ->
                 assertThat(links[index].attr(key)).isEqualTo(value)
             }
         }
@@ -107,7 +107,7 @@ class JsoupHtmlParserAdapterTest {
         )
         assertThat(links).hasSize(5)
         expected.forEachIndexed { index, map ->
-            map.forEach { key, value ->
+            map.forEach { (key, value) ->
                 if (index == 1 && key == "rel") {
                     assertThat(links[index].attr(key)).isEqualTo("shortcut")
                 } else {

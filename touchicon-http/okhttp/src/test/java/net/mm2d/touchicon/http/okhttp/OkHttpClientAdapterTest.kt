@@ -30,12 +30,12 @@ class OkHttpClientAdapterTest {
     fun userAgent() {
         var recordedRequest: RecordedRequest? = null
         val server = MockWebServer()
-        server.setDispatcher(object : Dispatcher() {
+        server.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest?): MockResponse {
                 recordedRequest = request
                 return MockResponse().setResponseCode(200)
             }
-        })
+        }
         server.start()
         val userAgent = "user-agent"
         val client = OkHttpClientAdapter(OkHttpClient())
@@ -49,12 +49,12 @@ class OkHttpClientAdapterTest {
     fun headers() {
         var recordedRequest: RecordedRequest? = null
         val server = MockWebServer()
-        server.setDispatcher(object : Dispatcher() {
+        server.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest?): MockResponse {
                 recordedRequest = request
                 return MockResponse().setResponseCode(200)
             }
-        })
+        }
         server.start()
         val userAgent = "user-agent"
         val client = OkHttpClientAdapter(OkHttpClient())
@@ -69,7 +69,7 @@ class OkHttpClientAdapterTest {
     @Test
     fun head() {
         val server = MockWebServer()
-        server.setDispatcher(object : Dispatcher() {
+        server.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest?): MockResponse {
                 if (request?.method != "HEAD") {
                     return MockResponse().setResponseCode(404)
@@ -81,7 +81,7 @@ class OkHttpClientAdapterTest {
                     else -> MockResponse().setResponseCode(404)
                 }
             }
-        })
+        }
         server.start()
         val client = OkHttpClientAdapter(OkHttpClient())
         client.head(server.url("favicon.ico").toString()).use {
@@ -95,7 +95,7 @@ class OkHttpClientAdapterTest {
     @Test
     fun get() {
         val server = MockWebServer()
-        server.setDispatcher(object : Dispatcher() {
+        server.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest?): MockResponse {
                 if (request?.method != "GET") {
                     return MockResponse().setResponseCode(404)
@@ -107,7 +107,7 @@ class OkHttpClientAdapterTest {
                     else -> MockResponse().setResponseCode(404)
                 }
             }
-        })
+        }
         server.start()
         val client = OkHttpClientAdapter(OkHttpClient())
         client.get(server.url("favicon.ico").toString()).use {
@@ -121,7 +121,7 @@ class OkHttpClientAdapterTest {
     @Test
     fun get_limit_bytes() {
         val server = MockWebServer()
-        server.setDispatcher(object : Dispatcher() {
+        server.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest?): MockResponse {
                 if (request?.method != "GET") {
                     return MockResponse().setResponseCode(404)
@@ -133,7 +133,7 @@ class OkHttpClientAdapterTest {
                     else -> MockResponse().setResponseCode(404)
                 }
             }
-        })
+        }
         server.start()
         val client = OkHttpClientAdapter(OkHttpClient())
         client.get(server.url("favicon.ico").toString()).use {
@@ -151,7 +151,7 @@ class OkHttpClientAdapterTest {
     @Test
     fun get_limit_string() {
         val server = MockWebServer()
-        server.setDispatcher(object : Dispatcher() {
+        server.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest?): MockResponse {
                 if (request?.method != "GET") {
                     return MockResponse().setResponseCode(404)
@@ -163,7 +163,7 @@ class OkHttpClientAdapterTest {
                     else -> MockResponse().setResponseCode(404)
                 }
             }
-        })
+        }
         server.start()
         val client = OkHttpClientAdapter(OkHttpClient())
         client.get(server.url("favicon.ico").toString()).use {
