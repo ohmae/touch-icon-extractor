@@ -8,6 +8,7 @@
 package net.mm2d.touchicon
 
 import com.google.common.truth.Truth.assertThat
+import io.mockk.every
 import io.mockk.mockk
 import net.mm2d.touchicon.html.simple.SimpleHtmlParserAdapterFactory
 import org.junit.Test
@@ -31,6 +32,24 @@ class ExtractFromPageTest {
             </head></html>
             """.trimIndent(),
             false
+        )[0]
+        assertThat(result.rel).isEqualTo(Relationship.ICON)
+        assertThat(result.url).isEqualTo("https://www.example.com/favicon.ico")
+        assertThat(result.sizes).isEqualTo("")
+        assertThat(result.mimeType).isEqualTo("image/vnd.microsoft.icon")
+    }
+
+    @Test
+    fun extract_icon_with_manifest() {
+        val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
+        val result = extract.extractFromHtml(
+            "https://www.example.com/",
+            """
+            <html><head>
+            <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+            </head></html>
+            """.trimIndent(),
+            true
         )[0]
         assertThat(result.rel).isEqualTo(Relationship.ICON)
         assertThat(result.url).isEqualTo("https://www.example.com/favicon.ico")
@@ -126,5 +145,49 @@ class ExtractFromPageTest {
         assertThat(result.url).isEqualTo("https://www.example.com/apple-touch-icon-57x57.png")
         assertThat(result.sizes).isEqualTo("57x57")
         assertThat(result.mimeType).isEqualTo("")
+    }
+
+    @Test
+    fun extract_web_app_manifest() {
+        val httpClient: HttpClientAdapter = mockk()
+        every {
+            httpClient.get("https://www.example.com/manifest.json")
+        } returns mockk<HttpResponse>(relaxed = true).also {
+            every { it.bodyString() } returns """
+            {
+                "short_name": "AirHorner",
+                "name": "Kinlan's AirHorner of Infamy",
+                "icons": [{
+                    "src": "launcher-icon-1x.png",
+                    "type": "image/png",
+                    "sizes": "48x48"
+                }, {
+                    "src": "launcher-icon-4x.png",
+                    "type": "image/png",
+                    "sizes": "192x192",
+                    "density": "4.0"
+                }],
+                "start_url": "index.html?launcher=true"
+            }""".trimIndent()
+        }
+        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val result = extract.extractFromHtml(
+            "https://www.example.com/",
+            """
+            <html><head>
+            <link rel="manifest" href="/manifest.json">
+            </head></html>
+            """.trimIndent(),
+            true
+        )
+        assertThat(result[0].rel).isEqualTo(Relationship.MANIFEST)
+        assertThat(result[0].mimeType).isEqualTo("image/png")
+        assertThat(result[0].sizes).isEqualTo("48x48")
+        assertThat(result[0].url).isEqualTo("https://www.example.com/launcher-icon-1x.png")
+        assertThat(result[1].rel).isEqualTo(Relationship.MANIFEST)
+        assertThat(result[1].mimeType).isEqualTo("image/png")
+        assertThat(result[1].sizes).isEqualTo("192x192")
+        assertThat(result[1].url).isEqualTo("https://www.example.com/launcher-icon-4x.png")
+        assertThat((result[1] as WebAppIcon).density).isEqualTo("4.0")
     }
 }
