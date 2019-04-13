@@ -27,22 +27,22 @@ repositories {
 Add dependencies, as following.
 ```gradle
 dependencies {
-    implementation 'net.mm2d:touchicon:0.4.0'
-    implementation 'net.mm2d:touchicon-http-okhttp:0.4.0' // If use OkHttp for HTTP access
-    implementation 'net.mm2d:touchicon-html-jsoup:0.4.0'  // If use Jsoup for HTML parse
+    implementation 'net.mm2d:touchicon:0.5.0'
+    implementation 'net.mm2d:touchicon-http-okhttp:0.5.0' // If use OkHttp for HTTP access
+    implementation 'net.mm2d:touchicon-html-jsoup:0.5.0'  // If use Jsoup for HTML parse
 }
 ```
 
 ### Sample code
 
 ```kotlin
-val extractor = TouchIconExtractor()                // initialize
-extractor.userAgent = "user agent string"           // option: set User-Agent
-extractor.headers = mapOf("Cookie" to "hoge=fuga")  // option: set additional HTTP header
-extractor.downloadLimit = 10_000                    // option: set download limit (default 64kB).
-                                                    // <= 0 means no limit 
+val extractor = TouchIconExtractor()                    // initialize
+extractor.userAgent = "user agent string"               // option: set User-Agent
+extractor.headers = mapOf("Cookie" to "hoge=fuga")      // option: set additional HTTP header
+extractor.downloadLimit = 10_000                        // option: set download limit (default 64kB).
+                                                        // <= 0 means no limit 
 //...
-Single.fromCallable { extractor.fromPage(url) }     // Do not call from the Main thread
+Single.fromCallable { extractor.fromPage(url, true) }   // Do not call from the Main thread
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({ 
@@ -97,6 +97,53 @@ Analyzing the downloaded HTML file,
 Extract only link tags whose rel attribute is
 "icon", "shortcut icon", "apple-touch-icon", "apple-touch-icon-precomposed".
 Parse it, create an `PageIcon` instance, and return it as a result.
+
+### Web App Manifest
+
+Although not strictly a WebClip icon, this can also get an icon written in the Web App Manifest.
+
+This is described by the following JSON.
+
+```json
+{
+  "short_name": "AirHorner",
+  "name": "Kinlan's AirHorner of Infamy",
+  "icons": [
+    {
+      "src": "launcher-icon-1x.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "launcher-icon-2x.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "launcher-icon-4x.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "index.html?launcher=true"
+}
+```
+
+And it is described as follows in HTML.
+
+```html
+<link rel="manifest" href="/manifest.json">
+```
+
+This information is expressed as `WebAppIcon`.
+
+If you want this information, as following
+
+```kotlin
+extractor.fromPage(url, true)
+```
+
+As you guessed, it gets at the same time as PageIcon.
 
 ### Icon associated with the Domain
 
