@@ -10,7 +10,6 @@ package net.mm2d.touchicon.sample
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -32,11 +31,10 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import net.mm2d.touchicon.Icon
 import net.mm2d.touchicon.PageIcon
 import net.mm2d.touchicon.WebAppIcon
@@ -45,7 +43,6 @@ import net.mm2d.touchicon.WebAppIcon
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 class IconDialog : DialogFragment() {
-    private val compositeDisposable = CompositeDisposable()
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val act = activity!!
         val arg = arguments!!
@@ -67,27 +64,22 @@ class IconDialog : DialogFragment() {
         recyclerView.addItemDecoration(DividerItemDecoration(act, DividerItemDecoration.VERTICAL))
         val adapter = IconListAdapter(act, view.findViewById(R.id.transparent_switch))
         recyclerView.adapter = adapter
-        Single.fromCallable { extractor.fromPage(siteUrl, true) }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doFinally { progressBar.visibility = View.GONE }
-            .subscribe({ adapter.add(it) }, {})
-            .addTo(compositeDisposable)
-        Single.fromCallable { extractor.listFromDomain(siteUrl, true, listOf("120x120")) }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doFinally { progressBar.visibility = View.GONE }
-            .subscribe({ adapter.add(it) }, {})
-            .addTo(compositeDisposable)
+        GlobalScope.launch(Dispatchers.Main) {
+            withContext(Dispatchers.IO) {
+                extractor.fromPage(siteUrl, true)
+            }.let { adapter.add(it) }
+            progressBar.visibility = View.GONE
+        }
+        GlobalScope.launch(Dispatchers.Main) {
+            withContext(Dispatchers.IO) {
+                extractor.listFromDomain(siteUrl, true, listOf("120x120"))
+            }.let { adapter.add(it) }
+            progressBar.visibility = View.GONE
+        }
         return AlertDialog.Builder(act)
             .setTitle(title)
             .setView(view)
             .create()
-    }
-
-    override fun onDismiss(dialog: DialogInterface?) {
-        super.onDismiss(dialog)
-        compositeDisposable.dispose()
     }
 
     private inner class IconListAdapter(

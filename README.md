@@ -42,6 +42,18 @@ extractor.headers = mapOf("Cookie" to "hoge=fuga")      // option: set additiona
 extractor.downloadLimit = 10_000                        // option: set download limit (default 64kB).
                                                         // <= 0 means no limit 
 //...
+GlobalScope.launch(Dispatchers.Main) {
+    val job = async(Dispatchers.IO) {
+        extractor.fromPage(siteUrl, true)               // Do not call from the Main thread
+    }
+    //...
+}
+```
+
+If in RxJava
+
+```kotlin
+//...
 Single.fromCallable { extractor.fromPage(url, true) }   // Do not call from the Main thread
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
@@ -223,29 +235,32 @@ I am writing documentation comments using KDoc.
 ### touchicon
 
 - [Kotlin](https://kotlinlang.org/)
+  - kotlin-stdlib-jdk7
 - [Android Jetpack](https://developer.android.com/jetpack/)
   - androidx.annotation:annotation
 
 ### touchicon-http-okhttp
 
 - [Kotlin](https://kotlinlang.org/)
+  - kotlin-stdlib-jdk7
 - [OkHttp3](https://square.github.io/okhttp/)
 
 ### touchicon-html-jsoup
 
 - [Kotlin](https://kotlinlang.org/)
+  - kotlin-stdlib-jdk7
 - [Jsoup](https://jsoup.org/)
 
 ### sample app
 - [Kotlin](https://kotlinlang.org/)
+  - kotlin-stdlib-jdk7
+  - kotlinx-coroutines-core
+  - kotlinx-coroutines-android
 - [Android Support Library](https://developer.android.com/topic/libraries/support-library/)
   - androidx.legacy:legacy-support-v4
   - androidx.appcompat:appcompat
   - androidx.constraintlayout:constraintlayout
   - com.google.android.material:material
-- [RxJava2](https://github.com/ReactiveX/RxJava)
-  - [RxAndroid](https://github.com/ReactiveX/RxAndroid)
-  - [RxKotlin](https://github.com/ReactiveX/RxKotlin)
 - [Glide](https://bumptech.github.io/glide/)
 
 ## Author
