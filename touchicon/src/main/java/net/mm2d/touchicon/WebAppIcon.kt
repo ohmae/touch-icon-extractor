@@ -11,6 +11,41 @@ import android.os.Parcel
 import android.os.Parcelable
 
 /**
+ * Icon information described in Web App Manifest.
+ *
+ * This is described by the following JSON.
+ *
+ * ```json
+ * {
+ *   "short_name": "AirHorner",
+ *   "name": "Kinlan's AirHorner of Infamy",
+ *   "icons": [
+ *     {
+ *       "src": "launcher-icon-1x.png",
+ *       "type": "image/png",
+ *       "sizes": "48x48"
+ *     },
+ *     {
+ *       "src": "launcher-icon-2x.png",
+ *       "type": "image/png",
+ *       "sizes": "96x96"
+ *     },
+ *     {
+ *       "src": "launcher-icon-4x.png",
+ *       "type": "image/png",
+ *       "sizes": "192x192"
+ *     }
+ *   ],
+ *   "start_url": "index.html?launcher=true"
+ * }
+ * ```
+ *
+ * And it is described as follows in HTML.
+ *
+ * ```html
+ * <link rel="manifest" href="/manifest.json">
+ * ```
+ *
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 data class WebAppIcon(
