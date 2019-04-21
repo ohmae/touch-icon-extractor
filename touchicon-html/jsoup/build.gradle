@@ -3,7 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'maven'
 apply plugin: 'org.jetbrains.dokka-android'
 apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.github.ben-manes.versions'
 
 def libraryName = 'touchicon-html-jsoup'
@@ -60,32 +59,6 @@ bintray {
         publicDownloadNumbers = true
         version {
             name = project.version
-        }
-    }
-}
-
-install {
-    repositories.mavenInstaller {
-        pom.project {
-            name = libraryName
-            url = pj.siteUrl
-
-            packaging = 'aar'
-            groupId = pj.groupId
-            artifactId = libraryName
-            version = pj.versions.name
-
-            licenses {
-                license {
-                    name = 'The MIT License'
-                    url = 'https://opensource.org/licenses/MIT'
-                    distribution = 'repo'
-                }
-            }
-            scm {
-                connection pj.githubUrl + '.git'
-                url pj.githubUrl
-            }
         }
     }
 }
