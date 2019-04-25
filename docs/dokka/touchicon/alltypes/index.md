@@ -18,4 +18,4 @@
 | [net.mm2d.touchicon.http.simple.SimpleHttpClientAdapterFactory](../net.mm2d.touchicon.http.simple/-simple-http-client-adapter-factory/index.md) | Supply default HttpClientAdapter implementation. |
 | [net.mm2d.touchicon.Size](../net.mm2d.touchicon/-size/index.md) | Icon size. |
 | [net.mm2d.touchicon.TouchIconExtractor](../net.mm2d.touchicon/-touch-icon-extractor/index.md) | Extract information of WebClip icon such as Apple Touch Icon or favicon related to the URL. |
-| [net.mm2d.touchicon.WebAppIcon](../net.mm2d.touchicon/-web-app-icon/index.md) |  |
+| [net.mm2d.touchicon.WebAppIcon](../net.mm2d.touchicon/-web-app-icon/index.md) | Icon information described in Web App Manifest. |

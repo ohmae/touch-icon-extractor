@@ -17,4 +17,4 @@
 | [Relationship](-relationship/index.md) | `enum class Relationship`<br>enum of relationship between icon and page. |
 | [Size](-size/index.md) | `data class Size`<br>Icon size. |
 | [TouchIconExtractor](-touch-icon-extractor/index.md) | `class TouchIconExtractor`<br>Extract information of WebClip icon such as Apple Touch Icon or favicon related to the URL. |
-| [WebAppIcon](-web-app-icon/index.md) | `data class WebAppIcon : `[`Icon`](-icon/index.md)`, `[`Parcelable`](https://developer.android.com/reference/android/os/Parcelable.html) |
+| [WebAppIcon](-web-app-icon/index.md) | `data class WebAppIcon : `[`Icon`](-icon/index.md)`, `[`Parcelable`](https://developer.android.com/reference/android/os/Parcelable.html)<br>Icon information described in Web App Manifest. |
