@@ -226,9 +226,9 @@ val bestIcon2 = icons.maxWith(IconComparator.REL_SIZE) // Compare by rel, if sam
 
 I am writing documentation comments using KDoc.
 
-- [touchicon](docs/dokka/touchicon/index.md)
-- [touchicon-http-okhttp](docs/dokka/touchicon-http/okhttp/index.md)
-- [touchicon-html-jsoup](docs/dokka/touchicon-html/jsoup/index.md)
+- [touchicon](https://ohmae.github.io/touch-icon-extractor/touchicon/index.html)
+- [touchicon-http-okhttp](https://ohmae.github.io/touch-icon-extractor/touchicon-http/okhttp/index.html)
+- [touchicon-html-jsoup](https://ohmae.github.io/touch-icon-extractor/touchicon-html/jsoup/index.html)
 
 ## Dependent OSS
 
