@@ -1,6 +1,0 @@
-$dokka.format:gfm
-$dokka.linkExtension:md
-
-net.mm2d.touchicon
-net.mm2d.touchicon.html.simple
-net.mm2d.touchicon.http.simple

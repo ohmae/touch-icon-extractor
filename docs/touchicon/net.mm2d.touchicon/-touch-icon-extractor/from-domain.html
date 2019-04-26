@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>TouchIconExtractor.fromDomain - touchicon</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">touchicon</a>&nbsp;/&nbsp;<a href="../index.html">net.mm2d.touchicon</a>&nbsp;/&nbsp;<a href="index.html">TouchIconExtractor</a>&nbsp;/&nbsp;<a href="./from-domain.html">fromDomain</a><br/>
+<br/>
+<h1>fromDomain</h1>
+<a name="net.mm2d.touchicon.TouchIconExtractor$fromDomain(kotlin.String, kotlin.Boolean, kotlin.collections.List((kotlin.String)))"></a>
+<code><span class="identifier">@WorkerThread</span> <span class="keyword">fun </span><span class="identifier">fromDomain</span><span class="symbol">(</span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$fromDomain(kotlin.String, kotlin.Boolean, kotlin.collections.List((kotlin.String)))/siteUrl">siteUrl</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$fromDomain(kotlin.String, kotlin.Boolean, kotlin.collections.List((kotlin.String)))/withPrecomposed">withPrecomposed</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$fromDomain(kotlin.String, kotlin.Boolean, kotlin.collections.List((kotlin.String)))/sizes">sizes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyList()<span class="symbol">)</span><span class="symbol">: </span><a href="../-icon/index.html"><span class="identifier">Icon</span></a><span class="symbol">?</span></code>
+<p>Get valid icon information,
+by trying to access to some icon from the root of domain of specified URL.</p>
+<p><strong>Do not call from main thread</strong> to avoid NetworkOnMainThreadException</p>
+<p>Judge the existence of icon using HTTP HEAD.
+Since many of these sites do not have these icons, 404 errors are recorded on the server.
+Because it is a bad manners, execution should be kept to a minimum.</p>
+<p>Checks the existence of the icon in order,
+and returns the information when judging that the icon exists.
+Processing is interrupted at the stage of finding the icon, and no confirmation is made on it after that</p>
+<p>The order of checking the existence of the icon is as follows</p>
+<p>In case of <code>withPrecomposed</code> is false and <code>sizes</code> is not specify.</p>
+<ol><li>apple-touch-icon.png</li>
+<li>favicon.ico</li>
+</ol>
+<p>In case of <code>withPrecomposed</code> is true and <code>sizes</code> is not specify.</p>
+<ol><li>apple-touch-icon-precomposed.png</li>
+<li>apple-touch-icon.png</li>
+<li>favicon.ico</li>
+</ol>
+<p>In case of <code>withPrecomposed</code> is true and <code>sizes</code> is <code>listOf("120x120", "72x72")</code></p>
+<ol><li>apple-touch-icon-120x120-precomposed.png</li>
+<li>apple-touch-icon-120x120.png</li>
+<li>apple-touch-icon-72x72-precomposed.png</li>
+<li>apple-touch-icon-72x72.png</li>
+<li>apple-touch-icon-precomposed.png</li>
+<li>apple-touch-icon.png</li>
+<li>favicon.ico</li>
+</ol>
+<h3>Parameters</h3>
+<p><a name="siteUrl"></a>
+<code>siteUrl</code> - URL of analysis target page</p>
+<p><a name="withPrecomposed"></a>
+<code>withPrecomposed</code> - If specify true, include the "precomposed". default is true</p>
+<p><a name="sizes"></a>
+<code>sizes</code> - Specify this when appending size (e.g. 80x80) to apple-touch-icon. Default is empty.</p>
+</BODY>
+</HTML>

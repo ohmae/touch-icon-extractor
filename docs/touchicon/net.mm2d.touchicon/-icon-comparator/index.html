@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>IconComparator - touchicon</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">touchicon</a>&nbsp;/&nbsp;<a href="../index.html">net.mm2d.touchicon</a>&nbsp;/&nbsp;<a href="./index.html">IconComparator</a><br/>
+<br/>
+<h1>IconComparator</h1>
+<code><span class="keyword">object </span><span class="identifier">IconComparator</span></code>
+<p>Comparator for sorting based on quality.</p>
+<p>To get the icon with the highest quality.</p>
+<p>If you give priority to size</p>
+<pre><code class="lang-kotlin">val bestIcon: Icon? = TouchIconExtractor.fromPage(url)
+    .maxWith(IconComparator.SIZE_REL)
+</code></pre>
+<p>If you give priority to type(relationship)</p>
+<pre><code class="lang-kotlin">val bestIcon: Icon? = TouchIconExtractor.fromPage(url)
+    .maxWith(IconComparator.REL_SIZE)
+</code></pre>
+<p><strong>Author</strong><br/>
+<a href="mailto:ryo@mm2d.net">大前良介 (OHMAE Ryosuke)</a></p>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-r-e-l.html">REL</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">REL</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparator/index.html"><span class="identifier">Comparator</span></a><span class="symbol">&lt;</span><a href="../-icon/index.html"><span class="identifier">Icon</span></a><span class="symbol">&gt;</span></code>
+<p>Comparator based on quality inferred from relationship.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-r-e-l_-s-i-z-e.html">REL_SIZE</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">REL_SIZE</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparator/index.html"><span class="identifier">Comparator</span></a><span class="symbol">&lt;</span><a href="../-icon/index.html"><span class="identifier">Icon</span></a><span class="symbol">&gt;</span></code>
+<p>Comparator for order by rel -&gt; size</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-s-i-z-e.html">SIZE</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">SIZE</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparator/index.html"><span class="identifier">Comparator</span></a><span class="symbol">&lt;</span><a href="../-icon/index.html"><span class="identifier">Icon</span></a><span class="symbol">&gt;</span></code>
+<p>Comparator based on size.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-s-i-z-e_-r-e-l.html">SIZE_REL</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">SIZE_REL</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparator/index.html"><span class="identifier">Comparator</span></a><span class="symbol">&lt;</span><a href="../-icon/index.html"><span class="identifier">Icon</span></a><span class="symbol">&gt;</span></code>
+<p>Comparator for order by size -&gt; rel</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

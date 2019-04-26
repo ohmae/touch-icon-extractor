@@ -1,0 +1,29 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>TouchIconExtractor.fromDomainWithDownload - touchicon</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">touchicon</a>&nbsp;/&nbsp;<a href="../index.html">net.mm2d.touchicon</a>&nbsp;/&nbsp;<a href="index.html">TouchIconExtractor</a>&nbsp;/&nbsp;<a href="./from-domain-with-download.html">fromDomainWithDownload</a><br/>
+<br/>
+<h1>fromDomainWithDownload</h1>
+<a name="net.mm2d.touchicon.TouchIconExtractor$fromDomainWithDownload(kotlin.String, kotlin.Boolean, kotlin.collections.List((kotlin.String)))"></a>
+<code><span class="identifier">@WorkerThread</span> <span class="keyword">fun </span><span class="identifier">fromDomainWithDownload</span><span class="symbol">(</span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$fromDomainWithDownload(kotlin.String, kotlin.Boolean, kotlin.collections.List((kotlin.String)))/siteUrl">siteUrl</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$fromDomainWithDownload(kotlin.String, kotlin.Boolean, kotlin.collections.List((kotlin.String)))/withPrecomposed">withPrecomposed</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$fromDomainWithDownload(kotlin.String, kotlin.Boolean, kotlin.collections.List((kotlin.String)))/sizes">sizes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyList()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html"><span class="identifier">Pair</span></a><span class="symbol">&lt;</span><a href="../-icon/index.html"><span class="identifier">Icon</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">&gt;</span><span class="symbol">?</span></code>
+<p>It performs the same processing as <a href="from-domain.html">fromDomain</a> using HTTP GET, and downloads binary if icon exists.</p>
+<p><strong>Do not call from main thread</strong> to avoid NetworkOnMainThreadException</p>
+<p>Since <a href="from-domain.html">fromDomain</a> get only the icon information,
+the binary data of the icon needs to be downloaded again using HTTP GET.
+In this method, HTTP GET is used to confirm the existence of the icon,
+and if there is an icon, download is also done.
+The result is returned with icon information and binary Pair.</p>
+<p>Do not call from main thread.</p>
+<h3>Parameters</h3>
+<p><a name="siteUrl"></a>
+<code>siteUrl</code> - URL of analysis target page</p>
+<p><a name="withPrecomposed"></a>
+<code>withPrecomposed</code> - If specify true, include the "precomposed". default is true</p>
+<p><a name="sizes"></a>
+<code>sizes</code> - Specify this when appending size (e.g. 80x80) to apple-touch-icon. Default is empty.</p>
+</BODY>
+</HTML>

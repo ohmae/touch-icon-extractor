@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>WebAppIcon.<init> - touchicon</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">touchicon</a>&nbsp;/&nbsp;<a href="../index.html">net.mm2d.touchicon</a>&nbsp;/&nbsp;<a href="index.html">WebAppIcon</a>&nbsp;/&nbsp;<a href="./-init-.html">&lt;init&gt;</a><br/>
+<br/>
+<h1>&lt;init&gt;</h1>
+<a name="net.mm2d.touchicon.WebAppIcon$&lt;init&gt;(android.os.Parcel)"></a>
+<code><span class="identifier">WebAppIcon</span><span class="symbol">(</span><span class="identifier" id="net.mm2d.touchicon.WebAppIcon$<init>(android.os.Parcel)/parcel">parcel</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/os/Parcel.html"><span class="identifier">Parcel</span></a><span class="symbol">)</span></code><a name="net.mm2d.touchicon.WebAppIcon$&lt;init&gt;(kotlin.String, kotlin.String, kotlin.String, kotlin.String)"></a>
+<code><span class="identifier">WebAppIcon</span><span class="symbol">(</span><span class="identifier" id="net.mm2d.touchicon.WebAppIcon$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/url">url</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.WebAppIcon$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/sizes">sizes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.WebAppIcon$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/mimeType">mimeType</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.WebAppIcon$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/density">density</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span></code>
+<p>Icon information described in Web App Manifest.</p>
+<p>This is described by the following JSON.</p>
+<pre><code class="lang-json">{
+  "short_name": "AirHorner",
+  "name": "Kinlan's AirHorner of Infamy",
+  "icons": [
+    {
+      "src": "launcher-icon-1x.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "launcher-icon-2x.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "launcher-icon-4x.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "index.html?launcher=true"
+}
+</code></pre>
+<p>And it is described as follows in HTML.</p>
+<pre><code class="lang-html">&lt;link rel="manifest" href="/manifest.json"&gt;
+</code></pre>
+<p><strong>Author</strong><br/>
+<a href="mailto:ryo@mm2d.net">大前良介 (OHMAE Ryosuke)</a></p>
+</BODY>
+</HTML>

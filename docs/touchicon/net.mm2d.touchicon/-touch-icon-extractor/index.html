@@ -1,0 +1,106 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>TouchIconExtractor - touchicon</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">touchicon</a>&nbsp;/&nbsp;<a href="../index.html">net.mm2d.touchicon</a>&nbsp;/&nbsp;<a href="./index.html">TouchIconExtractor</a><br/>
+<br/>
+<h1>TouchIconExtractor</h1>
+<code><span class="keyword">class </span><span class="identifier">TouchIconExtractor</span></code>
+<p>Extract information of WebClip icon such as Apple Touch Icon or favicon related to the URL.</p>
+<p><strong>Author</strong><br/>
+<a href="mailto:ryo@mm2d.net">大前良介 (OHMAE Ryosuke)</a></p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">TouchIconExtractor</span><span class="symbol">(</span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$<init>(net.mm2d.touchicon.HttpClientAdapter, net.mm2d.touchicon.HtmlParserAdapter)/httpClient">httpClient</span><span class="symbol">:</span>&nbsp;<a href="../-http-client-adapter/index.html"><span class="identifier">HttpClientAdapter</span></a>&nbsp;<span class="symbol">=</span>&nbsp;SimpleHttpClientAdapterFactory.create()<span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$<init>(net.mm2d.touchicon.HttpClientAdapter, net.mm2d.touchicon.HtmlParserAdapter)/htmlParser">htmlParser</span><span class="symbol">:</span>&nbsp;<a href="../-html-parser-adapter/index.html"><span class="identifier">HtmlParserAdapter</span></a>&nbsp;<span class="symbol">=</span>&nbsp;SimpleHtmlParserAdapterFactory.create()<span class="symbol">)</span></code>
+<p>Initialize the instance.
+You can change HttpClientAdapter and HtmlParserAdapter.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="download-limit.html">downloadLimit</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">downloadLimit</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Specify the maximum download size when downloading HTML file.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="headers.html">headers</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">headers</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p>Specify the HTTP communication header.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="user-agent.html">userAgent</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">userAgent</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>Specify the value of User-Agent used for HTTP communication.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="from-domain.html">fromDomain</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">fromDomain</span><span class="symbol">(</span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$fromDomain(kotlin.String, kotlin.Boolean, kotlin.collections.List((kotlin.String)))/siteUrl">siteUrl</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$fromDomain(kotlin.String, kotlin.Boolean, kotlin.collections.List((kotlin.String)))/withPrecomposed">withPrecomposed</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$fromDomain(kotlin.String, kotlin.Boolean, kotlin.collections.List((kotlin.String)))/sizes">sizes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyList()<span class="symbol">)</span><span class="symbol">: </span><a href="../-icon/index.html"><span class="identifier">Icon</span></a><span class="symbol">?</span></code>
+<p>Get valid icon information,
+by trying to access to some icon from the root of domain of specified URL.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="from-domain-with-download.html">fromDomainWithDownload</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">fromDomainWithDownload</span><span class="symbol">(</span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$fromDomainWithDownload(kotlin.String, kotlin.Boolean, kotlin.collections.List((kotlin.String)))/siteUrl">siteUrl</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$fromDomainWithDownload(kotlin.String, kotlin.Boolean, kotlin.collections.List((kotlin.String)))/withPrecomposed">withPrecomposed</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$fromDomainWithDownload(kotlin.String, kotlin.Boolean, kotlin.collections.List((kotlin.String)))/sizes">sizes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyList()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html"><span class="identifier">Pair</span></a><span class="symbol">&lt;</span><a href="../-icon/index.html"><span class="identifier">Icon</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">&gt;</span><span class="symbol">?</span></code>
+<p>It performs the same processing as <a href="from-domain.html">fromDomain</a> using HTTP GET, and downloads binary if icon exists.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="from-page.html">fromPage</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">fromPage</span><span class="symbol">(</span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$fromPage(kotlin.String, kotlin.Boolean)/siteUrl">siteUrl</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$fromPage(kotlin.String, kotlin.Boolean)/withManifest">withManifest</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-icon/index.html"><span class="identifier">Icon</span></a><span class="symbol">&gt;</span></code>
+<p>Analyzes the HTML of the designated URL and extract the icon information specified by the link tag.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="list-from-domain.html">listFromDomain</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">listFromDomain</span><span class="symbol">(</span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$listFromDomain(kotlin.String, kotlin.Boolean, kotlin.collections.List((kotlin.String)))/siteUrl">siteUrl</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$listFromDomain(kotlin.String, kotlin.Boolean, kotlin.collections.List((kotlin.String)))/withPrecomposed">withPrecomposed</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$listFromDomain(kotlin.String, kotlin.Boolean, kotlin.collections.List((kotlin.String)))/sizes">sizes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;emptyList()<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-icon/index.html"><span class="identifier">Icon</span></a><span class="symbol">&gt;</span></code>
+<p>Processing similar to <a href="from-domain.html">fromDomain</a> is performed, but even if an icon is found,
+processing is not stopped but a list of all existing icon information is returned.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
