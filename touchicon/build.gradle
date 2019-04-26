@@ -38,8 +38,8 @@ dependencies {
 }
 
 dokka {
-    outputFormat = 'gfm'
-    outputDirectory = "../docs/dokka"
+    outputFormat = 'html'
+    outputDirectory = "../docs"
 }
 
 bintray {

@@ -40,8 +40,8 @@ dependencies {
 }
 
 dokka {
-    outputFormat = 'gfm'
-    outputDirectory = "../../docs/dokka/touchicon-http"
+    outputFormat = 'html'
+    outputDirectory = "../../docs/touchicon-http"
 }
 
 bintray {

@@ -39,8 +39,8 @@ dependencies {
 }
 
 dokka {
-    outputFormat = 'gfm'
-    outputDirectory = "../../docs/dokka/touchicon-html"
+    outputFormat = 'html'
+    outputDirectory = "../../docs/touchicon-html"
 }
 
 bintray {
