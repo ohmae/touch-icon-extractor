@@ -33,6 +33,14 @@ dependencies {
 }
 ```
 
+## API document
+
+Documentation comment is written in KDoc.
+
+- [touchicon](https://ohmae.github.io/touch-icon-extractor/touchicon/index.html)
+- [touchicon-http-okhttp](https://ohmae.github.io/touch-icon-extractor/touchicon-http/okhttp/index.html)
+- [touchicon-html-jsoup](https://ohmae.github.io/touch-icon-extractor/touchicon-html/jsoup/index.html)
+
 ### Sample code
 
 ```kotlin
@@ -221,14 +229,6 @@ val icons = extractor.fromDomain(url, true, listOf("120x120", "72x72"))
 val bestIcon1 = icons.maxWith(IconComparator.SIZE)     // Compare by size. (the largest icon is the best)
 val bestIcon2 = icons.maxWith(IconComparator.REL_SIZE) // Compare by rel, if same, compare by size
 ```
-
-## API document
-
-I am writing documentation comments using KDoc.
-
-- [touchicon](https://ohmae.github.io/touch-icon-extractor/touchicon/index.html)
-- [touchicon-http-okhttp](https://ohmae.github.io/touch-icon-extractor/touchicon-http/okhttp/index.html)
-- [touchicon-html-jsoup](https://ohmae.github.io/touch-icon-extractor/touchicon-html/jsoup/index.html)
 
 ## Dependent OSS
 
