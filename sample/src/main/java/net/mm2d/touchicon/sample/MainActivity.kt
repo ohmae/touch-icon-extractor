@@ -29,10 +29,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setUpWebView()
         fab.setOnClickListener {
-            IconDialog.show(this, web_view.title, web_view.url, true)
-        }
-        fab2.setOnClickListener {
-            IconDialog.show(this, web_view.title, web_view.url, false)
+            IconDialog.show(this, web_view.title, web_view.url)
         }
         val url = extractUrlToLoad(intent)
         if (url.isNotEmpty()) {

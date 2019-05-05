@@ -223,7 +223,7 @@ class IconDialog : DialogFragment() {
         private const val KEY_SITE_URL = "KEY_SITE_URL"
         private const val KEY_LOCAL = "KEY_LOCAL"
 
-        fun show(activity: FragmentActivity, title: String, siteUrl: String, local: Boolean) {
+        fun show(activity: FragmentActivity, title: String, siteUrl: String, local: Boolean = false) {
             IconDialog().also {
                 it.arguments = makeArgument(title, siteUrl, local)
             }.show(activity.supportFragmentManager, "")

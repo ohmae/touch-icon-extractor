@@ -3,7 +3,6 @@
     <color name="colorPrimary">#424242</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#00c853</color>
-    <color name="fab2">#AA00FF</color>
     <color name="text">#000000</color>
     <color name="text_weak">#666666</color>
     <color name="text_strong">#304FFE</color>
