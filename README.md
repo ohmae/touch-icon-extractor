@@ -11,6 +11,7 @@ This is a library for android for extracting apple-touch-icon information from t
 ## Screenshots
 
 This app is included as a [sample module](sample) in this repository.
+And also published in [Play store](https://play.google.com/store/apps/details?id=net.mm2d.webclip)
 
 |![](readme/screenshot1.png)|![](readme/screenshot2.png)|![](readme/screenshot3.png)|
 |-|-|-|
