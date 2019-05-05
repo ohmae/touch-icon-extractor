@@ -4,16 +4,23 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.github.ben-manes.versions'
 
+def applicationName = "WebClip"
+def versionMajor = 0
+def versionMinor = 0
+def versionPatch = 1
+
 android {
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "net.mm2d.touchicon.sample"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+        resConfigs "en", "ja"
+        archivesBaseName = "${applicationName}-${versionName}"
         vectorDrawables.useSupportLibrary = true
     }
     compileOptions {
@@ -31,6 +38,17 @@ android {
         exclude 'META-INF/touchicon-http-okhttp_debug.kotlin_module'
         exclude 'META-INF/atomicfu.kotlin_module'
     }
+    applicationVariants.all { variant ->
+        if (variant.buildType.name != "release") {
+            return
+        }
+        variant.outputs.all {
+            outputFileName = "${applicationName}-${versionName}.apk"
+        }
+    }
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
 }
 
 dependencies {
@@ -39,7 +57,7 @@ dependencies {
     implementation project(':touchicon-html:jsoup')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.0"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.0.2'
