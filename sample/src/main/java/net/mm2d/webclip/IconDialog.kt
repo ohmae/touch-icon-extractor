@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2018 大前良介 (OHMAE Ryosuke)
+ * Copyright (c) 2019 大前良介 (OHMAE Ryosuke)
  *
  * This software is released under the MIT License.
  * http://opensource.org/licenses/MIT
  */
 
-package net.mm2d.touchicon.sample
+package net.mm2d.webclip
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -97,8 +97,20 @@ class IconDialog : DialogFragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup, type: Int): IconViewHolder {
             return when (type) {
-                0 -> PageIconViewHolder(inflater.inflate(R.layout.li_page_icon, parent, false))
-                1 -> WebAppIconViewHolder(inflater.inflate(R.layout.li_web_app_icon, parent, false))
+                0 -> PageIconViewHolder(
+                    inflater.inflate(
+                        R.layout.li_page_icon,
+                        parent,
+                        false
+                    )
+                )
+                1 -> WebAppIconViewHolder(
+                    inflater.inflate(
+                        R.layout.li_web_app_icon,
+                        parent,
+                        false
+                    )
+                )
                 else -> DomainIconViewHolder(
                     inflater.inflate(
                         R.layout.li_domain_icon,
@@ -142,7 +154,11 @@ class IconDialog : DialogFragment() {
         val type: TextView = view.findViewById(R.id.type)
         val url: TextView = view.findViewById(R.id.url)
         override fun apply(icon: Icon, transparent: Boolean) {
-            iconImage.setBackgroundResource(selectBackground(transparent))
+            iconImage.setBackgroundResource(
+                selectBackground(
+                    transparent
+                )
+            )
             itemView.tag = icon
             sizes.text = icon.sizes
             rel.text = icon.rel.value
@@ -158,7 +174,9 @@ class IconDialog : DialogFragment() {
             GlideApp.with(itemView)
                 .load(icon.url)
                 .override(Target.SIZE_ORIGINAL)
-                .addListener(bitmapHook { imageSizes.text = "${it.width}x${it.height} $inferSize" })
+                .addListener(bitmapHook {
+                    imageSizes.text = "${it.width}x${it.height} $inferSize"
+                })
                 .into(iconImage)
         }
     }
@@ -172,7 +190,11 @@ class IconDialog : DialogFragment() {
         val density: TextView = view.findViewById(R.id.density)
         val url: TextView = view.findViewById(R.id.url)
         override fun apply(icon: Icon, transparent: Boolean) {
-            iconImage.setBackgroundResource(selectBackground(transparent))
+            iconImage.setBackgroundResource(
+                selectBackground(
+                    transparent
+                )
+            )
             itemView.tag = icon
             sizes.text = icon.sizes
             type.text = icon.mimeType
@@ -190,7 +212,9 @@ class IconDialog : DialogFragment() {
             GlideApp.with(itemView)
                 .load(icon.url)
                 .override(Target.SIZE_ORIGINAL)
-                .addListener(bitmapHook { imageSizes.text = "${it.width}x${it.height} $inferSize" })
+                .addListener(bitmapHook {
+                    imageSizes.text = "${it.width}x${it.height} $inferSize"
+                })
                 .into(iconImage)
         }
     }
@@ -204,7 +228,11 @@ class IconDialog : DialogFragment() {
         val type: TextView = view.findViewById(R.id.type)
         val url: TextView = view.findViewById(R.id.url)
         override fun apply(icon: Icon, transparent: Boolean) {
-            iconImage.setBackgroundResource(selectBackground(transparent))
+            iconImage.setBackgroundResource(
+                selectBackground(
+                    transparent
+                )
+            )
             itemView.tag = icon
             sizes.text = icon.sizes
             length.text = icon.length.toString()
@@ -213,7 +241,9 @@ class IconDialog : DialogFragment() {
             GlideApp.with(itemView)
                 .load(icon.url)
                 .override(Target.SIZE_ORIGINAL)
-                .addListener(bitmapHook { imageSizes.text = "${it.width}x${it.height}" })
+                .addListener(bitmapHook {
+                    imageSizes.text = "${it.width}x${it.height}"
+                })
                 .into(iconImage)
         }
     }
@@ -225,7 +255,8 @@ class IconDialog : DialogFragment() {
 
         fun show(activity: FragmentActivity, title: String, siteUrl: String, local: Boolean = false) {
             IconDialog().also {
-                it.arguments = makeArgument(title, siteUrl, local)
+                it.arguments =
+                    makeArgument(title, siteUrl, local)
             }.show(activity.supportFragmentManager, "")
         }
 

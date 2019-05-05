@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/MIT
  */
 
-package net.mm2d.touchicon.sample
+package net.mm2d.webclip
 
 import android.webkit.CookieManager
 import net.mm2d.touchicon.http.simple.CookieHandler

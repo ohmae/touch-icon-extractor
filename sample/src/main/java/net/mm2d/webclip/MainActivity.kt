@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2018 大前良介 (OHMAE Ryosuke)
+ * Copyright (c) 2019 大前良介 (OHMAE Ryosuke)
  *
  * This software is released under the MIT License.
  * http://opensource.org/licenses/MIT
  */
 
-package net.mm2d.touchicon.sample
+package net.mm2d.webclip
 
 import android.annotation.SuppressLint
 import android.app.SearchManager
@@ -97,7 +97,11 @@ class MainActivity : AppCompatActivity() {
                 Intent.ACTION_VIEW ->
                     intent.data?.toString() ?: ""
                 Intent.ACTION_SEARCH, Intent.ACTION_WEB_SEARCH ->
-                    makeSearchUrl(intent.getStringExtra(SearchManager.QUERY) ?: "")
+                    makeSearchUrl(
+                        intent.getStringExtra(
+                            SearchManager.QUERY
+                        ) ?: ""
+                    )
                 else ->
                     ""
             }
