@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">WebClip icon checker</string>
-    <string name="transparent_grid">Transparent grid</string>
+    <string name="app_name">WebClip</string>
+    <string name="transparent_grid">透明グリッド</string>
     <string name="back_button">戻る</string>
     <string name="forward_button">進む</string>
     <string name="reload_button">再読み込み</string>
