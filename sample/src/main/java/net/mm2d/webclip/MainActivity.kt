@@ -37,6 +37,9 @@ class MainActivity : AppCompatActivity() {
         } else {
             web_view.loadUrl(DEFAULT_URL)
         }
+        back_button.setOnClickListener { web_view.goBack() }
+        forward_button.setOnClickListener { web_view.goForward() }
+        reload_button.setOnClickListener { web_view.reload() }
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -72,15 +75,22 @@ class MainActivity : AppCompatActivity() {
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 progress_bar.progress = newProgress
             }
+
+            override fun onReceivedTitle(view: WebView?, title: String?) {
+                site_title.text = title
+            }
         }
         web_view.webViewClient = object : WebViewClient() {
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 progress_bar.progress = 0
                 progress_bar.visibility = View.VISIBLE
+                site_url.text = url
             }
 
             override fun onPageFinished(view: WebView?, url: String?) {
                 progress_bar.visibility = View.INVISIBLE
+                site_url.text = url
+                site_title.text = view?.title
             }
         }
         ExtractorHolder.local.userAgent = web_view.settings.userAgentString

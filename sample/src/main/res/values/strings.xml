@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">WebClip icon checker</string>
     <string name="transparent_grid">Transparent grid</string>
+    <string name="back_button">Back</string>
+    <string name="forward_button">Forward</string>
+    <string name="reload_button">Reload</string>
+    <string name="settings">Settings</string>
 </resources>
