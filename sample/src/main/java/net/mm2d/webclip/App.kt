@@ -9,6 +9,7 @@ package net.mm2d.webclip
 
 import android.app.Application
 import android.webkit.WebView
+import net.mm2d.webclip.settings.Settings
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
@@ -16,6 +17,7 @@ import android.webkit.WebView
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
+        Settings.initialize(this)
         WebView.setWebContentsDebuggingEnabled(true)
     }
 }

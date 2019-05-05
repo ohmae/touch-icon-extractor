@@ -19,17 +19,20 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import net.mm2d.webclip.settings.Settings
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 class MainActivity : AppCompatActivity() {
+    private lateinit var settings: Settings
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        settings = Settings.get()
         setContentView(R.layout.activity_main)
         setUpWebView()
         fab.setOnClickListener {
-            IconDialog.show(this, web_view.title, web_view.url)
+            IconDialog.show(this, web_view.title, web_view.url, settings.shouldUseExtension())
         }
         val url = extractUrlToLoad(intent)
         if (url.isNotEmpty()) {
@@ -40,6 +43,14 @@ class MainActivity : AppCompatActivity() {
         back_button.setOnClickListener { web_view.goBack() }
         forward_button.setOnClickListener { web_view.goForward() }
         reload_button.setOnClickListener { web_view.reload() }
+        settings_button.setOnClickListener {
+            startActivity(
+                Intent(
+                    this,
+                    SettingsActivity::class.java
+                )
+            )
+        }
     }
 
     override fun onNewIntent(intent: Intent?) {

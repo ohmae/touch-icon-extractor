@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WebClip icon checker</string>
+    <string name="transparent_grid">Transparent grid</string>
+    <string name="back_button">戻る</string>
+    <string name="forward_button">進む</string>
+    <string name="reload_button">再読み込み</string>
+    <string name="settings">設定</string>
+
+    <string name="pref_title_use_extension">拡張ライブラリを使用</string>
+    <string name="pref_category_information">情報</string>
+    <string name="pref_title_copyright">作者</string>
+    <string name="pref_message_copyright">© 2018 大前良介 (OHMAE Ryosuke)</string>
+    <string name="pref_title_version_number">バージョン</string>
+    <string name="pref_title_license">オープンソースライセンス</string>
+    <string name="pref_message_license">本アプリで利用しているOSSのライセンスを表示します</string>
+    <string name="pref_title_source_code">ソースコード</string>
+    <string name="pref_message_source_code">本アプリのソースコードはMITライセンスで公開しています</string>
+</resources>

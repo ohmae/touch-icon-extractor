@@ -260,6 +260,7 @@ val bestIcon2 = icons.maxWith(IconComparator.REL_SIZE) // Compare by rel, if sam
   - androidx.legacy:legacy-support-v4
   - androidx.appcompat:appcompat
   - androidx.constraintlayout:constraintlayout
+  - androidx.preference:preference
   - com.google.android.material:material
 - [Glide](https://bumptech.github.io/glide/)
 

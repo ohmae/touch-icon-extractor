@@ -48,15 +48,15 @@ class IconDialog : DialogFragment() {
         val arg = arguments!!
         val title = arg.getString(KEY_TITLE)!!
         val siteUrl = arg.getString(KEY_SITE_URL)!!
-        val local = arg.getBoolean(KEY_LOCAL)
+        val useExtension = arg.getBoolean(KEY_USE_EXTENSION)
         val view = act.layoutInflater.inflate(
             R.layout.dialog_icon,
             act.window.decorView as ViewGroup,
             false
         )
         val extractor =
-            if (local) ExtractorHolder.local
-            else ExtractorHolder.library
+            if (useExtension) ExtractorHolder.library
+            else ExtractorHolder.local
         view.findViewById<TextView>(R.id.site_url).text = siteUrl
         val progressBar: ProgressBar = view.findViewById(R.id.progress_bar)
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
@@ -251,20 +251,25 @@ class IconDialog : DialogFragment() {
     companion object {
         private const val KEY_TITLE = "KEY_TITLE"
         private const val KEY_SITE_URL = "KEY_SITE_URL"
-        private const val KEY_LOCAL = "KEY_LOCAL"
+        private const val KEY_USE_EXTENSION = "KEY_USE_EXTENSION"
 
-        fun show(activity: FragmentActivity, title: String, siteUrl: String, local: Boolean = false) {
+        fun show(
+            activity: FragmentActivity,
+            title: String,
+            siteUrl: String,
+            useExtension: Boolean
+        ) {
             IconDialog().also {
                 it.arguments =
-                    makeArgument(title, siteUrl, local)
+                    makeArgument(title, siteUrl, useExtension)
             }.show(activity.supportFragmentManager, "")
         }
 
-        private fun makeArgument(title: String, siteUrl: String, local: Boolean): Bundle {
+        private fun makeArgument(title: String, siteUrl: String, useExtension: Boolean): Bundle {
             return Bundle().also {
                 it.putString(KEY_TITLE, title)
                 it.putString(KEY_SITE_URL, siteUrl)
-                it.putBoolean(KEY_LOCAL, local)
+                it.putBoolean(KEY_USE_EXTENSION, useExtension)
             }
         }
 
