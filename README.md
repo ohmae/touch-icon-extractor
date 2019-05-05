@@ -1,4 +1,4 @@
-# touch-icon-extractor
+# ![](.idea/icon.png) touch-icon-extractor
 [![license](https://img.shields.io/github/license/ohmae/touch-icon-extractor.svg)](./LICENSE)
 [![GitHub release](https://img.shields.io/github/release/ohmae/touch-icon-extractor.svg)](https://github.com/ohmae/touch-icon-extractor/releases)
 [![GitHub issues](https://img.shields.io/github/issues/ohmae/touch-icon-extractor.svg)](https://github.com/ohmae/touch-icon-extractor/issues)
