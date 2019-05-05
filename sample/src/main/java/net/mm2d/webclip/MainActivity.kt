@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val DEFAULT_URL = "https://m.yahoo.co.jp/"
+        private const val DEFAULT_URL = "https://www.google.com/"
         private const val YAHOO_SEARCH_URL = "https://search.yahoo.co.jp/search?ei=UTF-8"
         private const val YAHOO_SEARCH_QUERY_KEY = "p"
 
