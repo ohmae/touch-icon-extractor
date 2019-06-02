@@ -18,15 +18,11 @@ And also published in [Play store](https://play.google.com/store/apps/details?id
 
 ## How to use
 
-You can download this library from jCenter.
+Download from jCenter. Add dependencies, as following.
 ```gradle
 repositories {
     jcenter()
 }
-```
-
-Add dependencies, as following.
-```gradle
 dependencies {
     implementation 'net.mm2d:touchicon:0.6.0'
     implementation 'net.mm2d:touchicon-http-okhttp:0.6.0' // If use OkHttp for HTTP access
