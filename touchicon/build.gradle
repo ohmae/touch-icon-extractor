@@ -28,12 +28,12 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.annotation:annotation:1.0.2'
+    implementation 'androidx.annotation:annotation:1.1.0'
 
     testImplementation 'junit:junit:4.12'
-    testImplementation "com.google.truth:truth:0.44"
+    testImplementation "com.google.truth:truth:1.0"
     testImplementation "io.mockk:mockk:1.9.3"
-    testImplementation 'org.robolectric:robolectric:4.2.1'
+    testImplementation 'org.robolectric:robolectric:4.3'
     testImplementation 'com.squareup.okhttp3:mockwebserver:3.14.1'
 }
 
@@ -63,20 +63,25 @@ bintray {
 }
 
 uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: 'file:build/maven')
-            pom.project {
-                groupId = pj.groupId
-                artifactId = libraryName
-                version = pj.versions.name
-                licenses {
-                    license {
-                        name = 'The MIT License'
-                        url = 'https://opensource.org/licenses/MIT'
-                        distribution = 'repo'
-                    }
+    repositories.mavenDeployer {
+        repository(url: 'file:build/maven')
+        pom.project {
+            name = libraryName
+            url = pj.siteUrl
+
+            groupId = pj.groupId
+            artifactId = libraryName
+            version = pj.versions.name
+            licenses {
+                license {
+                    name = 'The MIT License'
+                    url = 'https://opensource.org/licenses/MIT'
+                    distribution = 'repo'
                 }
+            }
+            scm {
+                connection pj.githubUrl + ".git"
+                url pj.githubUrl
             }
         }
     }

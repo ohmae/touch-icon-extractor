@@ -33,9 +33,9 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.11.3'
 
     testImplementation 'junit:junit:4.12'
-    testImplementation "com.google.truth:truth:0.44"
+    testImplementation "com.google.truth:truth:1.0"
     testImplementation "io.mockk:mockk:1.9.3"
-    testImplementation 'org.robolectric:robolectric:4.2.1'
+    testImplementation 'org.robolectric:robolectric:4.3'
 }
 
 dokka {
@@ -64,20 +64,25 @@ bintray {
 }
 
 uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: 'file:build/maven')
-            pom.project {
-                groupId = pj.groupId
-                artifactId = libraryName
-                version = pj.versions.name
-                licenses {
-                    license {
-                        name = 'The MIT License'
-                        url = 'https://opensource.org/licenses/MIT'
-                        distribution = 'repo'
-                    }
+    repositories.mavenDeployer {
+        repository(url: 'file:build/maven')
+        pom.project {
+            name = libraryName
+            url = pj.siteUrl
+
+            groupId = pj.groupId
+            artifactId = libraryName
+            version = pj.versions.name
+            licenses {
+                license {
+                    name = 'The MIT License'
+                    url = 'https://opensource.org/licenses/MIT'
+                    distribution = 'repo'
                 }
+            }
+            scm {
+                connection pj.githubUrl + ".git"
+                url pj.githubUrl
             }
         }
     }
