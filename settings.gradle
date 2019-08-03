@@ -1,4 +1,4 @@
-include ':touchicon'
-include ':touchicon-http:okhttp'
-include ':touchicon-html:jsoup'
-include ':sample'
+include ":touchicon"
+include ":touchicon-http:okhttp"
+include ":touchicon-html:jsoup"
+include ":sample"
