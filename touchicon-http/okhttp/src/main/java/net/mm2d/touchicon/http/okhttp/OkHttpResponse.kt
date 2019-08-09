@@ -23,9 +23,7 @@ internal class OkHttpResponse(
     override val isSuccess: Boolean
         get() = response.isSuccessful
 
-    override fun header(name: String): String? {
-        return response.header(name)
-    }
+    override fun header(name: String): String? = response.header(name)
 
     @Throws(IOException::class)
     override fun bodyString(limit: Int): String? {
@@ -43,9 +41,7 @@ internal class OkHttpResponse(
         response.body()?.close()
     }
 
-    private fun ResponseBody.fetchString(limit: Int): String {
-        return String(fetchBytes(limit))
-    }
+    private fun ResponseBody.fetchString(limit: Int): String = String(fetchBytes(limit))
 
     private fun ResponseBody.fetchBytes(limit: Int): ByteArray {
         val stream = byteStream()

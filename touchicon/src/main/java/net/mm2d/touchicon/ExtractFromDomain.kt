@@ -78,9 +78,8 @@ internal class ExtractFromDomain(
         }
     }
 
-    private fun makeUrl(baseUri: Uri.Builder, tryData: TryData): String {
-        return baseUri.path(tryData.name).build().toString()
-    }
+    private fun makeUrl(baseUri: Uri.Builder, tryData: TryData): String =
+        baseUri.path(tryData.name).build().toString()
 
     private fun createDomainIcon(
         response: HttpResponse,

@@ -75,9 +75,8 @@ class TouchIconExtractor(
      * true: extract Web App Manifest icon too, if it exists. false: only from link tag
      */
     @WorkerThread
-    fun fromPage(siteUrl: String, withManifest: Boolean = false): List<Icon> {
-        return fromPage.invoke(siteUrl, withManifest)
-    }
+    fun fromPage(siteUrl: String, withManifest: Boolean = false): List<Icon> =
+        fromPage.invoke(siteUrl, withManifest)
 
     /**
      * Get valid icon information,
@@ -130,9 +129,7 @@ class TouchIconExtractor(
         siteUrl: String,
         withPrecomposed: Boolean = true,
         sizes: List<String> = emptyList()
-    ): Icon? {
-        return fromDomain.invoke(siteUrl, withPrecomposed, sizes)
-    }
+    ): Icon? = fromDomain.invoke(siteUrl, withPrecomposed, sizes)
 
     /**
      * It performs the same processing as [fromDomain] using HTTP GET, and downloads binary if icon exists.
@@ -161,9 +158,7 @@ class TouchIconExtractor(
         siteUrl: String,
         withPrecomposed: Boolean = true,
         sizes: List<String> = emptyList()
-    ): Pair<Icon, ByteArray>? {
-        return fromDomain.invokeWithDownload(siteUrl, withPrecomposed, sizes)
-    }
+    ): Pair<Icon, ByteArray>? = fromDomain.invokeWithDownload(siteUrl, withPrecomposed, sizes)
 
     /**
      * Processing similar to [fromDomain] is performed, but even if an icon is found,
@@ -189,7 +184,5 @@ class TouchIconExtractor(
         siteUrl: String,
         withPrecomposed: Boolean = true,
         sizes: List<String> = emptyList()
-    ): List<Icon> {
-        return fromDomain.list(siteUrl, withPrecomposed, sizes)
-    }
+    ): List<Icon> = fromDomain.list(siteUrl, withPrecomposed, sizes)
 }

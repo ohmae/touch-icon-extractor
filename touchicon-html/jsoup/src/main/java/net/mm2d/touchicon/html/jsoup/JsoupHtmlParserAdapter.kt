@@ -15,8 +15,7 @@ import org.jsoup.Jsoup
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 internal class JsoupHtmlParserAdapter : HtmlParserAdapter {
-    override fun extractLinkTags(html: String): List<HtmlTag> {
-        return Jsoup.parse(html).getElementsByTag("link")
+    override fun extractLinkTags(html: String): List<HtmlTag> =
+        Jsoup.parse(html).getElementsByTag("link")
             .map { JsoupHtmlTag(it) }
-    }
 }

@@ -20,7 +20,5 @@ object SimpleHtmlParserAdapterFactory {
      *
      * @return instance
      */
-    fun create(): HtmlParserAdapter {
-        return SimpleHtmlParserAdapter()
-    }
+    fun create(): HtmlParserAdapter = SimpleHtmlParserAdapter()
 }

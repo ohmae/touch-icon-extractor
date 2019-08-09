@@ -14,9 +14,8 @@ import net.mm2d.touchicon.HtmlTag
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 internal class SimpleHtmlParserAdapter : HtmlParserAdapter {
-    override fun extractLinkTags(html: String): List<HtmlTag> {
-        return extractElementList(html).filter { it.name.equals("link", true) }
-    }
+    override fun extractLinkTags(html: String): List<HtmlTag> =
+        extractElementList(html).filter { it.name.equals("link", true) }
 
     private fun extractElementList(html: String): List<SimpleHtmlTag> {
         val result = mutableListOf<SimpleHtmlTag>()
@@ -81,9 +80,8 @@ internal class SimpleHtmlParserAdapter : HtmlParserAdapter {
         return result
     }
 
-    private fun Char.isNameCharacter(): Boolean {
-        return this.isLetterOrDigit() || ":-_.".contains(this)
-    }
+    private fun Char.isNameCharacter(): Boolean =
+        this.isLetterOrDigit() || ":-_.".contains(this)
 
     private fun match(a: CharArray, offset: Int, pattern: String): Boolean {
         val p = pattern.toCharArray()

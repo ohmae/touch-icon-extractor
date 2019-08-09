@@ -107,17 +107,10 @@ data class DomainIcon(
         parcel.writeInt(length)
     }
 
-    override fun describeContents(): Int {
-        return 0
-    }
+    override fun describeContents(): Int = 0
 
     companion object CREATOR : Creator<DomainIcon> {
-        override fun createFromParcel(parcel: Parcel): DomainIcon {
-            return DomainIcon(parcel)
-        }
-
-        override fun newArray(size: Int): Array<DomainIcon?> {
-            return arrayOfNulls(size)
-        }
+        override fun createFromParcel(parcel: Parcel): DomainIcon = DomainIcon(parcel)
+        override fun newArray(size: Int): Array<DomainIcon?> = arrayOfNulls(size)
     }
 }

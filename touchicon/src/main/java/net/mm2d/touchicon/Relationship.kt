@@ -102,11 +102,7 @@ enum class Relationship(
             .map { it.value to it }
             .toMap()
 
-        internal fun of(value: String?): Relationship? {
-            if (value.isNullOrEmpty()) {
-                return null
-            }
-            return VALUE_MAP[value.toLowerCase()]
-        }
+        internal fun of(value: String?): Relationship? =
+            if (value.isNullOrEmpty()) null else VALUE_MAP[value.toLowerCase()]
     }
 }

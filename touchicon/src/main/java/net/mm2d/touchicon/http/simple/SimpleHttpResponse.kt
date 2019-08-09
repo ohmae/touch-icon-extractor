@@ -25,9 +25,7 @@ internal class SimpleHttpResponse(
         null
     }
 
-    override fun header(name: String): String? {
-        return connection.getHeaderField(name)
-    }
+    override fun header(name: String): String? = connection.getHeaderField(name)
 
     override fun bodyString(limit: Int): String? {
         val stream = inputStream ?: return null

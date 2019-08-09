@@ -24,24 +24,20 @@ internal class OkHttpClientAdapter(
     override var headers: Map<String, String> = emptyMap()
 
     @Throws(IOException::class)
-    override fun head(url: String): HttpResponse {
-        return Request.Builder()
-            .head()
-            .url(url)
-            .appendHeader()
-            .build()
-            .execute()
-    }
+    override fun head(url: String): HttpResponse = Request.Builder()
+        .head()
+        .url(url)
+        .appendHeader()
+        .build()
+        .execute()
 
     @Throws(IOException::class)
-    override fun get(url: String): HttpResponse {
-        return Request.Builder()
-            .get()
-            .url(url)
-            .appendHeader()
-            .build()
-            .execute()
-    }
+    override fun get(url: String): HttpResponse = Request.Builder()
+        .get()
+        .url(url)
+        .appendHeader()
+        .build()
+        .execute()
 
     private fun Request.Builder.appendHeader(): Request.Builder {
         if (headers.isNotEmpty()) {
@@ -53,7 +49,6 @@ internal class OkHttpClientAdapter(
         return this
     }
 
-    private fun Request.execute(): HttpResponse {
-        return OkHttpResponse(client.newCall(this).execute())
-    }
+    private fun Request.execute(): HttpResponse =
+        OkHttpResponse(client.newCall(this).execute())
 }

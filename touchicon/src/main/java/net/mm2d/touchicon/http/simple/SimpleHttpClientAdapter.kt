@@ -24,34 +24,28 @@ internal class SimpleHttpClientAdapter(
     override var headers: Map<String, String> = emptyMap()
 
     @Throws(IOException::class)
-    override fun head(url: String): HttpResponse {
-        return SimpleHttpResponse(createConnection(url).also {
-            it.requestMethod = "HEAD"
-            it.connect()
-            it.extractCookie(url)
-        })
-    }
+    override fun head(url: String): HttpResponse = SimpleHttpResponse(createConnection(url).also {
+        it.requestMethod = "HEAD"
+        it.connect()
+        it.extractCookie(url)
+    })
 
     @Throws(IOException::class)
-    override fun get(url: String): HttpResponse {
-        return SimpleHttpResponse(createConnection(url).also {
-            it.requestMethod = "GET"
-            it.connect()
-            it.extractCookie(url)
-        })
-    }
+    override fun get(url: String): HttpResponse = SimpleHttpResponse(createConnection(url).also {
+        it.requestMethod = "GET"
+        it.connect()
+        it.extractCookie(url)
+    })
 
-    private fun createConnection(url: String): HttpURLConnection {
-        return URL(url).openConnection().also {
-            headers.forEach { entry ->
-                it.setRequestProperty(entry.key, entry.value)
-            }
-            it.setRequestProperty(KEY_USER_AGENT, userAgent)
-            it.setCookie(url)
-            it.connectTimeout = TIMEOUT
-            it.readTimeout = TIMEOUT
-        } as HttpURLConnection
-    }
+    private fun createConnection(url: String): HttpURLConnection = URL(url).openConnection().also {
+        headers.forEach { entry ->
+            it.setRequestProperty(entry.key, entry.value)
+        }
+        it.setRequestProperty(KEY_USER_AGENT, userAgent)
+        it.setCookie(url)
+        it.connectTimeout = TIMEOUT
+        it.readTimeout = TIMEOUT
+    } as HttpURLConnection
 
     private fun URLConnection.setCookie(url: String) {
         val cookieHandler = cookieHandler ?: return

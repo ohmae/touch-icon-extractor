@@ -62,12 +62,8 @@ internal fun String.normalizePath(): String {
             return this
         }
     }
-    val list = sections
-        .asSequence()
-        .withIndex()
-        .filter { !ignore[it.index] }
-        .toList()
+    val list = sections.withIndex().filter { !ignore[it.index] }.map { it.value }
     if (list.isEmpty()) return "/"
     val suffix = if (last() == '/') "/" else ""
-    return list.joinToString("/", "/", suffix) { it.value }
+    return list.joinToString("/", "/", suffix)
 }

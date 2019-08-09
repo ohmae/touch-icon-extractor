@@ -116,17 +116,10 @@ data class PageIcon(
         parcel.writeString(mimeType)
     }
 
-    override fun describeContents(): Int {
-        return 0
-    }
+    override fun describeContents(): Int = 0
 
     companion object CREATOR : Creator<PageIcon> {
-        override fun createFromParcel(parcel: Parcel): PageIcon {
-            return PageIcon(parcel)
-        }
-
-        override fun newArray(size: Int): Array<PageIcon?> {
-            return arrayOfNulls(size)
-        }
+        override fun createFromParcel(parcel: Parcel): PageIcon = PageIcon(parcel)
+        override fun newArray(size: Int): Array<PageIcon?> = arrayOfNulls(size)
     }
 }

@@ -102,14 +102,13 @@ internal class ExtractFromPage(
         return result
     }
 
-    private fun createIcon(baseUrl: String, icon: JSONObject): WebAppIcon {
-        return WebAppIcon(
+    private fun createIcon(baseUrl: String, icon: JSONObject): WebAppIcon =
+        WebAppIcon(
             makeAbsoluteUrl(baseUrl, icon.getString("src")),
             icon.optString("sizes"),
             icon.optString("type"),
             icon.optString("density")
         )
-    }
 
     companion object {
         private const val DEFAULT_LIMIT_SIZE = 1024 * 64

@@ -20,7 +20,5 @@ object JsoupAdapterFactory {
      *
      * @return instance
      */
-    fun create(): HtmlParserAdapter {
-        return JsoupHtmlParserAdapter()
-    }
+    fun create(): HtmlParserAdapter = JsoupHtmlParserAdapter()
 }

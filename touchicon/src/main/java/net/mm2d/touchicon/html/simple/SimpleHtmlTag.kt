@@ -16,7 +16,6 @@ internal data class SimpleHtmlTag(
     val name: String,
     private val attrs: List<Pair<String, String>>
 ) : HtmlTag {
-    override fun attr(name: String): String {
-        return attrs.find { it.first.equals(name, true) }?.second ?: ""
-    }
+    override fun attr(name: String): String =
+        attrs.find { it.first.equals(name, true) }?.second ?: ""
 }

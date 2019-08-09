@@ -77,10 +77,7 @@ data class WebAppIcon(
 
     private fun inferSizeInner(): Size {
         val size = inferSizeFromSizes(sizes)
-        if (size.width > 0 && size.height > 0) {
-            return size
-        }
-        return inferSizeFromUrl(url)
+        return if (size.width > 0 && size.height > 0) size else inferSizeFromUrl(url)
     }
 
     constructor(parcel: Parcel) : this(
@@ -97,17 +94,10 @@ data class WebAppIcon(
         parcel.writeString(density)
     }
 
-    override fun describeContents(): Int {
-        return 0
-    }
+    override fun describeContents(): Int = 0
 
     companion object CREATOR : Parcelable.Creator<WebAppIcon> {
-        override fun createFromParcel(parcel: Parcel): WebAppIcon {
-            return WebAppIcon(parcel)
-        }
-
-        override fun newArray(size: Int): Array<WebAppIcon?> {
-            return arrayOfNulls(size)
-        }
+        override fun createFromParcel(parcel: Parcel): WebAppIcon = WebAppIcon(parcel)
+        override fun newArray(size: Int): Array<WebAppIcon?> = arrayOfNulls(size)
     }
 }
