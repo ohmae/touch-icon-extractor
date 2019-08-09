@@ -31,7 +31,7 @@ class OkHttpClientAdapterTest {
         var recordedRequest: RecordedRequest? = null
         val server = MockWebServer()
         server.dispatcher = object : Dispatcher() {
-            override fun dispatch(request: RecordedRequest?): MockResponse {
+            override fun dispatch(request: RecordedRequest): MockResponse {
                 recordedRequest = request
                 return MockResponse().setResponseCode(200)
             }
@@ -50,7 +50,7 @@ class OkHttpClientAdapterTest {
         var recordedRequest: RecordedRequest? = null
         val server = MockWebServer()
         server.dispatcher = object : Dispatcher() {
-            override fun dispatch(request: RecordedRequest?): MockResponse {
+            override fun dispatch(request: RecordedRequest): MockResponse {
                 recordedRequest = request
                 return MockResponse().setResponseCode(200)
             }
@@ -70,8 +70,8 @@ class OkHttpClientAdapterTest {
     fun head() {
         val server = MockWebServer()
         server.dispatcher = object : Dispatcher() {
-            override fun dispatch(request: RecordedRequest?): MockResponse {
-                if (request?.method != "HEAD") {
+            override fun dispatch(request: RecordedRequest): MockResponse {
+                if (request.method != "HEAD") {
                     return MockResponse().setResponseCode(404)
                 }
                 return when (request.path) {
@@ -96,8 +96,8 @@ class OkHttpClientAdapterTest {
     fun get() {
         val server = MockWebServer()
         server.dispatcher = object : Dispatcher() {
-            override fun dispatch(request: RecordedRequest?): MockResponse {
-                if (request?.method != "GET") {
+            override fun dispatch(request: RecordedRequest): MockResponse {
+                if (request.method != "GET") {
                     return MockResponse().setResponseCode(404)
                 }
                 return when (request.path) {
@@ -122,8 +122,8 @@ class OkHttpClientAdapterTest {
     fun get_limit_bytes() {
         val server = MockWebServer()
         server.dispatcher = object : Dispatcher() {
-            override fun dispatch(request: RecordedRequest?): MockResponse {
-                if (request?.method != "GET") {
+            override fun dispatch(request: RecordedRequest): MockResponse {
+                if (request.method != "GET") {
                     return MockResponse().setResponseCode(404)
                 }
                 return when (request.path) {
@@ -152,8 +152,8 @@ class OkHttpClientAdapterTest {
     fun get_limit_string() {
         val server = MockWebServer()
         server.dispatcher = object : Dispatcher() {
-            override fun dispatch(request: RecordedRequest?): MockResponse {
-                if (request?.method != "GET") {
+            override fun dispatch(request: RecordedRequest): MockResponse {
+                if (request.method != "GET") {
                     return MockResponse().setResponseCode(404)
                 }
                 return when (request.path) {
