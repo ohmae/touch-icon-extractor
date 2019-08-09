@@ -134,7 +134,6 @@ bintray {
     key = project.hasProperty("bintray_key") ? bintray_key : ""
     publications = ["bintray"]
 
-    dryRun = true
     pkg {
         repo = "maven"
         name = pj.groupId + "." + libraryName
