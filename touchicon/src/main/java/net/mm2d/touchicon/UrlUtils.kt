@@ -46,24 +46,16 @@ private fun makePath(baseUrl: String, url: String): String {
 internal fun String.normalizePath(): String {
     val sections = split('/')
         .filter { it.isNotEmpty() && it != "." }
-    val ignore = BooleanArray(sections.size)
-    for (i in 0 until sections.size) {
-        if (sections[i] != "..") continue
-        ignore[i] = true
-        var index = i - 1
-        while (index >= 0) {
-            if (!ignore[index]) {
-                ignore[index] = true
-                break
-            }
-            index--
-        }
-        if (index < 0) {
-            return this
-        }
+        .toMutableList()
+    val iterator = sections.listIterator()
+    while (iterator.hasNext()) {
+        if (iterator.next() != "..") continue
+        iterator.remove()
+        if (!iterator.hasPrevious()) throw IllegalArgumentException("path traversal error: $this")
+        iterator.previous()
+        iterator.remove()
     }
-    val list = sections.withIndex().filter { !ignore[it.index] }.map { it.value }
-    if (list.isEmpty()) return "/"
+    if (sections.isEmpty()) return "/"
     val suffix = if (last() == '/') "/" else ""
-    return list.joinToString("/", "/", suffix)
+    return sections.joinToString("/", "/", suffix)
 }

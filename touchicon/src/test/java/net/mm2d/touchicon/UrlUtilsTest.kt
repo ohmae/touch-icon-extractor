@@ -52,4 +52,9 @@ class UrlUtilsTest {
         assertThat("/a/b/c/../../d".normalizePath()).isEqualTo("/a/d")
         assertThat("/a/../b/c/../d".normalizePath()).isEqualTo("/b/d")
     }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun normalizePath_traversal_error() {
+        "../".normalizePath()
+    }
 }
