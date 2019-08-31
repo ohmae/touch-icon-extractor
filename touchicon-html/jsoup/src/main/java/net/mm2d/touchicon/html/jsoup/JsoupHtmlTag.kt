@@ -18,6 +18,7 @@ internal class JsoupHtmlTag(
 ) : HtmlTag {
     override fun attr(name: String): String = element.attr(name)
 
-    override fun toString(): String = "JsoupHtmlTag(name=${element.tagName()}, attrs=[" +
-            element.attributes().joinToString { "(${it.key}, ${it.value})" } + "])"
+    override fun toString(): String = element.attributes()
+        .joinToString { "(${it.key}, ${it.value})" }
+        .let { "JsoupHtmlTag(name=${element.tagName()}, attrs=[$it])" }
 }

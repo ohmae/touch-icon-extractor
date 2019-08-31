@@ -24,11 +24,7 @@ private val INVALID_VALUE = Size(-1, -1)
  * e.g. "apple-touch-icon-120x120-precomposed.png" -> (120,120)
  */
 internal fun inferSizeFromUrl(url: String): Size {
-    val startOfFileName = url.lastIndexOf('/')
-    if (startOfFileName < 0 || startOfFileName >= url.length - 1) {
-        return INVALID_VALUE
-    }
-    val fileName = url.substring(startOfFileName + 1)
+    val fileName = url.substringAfterLast('/', "")
     val matcher = Pattern.compile("\\d+x\\d+").matcher(fileName)
     if (!matcher.find()) {
         return INVALID_VALUE
@@ -45,8 +41,9 @@ internal fun inferSizeFromUrl(url: String): Size {
  */
 internal fun inferSizeFromSizes(sizes: String): Size {
     val part = sizes.split('x')
-    if (part.size == 2) {
-        return Size(part[0].toIntOrNull() ?: -1, part[1].toIntOrNull() ?: -1)
+    return if (part.size == 2) {
+        Size(part[0].toIntOrNull() ?: -1, part[1].toIntOrNull() ?: -1)
+    } else {
+        INVALID_VALUE
     }
-    return INVALID_VALUE
 }

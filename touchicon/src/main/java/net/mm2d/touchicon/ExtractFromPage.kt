@@ -29,18 +29,15 @@ internal class ExtractFromPage(
         return extractFromHtml(siteUrl, html, withManifest)
     }
 
-    private fun fetch(url: String): String {
-        httpClient.get(url).use {
-            if (!it.hasHtml()) return ""
-            return it.bodyString(downloadLimit) ?: ""
-        }
+    private fun fetch(url: String): String = httpClient.get(url).use {
+        if (!it.hasHtml()) "" else it.bodyString(downloadLimit) ?: ""
     }
 
     private fun HttpResponse.hasHtml(): Boolean {
         if (!isSuccess) return false
-        val type = header("Content-Type") ?: return false
-        return type.contains("text/html", true) ||
-                type.contains("application/xhtml+xml", true)
+        return header("Content-Type")?.let {
+            it.contains("text/html", true) || it.contains("application/xhtml+xml", true)
+        } ?: false
     }
 
     @VisibleForTesting
@@ -48,12 +45,11 @@ internal class ExtractFromPage(
         siteUrl: String,
         html: String,
         withManifest: Boolean
-    ): List<Icon> {
-        if (!withManifest) {
-            return htmlParser.extractLinkTags(html)
-                .mapNotNull { createPageIcon(siteUrl, it) }
-        }
-        return htmlParser.extractLinkTags(html)
+    ): List<Icon> = if (!withManifest) {
+        htmlParser.extractLinkTags(html)
+            .mapNotNull { createPageIcon(siteUrl, it) }
+    } else {
+        htmlParser.extractLinkTags(html)
             .flatMap { tag ->
                 if (Relationship.of(tag.attr("rel")) == Relationship.MANIFEST) {
                     extractFromManifest(siteUrl, tag.attr("href"))
@@ -86,20 +82,17 @@ internal class ExtractFromPage(
         }
     }
 
-    private fun String.extractFromManifestJson(baseUrl: String): List<Icon> {
-        val result: MutableList<Icon> = mutableListOf()
-        try {
-            val json = JSONObject(this)
-            val icons = json.getJSONArray("icons")
-            for (i in 0 until icons.length()) {
-                try {
-                    result.add(createIcon(baseUrl, icons.getJSONObject(i)))
-                } catch (ignored: Exception) {
-                }
+    private fun String.extractFromManifestJson(baseUrl: String): List<Icon> = try {
+        val icons = JSONObject(this).getJSONArray("icons")
+        (0 until icons.length()).mapNotNull {
+            try {
+                createIcon(baseUrl, icons.getJSONObject(it))
+            } catch (ignored: Exception) {
+                null
             }
-        } catch (ignored: Exception) {
         }
-        return result
+    } catch (ignored: Exception) {
+        emptyList()
     }
 
     private fun createIcon(baseUrl: String, icon: JSONObject): WebAppIcon =

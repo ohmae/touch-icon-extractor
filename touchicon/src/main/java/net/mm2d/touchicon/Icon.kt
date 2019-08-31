@@ -55,8 +55,7 @@ interface Icon {
     /**
      * Infer area of this icon.
      */
-    fun inferArea(): Int {
-        val size = inferSize()
-        return if (size.width > 0 && size.height > 0) size.width * size.height else 0
+    fun inferArea(): Int = inferSize().let {
+        if (it.isValid()) it.width * it.height else 0
     }
 }

@@ -40,7 +40,7 @@ internal class SimpleHttpResponse(
     override fun close() {
         try {
             inputStream?.close()
-        } catch (e: Exception) {
+        } catch (ignored: Exception) {
         }
     }
 

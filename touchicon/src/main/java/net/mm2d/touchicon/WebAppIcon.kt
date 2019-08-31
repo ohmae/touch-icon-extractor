@@ -64,20 +64,19 @@ data class WebAppIcon(
     override val precomposed: Boolean = true
     override val length: Int = -1
 
-    private var _size: Size? = null
+    private val size: Size by lazy {
+        inferSizeInner()
+    }
+
     /**
      * Infer display size of this icon from sizes value.
      *
      * if fail to infer from sizes, try to infer from url.
      */
-    override fun inferSize(): Size {
-        _size?.let { return it }
-        return inferSizeInner().also { _size = it }
-    }
+    override fun inferSize(): Size = size
 
-    private fun inferSizeInner(): Size {
-        val size = inferSizeFromSizes(sizes)
-        return if (size.width > 0 && size.height > 0) size else inferSizeFromUrl(url)
+    private fun inferSizeInner(): Size = inferSizeFromSizes(sizes).let {
+        if (it.isValid()) it else inferSizeFromUrl(url)
     }
 
     constructor(parcel: Parcel) : this(

@@ -21,4 +21,6 @@ data class Size(
      * height.
      */
     val height: Int
-)
+) {
+    fun isValid(): Boolean = width > 0 && height > 0
+}

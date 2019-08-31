@@ -80,14 +80,14 @@ data class DomainIcon(
      */
     override val length: Int
 ) : Icon, Parcelable {
-    private var _size: Size? = null
+    private val size: Size by lazy {
+        inferSizeFromSizes(sizes)
+    }
+
     /**
      * Infer display size of this icon from sizes value.
      */
-    override fun inferSize(): Size {
-        _size?.let { return it }
-        return inferSizeFromSizes(sizes).also { _size = it }
-    }
+    override fun inferSize(): Size = size
 
     constructor(parcel: Parcel) : this(
         Relationship.of(parcel.readString())!!,

@@ -39,7 +39,7 @@ internal class SimpleHtmlParserAdapter : HtmlParserAdapter {
                 continue
             }
             val tagName = String(a, i, tagNameEnd - i)
-            if (!a[tagNameEnd].isWhitespace() && a[tagNameEnd] != '/' && a[tagNameEnd] != '>') {
+            if (a[tagNameEnd].let { !it.isWhitespace() && it != '/' && it != '>' }) {
                 continue
             }
             i = tagNameEnd
@@ -86,10 +86,7 @@ internal class SimpleHtmlParserAdapter : HtmlParserAdapter {
     private fun match(a: CharArray, offset: Int, pattern: String): Boolean {
         val p = pattern.toCharArray()
         if (a.size < offset + p.size) return false
-        for (i in p.indices) {
-            if (a[offset + i] != p[i]) return false
-        }
-        return true
+        return p.indices.none { a[offset + it] != p[it] }
     }
 
     private inline fun skip(a: CharArray, start: Int, breakCondition: (Int) -> Boolean): Int {

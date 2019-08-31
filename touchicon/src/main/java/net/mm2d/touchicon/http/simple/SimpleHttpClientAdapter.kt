@@ -48,8 +48,7 @@ internal class SimpleHttpClientAdapter(
     } as HttpURLConnection
 
     private fun URLConnection.setCookie(url: String) {
-        val cookieHandler = cookieHandler ?: return
-        cookieHandler.loadCookie(url)?.let {
+        cookieHandler?.loadCookie(url)?.let {
             setRequestProperty(KEY_COOKIE, it)
         }
     }
