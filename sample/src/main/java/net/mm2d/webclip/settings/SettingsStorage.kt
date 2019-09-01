@@ -37,39 +37,29 @@ class SettingsStorage(context: Context) {
             .apply()
     }
 
-    operator fun contains(key: Key): Boolean {
-        return preferences.contains(key.name)
-    }
+    operator fun contains(key: Key): Boolean = preferences.contains(key.name)
 
     fun writeBoolean(key: Key, value: Boolean) {
-        if (!key.isBooleanKey) {
-            throw IllegalArgumentException(key.name + " is not key for boolean")
-        }
+        require(key.isBooleanKey) { key.name + " is not key for boolean" }
         preferences.edit()
             .putBoolean(key.name, value)
             .apply()
     }
 
     fun readBoolean(key: Key): Boolean {
-        if (!key.isBooleanKey) {
-            throw IllegalArgumentException(key.name + " is not key for boolean")
-        }
+        require(key.isBooleanKey) { key.name + " is not key for boolean" }
         return preferences.getBoolean(key.name, key.defaultBoolean)
     }
 
     fun writeInt(key: Key, value: Int) {
-        if (!key.isIntKey) {
-            throw IllegalArgumentException(key.name + " is not key for int")
-        }
+        require(key.isIntKey) { key.name + " is not key for int" }
         preferences.edit()
             .putInt(key.name, value)
             .apply()
     }
 
     fun readInt(key: Key): Int {
-        if (!key.isIntKey) {
-            throw IllegalArgumentException(key.name + " is not key for int")
-        }
+        require(key.isIntKey) { key.name + " is not key for int" }
         return preferences.getInt(key.name, key.defaultInt)
     }
 }

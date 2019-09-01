@@ -20,7 +20,5 @@ object WebViewCookieHandler : CookieHandler {
         cookieManager.setCookie(url, value)
     }
 
-    override fun loadCookie(url: String): String? {
-        return cookieManager.getCookie(url)
-    }
+    override fun loadCookie(url: String): String? = cookieManager.getCookie(url)
 }

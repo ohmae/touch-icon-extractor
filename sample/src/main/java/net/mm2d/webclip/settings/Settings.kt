@@ -15,21 +15,17 @@ import android.content.Context
 class Settings private constructor(
     private val storage: SettingsStorage
 ) {
-    fun shouldUseExtension(): Boolean {
-        return storage.readBoolean(Key.USE_EXTENSION)
-    }
+    fun shouldUseExtension(): Boolean = storage.readBoolean(Key.USE_EXTENSION)
 
     companion object {
-        private var settings: Settings? = null
-
-        fun get(): Settings {
-            return settings!!
-        }
+        private lateinit var settings: Settings
 
         fun initialize(context: Context) {
             val storage = SettingsStorage(context)
             Maintainer.maintain(storage)
             settings = Settings(storage)
         }
+
+        fun get(): Settings = settings
     }
 }

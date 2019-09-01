@@ -44,14 +44,14 @@ import net.mm2d.touchicon.WebAppIcon
  */
 class IconDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val act = activity!!
-        val arg = arguments!!
-        val title = arg.getString(KEY_TITLE)!!
-        val siteUrl = arg.getString(KEY_SITE_URL)!!
-        val useExtension = arg.getBoolean(KEY_USE_EXTENSION)
-        val view = act.layoutInflater.inflate(
+        val activity = activity!!
+        val arguments = arguments!!
+        val title = arguments.getString(KEY_TITLE)!!
+        val siteUrl = arguments.getString(KEY_SITE_URL)!!
+        val useExtension = arguments.getBoolean(KEY_USE_EXTENSION)
+        val view = activity.layoutInflater.inflate(
             R.layout.dialog_icon,
-            act.window.decorView as ViewGroup,
+            activity.window.decorView as ViewGroup,
             false
         )
         val extractor =
@@ -60,9 +60,9 @@ class IconDialog : DialogFragment() {
         view.findViewById<TextView>(R.id.site_url).text = siteUrl
         val progressBar: ProgressBar = view.findViewById(R.id.progress_bar)
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(act)
-        recyclerView.addItemDecoration(DividerItemDecoration(act, DividerItemDecoration.VERTICAL))
-        val adapter = IconListAdapter(act, view.findViewById(R.id.transparent_switch))
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
+        val adapter = IconListAdapter(activity, view.findViewById(R.id.transparent_switch))
         recyclerView.adapter = adapter
         GlobalScope.launch(Dispatchers.Main) {
             withContext(Dispatchers.IO) {
@@ -76,7 +76,7 @@ class IconDialog : DialogFragment() {
             }.let { adapter.add(it) }
             progressBar.visibility = View.GONE
         }
-        return AlertDialog.Builder(act)
+        return AlertDialog.Builder(activity)
             .setTitle(title)
             .setView(view)
             .create()
@@ -165,7 +165,7 @@ class IconDialog : DialogFragment() {
             type.text = icon.mimeType
             url.text = icon.url
             val size = icon.inferSize()
-            val inferSize = if (size.width > 0 && size.height > 0) {
+            val inferSize = if (size.isValid()) {
                 "(${size.width}x${size.height})"
             } else {
                 "(uncertain)"
@@ -280,9 +280,7 @@ class IconDialog : DialogFragment() {
                     model: Any?,
                     target: Target<Drawable?>?,
                     isFirstResource: Boolean
-                ): Boolean {
-                    return false
-                }
+                ): Boolean = false
 
                 override fun onResourceReady(
                     resource: Drawable?,
@@ -299,8 +297,7 @@ class IconDialog : DialogFragment() {
             }
         }
 
-        private fun selectBackground(transparent: Boolean): Int {
-            return if (transparent) R.drawable.bg_icon else 0
-        }
+        private fun selectBackground(transparent: Boolean): Int =
+            if (transparent) R.drawable.bg_icon else 0
     }
 }

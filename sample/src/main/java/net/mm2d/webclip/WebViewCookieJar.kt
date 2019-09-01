@@ -25,13 +25,14 @@ object WebViewCookieJar : CookieJar {
         }
     }
 
-    override fun loadForRequest(url: HttpUrl): List<Cookie> {
-        val cookie = cookieManager.getCookie(url.toString())
-        if (cookie.isNullOrEmpty()) {
-            return emptyList()
+    override fun loadForRequest(url: HttpUrl): List<Cookie> =
+        cookieManager.getCookie(url.toString()).let { cookie ->
+            if (cookie.isNullOrEmpty()) {
+                emptyList()
+            } else {
+                cookie.split(";")
+                    .filter { it.isNotBlank() }
+                    .mapNotNull { Cookie.parse(url, it) }
+            }
         }
-        return cookie.split(";")
-            .filter { it.isNotBlank() }
-            .mapNotNull { Cookie.parse(url, it) }
-    }
 }

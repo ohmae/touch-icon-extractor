@@ -113,27 +113,23 @@ class MainActivity : AppCompatActivity() {
         private const val YAHOO_SEARCH_URL = "https://search.yahoo.co.jp/search?ei=UTF-8"
         private const val YAHOO_SEARCH_QUERY_KEY = "p"
 
-        private fun extractUrlToLoad(intent: Intent): String {
-            return when (intent.action) {
-                Intent.ACTION_VIEW ->
-                    intent.data?.toString() ?: ""
-                Intent.ACTION_SEARCH, Intent.ACTION_WEB_SEARCH ->
-                    makeSearchUrl(
-                        intent.getStringExtra(
-                            SearchManager.QUERY
-                        ) ?: ""
-                    )
-                else ->
-                    ""
-            }
+        private fun extractUrlToLoad(intent: Intent): String = when (intent.action) {
+            Intent.ACTION_VIEW ->
+                intent.data?.toString() ?: ""
+            Intent.ACTION_SEARCH, Intent.ACTION_WEB_SEARCH ->
+                makeSearchUrl(
+                    intent.getStringExtra(
+                        SearchManager.QUERY
+                    ) ?: ""
+                )
+            else ->
+                ""
         }
 
-        private fun makeSearchUrl(query: String): String {
-            return Uri.parse(YAHOO_SEARCH_URL)
-                .buildUpon()
-                .appendQueryParameter(YAHOO_SEARCH_QUERY_KEY, query)
-                .build()
-                .toString()
-        }
+        private fun makeSearchUrl(query: String): String = Uri.parse(YAHOO_SEARCH_URL)
+            .buildUpon()
+            .appendQueryParameter(YAHOO_SEARCH_QUERY_KEY, query)
+            .build()
+            .toString()
     }
 }
