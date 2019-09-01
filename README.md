@@ -19,6 +19,7 @@ And also published in [Play store](https://play.google.com/store/apps/details?id
 ## How to use
 
 Download from jCenter. Add dependencies, as following.
+
 ```gradle
 repositories {
     jcenter()
@@ -45,7 +46,7 @@ val extractor = TouchIconExtractor()                    // initialize
 extractor.userAgent = "user agent string"               // option: set User-Agent
 extractor.headers = mapOf("Cookie" to "hoge=fuga")      // option: set additional HTTP header
 extractor.downloadLimit = 10_000                        // option: set download limit (default 64kB).
-                                                        // <= 0 means no limit 
+                                                        // <= 0 means no limit
 //...
 GlobalScope.launch(Dispatchers.Main) {
     val job = async(Dispatchers.IO) {
@@ -62,7 +63,7 @@ If in RxJava
 Single.fromCallable { extractor.fromPage(url, true) }   // Do not call from the Main thread
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe({ 
+        .subscribe({
             //...
         }, {})
 ```
@@ -85,8 +86,70 @@ val extractor = TouchIconExtractor(
 )
 ```
 
+#### HTTP Session
+
+You may want to use communication in the same session as other communication.
+You need to use the same cookie in WebView and HTTP session of this library.
+For example, to use the same session as WebView in an Android application,
+
+For the default HTTP client using HttpUrlConnection, implement CookieHanlder.
+
+```kotlin
+object WebViewCookieHandler : CookieHandler {
+    private val cookieManager = CookieManager.getInstance()
+
+    override fun saveCookie(url: String, value: String) {
+        cookieManager.setCookie(url, value)
+    }
+
+    override fun loadCookie(url: String): String? = cookieManager.getCookie(url)
+}
+```
+
+```kotlin
+TouchIconExtractor(
+    httpClient = SimpleHttpClientAdapterFactory.create(WebViewCookieHandler)
+)
+```
+
+For OkHttp, set CookieJar in OkHttpClient as you know.
+
+```kotlin
+object WebViewCookieJar : CookieJar {
+    private val cookieManager = CookieManager.getInstance()
+
+    override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
+        val urlString = url.toString()
+        cookies.forEach {
+            cookieManager.setCookie(urlString, it.toString())
+        }
+    }
+
+    override fun loadForRequest(url: HttpUrl): List<Cookie> =
+        cookieManager.getCookie(url.toString()).let { cookie ->
+            if (cookie.isNullOrEmpty()) {
+                emptyList()
+            } else {
+                cookie.split(";")
+                    .filter { it.isNotBlank() }
+                    .mapNotNull { Cookie.parse(url, it) }
+            }
+        }
+}
+```
+
+```kotlin
+TouchIconExtractor(
+    httpClient = OkHttpAdapterFactory.create(
+        OkHttpClient.Builder()
+            .cookieJar(WebViewCookieJar)
+            .build()
+    )
+)
+```
+
 ## Operating principle
-   
+
 There are two kinds of methods for specifying the WebClip icon.
 This library supports both.
 
