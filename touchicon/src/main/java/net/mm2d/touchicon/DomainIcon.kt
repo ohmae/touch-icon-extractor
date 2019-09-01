@@ -86,6 +86,8 @@ data class DomainIcon(
 
     /**
      * Infer display size of this icon from sizes value.
+     *
+     * @return Inferred size
      */
     override fun inferSize(): Size = size
 

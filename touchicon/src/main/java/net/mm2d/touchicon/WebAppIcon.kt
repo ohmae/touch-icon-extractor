@@ -72,6 +72,8 @@ data class WebAppIcon(
      * Infer display size of this icon from sizes value.
      *
      * if fail to infer from sizes, try to infer from url.
+     *
+     * @return Inferred size
      */
     override fun inferSize(): Size = size
 

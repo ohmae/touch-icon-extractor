@@ -49,11 +49,15 @@ interface Icon {
      *
      * Infer based on [sizes] or [url].
      * If x or y is -1, it means fail to infer.
+     *
+     * @return Inferred size
      */
     fun inferSize(): Size
 
     /**
      * Infer area of this icon.
+     *
+     * @return area
      */
     fun inferArea(): Int = inferSize().let {
         if (it.isValid()) it.width * it.height else 0

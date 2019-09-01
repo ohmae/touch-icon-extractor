@@ -1,13 +1,7 @@
 apply plugin: "maven"
 apply plugin: "maven-publish"
-apply plugin: "org.jetbrains.dokka-android"
 apply plugin: "com.jfrog.bintray"
 apply plugin: "com.github.ben-manes.versions"
-
-dokka {
-    outputFormat = "html"
-    outputDirectory = "../../docs/touchicon-html"
-}
 
 task sourcesJar(type: Jar) {
     archiveClassifier = "sources"

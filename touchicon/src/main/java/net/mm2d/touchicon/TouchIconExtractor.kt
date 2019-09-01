@@ -71,8 +71,11 @@ class TouchIconExtractor(
      *
      * @param siteUrl
      * URL of analysis target page
+     *
      * @param withManifest
      * true: extract Web App Manifest icon too, if it exists. false: only from link tag
+     *
+     * @return List of acquired icons
      */
     @WorkerThread
     fun fromPage(siteUrl: String, withManifest: Boolean = false): List<Icon> =
@@ -123,6 +126,8 @@ class TouchIconExtractor(
      *
      * @param sizes
      * Specify this when appending size (e.g. 80x80) to apple-touch-icon. Default is empty.
+     *
+     * @return First acquired icon
      */
     @WorkerThread
     fun fromDomain(
@@ -152,6 +157,8 @@ class TouchIconExtractor(
      *
      * @param sizes
      * Specify this when appending size (e.g. 80x80) to apple-touch-icon. Default is empty.
+     *
+     * @return Pair of first acquired icon and that binary
      */
     @WorkerThread
     fun fromDomainWithDownload(
@@ -178,6 +185,8 @@ class TouchIconExtractor(
      *
      * @param sizes
      * Specify this when appending size (e.g. 80x80) to apple-touch-icon. Default is empty.
+     *
+     * @return List of acquired icons
      */
     @WorkerThread
     fun listFromDomain(

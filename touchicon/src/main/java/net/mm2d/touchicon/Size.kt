@@ -22,5 +22,10 @@ data class Size(
      */
     val height: Int
 ) {
+    /**
+     * Returns whether this has a valid value.
+     *
+     * @return true: this has valid value, false: otherwise
+     */
     fun isValid(): Boolean = width > 0 && height > 0
 }

@@ -1,5 +1,6 @@
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
+apply plugin: "org.jetbrains.dokka-android"
 
 def libraryName = "touchicon-html-jsoup"
 
@@ -32,6 +33,11 @@ dependencies {
     testImplementation "com.google.truth:truth:1.0"
     testImplementation "io.mockk:mockk:1.9.3"
     testImplementation "org.robolectric:robolectric:4.3"
+}
+
+dokka {
+    outputFormat = "html"
+    outputDirectory = "../../docs/touchicon-html"
 }
 
 apply from: "${rootDir}/common.gradle"
