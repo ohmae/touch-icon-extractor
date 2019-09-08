@@ -9,12 +9,11 @@ archivesBaseName = libraryName
 version pj.versions.name
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode pj.versions.code
         versionName pj.versions.name
     }

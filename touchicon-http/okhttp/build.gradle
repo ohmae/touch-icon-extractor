@@ -9,12 +9,11 @@ archivesBaseName = libraryName
 version pj.versions.name
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode pj.versions.code
         versionName pj.versions.name
     }
@@ -27,7 +26,7 @@ dependencies {
     implementation project(":touchicon")
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "com.squareup.okhttp3:okhttp:3.12.2"
+    implementation "com.squareup.okhttp3:okhttp:3.12.4"
 
     testImplementation "junit:junit:4.12"
     testImplementation "com.google.truth:truth:1.0"
