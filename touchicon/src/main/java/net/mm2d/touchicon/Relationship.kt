@@ -7,6 +7,8 @@
 
 package net.mm2d.touchicon
 
+import java.util.*
+
 /**
  * enum of relationship between icon and page.
  *
@@ -103,6 +105,6 @@ enum class Relationship(
             .toMap()
 
         internal fun of(value: String?): Relationship? =
-            if (value.isNullOrEmpty()) null else VALUE_MAP[value.toLowerCase()]
+            if (value.isNullOrEmpty()) null else VALUE_MAP[value.toLowerCase(Locale.US)]
     }
 }
