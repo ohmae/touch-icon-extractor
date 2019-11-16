@@ -9,10 +9,13 @@ package net.mm2d.touchicon.html.simple
 
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
+@RunWith(JUnit4::class)
 class SimpleHtmlParserAdapterTest {
     private val expected = listOf(
         mapOf(
