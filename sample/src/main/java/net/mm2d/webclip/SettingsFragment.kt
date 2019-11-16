@@ -10,6 +10,7 @@ package net.mm2d.webclip
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import net.mm2d.webclip.settings.Key
 
@@ -19,8 +20,8 @@ import net.mm2d.webclip.settings.Key
 class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.preference)
-        findPreference(Key.VERSION_NUMBER.name).summary = BuildConfig.VERSION_NAME
-        findPreference(Key.SOURCE_CODE.name).setOnPreferenceClickListener {
+        findPreference<Preference>(Key.VERSION_NUMBER.name)?.summary = BuildConfig.VERSION_NAME
+        findPreference<Preference>(Key.SOURCE_CODE.name)?.setOnPreferenceClickListener {
             startActivity(Intent(activity, MainActivity::class.java).also {
                 it.action = Intent.ACTION_VIEW
                 it.addCategory(Intent.CATEGORY_BROWSABLE)
@@ -28,7 +29,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             })
             true
         }
-        findPreference(Key.LICENSE.name).setOnPreferenceClickListener {
+        findPreference<Preference>(Key.LICENSE.name)?.setOnPreferenceClickListener {
             startActivity(Intent(activity, MainActivity::class.java).also {
                 it.action = Intent.ACTION_VIEW
                 it.addCategory(Intent.CATEGORY_BROWSABLE)
