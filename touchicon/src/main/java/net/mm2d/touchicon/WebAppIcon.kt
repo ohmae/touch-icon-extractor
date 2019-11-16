@@ -59,7 +59,7 @@ data class WebAppIcon(
      * eg. "3.0"
      */
     val density: String
-) : Icon, Parcelable {
+) : Icon {
     override val rel: Relationship = Relationship.MANIFEST
     override val precomposed: Boolean = true
     override val length: Int = -1

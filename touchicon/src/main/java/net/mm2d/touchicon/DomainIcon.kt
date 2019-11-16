@@ -8,7 +8,6 @@
 package net.mm2d.touchicon
 
 import android.os.Parcel
-import android.os.Parcelable
 import android.os.Parcelable.Creator
 
 /**
@@ -79,7 +78,7 @@ data class DomainIcon(
      * Negative value means unknown.
      */
     override val length: Int
-) : Icon, Parcelable {
+) : Icon {
     private val size: Size by lazy {
         inferSizeFromSizes(sizes)
     }

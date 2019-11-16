@@ -8,7 +8,6 @@
 package net.mm2d.touchicon
 
 import android.os.Parcel
-import android.os.Parcelable
 import android.os.Parcelable.Creator
 
 /**
@@ -82,7 +81,7 @@ data class PageIcon(
      * Negative value means unknown. and in this class always -1.
      */
     override val length: Int = -1
-) : Icon, Parcelable {
+) : Icon {
     private val size: Size by lazy {
         inferSizeInner()
     }
