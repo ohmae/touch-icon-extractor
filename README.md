@@ -25,9 +25,9 @@ repositories {
     jcenter()
 }
 dependencies {
-    implementation 'net.mm2d:touchicon:0.7.0'
-    implementation 'net.mm2d:touchicon-http-okhttp:0.7.0' // If use OkHttp for HTTP access
-    implementation 'net.mm2d:touchicon-html-jsoup:0.7.0'  // If use Jsoup for HTML parse
+    implementation "net.mm2d:touchicon:0.7.0"
+    implementation "net.mm2d:touchicon-http-okhttp:0.7.0" // If use OkHttp for HTTP access
+    implementation "net.mm2d:touchicon-html-jsoup:0.7.0"  // If use Jsoup for HTML parse
 }
 ```
 
@@ -186,26 +186,26 @@ This is described by the following JSON.
 
 ```json
 {
-  "short_name": "AirHorner",
-  "name": "Kinlan's AirHorner of Infamy",
+  "short_name": "name",
+  "name": "Web App Icon",
   "icons": [
     {
-      "src": "launcher-icon-1x.png",
+      "src": "icon-1x.png",
       "type": "image/png",
       "sizes": "48x48"
     },
     {
-      "src": "launcher-icon-2x.png",
+      "src": "icon-2x.png",
       "type": "image/png",
       "sizes": "96x96"
     },
     {
-      "src": "launcher-icon-4x.png",
+      "src": "icon-4x.png",
       "type": "image/png",
       "sizes": "192x192"
     }
   ],
-  "start_url": "index.html?launcher=true"
+  "start_url": "index.html"
 }
 ```
 
@@ -231,7 +231,8 @@ Simply putting a file with a fixed name like "favicon.ico" in the root of the do
 Whether an icon exists or not can not be known until you try HTTP communication.
 
 This is an inefficient, but there are Web sites that are still deployed in this way.
-You should try only if you can not get it by the method in the previous section
+You should try only if you can not get it by the method in the previous section.
+_Please be aware that this method can be annoying to the website administrator._
 
 If you want this information, as following
 
