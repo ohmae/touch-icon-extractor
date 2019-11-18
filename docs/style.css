@@ -87,7 +87,13 @@ code, pre {
 code {
     font-size: 14pt;
     margin: 8px 0;
-    display: block;
+}
+
+p code {
+    background: #f0f8ff;
+    padding: 2px 8px;
+    border: 1px solid #aaeeff;
+    border-radius: 8px;
 }
 
 pre code {
