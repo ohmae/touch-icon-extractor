@@ -22,7 +22,11 @@ internal class ExtractFromDomain(
         .fragment(null)
         .clearQuery()
 
-    fun invoke(siteUrl: String, withPrecomposed: Boolean, sizes: List<String>): DomainIcon? {
+    internal fun invoke(
+        siteUrl: String,
+        withPrecomposed: Boolean,
+        sizes: List<String>
+    ): DomainIcon? {
         val base = makeBaseBuilder(siteUrl)
         return createTryDataList(withPrecomposed, sizes)
             .asSequence()
@@ -30,7 +34,7 @@ internal class ExtractFromDomain(
             .first()
     }
 
-    fun invokeWithDownload(
+    internal fun invokeWithDownload(
         siteUrl: String,
         withPrecomposed: Boolean,
         sizes: List<String>
@@ -42,7 +46,11 @@ internal class ExtractFromDomain(
             .first()
     }
 
-    fun list(siteUrl: String, withPrecomposed: Boolean, sizes: List<String>): List<DomainIcon> {
+    internal fun list(
+        siteUrl: String,
+        withPrecomposed: Boolean,
+        sizes: List<String>
+    ): List<DomainIcon> {
         val base = makeBaseBuilder(siteUrl)
         return createTryDataList(withPrecomposed, sizes)
             .mapNotNull { tryHead(base, it) }

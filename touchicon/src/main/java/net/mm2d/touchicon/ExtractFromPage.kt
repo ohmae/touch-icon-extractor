@@ -29,6 +29,18 @@ internal class ExtractFromPage(
         return extractFromHtml(siteUrl, html, withManifest)
     }
 
+    internal fun fromManifest(siteUrl: String): List<Icon> {
+        val html = try {
+            fetch(siteUrl)
+        } catch (ignored: Exception) {
+            ""
+        }
+        if (html.isEmpty()) return emptyList()
+        return htmlParser.extractLinkTags(html)
+            .filter { Relationship.of(it.attr("rel")) == Relationship.MANIFEST }
+            .flatMap { extractFromManifest(siteUrl, it.attr("href")) ?: emptyList() }
+    }
+
     private fun fetch(url: String): String = httpClient.get(url).use {
         if (!it.hasHtml()) "" else it.bodyString(downloadLimit) ?: ""
     }

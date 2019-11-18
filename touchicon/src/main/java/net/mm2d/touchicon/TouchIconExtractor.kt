@@ -62,12 +62,11 @@ class TouchIconExtractor(
         }
 
     /**
-     * Analyzes the HTML of the designated URL and extract the icon information specified by the link tag.
+     * Analyzes the HTML of the specified URL and extract the icon information specified by the link tag.
      *
      * **Do not call from main thread** to avoid NetworkOnMainThreadException
      *
-     * Download the HTML file to the [downloadLimit] size
-     * and analyze the `<link>` tag within that range.
+     * The HTML file is downloaded up to the maximum [downloadLimit] and analyzed within that range.
      *
      * @param siteUrl
      * URL of analysis target page
@@ -80,6 +79,22 @@ class TouchIconExtractor(
     @WorkerThread
     fun fromPage(siteUrl: String, withManifest: Boolean = false): List<Icon> =
         fromPage.invoke(siteUrl, withManifest)
+
+    /**
+     * Analyzes the HTML of specified URL and if there is a tag indicating WebApp Manifest, analyze the Manifest file and return icon information.
+     *
+     * **Do not call from main thread** to avoid NetworkOnMainThreadException
+     *
+     * The HTML file is downloaded up to the maximum [downloadLimit] and analyzed within that range.
+     *
+     * @param siteUrl
+     * URL of analysis target page
+     *
+     * @return List of acquired icons
+     */
+    @WorkerThread
+    fun fromManifest(siteUrl: String): List<Icon> =
+        fromPage.fromManifest(siteUrl)
 
     /**
      * Get valid icon information,
