@@ -78,7 +78,7 @@ class TouchIconExtractor(
      */
     @WorkerThread
     fun fromPage(siteUrl: String, withManifest: Boolean = false): List<Icon> =
-        fromPage.invoke(siteUrl, withManifest)
+        fromPage.fromPage(siteUrl, withManifest)
 
     /**
      * Analyzes the HTML of specified URL and if there is a tag indicating WebApp Manifest, analyze the Manifest file and return icon information.

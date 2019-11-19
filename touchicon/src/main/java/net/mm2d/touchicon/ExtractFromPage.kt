@@ -19,7 +19,7 @@ internal class ExtractFromPage(
 ) {
     var downloadLimit: Int = DEFAULT_LIMIT_SIZE
 
-    internal fun invoke(siteUrl: String, withManifest: Boolean): List<Icon> {
+    internal fun fromPage(siteUrl: String, withManifest: Boolean): List<Icon> {
         val html = try {
             fetch(siteUrl)
         } catch (ignored: Exception) {
