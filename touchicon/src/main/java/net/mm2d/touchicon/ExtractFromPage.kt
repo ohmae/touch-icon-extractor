@@ -35,7 +35,7 @@ internal class ExtractFromPage(
         } else {
             htmlParser.extractLinkTags(html)
                 .filter { Relationship.of(it.attr("rel")) == Relationship.MANIFEST }
-                .flatMap { extractFromManifest(siteUrl, it.attr("href")) ?: emptyList() }
+                .flatMap { extractFromManifest(siteUrl, it.attr("href")) }
         }
     }
 
