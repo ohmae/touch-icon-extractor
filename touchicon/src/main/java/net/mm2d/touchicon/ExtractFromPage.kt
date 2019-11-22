@@ -20,29 +20,27 @@ internal class ExtractFromPage(
     var downloadLimit: Int = DEFAULT_LIMIT_SIZE
 
     internal fun fromPage(siteUrl: String, withManifest: Boolean): List<Icon> {
-        val html = try {
-            fetch(siteUrl)
-        } catch (ignored: Exception) {
-            ""
+        val html = runCatching { fetch(siteUrl) }.getOrNull()
+        return if (html.isNullOrEmpty()) {
+            emptyList()
+        } else {
+            extractFromHtml(siteUrl, html, withManifest)
         }
-        if (html.isEmpty()) return emptyList()
-        return extractFromHtml(siteUrl, html, withManifest)
     }
 
     internal fun fromManifest(siteUrl: String): List<Icon> {
-        val html = try {
-            fetch(siteUrl)
-        } catch (ignored: Exception) {
-            ""
+        val html = runCatching { fetch(siteUrl) }.getOrNull()
+        return if (html.isNullOrEmpty()) {
+            emptyList()
+        } else {
+            htmlParser.extractLinkTags(html)
+                .filter { Relationship.of(it.attr("rel")) == Relationship.MANIFEST }
+                .flatMap { extractFromManifest(siteUrl, it.attr("href")) ?: emptyList() }
         }
-        if (html.isEmpty()) return emptyList()
-        return htmlParser.extractLinkTags(html)
-            .filter { Relationship.of(it.attr("rel")) == Relationship.MANIFEST }
-            .flatMap { extractFromManifest(siteUrl, it.attr("href")) ?: emptyList() }
     }
 
-    private fun fetch(url: String): String = httpClient.get(url).use {
-        if (!it.hasHtml()) "" else it.bodyString(downloadLimit) ?: ""
+    private fun fetch(url: String): String? = httpClient.get(url).use {
+        if (it.hasHtml()) it.bodyString(downloadLimit) else null
     }
 
     private fun HttpResponse.hasHtml(): Boolean {
@@ -61,14 +59,11 @@ internal class ExtractFromPage(
         htmlParser.extractLinkTags(html)
             .mapNotNull { createPageIcon(siteUrl, it) }
     } else {
-        htmlParser.extractLinkTags(html)
-            .flatMap { tag ->
-                if (Relationship.of(tag.attr("rel")) == Relationship.MANIFEST) {
-                    extractFromManifest(siteUrl, tag.attr("href"))
-                } else {
-                    createPageIcon(siteUrl, tag)?.let { listOf(it) }
-                } ?: emptyList()
-            }
+        htmlParser.extractLinkTags(html).let { tags ->
+            tags.mapNotNull { createPageIcon(siteUrl, it) } +
+                tags.filter { Relationship.of(it.attr("rel")) == Relationship.MANIFEST }
+                    .flatMap { extractFromManifest(siteUrl, it.attr("href")) }
+        }
     }
 
     private fun createPageIcon(siteUrl: String, linkTag: HtmlTag): PageIcon? {
@@ -82,32 +77,25 @@ internal class ExtractFromPage(
         return PageIcon(rel, url, sizes, mimeType)
     }
 
-    private fun extractFromManifest(siteUrl: String, href: String): List<Icon>? {
-        if (href.isEmpty()) return null
+    private fun extractFromManifest(siteUrl: String, href: String): List<Icon> {
+        if (href.isEmpty()) return emptyList()
         val url = makeAbsoluteUrl(siteUrl, href)
-        return try {
+        return runCatching {
             httpClient.get(url).use {
                 it.bodyString()?.extractFromManifestJson(url)
             }
-        } catch (ignored: Exception) {
-            null
-        }
+        }.getOrNull() ?: emptyList()
     }
 
-    private fun String.extractFromManifestJson(baseUrl: String): List<Icon> = try {
-        val icons = JSONObject(this).getJSONArray("icons")
-        (0 until icons.length()).mapNotNull {
-            try {
-                createIcon(baseUrl, icons.getJSONObject(it))
-            } catch (ignored: Exception) {
-                null
+    private fun String.extractFromManifestJson(baseUrl: String): List<Icon>? =
+        runCatching {
+            val icons = JSONObject(this).getJSONArray("icons")
+            (0 until icons.length()).mapNotNull {
+                runCatching { createWebAppIcon(baseUrl, icons.getJSONObject(it)) }.getOrNull()
             }
-        }
-    } catch (ignored: Exception) {
-        emptyList()
-    }
+        }.getOrNull()
 
-    private fun createIcon(baseUrl: String, icon: JSONObject): WebAppIcon =
+    private fun createWebAppIcon(baseUrl: String, icon: JSONObject): WebAppIcon =
         WebAppIcon(
             makeAbsoluteUrl(baseUrl, icon.getString("src")),
             icon.optString("sizes"),
