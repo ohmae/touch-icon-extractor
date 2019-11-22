@@ -56,23 +56,21 @@ internal class ExtractFromDomain(
             .mapNotNull { tryHead(base, it) }
     }
 
-    private fun tryHead(baseUri: Uri.Builder, tryData: TryData): DomainIcon? = try {
-        val url = makeUrl(baseUri, tryData)
-        httpClient.head(url).use { createDomainIcon(it, url, tryData) }
-    } catch (ignored: Exception) {
-        null
-    }
+    private fun tryHead(baseUri: Uri.Builder, tryData: TryData): DomainIcon? =
+        runCatching {
+            val url = makeUrl(baseUri, tryData)
+            httpClient.head(url).use { createDomainIcon(it, url, tryData) }
+        }.getOrNull()
 
-    private fun tryGet(baseUri: Uri.Builder, tryData: TryData): Pair<DomainIcon, ByteArray>? = try {
-        val url = makeUrl(baseUri, tryData)
-        httpClient.get(url).use {
-            val icon = createDomainIcon(it, url, tryData)
-            val bytes = it.bodyBytes()
-            if (icon != null && bytes != null) icon to bytes else null
-        }
-    } catch (ignored: Exception) {
-        null
-    }
+    private fun tryGet(baseUri: Uri.Builder, tryData: TryData): Pair<DomainIcon, ByteArray>? =
+        runCatching {
+            val url = makeUrl(baseUri, tryData)
+            httpClient.get(url).use {
+                val icon = createDomainIcon(it, url, tryData)
+                val bytes = it.bodyBytes()
+                if (icon != null && bytes != null) icon to bytes else null
+            }
+        }.getOrNull()
 
     private fun makeUrl(baseUri: Uri.Builder, tryData: TryData): String =
         baseUri.path(tryData.name).build().toString()
@@ -102,36 +100,30 @@ internal class ExtractFromDomain(
         val result: MutableList<TryData> = mutableListOf()
         sizes.forEach {
             if (withPrecomposed) {
-                result.add(
-                    TryData(
-                        Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
-                        "$APPLE_TOUCH_ICON-$it-$PRECOMPOSED.$PNG",
-                        it,
-                        true
-                    )
+                result += TryData(
+                    Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
+                    "$APPLE_TOUCH_ICON-$it-$PRECOMPOSED.$PNG",
+                    it,
+                    true
                 )
             }
-            result.add(
-                TryData(
-                    Relationship.APPLE_TOUCH_ICON,
-                    "$APPLE_TOUCH_ICON-$it.$PNG",
-                    it,
-                    false
-                )
+            result += TryData(
+                Relationship.APPLE_TOUCH_ICON,
+                "$APPLE_TOUCH_ICON-$it.$PNG",
+                it,
+                false
             )
         }
         if (withPrecomposed) {
-            result.add(
-                TryData(
-                    Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
-                    "$APPLE_TOUCH_ICON-$PRECOMPOSED.$PNG",
-                    "",
-                    true
-                )
+            result += TryData(
+                Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
+                "$APPLE_TOUCH_ICON-$PRECOMPOSED.$PNG",
+                "",
+                true
             )
         }
-        result.add(TryData(Relationship.APPLE_TOUCH_ICON, "$APPLE_TOUCH_ICON.$PNG", "", false))
-        result.add(TryData(Relationship.ICON, FAVICON_ICO, "", false))
+        result += TryData(Relationship.APPLE_TOUCH_ICON, "$APPLE_TOUCH_ICON.$PNG", "", false)
+        result += TryData(Relationship.ICON, FAVICON_ICO, "", false)
         return result
     }
 
