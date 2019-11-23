@@ -25,9 +25,9 @@ repositories {
     jcenter()
 }
 dependencies {
-    implementation "net.mm2d:touchicon:0.7.0"
-    implementation "net.mm2d:touchicon-http-okhttp:0.7.0" // If use OkHttp for HTTP access
-    implementation "net.mm2d:touchicon-html-jsoup:0.7.0"  // If use Jsoup for HTML parse
+    implementation "net.mm2d:touchicon:0.7.1"
+    implementation "net.mm2d:touchicon-http-okhttp:0.7.1" // If use OkHttp for HTTP access
+    implementation "net.mm2d:touchicon-html-jsoup:0.7.1"  // If use Jsoup for HTML parse
 }
 ```
 
