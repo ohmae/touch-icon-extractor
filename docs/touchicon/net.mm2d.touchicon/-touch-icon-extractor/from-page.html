@@ -10,10 +10,9 @@
 <h1>fromPage</h1>
 <a name="net.mm2d.touchicon.TouchIconExtractor$fromPage(kotlin.String, kotlin.Boolean)"></a>
 <code><span class="identifier">@WorkerThread</span> <span class="keyword">fun </span><span class="identifier">fromPage</span><span class="symbol">(</span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$fromPage(kotlin.String, kotlin.Boolean)/siteUrl">siteUrl</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.TouchIconExtractor$fromPage(kotlin.String, kotlin.Boolean)/withManifest">withManifest</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-icon/index.html"><span class="identifier">Icon</span></a><span class="symbol">&gt;</span></code>
-<p>Analyzes the HTML of the designated URL and extract the icon information specified by the link tag.</p>
+<p>Analyzes the HTML of the specified URL and extract the icon information specified by the link tag.</p>
 <p><strong>Do not call from main thread</strong> to avoid NetworkOnMainThreadException</p>
-<p>Download the HTML file to the <a href="download-limit.html">downloadLimit</a> size
-and analyze the <code>&lt;link&gt;</code> tag within that range.</p>
+<p>The HTML file is downloaded up to the maximum <a href="download-limit.html">downloadLimit</a> and analyzed within that range.</p>
 <h3>Parameters</h3>
 <p><a name="siteUrl"></a>
 <code>siteUrl</code> - URL of analysis target page</p>
