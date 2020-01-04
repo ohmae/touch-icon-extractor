@@ -1,6 +1,7 @@
 apply plugin: "maven"
 apply plugin: "maven-publish"
 apply plugin: "com.jfrog.bintray"
+apply plugin: "jacoco"
 apply plugin: "com.github.ben-manes.versions"
 
 task sourcesJar(type: Jar) {
@@ -109,6 +110,24 @@ bintray {
 }
 
 bintrayUpload.dependsOn assemble
+
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+task jacocoTestReport(
+    type: JacocoReport,
+    dependsOn: "testDebugUnitTest",
+    group: "verification"
+) {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+    getSourceDirectories().from = "${projectDir}/src/main/java"
+    getClassDirectories().from = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug")
+    getExecutionData().from = "${buildDir}/jacoco/testDebugUnitTest.exec"
+}
 
 dependencyUpdates.resolutionStrategy {
     componentSelection { rules ->
