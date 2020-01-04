@@ -1,12 +1,10 @@
-name: android
+name: ci
 
 on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
     - name: set up JDK 1.8
@@ -23,4 +21,3 @@ jobs:
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        file: ./build/reports/jacoco/report.xml
