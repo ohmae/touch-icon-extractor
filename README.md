@@ -5,6 +5,8 @@
 [![GitHub closed issues](https://img.shields.io/github/issues-closed/ohmae/touch-icon-extractor.svg)](https://github.com/ohmae/touch-icon-extractor/issues?q=is%3Aissue+is%3Aclosed)
 [![Maven Repository](https://img.shields.io/badge/maven-jcenter-brightgreen.svg)](https://bintray.com/ohmae/maven/net.mm2d.touchicon)
 [![Maven metadata URI](https://img.shields.io/maven-metadata/v/https/jcenter.bintray.com/net/mm2d/touchicon/maven-metadata.xml.svg)](https://bintray.com/ohmae/maven/net.mm2d.touchicon)
+[![Actions Status](https://github.com/ohmae/touch-icon-extractor/workflows/ci/badge.svg)](https://github.com/ohmae/touch-icon-extractor/actions)
+[![codecov](https://codecov.io/gh/ohmae/touch-icon-extractor/branch/develop/graph/badge.svg)](https://codecov.io/gh/ohmae/touch-icon-extractor)
 
 This is a library for android for extracting apple-touch-icon information from the website.
 
