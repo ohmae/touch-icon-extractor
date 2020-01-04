@@ -1,4 +1,4 @@
-name: Android CI
+name: android
 
 on: [push]
 
@@ -13,9 +13,14 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: UnitTest
+    - name: chmod
       run: chmod +x gradlew
     - name: UnitTest
       run: ./gradlew testDebugUnitTest
     - name: TestReport
       run: ./gradlew jacocoMergedReport
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./build/reports/jacoco/report.xml
