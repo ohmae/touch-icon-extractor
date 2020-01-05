@@ -32,7 +32,7 @@ class ExtractFromDomainTest {
             every { header("Content-Type") } returns "image/png"
         }
         val extract = ExtractFromDomain(httpClient)
-        val icon = extract.invoke("$baseUrl/index.html", true, emptyList())
+        val icon = extract.fromDomain("$baseUrl/index.html", true, emptyList())
         assertThat(icon?.mimeType).isEqualTo("image/png")
         verify(inverse = true) { httpClient.get(any()) }
         verify(exactly = 1) { httpClient.head(any()) }
@@ -50,7 +50,7 @@ class ExtractFromDomainTest {
             every { header("Content-Type") } returns "image/png"
         }
         val extract = ExtractFromDomain(httpClient)
-        val icon = extract.invoke("$baseUrl/index.html", true, emptyList())
+        val icon = extract.fromDomain("$baseUrl/index.html", true, emptyList())
         assertThat(icon?.mimeType).isEqualTo("image/png")
         verify(inverse = true) { httpClient.get(any()) }
         verify(exactly = 2) { httpClient.head(any()) }
@@ -68,7 +68,7 @@ class ExtractFromDomainTest {
             every { header("Content-Type") } returns "image/x-icon"
         }
         val extract = ExtractFromDomain(httpClient)
-        val icon = extract.invoke("$baseUrl/index.html", true, emptyList())
+        val icon = extract.fromDomain("$baseUrl/index.html", true, emptyList())
         assertThat(icon?.mimeType).isEqualTo("image/x-icon")
         verify(inverse = true) { httpClient.get(any()) }
         verify(exactly = 3) { httpClient.head(any()) }

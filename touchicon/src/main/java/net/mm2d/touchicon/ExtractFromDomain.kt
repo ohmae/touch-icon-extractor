@@ -22,7 +22,7 @@ internal class ExtractFromDomain(
         .fragment(null)
         .clearQuery()
 
-    internal fun invoke(
+    internal fun fromDomain(
         siteUrl: String,
         withPrecomposed: Boolean,
         sizes: List<String>
@@ -34,7 +34,7 @@ internal class ExtractFromDomain(
             .first()
     }
 
-    internal fun invokeWithDownload(
+    internal fun fromDomainWithDownload(
         siteUrl: String,
         withPrecomposed: Boolean,
         sizes: List<String>
@@ -46,7 +46,7 @@ internal class ExtractFromDomain(
             .first()
     }
 
-    internal fun list(
+    internal fun listFromDomain(
         siteUrl: String,
         withPrecomposed: Boolean,
         sizes: List<String>

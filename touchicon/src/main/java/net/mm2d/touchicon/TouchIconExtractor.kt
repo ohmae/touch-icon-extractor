@@ -27,8 +27,9 @@ class TouchIconExtractor(
     private val httpClient: HttpClientAdapter = SimpleHttpClientAdapterFactory.create(),
     private val htmlParser: HtmlParserAdapter = SimpleHtmlParserAdapterFactory.create()
 ) {
-    private val fromPage = ExtractFromPage(httpClient, htmlParser)
-    private val fromDomain = ExtractFromDomain(httpClient)
+    private val fromPage = createExtractFromPage(httpClient, htmlParser)
+    private val fromDomain = createExtractFromDomain(httpClient)
+
     /**
      * Specify the value of User-Agent used for HTTP communication.
      *
@@ -149,7 +150,7 @@ class TouchIconExtractor(
         siteUrl: String,
         withPrecomposed: Boolean = true,
         sizes: List<String> = emptyList()
-    ): Icon? = fromDomain.invoke(siteUrl, withPrecomposed, sizes)
+    ): Icon? = fromDomain.fromDomain(siteUrl, withPrecomposed, sizes)
 
     /**
      * It performs the same processing as [fromDomain] using HTTP GET, and downloads binary if icon exists.
@@ -180,7 +181,7 @@ class TouchIconExtractor(
         siteUrl: String,
         withPrecomposed: Boolean = true,
         sizes: List<String> = emptyList()
-    ): Pair<Icon, ByteArray>? = fromDomain.invokeWithDownload(siteUrl, withPrecomposed, sizes)
+    ): Pair<Icon, ByteArray>? = fromDomain.fromDomainWithDownload(siteUrl, withPrecomposed, sizes)
 
     /**
      * Processing similar to [fromDomain] is performed, but even if an icon is found,
@@ -208,5 +209,16 @@ class TouchIconExtractor(
         siteUrl: String,
         withPrecomposed: Boolean = true,
         sizes: List<String> = emptyList()
-    ): List<Icon> = fromDomain.list(siteUrl, withPrecomposed, sizes)
+    ): List<Icon> = fromDomain.listFromDomain(siteUrl, withPrecomposed, sizes)
+
+    companion object {
+        internal fun createExtractFromPage(
+            httpClient: HttpClientAdapter,
+            htmlParser: HtmlParserAdapter
+        ): ExtractFromPage = ExtractFromPage(httpClient, htmlParser)
+
+        internal fun createExtractFromDomain(
+            httpClient: HttpClientAdapter
+        ): ExtractFromDomain = ExtractFromDomain(httpClient)
+    }
 }
