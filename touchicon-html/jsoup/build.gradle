@@ -17,9 +17,6 @@ android {
         versionCode pj.versions.code
         versionName pj.versions.name
     }
-    testOptions {
-        unitTests.includeAndroidResources = true
-    }
 }
 
 dependencies {

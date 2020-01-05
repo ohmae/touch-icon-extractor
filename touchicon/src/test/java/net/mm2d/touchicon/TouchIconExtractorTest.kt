@@ -63,7 +63,7 @@ class TouchIconExtractorTest {
     fun setHeaders() {
         val headers = mapOf("key" to "value")
         extractor.headers = headers
-        verify { httpClientAdapter.headers }
+        verify { httpClientAdapter.headers = headers }
     }
 
     @Test
@@ -77,14 +77,14 @@ class TouchIconExtractorTest {
     fun setDownloadLimit() {
         val downloadLimit = 10
         extractor.downloadLimit = downloadLimit
-        verify { extractFromPage.downloadLimit }
+        verify { extractFromPage.downloadLimit = downloadLimit }
     }
 
     @Test
     fun getDownloadLimit() {
         val downloadLimit = 10
         every { extractFromPage.downloadLimit } returns downloadLimit
-        assertThat(extractor.headers).isEqualTo(downloadLimit)
+        assertThat(extractor.downloadLimit).isEqualTo(downloadLimit)
     }
 
     @Test
