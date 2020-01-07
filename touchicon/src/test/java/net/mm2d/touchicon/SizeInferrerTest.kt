@@ -97,5 +97,6 @@ class SizeInferrerTest {
         assertThat(inferSizeFromSizes("48x48")).isEqualTo(Size(48, 48))
         assertThat(inferSizeFromSizes("1024x1024")).isEqualTo(Size(1024, 1024))
         assertThat(inferSizeFromSizes("A0x1B")).isEqualTo(Size(-1, -1))
+        assertThat(inferSizeFromSizes("10-10")).isEqualTo(Size(-1, -1))
     }
 }

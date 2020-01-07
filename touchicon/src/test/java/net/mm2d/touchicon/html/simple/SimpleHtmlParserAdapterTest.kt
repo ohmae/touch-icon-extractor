@@ -119,5 +119,28 @@ class SimpleHtmlParserAdapterTest {
             }
         }
     }
+
+    @Test
+    fun extractLinkTags_end1() {
+        val links = SimpleHtmlParserAdapter().extractLinkTags(
+            """html lang="ja"><head><link rel=icon href=/favicon.ico type=image/vnd.microsoft.icon><link"""
+        )
+        assertThat(links).hasSize(1)
+        assertThat(links[0].attr("hoge")).isNotNull()
+    }
+
+    @Test
+    fun extractLinkTags_end2() {
+        val links = SimpleHtmlParserAdapter().extractLinkTags(
+            """
+            <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+            <html lang="ja">
+            <head>
+            <link rel=icon href=/favicon.ico type=image/vnd.microsoft.icon>
+            <link\
+            <link rel='shortcut""".trimIndent()
+        )
+        assertThat(links).hasSize(2)
+    }
 }
 
