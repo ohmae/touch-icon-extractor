@@ -11,12 +11,11 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: chmod
-      run: chmod +x gradlew
-    - name: UnitTest
-      run: ./gradlew testDebugUnitTest
-    - name: TestReport
-      run: ./gradlew jacocoMergedReport
+    - name: run unit test and send report
+      run: |
+        chmod +x gradlew
+        ./gradlew testDebugUnitTest
+        ./gradlew jacocoMergedReport
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
