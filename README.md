@@ -298,25 +298,25 @@ val bestIcon2 = icons.maxWith(IconComparator.REL_SIZE) // Compare by rel, if sam
 ### touchicon
 
 - [Kotlin](https://kotlinlang.org/)
-  - kotlin-stdlib-jdk7
+  - kotlin-stdlib
 - [Android Jetpack](https://developer.android.com/jetpack/)
   - androidx.annotation:annotation
 
 ### touchicon-http-okhttp
 
 - [Kotlin](https://kotlinlang.org/)
-  - kotlin-stdlib-jdk7
+  - kotlin-stdlib
 - [OkHttp3](https://square.github.io/okhttp/)
 
 ### touchicon-html-jsoup
 
 - [Kotlin](https://kotlinlang.org/)
-  - kotlin-stdlib-jdk7
+  - kotlin-stdlib
 - [Jsoup](https://jsoup.org/)
 
 ### sample app
 - [Kotlin](https://kotlinlang.org/)
-  - kotlin-stdlib-jdk7
+  - kotlin-stdlib
   - kotlinx-coroutines-core
   - kotlinx-coroutines-android
 - [Android Support Library](https://developer.android.com/topic/libraries/support-library/)
