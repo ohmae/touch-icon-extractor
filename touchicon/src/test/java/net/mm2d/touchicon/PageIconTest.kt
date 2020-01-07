@@ -7,8 +7,6 @@
 
 package net.mm2d.touchicon
 
-import android.os.Bundle
-import android.os.Parcel
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -64,18 +62,9 @@ class PageIconTest {
             sizes = "50x50",
             url = "http://example.com/icon-40x40.png"
         )
-        val key = "key"
-        val bundle1 = Bundle()
-        val parcel = Parcel.obtain()
-        try {
-            bundle1.putParcelable(key, icon)
-            parcel.writeBundle(bundle1)
-            parcel.setDataPosition(0)
-            val bundle2 = parcel.readBundle()!!
-            val restoredIcon: PageIcon = bundle2.getParcelable(key)!!
-            assertThat(icon).isEqualTo(restoredIcon)
-        } finally {
-            parcel.recycle()
-        }
+        val restoredIcon = ParcelableTestUtil.saveAndRestore(icon)
+        assertThat(restoredIcon).isEqualTo(icon)
+        assertThat(icon.describeContents()).isEqualTo(0)
+        assertThat(PageIcon.newArray(1)).hasLength(1)
     }
 }

@@ -7,9 +7,7 @@
 
 package net.mm2d.touchicon
 
-import android.os.Bundle
-import android.os.Parcel
-import com.google.common.truth.Truth
+import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -22,7 +20,7 @@ import org.robolectric.RobolectricTestRunner
 class WebAppIconTest {
     @Test
     fun inferSize() {
-        Truth.assertThat(
+        assertThat(
             WebAppIcon(
                 mimeType = "image/png",
                 sizes = "50x50",
@@ -40,19 +38,10 @@ class WebAppIconTest {
             url = "http://example.com/icon-40x40.png",
             density = "3.0"
         )
-        val key = "key"
-        val bundle1 = Bundle()
-        val parcel = Parcel.obtain()
-        try {
-            bundle1.putParcelable(key, icon)
-            parcel.writeBundle(bundle1)
-            parcel.setDataPosition(0)
-            val bundle2 = parcel.readBundle()!!
-            val restoredIcon: WebAppIcon = bundle2.getParcelable(key)!!
-            Truth.assertThat(icon).isEqualTo(restoredIcon)
-        } finally {
-            parcel.recycle()
-        }
+        val restoredIcon = ParcelableTestUtil.saveAndRestore(icon)
+        assertThat(restoredIcon).isEqualTo(icon)
+        assertThat(icon.describeContents()).isEqualTo(0)
+        assertThat(WebAppIcon.newArray(1)).hasLength(1)
     }
 }
 
