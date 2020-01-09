@@ -153,6 +153,7 @@ class ExtractFromPageTest {
         every {
             httpClient.get("https://www.example.com/manifest.json")
         } returns mockk<HttpResponse>(relaxed = true).also {
+            every { it.isSuccess } returns true
             every { it.bodyString() } returns """
             {
                 "short_name": "AirHorner",
@@ -189,5 +190,86 @@ class ExtractFromPageTest {
         assertThat(result[1].sizes).isEqualTo("192x192")
         assertThat(result[1].url).isEqualTo("https://www.example.com/launcher-icon-4x.png")
         assertThat((result[1] as WebAppIcon).density).isEqualTo("4.0")
+    }
+
+    @Test
+    fun extract_from_page_html() {
+        val httpClient: HttpClientAdapter = mockk()
+        every {
+            httpClient.get("https://www.example.com/")
+        } returns mockk<HttpResponse>(relaxed = true).also {
+            every { it.isSuccess } returns true
+            every { it.header("Content-Type") } returns "text/html"
+            every { it.bodyString(any()) } returns """
+            <html><head>
+            <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+            </head></html>
+            """.trimIndent()
+        }
+        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val result = extract.fromPage("https://www.example.com/", false)[0]
+        assertThat(result.rel).isEqualTo(Relationship.ICON)
+        assertThat(result.url).isEqualTo("https://www.example.com/favicon.ico")
+        assertThat(result.sizes).isEqualTo("")
+        assertThat(result.mimeType).isEqualTo("image/vnd.microsoft.icon")
+    }
+
+    @Test
+    fun extract_from_page_xhtml() {
+        val httpClient: HttpClientAdapter = mockk()
+        every {
+            httpClient.get("https://www.example.com/")
+        } returns mockk<HttpResponse>(relaxed = true).also {
+            every { it.isSuccess } returns true
+            every { it.header("Content-Type") } returns "application/xhtml+xml"
+            every { it.bodyString(any()) } returns """
+            <html><head>
+            <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+            </head></html>
+            """.trimIndent()
+        }
+        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val result = extract.fromPage("https://www.example.com/", false)[0]
+        assertThat(result.rel).isEqualTo(Relationship.ICON)
+        assertThat(result.url).isEqualTo("https://www.example.com/favicon.ico")
+        assertThat(result.sizes).isEqualTo("")
+        assertThat(result.mimeType).isEqualTo("image/vnd.microsoft.icon")
+    }
+
+    @Test
+    fun extract_from_page_fail1() {
+        val httpClient: HttpClientAdapter = mockk()
+        every {
+            httpClient.get("https://www.example.com/")
+        } returns mockk<HttpResponse>(relaxed = true).also {
+            every { it.isSuccess } returns false
+        }
+        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        assertThat(extract.fromPage("https://www.example.com/", false)).isEmpty()
+    }
+
+    @Test
+    fun extract_from_page_fail2() {
+        val httpClient: HttpClientAdapter = mockk()
+        every {
+            httpClient.get("https://www.example.com/")
+        } returns mockk<HttpResponse>(relaxed = true).also {
+            every { it.isSuccess } returns true
+            every { it.header("Content-Type") } returns "image/png"
+        }
+        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        assertThat(extract.fromPage("https://www.example.com/", false)).isEmpty()
+    }
+
+    @Test
+    fun extract_from_manifest_fail1() {
+        val httpClient: HttpClientAdapter = mockk()
+        every {
+            httpClient.get("https://www.example.com/")
+        } returns mockk<HttpResponse>(relaxed = true).also {
+            every { it.isSuccess } returns false
+        }
+        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        assertThat(extract.fromManifest("https://www.example.com/")).isEmpty()
     }
 }
