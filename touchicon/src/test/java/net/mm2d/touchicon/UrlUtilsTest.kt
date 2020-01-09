@@ -32,8 +32,18 @@ class UrlUtilsTest {
             makeAbsoluteUrl("https://www.example.com/foo/bar.html", "//www.example.net/icon.png")
         ).isEqualTo("https://www.example.net/icon.png")
         assertThat(
+            makeAbsoluteUrl("//www.example.com/foo/bar.html", "//www.example.net/icon.png")
+        ).isEqualTo("https://www.example.net/icon.png")
+        assertThat(
             makeAbsoluteUrl("http://www.example.com/foo/bar.html", "//www.example.net/icon.png")
         ).isEqualTo("http://www.example.net/icon.png")
+        assertThat(
+            makeAbsoluteUrl("https://www.example.com/foo/bar.html", "http://www.example.net/icon.png")
+        ).isEqualTo("http://www.example.net/icon.png")
+        assertThat(makeAbsoluteUrl("https://www.example.com", "icon.png"))
+            .isEqualTo("https://www.example.com/icon.png")
+        assertThat(makeAbsoluteUrl("https://www.example.com/foo/", "icon.png"))
+            .isEqualTo("https://www.example.com/foo/icon.png")
     }
 
     @Test
