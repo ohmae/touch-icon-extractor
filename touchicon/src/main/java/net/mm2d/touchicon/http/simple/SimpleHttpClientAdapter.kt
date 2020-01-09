@@ -55,7 +55,7 @@ internal class SimpleHttpClientAdapter(
 
     private fun HttpURLConnection.extractCookie(url: String) {
         val cookieHandler = cookieHandler ?: return
-        headerFields?.get(KEY_SET_COOKIE)?.forEach {
+        headerFields[KEY_SET_COOKIE]?.forEach {
             cookieHandler.saveCookie(url, it)
         }
     }

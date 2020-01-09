@@ -8,6 +8,8 @@
 package net.mm2d.touchicon.http.simple
 
 import com.google.common.truth.Truth.assertThat
+import io.mockk.every
+import io.mockk.mockk
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -38,9 +40,10 @@ class SimpleHttpClientAdapterTest {
         val userAgent = "user-agent"
         val client = SimpleHttpClientAdapter()
         client.userAgent = userAgent
-        client.head(server.url("favicon.ico").toString())
+        val response = client.head(server.url("favicon.ico").toString())
         server.shutdown()
         assertThat(recordedRequest?.getHeader("User-Agent")).isEqualTo(userAgent)
+        assertThat(response.isSuccess).isTrue()
     }
 
     @Test
@@ -171,5 +174,49 @@ class SimpleHttpClientAdapterTest {
             assertThat(it.bodyString()).isEqualTo("12345678901234567890")
         }
         server.shutdown()
+    }
+
+    @Test
+    fun setCookie() {
+        var recordedRequest: RecordedRequest? = null
+        val server = MockWebServer()
+        server.dispatcher = object : Dispatcher() {
+            override fun dispatch(request: RecordedRequest): MockResponse {
+                recordedRequest = request
+                return MockResponse().setResponseCode(200)
+            }
+        }
+        server.start()
+        val cookie = "name=value"
+        val cookieHandler: CookieHandler = mockk()
+        every { cookieHandler.loadCookie(any()) } returns cookie
+        val client = SimpleHttpClientAdapter(cookieHandler)
+        client.head(server.url("favicon.ico").toString())
+        server.shutdown()
+        assertThat(recordedRequest?.getHeader("Cookie")).isEqualTo(cookie)
+    }
+
+    @Test
+    fun getCookie() {
+        val cookie1 = "name=value; Max-Age=1000"
+        val cookie2 = "name=value; HttpOnly"
+        val server = MockWebServer()
+        server.dispatcher = object : Dispatcher() {
+            override fun dispatch(request: RecordedRequest): MockResponse {
+                return MockResponse().setResponseCode(200)
+                    .addHeader("Set-Cookie", cookie1)
+                    .addHeader("Set-Cookie", cookie2)
+            }
+        }
+        server.start()
+        val cookieHandler: CookieHandler = mockk()
+        every { cookieHandler.loadCookie(any()) } returns null
+        val slot = mutableListOf<String>()
+        every { cookieHandler.saveCookie(any(), capture(slot)) } answers { nothing }
+        val client = SimpleHttpClientAdapter(cookieHandler)
+        client.head(server.url("favicon.ico").toString())
+        server.shutdown()
+        assertThat(slot).contains(cookie1)
+        assertThat(slot).contains(cookie2)
     }
 }
