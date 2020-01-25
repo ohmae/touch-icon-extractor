@@ -9,13 +9,10 @@ package net.mm2d.touchicon
 
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-@RunWith(RobolectricTestRunner::class)
 @Suppress("TestFunctionName")
 class UrlUtilsTest {
     @Test
@@ -44,27 +41,9 @@ class UrlUtilsTest {
             .isEqualTo("https://www.example.com/icon.png")
         assertThat(makeAbsoluteUrl("https://www.example.com/foo/", "icon.png"))
             .isEqualTo("https://www.example.com/foo/icon.png")
-    }
-
-    @Test
-    fun normalizePath() {
-        assertThat("/".normalizePath()).isEqualTo("/")
-        assertThat("./".normalizePath()).isEqualTo("/")
-        assertThat("a".normalizePath()).isEqualTo("/a")
-        assertThat("a/b".normalizePath()).isEqualTo("/a/b")
-        assertThat("/a/b".normalizePath()).isEqualTo("/a/b")
-        assertThat("/a/b/".normalizePath()).isEqualTo("/a/b/")
-        assertThat("/a/b/./".normalizePath()).isEqualTo("/a/b/")
-        assertThat("/a/b/./c".normalizePath()).isEqualTo("/a/b/c")
-        assertThat("/a/b/c/../".normalizePath()).isEqualTo("/a/b/")
-        assertThat("/a/b/c/../d".normalizePath()).isEqualTo("/a/b/d")
-        assertThat("/a/b/c/./../d".normalizePath()).isEqualTo("/a/b/d")
-        assertThat("/a/b/c/../../d".normalizePath()).isEqualTo("/a/d")
-        assertThat("/a/../b/c/../d".normalizePath()).isEqualTo("/b/d")
-    }
-
-    @Test(expected = IllegalArgumentException::class)
-    fun normalizePath_traversal_error() {
-        "../".normalizePath()
+        assertThat(makeAbsoluteUrl("https://www.example.com/foo/", "./icon.png"))
+            .isEqualTo("https://www.example.com/foo/icon.png")
+        assertThat(makeAbsoluteUrl("https://www.example.com/foo/", "../icon.png"))
+            .isEqualTo("https://www.example.com/icon.png")
     }
 }
