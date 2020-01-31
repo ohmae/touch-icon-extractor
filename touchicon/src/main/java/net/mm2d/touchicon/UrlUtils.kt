@@ -12,7 +12,12 @@ import java.net.URL
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-internal fun makeAbsoluteUrl(baseUrl: String, url: String): String {
-    val base = URL(if (baseUrl.startsWith("//")) "https:$baseUrl" else baseUrl)
-    return if (url.startsWith("//")) base.protocol + ":" + url else URL(base, url).toString()
-}
+internal fun makeAbsoluteUrl(baseUrl: String, url: String): String =
+    URL(if (baseUrl.startsWith("//")) "https:$baseUrl" else baseUrl).let {
+        if (url.startsWith("//")) {
+            it.protocol + ":" + url
+        } else {
+            URL(it, url).toString()
+        }
+    }
+
