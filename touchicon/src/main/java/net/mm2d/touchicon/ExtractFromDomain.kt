@@ -7,8 +7,8 @@
 
 package net.mm2d.touchicon
 
-import android.net.Uri
 import androidx.annotation.VisibleForTesting
+import java.net.URL
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
@@ -16,55 +16,40 @@ import androidx.annotation.VisibleForTesting
 internal class ExtractFromDomain(
     private val httpClient: HttpClientAdapter
 ) {
-    private fun makeBaseBuilder(siteUrl: String) = Uri.parse(siteUrl)
-        .buildUpon()
-        .path(null)
-        .fragment(null)
-        .clearQuery()
-
     internal fun fromDomain(
         siteUrl: String,
         withPrecomposed: Boolean,
         sizes: List<String>
-    ): DomainIcon? {
-        val base = makeBaseBuilder(siteUrl)
-        return createTryDataList(withPrecomposed, sizes)
-            .asSequence()
-            .mapNotNull { tryHead(base, it) }
-            .first()
-    }
+    ): DomainIcon? = createTryDataList(withPrecomposed, sizes)
+        .asSequence()
+        .mapNotNull { tryHead(siteUrl, it) }
+        .first()
 
     internal fun fromDomainWithDownload(
         siteUrl: String,
         withPrecomposed: Boolean,
         sizes: List<String>
-    ): Pair<DomainIcon, ByteArray>? {
-        val base = makeBaseBuilder(siteUrl)
-        return createTryDataList(withPrecomposed, sizes)
-            .asSequence()
-            .mapNotNull { tryGet(base, it) }
-            .first()
-    }
+    ): Pair<DomainIcon, ByteArray>? = createTryDataList(withPrecomposed, sizes)
+        .asSequence()
+        .mapNotNull { tryGet(siteUrl, it) }
+        .first()
 
     internal fun listFromDomain(
         siteUrl: String,
         withPrecomposed: Boolean,
         sizes: List<String>
-    ): List<DomainIcon> {
-        val base = makeBaseBuilder(siteUrl)
-        return createTryDataList(withPrecomposed, sizes)
-            .mapNotNull { tryHead(base, it) }
-    }
+    ): List<DomainIcon> = createTryDataList(withPrecomposed, sizes)
+        .mapNotNull { tryHead(siteUrl, it) }
 
-    private fun tryHead(baseUri: Uri.Builder, tryData: TryData): DomainIcon? =
+    private fun tryHead(baseUrl: String, tryData: TryData): DomainIcon? =
         runCatching {
-            val url = makeUrl(baseUri, tryData)
+            val url = makeUrl(baseUrl, tryData)
             httpClient.head(url).use { createDomainIcon(it, url, tryData) }
         }.getOrNull()
 
-    private fun tryGet(baseUri: Uri.Builder, tryData: TryData): Pair<DomainIcon, ByteArray>? =
+    private fun tryGet(baseUrl: String, tryData: TryData): Pair<DomainIcon, ByteArray>? =
         runCatching {
-            val url = makeUrl(baseUri, tryData)
+            val url = makeUrl(baseUrl, tryData)
             httpClient.get(url).use {
                 val icon = createDomainIcon(it, url, tryData)
                 val bytes = it.bodyBytes()
@@ -72,8 +57,8 @@ internal class ExtractFromDomain(
             }
         }.getOrNull()
 
-    private fun makeUrl(baseUri: Uri.Builder, tryData: TryData): String =
-        baseUri.path(tryData.name).build().toString()
+    private fun makeUrl(baseUrl: String, tryData: TryData): String =
+        URL(URL(baseUrl), "/" + tryData.name).toString()
 
     private fun createDomainIcon(
         response: HttpResponse,
