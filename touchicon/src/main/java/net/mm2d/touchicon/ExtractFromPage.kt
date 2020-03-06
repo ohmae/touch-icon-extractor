@@ -8,7 +8,9 @@
 package net.mm2d.touchicon
 
 import androidx.annotation.VisibleForTesting
-import org.json.JSONObject
+import net.mm2d.touchicon.json.JsonArray
+import net.mm2d.touchicon.json.JsonObject
+import net.mm2d.touchicon.json.JsonParser
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
@@ -89,19 +91,21 @@ internal class ExtractFromPage(
 
     private fun String.extractFromManifestJson(baseUrl: String): List<Icon>? =
         runCatching {
-            val icons = JSONObject(this).getJSONArray("icons")
-            (0 until icons.length()).mapNotNull {
-                runCatching { createWebAppIcon(baseUrl, icons.getJSONObject(it)) }.getOrNull()
-            }
+            JsonParser(this).parse()
+                .get<JsonArray>("icons")
+                .mapNotNull { it as? JsonObject }
+                .mapNotNull { createWebAppIcon(baseUrl, it) }
         }.getOrNull()
 
-    private fun createWebAppIcon(baseUrl: String, icon: JSONObject): WebAppIcon =
-        WebAppIcon(
-            makeAbsoluteUrl(baseUrl, icon.getString("src")),
-            icon.optString("sizes"),
-            icon.optString("type"),
-            icon.optString("density")
-        )
+    private fun createWebAppIcon(baseUrl: String, icon: JsonObject): WebAppIcon? =
+        runCatching {
+            WebAppIcon(
+                makeAbsoluteUrl(baseUrl, icon.get("src")),
+                icon.getOrDefault("sizes", ""),
+                icon.getOrDefault("type", ""),
+                icon.getOrDefault("density", "")
+            )
+        }.getOrNull()
 
     companion object {
         private const val DEFAULT_LIMIT_SIZE = 1024 * 64
