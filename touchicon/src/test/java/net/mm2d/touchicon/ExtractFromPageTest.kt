@@ -156,8 +156,8 @@ class ExtractFromPageTest {
             every { it.isSuccess } returns true
             every { it.bodyString() } returns """
             {
-                "short_name": "AirHorner",
-                "name": "Kinlan's AirHorner of Infamy",
+                "short_name": "short_name",
+                "name": "name",
                 "icons": [{
                     "src": "launcher-icon-1x.png",
                     "type": "image/png",
@@ -176,6 +176,7 @@ class ExtractFromPageTest {
             "https://www.example.com/",
             """
             <html><head>
+            <link rel="stylesheet" href="style.css">
             <link rel="manifest" href="/manifest.json">
             </head></html>
             """.trimIndent(),
@@ -190,6 +191,82 @@ class ExtractFromPageTest {
         assertThat(result[1].sizes).isEqualTo("192x192")
         assertThat(result[1].url).isEqualTo("https://www.example.com/launcher-icon-4x.png")
         assertThat((result[1] as WebAppIcon).density).isEqualTo("4.0")
+    }
+
+    @Test
+    fun extract_web_app_manifest_json_error1() {
+        val httpClient: HttpClientAdapter = mockk()
+        every {
+            httpClient.get("https://www.example.com/manifest.json")
+        } returns mockk<HttpResponse>(relaxed = true).also {
+            every { it.isSuccess } returns true
+            every { it.bodyString() } returns """
+            {
+                "short_name": "short_name",
+                "name": "name",
+                "icons": [{
+                    "src": "launcher-icon-1x.png",
+                    "type": "image/png",
+                    "sizes": "48x48"
+                }, {
+                    "src": "launcher-icon-4x.png",
+                    "type": "image/png",
+                    "sizes": "192x192",
+                    "density": "4.0"
+                }],
+                "start_url": "index.html?launcher=true"
+            """.trimIndent()
+        }
+        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val result = extract.extractFromHtml(
+            "https://www.example.com/",
+            """
+            <html><head>
+            <link rel="stylesheet" href="style.css">
+            <link rel="manifest" href="/manifest.json">
+            </head></html>
+            """.trimIndent(),
+            true
+        )
+        assertThat(result).isEmpty()
+    }
+
+    @Test
+    fun extract_web_app_manifest_json_error2() {
+        val httpClient: HttpClientAdapter = mockk()
+        every {
+            httpClient.get("https://www.example.com/manifest.json")
+        } returns mockk<HttpResponse>(relaxed = true).also {
+            every { it.isSuccess } returns true
+            every { it.bodyString() } returns """
+            {
+                "short_name": "short_name",
+                "name": "name",
+                "icons": ["dummy",
+                {
+                    "src": "launcher-icon-1x.png",
+                    "type": "image/png",
+                    "sizes": "48x48"
+                }, {
+                    "type": "image/png",
+                    "sizes": "192x192",
+                    "density": "4.0"
+                }],
+                "start_url": "index.html?launcher=true"
+            }""".trimIndent()
+        }
+        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val result = extract.extractFromHtml(
+            "https://www.example.com/",
+            """
+            <html><head>
+            <link rel="stylesheet" href="style.css">
+            <link rel="manifest" href="/manifest.json">
+            </head></html>
+            """.trimIndent(),
+            true
+        )
+        assertThat(result).hasSize(1)
     }
 
     @Test
