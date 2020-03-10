@@ -53,18 +53,4 @@ class PageIconTest {
             ).inferSize()
         ).isEqualTo(Size(-1, -1))
     }
-
-    @Test
-    fun parcelable() {
-        val icon = PageIcon(
-            rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
-            mimeType = "image/png",
-            sizes = "50x50",
-            url = "http://example.com/icon-40x40.png"
-        )
-        val restoredIcon = ParcelableTestUtil.saveAndRestore(icon)
-        assertThat(restoredIcon).isEqualTo(icon)
-        assertThat(icon.describeContents()).isEqualTo(0)
-        assertThat(PageIcon.newArray(1)).hasLength(1)
-    }
 }

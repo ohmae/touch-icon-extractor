@@ -29,19 +29,5 @@ class WebAppIconTest {
             ).inferSize()
         ).isEqualTo(Size(50, 50))
     }
-
-    @Test
-    fun parcelable() {
-        val icon = WebAppIcon(
-            mimeType = "image/png",
-            sizes = "50x50",
-            url = "http://example.com/icon-40x40.png",
-            density = "3.0"
-        )
-        val restoredIcon = ParcelableTestUtil.saveAndRestore(icon)
-        assertThat(restoredIcon).isEqualTo(icon)
-        assertThat(icon.describeContents()).isEqualTo(0)
-        assertThat(WebAppIcon.newArray(1)).hasLength(1)
-    }
 }
 

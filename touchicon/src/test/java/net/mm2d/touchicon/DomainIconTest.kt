@@ -31,21 +31,4 @@ class DomainIconTest {
             ).inferSize()
         ).isEqualTo(Size(50, 50))
     }
-
-    @Test
-    fun parcelable() {
-        val icon = DomainIcon(
-            rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
-            mimeType = "image/png",
-            sizes = "50x50",
-            url = "http://example.com/icon-40x40.png",
-            precomposed = true,
-            length = 0
-        )
-
-        val restoredIcon = ParcelableTestUtil.saveAndRestore(icon)
-        assertThat(restoredIcon).isEqualTo(icon)
-        assertThat(icon.describeContents()).isEqualTo(0)
-        assertThat(DomainIcon.newArray(1)).hasLength(1)
-    }
 }

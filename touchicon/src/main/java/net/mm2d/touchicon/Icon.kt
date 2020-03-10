@@ -7,38 +7,41 @@
 
 package net.mm2d.touchicon
 
-import android.os.Parcelable
-
 /**
  * Icon information interface.
  *
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-interface Icon : Parcelable {
+interface Icon {
     /**
      * Relationship between icon and page.
      */
     val rel: Relationship
+
     /**
      * Icon url.
      */
     val url: String
+
     /**
      * Size information, assumed format is (width)x(height). e.g. "80x80".
      *
      * It exists only if a value is specified, often blank.
      */
     val sizes: String
+
     /**
      * Icon MIME type. e.g. "image/png"
      *
      * It exists only if a value is specified, often blank
      */
     val mimeType: String
+
     /**
      * true if this is for a precomposed touch icon.
      */
     val precomposed: Boolean
+
     /**
      * Icon file length.
      *

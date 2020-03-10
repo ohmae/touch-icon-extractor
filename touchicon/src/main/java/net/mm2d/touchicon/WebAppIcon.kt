@@ -7,9 +7,6 @@
 
 package net.mm2d.touchicon
 
-import android.os.Parcel
-import android.os.Parcelable
-
 /**
  * Icon information described in Web App Manifest.
  *
@@ -79,26 +76,5 @@ data class WebAppIcon(
 
     private fun inferSizeInner(): Size = inferSizeFromSizes(sizes).let {
         if (it.isValid()) it else inferSizeFromUrl(url)
-    }
-
-    constructor(parcel: Parcel) : this(
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!
-    )
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(url)
-        parcel.writeString(sizes)
-        parcel.writeString(mimeType)
-        parcel.writeString(density)
-    }
-
-    override fun describeContents(): Int = 0
-
-    companion object CREATOR : Parcelable.Creator<WebAppIcon> {
-        override fun createFromParcel(parcel: Parcel): WebAppIcon = WebAppIcon(parcel)
-        override fun newArray(size: Int): Array<WebAppIcon?> = arrayOfNulls(size)
     }
 }

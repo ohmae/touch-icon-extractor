@@ -21,6 +21,7 @@ interface HttpClientAdapter {
      * It takes precedence over specification in [headers].
      */
     var userAgent: String
+
     /**
      * Specify the HTTP communication header.
      *

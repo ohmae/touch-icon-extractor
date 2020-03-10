@@ -40,6 +40,7 @@ enum class Relationship(
      * ```
      */
     APPLE_TOUCH_ICON_PRECOMPOSED("apple-touch-icon-precomposed", 3, true),
+
     /**
      * This expresses that the rel value of the link tag is "apple-touch-icon".
      *
@@ -50,6 +51,7 @@ enum class Relationship(
      * ```
      */
     APPLE_TOUCH_ICON("apple-touch-icon", 2, true),
+
     /**
      * This expresses that the rel value of the link tag is "icon".
      *
@@ -60,6 +62,7 @@ enum class Relationship(
      * ```
      */
     ICON("icon", 1, true),
+
     /**
      * This expresses that the rel value of the link tag is "shortcut icon".
      *
@@ -73,6 +76,7 @@ enum class Relationship(
      * ```
      */
     SHORTCUT_ICON("shortcut icon", 0, true),
+
     /**
      * Used to represent the icon described in Web App Manifest.
      *

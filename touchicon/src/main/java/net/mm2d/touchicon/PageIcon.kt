@@ -7,9 +7,6 @@
 
 package net.mm2d.touchicon
 
-import android.os.Parcel
-import android.os.Parcelable.Creator
-
 /**
  * Icon information associated with the Web page.
  *
@@ -97,26 +94,5 @@ data class PageIcon(
 
     private fun inferSizeInner(): Size = inferSizeFromSizes(sizes).let { size ->
         if (size.isValid()) size else inferSizeFromUrl(url)
-    }
-
-    constructor(parcel: Parcel) : this(
-        Relationship.of(parcel.readString())!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!
-    )
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(rel.value)
-        parcel.writeString(url)
-        parcel.writeString(sizes)
-        parcel.writeString(mimeType)
-    }
-
-    override fun describeContents(): Int = 0
-
-    companion object CREATOR : Creator<PageIcon> {
-        override fun createFromParcel(parcel: Parcel): PageIcon = PageIcon(parcel)
-        override fun newArray(size: Int): Array<PageIcon?> = arrayOfNulls(size)
     }
 }

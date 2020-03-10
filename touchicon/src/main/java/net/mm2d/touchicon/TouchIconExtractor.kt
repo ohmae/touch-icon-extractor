@@ -40,6 +40,7 @@ class TouchIconExtractor(
         set(value) {
             httpClient.userAgent = value
         }
+
     /**
      * Specify the HTTP communication header.
      *
@@ -50,6 +51,7 @@ class TouchIconExtractor(
         set(value) {
             httpClient.headers = value
         }
+
     /**
      * Specify the maximum download size when downloading HTML file.
      *

@@ -7,9 +7,6 @@
 
 package net.mm2d.touchicon
 
-import android.os.Parcel
-import android.os.Parcelable.Creator
-
 /**
  * Icon information associated with the Web site domain.
  *
@@ -89,29 +86,4 @@ data class DomainIcon(
      * @return Inferred size
      */
     override fun inferSize(): Size = size
-
-    constructor(parcel: Parcel) : this(
-        Relationship.of(parcel.readString())!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readByte() != 0.toByte(),
-        parcel.readInt()
-    )
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(rel.value)
-        parcel.writeString(url)
-        parcel.writeString(sizes)
-        parcel.writeString(mimeType)
-        parcel.writeByte(if (precomposed) 1 else 0)
-        parcel.writeInt(length)
-    }
-
-    override fun describeContents(): Int = 0
-
-    companion object CREATOR : Creator<DomainIcon> {
-        override fun createFromParcel(parcel: Parcel): DomainIcon = DomainIcon(parcel)
-        override fun newArray(size: Int): Array<DomainIcon?> = arrayOfNulls(size)
-    }
 }
