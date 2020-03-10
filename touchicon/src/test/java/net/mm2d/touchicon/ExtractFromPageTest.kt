@@ -13,12 +13,12 @@ import io.mockk.mockk
 import net.mm2d.touchicon.html.simple.SimpleHtmlParserAdapterFactory
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
+import org.junit.runners.JUnit4
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-@RunWith(RobolectricTestRunner::class)
+@RunWith(JUnit4::class)
 @Suppress("TestFunctionName")
 class ExtractFromPageTest {
     @Test

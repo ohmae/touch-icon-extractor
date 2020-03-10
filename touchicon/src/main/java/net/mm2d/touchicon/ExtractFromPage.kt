@@ -7,7 +7,6 @@
 
 package net.mm2d.touchicon
 
-import androidx.annotation.VisibleForTesting
 import net.mm2d.touchicon.json.JsonArray
 import net.mm2d.touchicon.json.JsonObject
 import net.mm2d.touchicon.json.JsonParser
@@ -52,7 +51,7 @@ internal class ExtractFromPage(
         } ?: false
     }
 
-    @VisibleForTesting
+    // VisibleForTesting
     internal fun extractFromHtml(
         siteUrl: String,
         html: String,

@@ -7,7 +7,6 @@
 
 package net.mm2d.touchicon
 
-import androidx.annotation.WorkerThread
 import net.mm2d.touchicon.html.simple.SimpleHtmlParserAdapterFactory
 import net.mm2d.touchicon.http.simple.SimpleHttpClientAdapterFactory
 
@@ -79,7 +78,7 @@ class TouchIconExtractor(
      *
      * @return List of acquired icons
      */
-    @WorkerThread
+    // WorkerThread
     fun fromPage(siteUrl: String, withManifest: Boolean = false): List<Icon> =
         fromPage.fromPage(siteUrl, withManifest)
 
@@ -95,7 +94,7 @@ class TouchIconExtractor(
      *
      * @return List of acquired icons
      */
-    @WorkerThread
+    // WorkerThread
     fun fromManifest(siteUrl: String): List<Icon> =
         fromPage.fromManifest(siteUrl)
 
@@ -147,7 +146,7 @@ class TouchIconExtractor(
      *
      * @return First acquired icon
      */
-    @WorkerThread
+    // WorkerThread
     fun fromDomain(
         siteUrl: String,
         withPrecomposed: Boolean = true,
@@ -178,7 +177,7 @@ class TouchIconExtractor(
      *
      * @return Pair of first acquired icon and that binary
      */
-    @WorkerThread
+    // WorkerThread
     fun fromDomainWithDownload(
         siteUrl: String,
         withPrecomposed: Boolean = true,
@@ -206,7 +205,7 @@ class TouchIconExtractor(
      *
      * @return List of acquired icons
      */
-    @WorkerThread
+    // WorkerThread
     fun listFromDomain(
         siteUrl: String,
         withPrecomposed: Boolean = true,

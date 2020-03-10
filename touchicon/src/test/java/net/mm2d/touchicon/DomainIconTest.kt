@@ -10,12 +10,12 @@ package net.mm2d.touchicon
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
+import org.junit.runners.JUnit4
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
-@RunWith(RobolectricTestRunner::class)
+@RunWith(JUnit4::class)
 @Suppress("TestFunctionName")
 class DomainIconTest {
     @Test

@@ -53,7 +53,9 @@ class JsonParserTest {
         assertThat(result.get<JsonArray>("array")).containsExactly("a", "b", "c")
         assertThat(result.get<JsonObject>("object").get<String>("a")).isEqualTo("b")
         assertThat(result.get<JsonArray>("empty array")).isEmpty()
-        assertThat(result.get<JsonArray>("object array").first()).isInstanceOf(JsonObject::class.java)
+        assertThat(
+            result.get<JsonArray>("object array").first()
+        ).isInstanceOf(JsonObject::class.java)
         assertThat(result.get<String>("escape")).isEqualTo("\r\n\b\t\\\u0000\u0001")
     }
 

@@ -7,7 +7,6 @@
 
 package net.mm2d.touchicon
 
-import androidx.annotation.VisibleForTesting
 import java.net.URL
 
 /**
@@ -72,7 +71,7 @@ internal class ExtractFromDomain(
         return DomainIcon(tryData.rel, url, tryData.sizes, type, tryData.precomposed, length)
     }
 
-    @VisibleForTesting
+    // VisibleForTesting
     internal data class TryData(
         val rel: Relationship,
         val name: String,
@@ -80,7 +79,7 @@ internal class ExtractFromDomain(
         val precomposed: Boolean
     )
 
-    @VisibleForTesting
+    // VisibleForTesting
     internal fun createTryDataList(withPrecomposed: Boolean, sizes: List<String>): List<TryData> {
         val result: MutableList<TryData> = mutableListOf()
         sizes.forEach {
