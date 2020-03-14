@@ -20,6 +20,7 @@ class JsonArrayTest {
         verify { delegate.hashCode() }
     }
 
+    @Suppress("ReplaceCallWithBinaryOperator", "UnusedEquals")
     @Test
     fun testEquals() {
         val delegate: List<Any> = mockk(relaxed = true)

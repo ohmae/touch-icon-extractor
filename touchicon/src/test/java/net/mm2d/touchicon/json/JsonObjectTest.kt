@@ -20,6 +20,7 @@ class JsonObjectTest {
         verify { delegate.hashCode() }
     }
 
+    @Suppress("ReplaceCallWithBinaryOperator", "UnusedEquals")
     @Test
     fun testEquals() {
         val delegate: Map<String, Any> = mockk(relaxed = true)
