@@ -7,7 +7,7 @@
 
 package net.mm2d.touchicon.json
 
-class JsonArray(
+internal class JsonArray(
     private val delegate: List<Any?> = emptyList()
 ) : Iterable<Any?> by delegate {
     override fun hashCode(): Int = delegate.hashCode()

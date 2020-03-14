@@ -7,7 +7,7 @@
 
 package net.mm2d.touchicon.json
 
-class JsonParser(
+internal class JsonParser(
     private val input: String
 ) {
     private var pos: Int = 0

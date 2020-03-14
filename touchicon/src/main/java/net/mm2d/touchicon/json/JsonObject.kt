@@ -7,7 +7,7 @@
 
 package net.mm2d.touchicon.json
 
-class JsonObject(
+internal class JsonObject(
     private val delegate: Map<String, Any?> = emptyMap()
 ) {
     @Suppress("UNCHECKED_CAST")
