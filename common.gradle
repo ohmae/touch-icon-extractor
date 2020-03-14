@@ -4,20 +4,9 @@ apply plugin: "com.jfrog.bintray"
 apply plugin: "jacoco"
 apply plugin: "com.github.ben-manes.versions"
 
-android {
-    testOptions {
-        unitTests.includeAndroidResources = true
-        unitTests.all {
-            jacoco {
-                includeNoLocationClasses = true
-            }
-        }
-    }
-}
-
-task sourcesJar(type: Jar) {
+task sourcesJar(type: Jar, dependsOn:classes) {
     archiveClassifier = "sources"
-    from android.sourceSets.main.java.srcDirs
+    from sourceSets.main.allSource
 }
 
 artifacts {
@@ -126,18 +115,11 @@ jacoco {
     toolVersion = "0.8.5"
 }
 
-task jacocoTestReport(
-    type: JacocoReport,
-    dependsOn: "testDebugUnitTest",
-    group: "verification"
-) {
+jacocoTestReport {
     reports {
-        xml.enabled = true
-        html.enabled = true
+        xml.enabled true
+        html.enabled false
     }
-    getSourceDirectories().from = "${projectDir}/src/main/java"
-    getClassDirectories().from = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug")
-    getExecutionData().from = "${buildDir}/jacoco/testDebugUnitTest.exec"
 }
 
 dependencyUpdates.resolutionStrategy {
