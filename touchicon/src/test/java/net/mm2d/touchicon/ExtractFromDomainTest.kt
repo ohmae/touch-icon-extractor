@@ -34,6 +34,10 @@ class ExtractFromDomainTest {
         val extract = ExtractFromDomain(httpClient)
         val icon = extract.fromDomain("$baseUrl/index.html", true, emptyList())!!
         assertThat(icon.mimeType).isEqualTo("image/png")
+        assertThat(icon.url).isEqualTo("$baseUrl/apple-touch-icon-precomposed.png")
+        assertThat(icon.rel).isEqualTo(Relationship.APPLE_TOUCH_ICON_PRECOMPOSED)
+        assertThat(icon.precomposed).isTrue()
+        assertThat(icon.length).isLessThan(0)
         verify(inverse = true) { httpClient.get(any()) }
         verify(exactly = 1) { httpClient.head(any()) }
         verify(exactly = 1) { httpClient.head("$baseUrl/apple-touch-icon-precomposed.png") }
@@ -52,6 +56,10 @@ class ExtractFromDomainTest {
         val extract = ExtractFromDomain(httpClient)
         val icon = extract.fromDomain("$baseUrl/index.html", true, emptyList())!!
         assertThat(icon.mimeType).isEqualTo("image/png")
+        assertThat(icon.url).isEqualTo("$baseUrl/apple-touch-icon.png")
+        assertThat(icon.rel).isEqualTo(Relationship.APPLE_TOUCH_ICON)
+        assertThat(icon.precomposed).isFalse()
+        assertThat(icon.length).isLessThan(0)
         verify(inverse = true) { httpClient.get(any()) }
         verify(exactly = 2) { httpClient.head(any()) }
         verify(exactly = 1) { httpClient.head("$baseUrl/apple-touch-icon.png") }
@@ -70,6 +78,10 @@ class ExtractFromDomainTest {
         val extract = ExtractFromDomain(httpClient)
         val icon = extract.fromDomain("$baseUrl/index.html", true, emptyList())!!
         assertThat(icon.mimeType).isEqualTo("image/x-icon")
+        assertThat(icon.url).isEqualTo("$baseUrl/favicon.ico")
+        assertThat(icon.rel).isEqualTo(Relationship.ICON)
+        assertThat(icon.precomposed).isFalse()
+        assertThat(icon.length).isLessThan(0)
         verify(inverse = true) { httpClient.get(any()) }
         verify(exactly = 3) { httpClient.head(any()) }
         verify(exactly = 1) { httpClient.head("$baseUrl/favicon.ico") }
