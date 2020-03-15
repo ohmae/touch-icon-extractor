@@ -8,7 +8,7 @@
 <a href="../../index.html">touchicon</a>&nbsp;/&nbsp;<a href="../index.html">net.mm2d.touchicon</a>&nbsp;/&nbsp;<a href="./index.html">Icon</a><br/>
 <br/>
 <h1>Icon</h1>
-<code><span class="keyword">interface </span><span class="identifier">Icon</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/os/Parcelable.html"><span class="identifier">Parcelable</span></a></code>
+<code><span class="keyword">interface </span><span class="identifier">Icon</span></code>
 <p>Icon information interface.</p>
 <p><strong>Author</strong><br/>
 <a href="mailto:ryo@mm2d.net">大前良介 (OHMAE Ryosuke)</a></p>
@@ -17,57 +17,51 @@
 <tbody>
 <tr>
 <td>
-<p><a href="length.html">length</a></p>
+<h4><a href="length.html">length</a></h4>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">length</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
 <p>Icon file length.</p>
-</td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">length</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="mime-type.html">mimeType</a></p>
+<h4><a href="mime-type.html">mimeType</a></h4>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">mimeType</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
 <p>Icon MIME type. e.g. "image/png"</p>
-</td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">mimeType</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="precomposed.html">precomposed</a></p>
+<h4><a href="precomposed.html">precomposed</a></h4>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">precomposed</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
 <p>true if this is for a precomposed touch icon.</p>
-</td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">precomposed</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="rel.html">rel</a></p>
+<h4><a href="rel.html">rel</a></h4>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">rel</span><span class="symbol">: </span><a href="../-relationship/index.html"><span class="identifier">Relationship</span></a></code>
 <p>Relationship between icon and page.</p>
-</td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">rel</span><span class="symbol">: </span><a href="../-relationship/index.html"><span class="identifier">Relationship</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="sizes.html">sizes</a></p>
+<h4><a href="sizes.html">sizes</a></h4>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">sizes</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
 <p>Size information, assumed format is (width)x(height). e.g. "80x80".</p>
-</td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">sizes</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="url.html">url</a></p>
+<h4><a href="url.html">url</a></h4>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">url</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
 <p>Icon url.</p>
-</td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">url</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 </tbody>
 </table>
@@ -76,21 +70,19 @@
 <tbody>
 <tr>
 <td>
-<p><a href="infer-area.html">inferArea</a></p>
+<h4><a href="infer-area.html">inferArea</a></h4>
 </td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">inferArea</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
 <p>Infer area of this icon.</p>
-</td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">inferArea</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="infer-size.html">inferSize</a></p>
+<h4><a href="infer-size.html">inferSize</a></h4>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">inferSize</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-size/index.html"><span class="identifier">Size</span></a></code>
 <p>Infer display size of this icon.</p>
-</td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">inferSize</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-size/index.html"><span class="identifier">Size</span></a></code></td>
 </tr>
 </tbody>
 </table>
@@ -99,30 +91,27 @@
 <tbody>
 <tr>
 <td>
-<p><a href="../-domain-icon/index.html">DomainIcon</a></p>
+<h4><a href="../-domain-icon/index.html">DomainIcon</a></h4>
 </td>
 <td>
-<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">DomainIcon</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Icon</span></a></code>
 <p>Icon information associated with the Web site domain.</p>
-</td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">DomainIcon</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Icon</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="../-page-icon/index.html">PageIcon</a></p>
+<h4><a href="../-page-icon/index.html">PageIcon</a></h4>
 </td>
 <td>
-<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">PageIcon</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Icon</span></a></code>
 <p>Icon information associated with the Web page.</p>
-</td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">PageIcon</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Icon</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="../-web-app-icon/index.html">WebAppIcon</a></p>
+<h4><a href="../-web-app-icon/index.html">WebAppIcon</a></h4>
 </td>
 <td>
-<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">WebAppIcon</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Icon</span></a></code>
 <p>Icon information described in Web App Manifest.</p>
-</td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">WebAppIcon</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Icon</span></a></code></td>
 </tr>
 </tbody>
 </table>

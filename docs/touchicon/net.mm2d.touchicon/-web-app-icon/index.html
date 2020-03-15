@@ -39,29 +39,16 @@
 </code></pre>
 <p><strong>Author</strong><br/>
 <a href="mailto:ryo@mm2d.net">大前良介 (OHMAE Ryosuke)</a></p>
-<h3>Types</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<p><a href="-c-r-e-a-t-o-r/index.html">CREATOR</a></p>
-</td>
-<td>
-<code><span class="keyword">companion</span> <span class="keyword">object </span><span class="identifier">CREATOR</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/os/Parcelable/Creator.html"><span class="identifier">Creator</span></a><span class="symbol">&lt;</span><a href="./index.html"><span class="identifier">WebAppIcon</span></a><span class="symbol">&gt;</span></code></td>
-</tr>
-</tbody>
-</table>
 <h3>Constructors</h3>
 <table>
 <tbody>
 <tr>
 <td>
-<p><a href="-init-.html">&lt;init&gt;</a></p>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
 </td>
 <td>
-<code><span class="identifier">WebAppIcon</span><span class="symbol">(</span><span class="identifier" id="net.mm2d.touchicon.WebAppIcon$<init>(android.os.Parcel)/parcel">parcel</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/os/Parcel.html"><span class="identifier">Parcel</span></a><span class="symbol">)</span></code><code><span class="identifier">WebAppIcon</span><span class="symbol">(</span><span class="identifier" id="net.mm2d.touchicon.WebAppIcon$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/url">url</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.WebAppIcon$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/sizes">sizes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.WebAppIcon$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/mimeType">mimeType</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.WebAppIcon$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/density">density</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span></code>
 <p>Icon information described in Web App Manifest.</p>
-</td>
+<code><span class="identifier">WebAppIcon</span><span class="symbol">(</span><span class="identifier" id="net.mm2d.touchicon.WebAppIcon$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/url">url</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.WebAppIcon$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/sizes">sizes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.WebAppIcon$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/mimeType">mimeType</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.WebAppIcon$<init>(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/density">density</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -70,66 +57,59 @@
 <tbody>
 <tr>
 <td>
-<p><a href="density.html">density</a></p>
+<h4><a href="density.html">density</a></h4>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">density</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
 <p>pixel densities.</p>
-</td>
+<code><span class="keyword">val </span><span class="identifier">density</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="length.html">length</a></p>
+<h4><a href="length.html">length</a></h4>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">length</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
 <p>Icon file length.</p>
-</td>
+<code><span class="keyword">val </span><span class="identifier">length</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="mime-type.html">mimeType</a></p>
+<h4><a href="mime-type.html">mimeType</a></h4>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">mimeType</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
 <p>Icon MIME type. e.g. "image/png"</p>
-</td>
+<code><span class="keyword">val </span><span class="identifier">mimeType</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="precomposed.html">precomposed</a></p>
+<h4><a href="precomposed.html">precomposed</a></h4>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">precomposed</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
 <p>true if this is for a precomposed touch icon.</p>
-</td>
+<code><span class="keyword">val </span><span class="identifier">precomposed</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="rel.html">rel</a></p>
+<h4><a href="rel.html">rel</a></h4>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">rel</span><span class="symbol">: </span><a href="../-relationship/index.html"><span class="identifier">Relationship</span></a></code>
 <p>Relationship between icon and page.</p>
-</td>
+<code><span class="keyword">val </span><span class="identifier">rel</span><span class="symbol">: </span><a href="../-relationship/index.html"><span class="identifier">Relationship</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="sizes.html">sizes</a></p>
+<h4><a href="sizes.html">sizes</a></h4>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">sizes</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
 <p>Size information, assumed format is (width)x(height). e.g. "80x80".</p>
-</td>
+<code><span class="keyword">val </span><span class="identifier">sizes</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="url.html">url</a></p>
+<h4><a href="url.html">url</a></h4>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">url</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
 <p>Icon url.</p>
-</td>
+<code><span class="keyword">val </span><span class="identifier">url</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 </tbody>
 </table>
@@ -138,59 +118,11 @@
 <tbody>
 <tr>
 <td>
-<p><a href="describe-contents.html">describeContents</a></p>
+<h4><a href="infer-size.html">inferSize</a></h4>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">describeContents</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
-</tr>
-<tr>
-<td>
-<p><a href="infer-size.html">inferSize</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">inferSize</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-size/index.html"><span class="identifier">Size</span></a></code>
 <p>Infer display size of this icon from sizes value.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="write-to-parcel.html">writeToParcel</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">writeToParcel</span><span class="symbol">(</span><span class="identifier" id="net.mm2d.touchicon.WebAppIcon$writeToParcel(android.os.Parcel, kotlin.Int)/parcel">parcel</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/os/Parcel.html"><span class="identifier">Parcel</span></a><span class="symbol">, </span><span class="identifier" id="net.mm2d.touchicon.WebAppIcon$writeToParcel(android.os.Parcel, kotlin.Int)/flags">flags</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
-</tr>
-</tbody>
-</table>
-<h3>Inherited Functions</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<p><a href="../-icon/infer-area.html">inferArea</a></p>
-</td>
-<td>
-<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">inferArea</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
-<p>Infer area of this icon.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3>Companion Object Functions</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<p><a href="create-from-parcel.html">createFromParcel</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">createFromParcel</span><span class="symbol">(</span><span class="identifier" id="net.mm2d.touchicon.WebAppIcon.CREATOR$createFromParcel(android.os.Parcel)/parcel">parcel</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/os/Parcel.html"><span class="identifier">Parcel</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">WebAppIcon</span></a></code></td>
-</tr>
-<tr>
-<td>
-<p><a href="new-array.html">newArray</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">newArray</span><span class="symbol">(</span><span class="identifier" id="net.mm2d.touchicon.WebAppIcon.CREATOR$newArray(kotlin.Int)/size">size</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><a href="./index.html"><span class="identifier">WebAppIcon</span></a><span class="symbol">?</span><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">inferSize</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-size/index.html"><span class="identifier">Size</span></a></code></td>
 </tr>
 </tbody>
 </table>
