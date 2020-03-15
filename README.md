@@ -8,11 +8,12 @@
 [![Actions Status](https://github.com/ohmae/touch-icon-extractor/workflows/ci/badge.svg)](https://github.com/ohmae/touch-icon-extractor/actions)
 [![codecov](https://codecov.io/gh/ohmae/touch-icon-extractor/branch/develop/graph/badge.svg)](https://codecov.io/gh/ohmae/touch-icon-extractor)
 
-This is a library for android for extracting apple-touch-icon information from the website.
+This is a library to extract WebClip icon information from the website.
+Available in **JVM** and **Android** as this is written in pure **Kotlin**.
 
-## Screenshots
+## Sample App
 
-This app is included as a [sample module](sample) in this repository.
+This app is in [touch-icon-extractor-sample](https://github.com/ohmae/touch-icon-extractor-sample)
 And also published in [Play store](https://play.google.com/store/apps/details?id=net.mm2d.webclip)
 
 |![](readme/screenshot1.png)|![](readme/screenshot2.png)|![](readme/screenshot3.png)|
@@ -299,8 +300,6 @@ val bestIcon2 = icons.maxWith(IconComparator.REL_SIZE) // Compare by rel, if sam
 
 - [Kotlin](https://kotlinlang.org/)
   - kotlin-stdlib
-- [Android Jetpack](https://developer.android.com/jetpack/)
-  - androidx.annotation:annotation
 
 ### touchicon-http-okhttp
 
@@ -313,19 +312,6 @@ val bestIcon2 = icons.maxWith(IconComparator.REL_SIZE) // Compare by rel, if sam
 - [Kotlin](https://kotlinlang.org/)
   - kotlin-stdlib
 - [Jsoup](https://jsoup.org/)
-
-### sample app
-- [Kotlin](https://kotlinlang.org/)
-  - kotlin-stdlib
-  - kotlinx-coroutines-core
-  - kotlinx-coroutines-android
-- [Android Support Library](https://developer.android.com/topic/libraries/support-library/)
-  - androidx.legacy:legacy-support-v4
-  - androidx.appcompat:appcompat
-  - androidx.constraintlayout:constraintlayout
-  - androidx.preference:preference
-  - com.google.android.material:material
-- [Glide](https://bumptech.github.io/glide/)
 
 ## Author
 大前 良介 (OHMAE Ryosuke)
