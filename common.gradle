@@ -4,7 +4,7 @@ apply plugin: "com.jfrog.bintray"
 apply plugin: "jacoco"
 apply plugin: "com.github.ben-manes.versions"
 
-task sourcesJar(type: Jar, dependsOn:classes) {
+task sourcesJar(type: Jar, dependsOn: classes) {
     archiveClassifier = "sources"
     from sourceSets.main.allSource
 }
@@ -41,7 +41,7 @@ uploadArchives {
 publishing {
     publications {
         bintray(MavenPublication) {
-            artifact("$buildDir/outputs/aar/${archivesBaseName}-release.aar")
+            artifact("$buildDir/libs/${archivesBaseName}-${version}.jar")
             groupId = pj.groupId
             artifactId = archivesBaseName
             version = pj.versions.name
@@ -93,6 +93,8 @@ bintray {
     user = project.hasProperty("bintray_user") ? bintray_user : ""
     key = project.hasProperty("bintray_key") ? bintray_key : ""
     publications = ["bintray"]
+
+    dryRun = true
 
     pkg {
         repo = "maven"

@@ -5,24 +5,23 @@ buildscript {
     ext {
         kotlin_version = "1.3.70"
         pj = [
-            versions     : [
-                name: "${versionMajor}.${versionMinor}.${versionPatch}",
-                code: versionMajor * 10000 + versionMinor * 100 + versionPatch
-            ],
-            groupId      : "net.mm2d",
-            siteUrl      : "https://github.com/ohmae/touch-icon-extractor",
-            githubUrl    : "https://github.com/ohmae/touch-icon-extractor",
-            scmConnection: "scm:git:https://github.com/ohmae/touch-icon-extractor.git"
+                versions : [
+                        name: "${versionMajor}.${versionMinor}.${versionPatch}",
+                        code: versionMajor * 10000 + versionMinor * 100 + versionPatch
+                ],
+                groupId      : "net.mm2d",
+                siteUrl      : "https://github.com/ohmae/touch-icon-extractor",
+                githubUrl    : "https://github.com/ohmae/touch-icon-extractor",
+                scmConnection: "scm:git:https://github.com/ohmae/touch-icon-extractor.git"
         ]
     }
     repositories {
-        google()
+        mavenCentral()
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:3.6.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.18"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.10.1"
 
         classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4"
         classpath "com.github.ben-manes:gradle-versions-plugin:0.27.0"
@@ -31,14 +30,9 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
-        jcenter()
         mavenCentral()
+        jcenter()
     }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }
 
 apply plugin: "jacoco"
@@ -48,8 +42,8 @@ jacoco {
 }
 
 task jacocoMerge(
-    type: JacocoMerge,
-    group: "verification"
+        type: JacocoMerge,
+        group: "verification"
 ) {
     gradle.afterProject { project, _ ->
         if (project.rootProject != project && project.plugins.hasPlugin('jacoco')) {
@@ -59,16 +53,16 @@ task jacocoMerge(
 }
 
 task jacocoMergedReport(
-    type: JacocoReport,
-    dependsOn: [tasks.jacocoMerge],
-    group: "verification"
+        type: JacocoReport,
+        dependsOn: [tasks.jacocoMerge],
+        group: "verification"
 ) {
     getExecutionData().from = jacocoMerge.destinationFile
 
     gradle.afterProject { project, _ ->
         if (project.rootProject != project && project.plugins.hasPlugin('jacoco')) {
             getSourceDirectories().from += "${project.projectDir}/src/main/java"
-            getClassDirectories().from += project.fileTree(dir: "${project.buildDir}/tmp/kotlin-classes/debug")
+            getClassDirectories().from += project.fileTree(dir: "${project.buildDir}/classes/kotlin/main")
         }
     }
     reports {
