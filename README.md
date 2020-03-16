@@ -19,6 +19,12 @@ And also published in [Play store](https://play.google.com/store/apps/details?id
 |![](readme/screenshot1.png)|![](readme/screenshot2.png)|![](readme/screenshot3.png)|
 |-|-|-|
 
+## Library structure
+
+- `net.mm2d:touchicon:` core component. All feature is provided by this. Use `UrlConnection` for HTTP access and its own parser for HTML parse.
+- `net.mm2d:touchicon-http-okhttp:` Adapter to use OkHttp for HTTP access.
+- `net.mm2d:touchicon-html-jsoup:` Adapter to use Jsoup for HTML parse.
+
 ## How to use
 
 Download from jCenter. Add dependencies, as following.
@@ -28,9 +34,9 @@ repositories {
     jcenter()
 }
 dependencies {
-    implementation "net.mm2d:touchicon:0.7.1"
-    implementation "net.mm2d:touchicon-http-okhttp:0.7.1" // If use OkHttp for HTTP access
-    implementation "net.mm2d:touchicon-html-jsoup:0.7.1"  // If use Jsoup for HTML parse
+    implementation "net.mm2d:touchicon:0.8.0"
+    implementation "net.mm2d:touchicon-http-okhttp:0.8.0" // Optional: If use OkHttp for HTTP access
+    implementation "net.mm2d:touchicon-html-jsoup:0.8.0"  // Optional: If use Jsoup for HTML parse
 }
 ```
 
