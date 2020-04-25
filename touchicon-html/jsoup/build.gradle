@@ -8,12 +8,7 @@ group pj.groupId
 archivesBaseName = libraryName
 version pj.versions.name
 
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
-
-compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
-}
+compileKotlin.kotlinOptions.jvmTarget = "1.6"
 
 dependencies {
     api project(":touchicon")
