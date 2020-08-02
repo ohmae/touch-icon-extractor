@@ -18,6 +18,7 @@ buildscript {
     repositories {
         jcenter()
         mavenCentral()
+        maven("https://dl.bintray.com/kotlin/kotlin-eap")
     }
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
@@ -32,6 +33,7 @@ allprojects {
     repositories {
         jcenter()
         mavenCentral()
+        maven("https://dl.bintray.com/kotlin/kotlin-eap")
     }
 }
 
