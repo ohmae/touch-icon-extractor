@@ -1,20 +1,5 @@
 buildscript {
-    val versionMajor = 0
-    val versionMinor = 8
-    val versionPatch = 0
     val kotlinVersion by extra { "1.4.0-rc" }
-    val pj by extra {
-        mapOf(
-            "groupId" to "net.mm2d",
-            "versions" to mapOf(
-                "name" to "${versionMajor}.${versionMinor}.${versionPatch}",
-                "code" to versionMajor * 10000 + versionMinor * 100 + versionPatch
-            ),
-            "siteUrl" to "https://github.com/ohmae/touch-icon-extractor",
-            "githubUrl" to "https://github.com/ohmae/touch-icon-extractor",
-            "scmConnection" to "scm:git:https://github.com/ohmae/touch-icon-extractor.git"
-        )
-    }
     repositories {
         jcenter()
         mavenCentral()
