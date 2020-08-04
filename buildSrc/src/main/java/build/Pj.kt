@@ -1,4 +1,4 @@
-package environment
+package build
 
 object Pj {
     const val groupId: String = "net.mm2d"

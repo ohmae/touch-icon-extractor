@@ -1,4 +1,4 @@
-package environment
+package build
 
 object Dep {
     object Kotlin {
