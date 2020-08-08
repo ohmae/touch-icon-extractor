@@ -1,4 +1,4 @@
-package build
+package build.internal
 
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
@@ -9,7 +9,7 @@ import org.gradle.testing.jacoco.tasks.JacocoReport
 private fun Project.jacoco(configure: JacocoPluginExtension.() -> Unit): Unit =
     (this as ExtensionAware).extensions.configure("jacoco", configure)
 
-fun Project.setUpJacoco() {
+internal fun Project.jacocoSettings() {
     jacoco {
         toolVersion = "0.8.5"
     }

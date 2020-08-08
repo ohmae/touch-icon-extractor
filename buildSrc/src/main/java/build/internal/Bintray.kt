@@ -1,5 +1,6 @@
-package build
+package build.internal
 
+import build.Properties
 import com.jfrog.bintray.gradle.BintrayExtension
 import org.gradle.api.Project
 import org.gradle.api.internal.HasConvention
@@ -14,7 +15,7 @@ private fun Project.bintray(configure: BintrayExtension.() -> Unit): Unit =
 private val Project.base: BasePluginConvention
     get() = ((this as? Project)?.convention ?: (this as HasConvention).convention).getPluginByName("base")
 
-fun Project.setUpBintray() {
+internal fun Project.bintraySettings() {
     bintray {
         user = project.findProperty("bintray_user") as? String ?: ""
         key = project.findProperty("bintray_key") as? String ?: ""
@@ -24,14 +25,14 @@ fun Project.setUpBintray() {
 
         pkg(closureOf<BintrayExtension.PackageConfig> {
             repo = "maven"
-            name = Pj.groupId + "." + base.archivesBaseName
+            name = Properties.groupId + "." + base.archivesBaseName
             setLicenses("MIT")
-            websiteUrl = Pj.Url.site
-            vcsUrl = Pj.Url.github + ".git"
-            issueTrackerUrl = Pj.Url.github + "/issues"
+            websiteUrl = Properties.Url.site
+            vcsUrl = Properties.Url.github + ".git"
+            issueTrackerUrl = Properties.Url.github + "/issues"
             publicDownloadNumbers = true
             version = VersionConfig().apply {
-                name = Pj.versionName
+                name = Properties.versionName
             }
         })
     }

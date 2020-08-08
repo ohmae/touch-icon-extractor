@@ -1,6 +1,6 @@
 package build
 
-object Pj {
+object Properties {
     const val groupId: String = "net.mm2d"
 
     private const val versionMajor: Int = 0

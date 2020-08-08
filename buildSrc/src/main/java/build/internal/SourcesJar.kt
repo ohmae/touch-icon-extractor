@@ -1,4 +1,4 @@
-package build
+package build.internal
 
 import org.gradle.api.Project
 import org.gradle.api.artifacts.PublishArtifact
@@ -14,7 +14,7 @@ private val Project.sourceSets: SourceSetContainer get() = (this as ExtensionAwa
 
 private fun ArtifactHandler.archives(artifactNotation: Any): PublishArtifact = add("archives", artifactNotation)
 
-fun Project.setUpSourcesJar() {
+internal fun Project.sourcesJarSettings() {
     tasks.create("sourcesJar", Jar::class) {
         dependsOn("classes")
         archiveClassifier.set("sources")

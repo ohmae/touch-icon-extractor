@@ -1,10 +1,10 @@
-package build
+package build.internal
 
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.named
 
-fun Project.setUpDependencyUpdates() {
+internal fun Project.dependencyUpdatesSettings() {
     tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
         resolutionStrategy {
             rejectVersionIf {

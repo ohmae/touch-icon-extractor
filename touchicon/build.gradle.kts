@@ -14,14 +14,14 @@ plugins {
 }
 
 base.archivesBaseName = "touchicon"
-group = Pj.groupId
-version = Pj.versionName
+group = Properties.groupId
+version = Properties.versionName
 
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions.jvmTarget = "1.6"
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${Dep.Kotlin.version}")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:${Libraries.Kotlin.version}")
 
     testImplementation("junit:junit:4.13")
     testImplementation("com.google.truth:truth:1.0.1")
@@ -34,9 +34,4 @@ tasks.named<DokkaTask>("dokka") {
     outputDirectory = "../docs"
 }
 
-setUpSourcesJar()
-setUpUploadArchives()
-setUpPublishing()
-setUpBintray()
-setUpJacoco()
-setUpDependencyUpdates()
+commonSettings()

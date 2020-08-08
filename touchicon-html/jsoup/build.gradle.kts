@@ -14,8 +14,8 @@ plugins {
 }
 
 base.archivesBaseName = "touchicon-html-jsoup"
-group = Pj.groupId
-version = Pj.versionName
+group = Properties.groupId
+version = Properties.versionName
 
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions.jvmTarget = "1.6"
@@ -23,7 +23,7 @@ compileKotlin.kotlinOptions.jvmTarget = "1.6"
 dependencies {
     api(project(":touchicon"))
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${Dep.Kotlin.version}")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:${Libraries.Kotlin.version}")
     implementation("org.jsoup:jsoup:1.13.1")
 
     testImplementation("junit:junit:4.13")
@@ -36,9 +36,4 @@ tasks.named<DokkaTask>("dokka") {
     outputDirectory = "../../docs/touchicon-html"
 }
 
-setUpSourcesJar()
-setUpUploadArchives()
-setUpPublishing()
-setUpBintray()
-setUpJacoco()
-setUpDependencyUpdates()
+commonSettings()

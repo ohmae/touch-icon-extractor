@@ -1,5 +1,6 @@
-package build
+package build.internal
 
+import build.Properties
 import org.gradle.api.Project
 import org.gradle.api.internal.HasConvention
 import org.gradle.api.plugins.BasePluginConvention
@@ -11,7 +12,7 @@ import org.gradle.kotlin.dsl.withGroovyBuilder
 private val Project.base: BasePluginConvention
     get() = ((this as? Project)?.convention ?: (this as HasConvention).convention).getPluginByName("base")
 
-fun Project.setUpUploadArchives() {
+internal fun Project.uploadArchivesSettings() {
     tasks.named<Upload>("uploadArchives") {
         repositories.withGroovyBuilder {
             "mavenDeployer" {
@@ -19,10 +20,10 @@ fun Project.setUpUploadArchives() {
                 "pom" {
                     "project" {
                         setProperty("name", base.archivesBaseName)
-                        setProperty("url", Pj.Url.site)
-                        setProperty("groupId", Pj.groupId)
+                        setProperty("url", Properties.Url.site)
+                        setProperty("groupId", Properties.groupId)
                         setProperty("artifactId", base.archivesBaseName)
-                        setProperty("version", Pj.versionName)
+                        setProperty("version", Properties.versionName)
                         "licenses" {
                             "license" {
                                 setProperty("name", "The MIT License")
@@ -31,8 +32,8 @@ fun Project.setUpUploadArchives() {
                             }
                         }
                         "scm" {
-                            setProperty("connection", Pj.Url.scm)
-                            setProperty("url", Pj.Url.github)
+                            setProperty("connection", Properties.Url.scm)
+                            setProperty("url", Properties.Url.github)
                         }
                     }
                 }
