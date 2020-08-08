@@ -31,7 +31,7 @@ dependencies {
     testImplementation("io.mockk:mockk:1.10.0")
 }
 
-tasks.getting(DokkaTask::class) {
+tasks.named<DokkaTask>("dokka") {
     outputFormat = "html"
     outputDirectory = "../../docs/touchicon-html"
 }

@@ -29,7 +29,7 @@ dependencies {
     testImplementation("com.squareup.okhttp3:mockwebserver:4.8.0")
 }
 
-tasks.getting(DokkaTask::class) {
+tasks.named<DokkaTask>("dokka") {
     outputFormat = "html"
     outputDirectory = "../docs"
 }
