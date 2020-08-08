@@ -1,12 +1,11 @@
 buildscript {
-    val kotlinVersion by extra { "1.4.0-rc" }
     repositories {
         jcenter()
         mavenCentral()
         maven("https://dl.bintray.com/kotlin/kotlin-eap")
     }
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${build.Libraries.Kotlin.version}")
         classpath("org.jetbrains.dokka:dokka-gradle-plugin:0.10.1")
 
         classpath("com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5")
