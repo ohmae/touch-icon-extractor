@@ -26,7 +26,7 @@ compileTestKotlin.kotlinOptions.jvmTarget = "1.8"
 dependencies {
     api(project(":touchicon"))
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${Libraries.Kotlin.version}")
+    implementation(kotlin("stdlib"))
     implementation("org.jsoup:jsoup:1.13.1")
 
     testImplementation("junit:junit:4.13")
@@ -34,9 +34,8 @@ dependencies {
     testImplementation("io.mockk:mockk:1.10.0")
 }
 
-tasks.named<DokkaTask>("dokka") {
-    outputFormat = "html"
-    outputDirectory = "../../docs/touchicon-html"
+tasks.named<DokkaTask>("dokkaHtml") {
+    outputDirectory = "../../docs"
 }
 
 commonSettings()

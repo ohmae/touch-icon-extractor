@@ -26,7 +26,7 @@ compileTestKotlin.kotlinOptions.jvmTarget = "1.8"
 dependencies {
     api(project(":touchicon"))
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${Libraries.Kotlin.version}")
+    implementation(kotlin("stdlib"))
     compileOnly("com.squareup.okhttp3:okhttp:3.12.10")
 
     testImplementation("junit:junit:4.13")
@@ -35,9 +35,8 @@ dependencies {
     testImplementation("com.squareup.okhttp3:mockwebserver:4.8.1")
 }
 
-tasks.named<DokkaTask>("dokka") {
-    outputFormat = "html"
-    outputDirectory = "../../docs/touchicon-http"
+tasks.named<DokkaTask>("dokkaHtml") {
+    outputDirectory = "../../docs"
 }
 
 commonSettings()
