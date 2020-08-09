@@ -79,7 +79,7 @@ class IconComparatorTest {
         assertThat(sorted[5].url).isEqualTo("5")
         assertThat(sorted[6].url).isEqualTo("3")
         assertThat(sorted[7].url).isEqualTo("1")
-        assertThat(list.maxWith(IconComparator.SIZE_REL)?.url).isEqualTo("1")
+        assertThat(list.maxWithOrNull(IconComparator.SIZE_REL)?.url).isEqualTo("1")
     }
 
     @Test
@@ -143,7 +143,7 @@ class IconComparatorTest {
         assertThat(sorted[5].url).isEqualTo("3")
         assertThat(sorted[6].url).isEqualTo("2")
         assertThat(sorted[7].url).isEqualTo("1")
-        assertThat(list.maxWith(IconComparator.SIZE_REL)?.url).isEqualTo("1")
+        assertThat(list.maxWithOrNull(IconComparator.SIZE_REL)?.url).isEqualTo("1")
     }
 
     @Test
