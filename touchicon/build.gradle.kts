@@ -14,8 +14,8 @@ plugins {
 }
 
 base.archivesBaseName = "touchicon"
-group = Properties.groupId
-version = Properties.versionName
+group = ProjectProperties.groupId
+version = ProjectProperties.versionName
 
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions.jvmTarget = "1.8"

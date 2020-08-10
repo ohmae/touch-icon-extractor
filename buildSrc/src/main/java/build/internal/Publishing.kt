@@ -1,6 +1,6 @@
 package build.internal
 
-import build.Properties
+import build.ProjectProperties
 import groovy.util.Node
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.NamedDomainObjectProvider
@@ -33,15 +33,15 @@ internal fun Project.publishingSettings() {
         publications {
             create<MavenPublication>("bintray") {
                 artifact("$buildDir/libs/${base.archivesBaseName}-${version}.jar")
-                groupId = Properties.groupId
+                groupId = ProjectProperties.groupId
                 artifactId = base.archivesBaseName
-                version = Properties.versionName
+                version = ProjectProperties.versionName
                 artifact(tasks["sourcesJar"])
                 pom.withXml {
                     val node = asNode()
                     val licenses = node.appendNode("licenses")
                     appendLicense(licenses, "The MIT License", "https://opensource.org/licenses/MIT", "repo")
-                    appendScm(node, Properties.Url.scm, Properties.Url.github)
+                    appendScm(node, ProjectProperties.Url.scm, ProjectProperties.Url.github)
                     val dependencies = node.appendNode("dependencies")
                     configurations.api.get().dependencies.forEach {
                         appendDependency(
