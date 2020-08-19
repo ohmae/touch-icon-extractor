@@ -45,8 +45,8 @@ dependencies {
 Documentation comment is written in KDoc.
 
 - [touchicon](https://ohmae.github.io/touch-icon-extractor/touchicon/index.html)
-- [touchicon-http-okhttp](https://ohmae.github.io/touch-icon-extractor/touchicon-http/okhttp/index.html)
-- [touchicon-html-jsoup](https://ohmae.github.io/touch-icon-extractor/touchicon-html/jsoup/index.html)
+- [touchicon-http-okhttp](https://ohmae.github.io/touch-icon-extractor/touchicon-http-okhttp/index.html)
+- [touchicon-html-jsoup](https://ohmae.github.io/touch-icon-extractor/touchicon-html-jsoup/index.html)
 
 ### Sample code
 

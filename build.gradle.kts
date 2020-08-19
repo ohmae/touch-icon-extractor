@@ -2,10 +2,9 @@ buildscript {
     repositories {
         jcenter()
         mavenCentral()
-        maven { setUrl("https://dl.bintray.com/kotlin/kotlin-eap") }
     }
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.0-rc")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.0")
         classpath("org.jetbrains.dokka:dokka-gradle-plugin:1.4.0-rc")
 
         classpath("com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5")
@@ -17,7 +16,6 @@ allprojects {
     repositories {
         jcenter()
         mavenCentral()
-        maven { setUrl("https://dl.bintray.com/kotlin/kotlin-eap") }
     }
 }
 
