@@ -29,7 +29,7 @@ dependencies {
     testImplementation("junit:junit:4.13")
     testImplementation("com.google.truth:truth:1.0.1")
     testImplementation("io.mockk:mockk:1.10.0")
-    testImplementation("com.squareup.okhttp3:mockwebserver:4.8.0")
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.8.1")
 }
 
 tasks.named<DokkaTask>("dokkaHtml") {
