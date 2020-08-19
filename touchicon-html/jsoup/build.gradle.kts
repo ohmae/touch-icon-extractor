@@ -35,7 +35,7 @@ dependencies {
 }
 
 tasks.named<DokkaTask>("dokkaHtml") {
-    outputDirectory = "../../docs"
+    outputDirectory = "../../docs/html-jsoup"
     dokkaSourceSets {
         configureEach {
             moduleDisplayName = "touchicon-html-jsoup"

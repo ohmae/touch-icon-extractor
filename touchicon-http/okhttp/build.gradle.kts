@@ -36,7 +36,7 @@ dependencies {
 }
 
 tasks.named<DokkaTask>("dokkaHtml") {
-    outputDirectory = "../../docs"
+    outputDirectory = "../../docs/http-okhttp"
     dokkaSourceSets {
         configureEach {
             moduleDisplayName = "touchicon-http-okhttp"
