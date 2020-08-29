@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.0")
+        classpath(kotlin("gradle-plugin", version = "1.4.0"))
         classpath("org.jetbrains.dokka:dokka-gradle-plugin:1.4.0-rc")
 
         classpath("com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5")
