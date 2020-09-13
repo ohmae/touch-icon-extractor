@@ -33,7 +33,7 @@ dependencies {
 }
 
 tasks.named<DokkaTask>("dokkaHtml") {
-    outputDirectory = "../docs/touchicon"
+    outputDirectory.set(File(projectDir, "../docs/touchicon"))
 }
 
 commonSettings()

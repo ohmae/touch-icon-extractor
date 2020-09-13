@@ -1,8 +1,7 @@
-$dokka.format:html
+$dokka.format:html-v1
 $dokka.linkExtension:html
 
 net.mm2d.touchicon
 net.mm2d.touchicon.html.simple
 net.mm2d.touchicon.http.simple
-net.mm2d.touchicon.json
 

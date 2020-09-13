@@ -15,6 +15,7 @@
 /.idea/assetWizardSettings.xml
 /.idea/jarRepositories.xml
 /.idea/compiler.xml
+/.idea/uiDesigner.xml
 /build
 /captures
 .externalNativeBuild
