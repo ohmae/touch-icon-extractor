@@ -39,7 +39,7 @@ tasks.named<DokkaTask>("dokkaHtml") {
     outputDirectory.set(File(projectDir, "../../docs/http-okhttp"))
     dokkaSourceSets {
         configureEach {
-            moduleDisplayName.set("touchicon-http-okhttp")
+            moduleName.set("touchicon-http-okhttp")
         }
     }
 }

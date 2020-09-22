@@ -101,7 +101,7 @@ You may want to use communication in the same session as other communication.
 You need to use the same cookie in WebView and HTTP session of this library.
 For example, to use the same session as WebView in an Android application,
 
-For the default HTTP client using HttpUrlConnection, implement CookieHanlder.
+For the default HTTP client using HttpUrlConnection, implement CookieHandler.
 
 ```kotlin
 object WebViewCookieHandler : CookieHandler {
@@ -249,7 +249,7 @@ If you want this information, as following
 extractor.fromDomain(url)
 ```
 
-It checks whether or not the file exists, and returns the information if it exists.
+It checks whether the file exists, and returns the information if it exists.
 
 The order of checking the existence of the icon is as follows
 
