@@ -1,1 +1,1 @@
-sourceset_dependencies = '{":touchicon-html:jsoup/main": []}'
+sourceset_dependencies = '{":touchicon-html:jsoup:dokkaHtml/main": []}'

@@ -2,6 +2,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>net.mm2d.touchicon</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
     <link href="../../styles/style.css" rel="Stylesheet">
     <script type="text/javascript" src="../../scripts/navigationLoader.js" async="async"></script>
     <script type="text/javascript" src="../../scripts/platformContentHandler.js" async="async"></script>
@@ -18,6 +19,7 @@
         <div id="sideMenu"></div>
       </div>
       <div id="main">
+        <div id="leftToggler"><span class="icon-toggler"></span></div>
         <div id="searchBar"></div>
         <script type="text/javascript" src="../../scripts/pages.js"></script>
         <script type="text/javascript" src="../../scripts/main.js"></script>
@@ -31,7 +33,7 @@
             <div class="tabs-section-body">
               <h2 class=""><a data-name="types"></a>Types</h2>
               <div class="table" data-togglable="Types"><a data-name="net.mm2d.touchicon/DomainIcon///PointingToDeclaration/"></a>
-                <div class="table-row" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main">
+                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
                   <div class="main-subrow "><span><a href="-domain-icon/index.html">DomainIcon</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="net.mm2d.touchicon/DomainIcon///PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
     <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
@@ -42,11 +44,11 @@
                       </span></span></div>
                   <div class="platform-dependent-row keyValue">
                     <div></div>
-                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph"><p class="paragraph">Icon information associated with the Web site domain.</p><p class="paragraph">e.g. Assuming that the URL of the site is https://www.example.com/index.html</p><p class="paragraph">When the file name is &quot;apple-touch-icon-120x120-precomposed.png&quot;, the following values are stored</p><div class="sample-container"><code class="" theme="idea"><pre>rel=ICON<br>url=https://www.example.com/favicon.ico<br>sizes=120x120<br>mimeType=image/x-icon   &lt;- Content-Type value of the response from the server<br>precomposed=false<br>length=99999            &lt;- Content-Length value of the response from the server</pre></code></div><p class="paragraph">When the file name is &quot;favicon.con&quot;, the following values are stored</p><div class="sample-container"><code class="" theme="idea"><pre>rel=ICON<br>url=https://www.example.com/favicon.ico<br>sizes=                  &lt;- empty<br>mimeType=image/x-icon   &lt;- Content-Type value of the response from the server<br>precomposed=false<br>length=99999            &lt;- Content-Length value of the response from the server</pre></code></div></p></div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph"><p class="paragraph">Icon information associated with the Web site domain.</p><p class="paragraph">e.g. Assuming that the URL of the site is https://www.example.com/index.html</p><p class="paragraph">When the file name is &quot;apple-touch-icon-120x120-precomposed.png&quot;, the following values are stored</p><div class="sample-container"><code class="" theme="idea"><pre>rel=ICON<br>url=https://www.example.com/favicon.ico<br>sizes=120x120<br>mimeType=image/x-icon   &lt;- Content-Type value of the response from the server<br>precomposed=false<br>length=99999            &lt;- Content-Length value of the response from the server</pre></code></div><p class="paragraph">When the file name is &quot;favicon.con&quot;, the following values are stored</p><div class="sample-container"><code class="" theme="idea"><pre>rel=ICON<br>url=https://www.example.com/favicon.ico<br>sizes=                  &lt;- empty<br>mimeType=image/x-icon   &lt;- Content-Type value of the response from the server<br>precomposed=false<br>length=99999            &lt;- Content-Length value of the response from the server</pre></code></div></p></div></div>
 <span class="pull-right"></span></div>
 
   <div class="main-subrow">
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon/main"><div class="symbol monospace">data class <a href="-domain-icon/index.html">DomainIcon</a>(rel: <a href="-relationship/index.html">Relationship</a>, url: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, sizes: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, mimeType: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, precomposed: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>, length: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) : <a href="-icon/index.html">Icon</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><div class="symbol monospace">data class <a href="-domain-icon/index.html">DomainIcon</a>(rel: <a href="-relationship/index.html">Relationship</a>, url: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, sizes: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, mimeType: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, precomposed: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>, length: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) : <a href="-icon/index.html">Icon</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
                        </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
@@ -57,7 +59,7 @@
                   </div>
                 </div>
 <a data-name="net.mm2d.touchicon/HtmlParserAdapter///PointingToDeclaration/"></a>
-                <div class="table-row" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main">
+                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
                   <div class="main-subrow "><span><a href="-html-parser-adapter/index.html">HtmlParserAdapter</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="net.mm2d.touchicon/HtmlParserAdapter///PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
     <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
@@ -68,11 +70,11 @@
                       </span></span></div>
                   <div class="platform-dependent-row keyValue">
                     <div></div>
-                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph">Html Parser Interface.</p></div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph">Html Parser Interface.</p></div></div>
 <span class="pull-right"></span></div>
 
   <div class="main-subrow">
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon/main"><div class="symbol monospace">interface <a href="-html-parser-adapter/index.html">HtmlParserAdapter</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><div class="symbol monospace">interface <a href="-html-parser-adapter/index.html">HtmlParserAdapter</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
                        </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
@@ -83,7 +85,7 @@
                   </div>
                 </div>
 <a data-name="net.mm2d.touchicon/HtmlTag///PointingToDeclaration/"></a>
-                <div class="table-row" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main">
+                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
                   <div class="main-subrow "><span><a href="-html-tag/index.html">HtmlTag</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="net.mm2d.touchicon/HtmlTag///PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
     <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
@@ -94,11 +96,11 @@
                       </span></span></div>
                   <div class="platform-dependent-row keyValue">
                     <div></div>
-                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph">Represent HTML element.</p></div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph">Represent HTML element.</p></div></div>
 <span class="pull-right"></span></div>
 
   <div class="main-subrow">
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon/main"><div class="symbol monospace">interface <a href="-html-tag/index.html">HtmlTag</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><div class="symbol monospace">interface <a href="-html-tag/index.html">HtmlTag</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
                        </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
@@ -109,7 +111,7 @@
                   </div>
                 </div>
 <a data-name="net.mm2d.touchicon/HttpClientAdapter///PointingToDeclaration/"></a>
-                <div class="table-row" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main">
+                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
                   <div class="main-subrow "><span><a href="-http-client-adapter/index.html">HttpClientAdapter</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="net.mm2d.touchicon/HttpClientAdapter///PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
     <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
@@ -120,11 +122,11 @@
                       </span></span></div>
                   <div class="platform-dependent-row keyValue">
                     <div></div>
-                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph">Interface of HTTP Client</p></div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph">Interface of HTTP Client</p></div></div>
 <span class="pull-right"></span></div>
 
   <div class="main-subrow">
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon/main"><div class="symbol monospace">interface <a href="-http-client-adapter/index.html">HttpClientAdapter</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><div class="symbol monospace">interface <a href="-http-client-adapter/index.html">HttpClientAdapter</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
                        </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
@@ -135,7 +137,7 @@
                   </div>
                 </div>
 <a data-name="net.mm2d.touchicon/HttpResponse///PointingToDeclaration/"></a>
-                <div class="table-row" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main">
+                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
                   <div class="main-subrow "><span><a href="-http-response/index.html">HttpResponse</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="net.mm2d.touchicon/HttpResponse///PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
     <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
@@ -146,11 +148,11 @@
                       </span></span></div>
                   <div class="platform-dependent-row keyValue">
                     <div></div>
-                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph">Interface of HTTP response</p></div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph">Interface of HTTP response</p></div></div>
 <span class="pull-right"></span></div>
 
   <div class="main-subrow">
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon/main"><div class="symbol monospace">interface <a href="-http-response/index.html">HttpResponse</a> : <a href="https://docs.oracle.com/javase/8/docs/api/java/io/Closeable.html">Closeable</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><div class="symbol monospace">interface <a href="-http-response/index.html">HttpResponse</a> : <a href="https://docs.oracle.com/javase/8/docs/api/java/io/Closeable.html">Closeable</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
                        </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
@@ -161,7 +163,7 @@
                   </div>
                 </div>
 <a data-name="net.mm2d.touchicon/Icon///PointingToDeclaration/"></a>
-                <div class="table-row" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main">
+                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
                   <div class="main-subrow "><span><a href="-icon/index.html">Icon</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="net.mm2d.touchicon/Icon///PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
     <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
@@ -172,11 +174,11 @@
                       </span></span></div>
                   <div class="platform-dependent-row keyValue">
                     <div></div>
-                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph">Icon information interface.</p></div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph">Icon information interface.</p></div></div>
 <span class="pull-right"></span></div>
 
   <div class="main-subrow">
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon/main"><div class="symbol monospace">interface <a href="-icon/index.html">Icon</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><div class="symbol monospace">interface <a href="-icon/index.html">Icon</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
                        </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
@@ -187,7 +189,7 @@
                   </div>
                 </div>
 <a data-name="net.mm2d.touchicon/IconComparator///PointingToDeclaration/"></a>
-                <div class="table-row" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main">
+                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
                   <div class="main-subrow "><span><a href="-icon-comparator/index.html">IconComparator</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="net.mm2d.touchicon/IconComparator///PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
     <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
@@ -198,11 +200,11 @@
                       </span></span></div>
                   <div class="platform-dependent-row keyValue">
                     <div></div>
-                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph"><p class="paragraph">Comparator for sorting based on quality.</p><p class="paragraph">To get the icon with the highest quality.</p><p class="paragraph">If you give priority to size</p><div class="sample-container"><code class="" theme="idea"><pre>val bestIcon: Icon? = TouchIconExtractor.fromPage(url)<br>    .maxWith(IconComparator.SIZE_REL)</pre></code></div><p class="paragraph">If you give priority to type(relationship)</p><div class="sample-container"><code class="" theme="idea"><pre>val bestIcon: Icon? = TouchIconExtractor.fromPage(url)<br>    .maxWith(IconComparator.REL_SIZE)</pre></code></div></p></div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph"><p class="paragraph">Comparator for sorting based on quality.</p><p class="paragraph">To get the icon with the highest quality.</p><p class="paragraph">If you give priority to size</p><div class="sample-container"><code class="" theme="idea"><pre>val bestIcon: Icon? = TouchIconExtractor.fromPage(url)<br>    .maxWith(IconComparator.SIZE_REL)</pre></code></div><p class="paragraph">If you give priority to type(relationship)</p><div class="sample-container"><code class="" theme="idea"><pre>val bestIcon: Icon? = TouchIconExtractor.fromPage(url)<br>    .maxWith(IconComparator.REL_SIZE)</pre></code></div></p></div></div>
 <span class="pull-right"></span></div>
 
   <div class="main-subrow">
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon/main"><div class="symbol monospace">object <a href="-icon-comparator/index.html">IconComparator</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><div class="symbol monospace">object <a href="-icon-comparator/index.html">IconComparator</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
                        </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
@@ -213,7 +215,7 @@
                   </div>
                 </div>
 <a data-name="net.mm2d.touchicon/PageIcon///PointingToDeclaration/"></a>
-                <div class="table-row" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main">
+                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
                   <div class="main-subrow "><span><a href="-page-icon/index.html">PageIcon</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="net.mm2d.touchicon/PageIcon///PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
     <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
@@ -224,11 +226,11 @@
                       </span></span></div>
                   <div class="platform-dependent-row keyValue">
                     <div></div>
-                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph"><p class="paragraph">Icon information associated with the Web page.</p><p class="paragraph">e.g. Assuming that the URL of the site is https://www.example.com/index.html</p><p class="paragraph">When the HTML tag is</p><div class="sample-container"><code class="" theme="idea"><pre>&lt;link rel=&quot;apple-touch-icon-precomposed&quot; href=&quot;/apple-touch-icon-precomposed.png&quot; sizes=&quot;120x120&quot;&gt;</pre></code></div><p class="paragraph">the following values are stored</p><div class="sample-container"><code class="" theme="idea"><pre>rel=APPLE_TOUCH_ICON_PRECOMPOSED<br>url=https://www.example.com/apple-touch-icon-precomposed.png<br>sizes=120x120<br>mimeType=             &lt;- empty<br>precomposed=true<br>length=-1             &lt;- always -1</pre></code></div><p class="paragraph">When the HTML tag is</p><div class="sample-container"><code class="" theme="idea"><pre>&lt;link rel=&quot;icon&quot; href=&quot;/favicon.ico&quot; type=&quot;image/x-icon&quot;&gt;</pre></code></div><p class="paragraph">the following values are stored</p><div class="sample-container"><code class="" theme="idea"><pre>rel=ICON<br>url=https://www.example.com/favicon.ico<br>sizes=                &lt;- empty<br>mimeType=image/x-icon<br>precomposed=false<br>length=-1             &lt;- always -1</pre></code></div></p></div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph"><p class="paragraph">Icon information associated with the Web page.</p><p class="paragraph">e.g. Assuming that the URL of the site is https://www.example.com/index.html</p><p class="paragraph">When the HTML tag is</p><div class="sample-container"><code class="" theme="idea"><pre>&lt;link rel=&quot;apple-touch-icon-precomposed&quot; href=&quot;/apple-touch-icon-precomposed.png&quot; sizes=&quot;120x120&quot;&gt;</pre></code></div><p class="paragraph">the following values are stored</p><div class="sample-container"><code class="" theme="idea"><pre>rel=APPLE_TOUCH_ICON_PRECOMPOSED<br>url=https://www.example.com/apple-touch-icon-precomposed.png<br>sizes=120x120<br>mimeType=             &lt;- empty<br>precomposed=true<br>length=-1             &lt;- always -1</pre></code></div><p class="paragraph">When the HTML tag is</p><div class="sample-container"><code class="" theme="idea"><pre>&lt;link rel=&quot;icon&quot; href=&quot;/favicon.ico&quot; type=&quot;image/x-icon&quot;&gt;</pre></code></div><p class="paragraph">the following values are stored</p><div class="sample-container"><code class="" theme="idea"><pre>rel=ICON<br>url=https://www.example.com/favicon.ico<br>sizes=                &lt;- empty<br>mimeType=image/x-icon<br>precomposed=false<br>length=-1             &lt;- always -1</pre></code></div></p></div></div>
 <span class="pull-right"></span></div>
 
   <div class="main-subrow">
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon/main"><div class="symbol monospace">data class <a href="-page-icon/index.html">PageIcon</a>(rel: <a href="-relationship/index.html">Relationship</a>, url: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, sizes: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, mimeType: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, precomposed: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>, length: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) : <a href="-icon/index.html">Icon</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><div class="symbol monospace">data class <a href="-page-icon/index.html">PageIcon</a>(rel: <a href="-relationship/index.html">Relationship</a>, url: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, sizes: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, mimeType: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, precomposed: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>, length: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) : <a href="-icon/index.html">Icon</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
                        </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
@@ -239,7 +241,7 @@
                   </div>
                 </div>
 <a data-name="net.mm2d.touchicon/Relationship///PointingToDeclaration/"></a>
-                <div class="table-row" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main">
+                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
                   <div class="main-subrow "><span><a href="-relationship/index.html">Relationship</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="net.mm2d.touchicon/Relationship///PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
     <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
@@ -250,11 +252,11 @@
                       </span></span></div>
                   <div class="platform-dependent-row keyValue">
                     <div></div>
-                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph"><p class="paragraph">enum of relationship between icon and page.</p><p class="paragraph">Express the value of rel of the link tag.</p></p></div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph"><p class="paragraph">enum of relationship between icon and page.</p><p class="paragraph">Express the value of rel of the link tag.</p></p></div></div>
 <span class="pull-right"></span></div>
 
   <div class="main-subrow">
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon/main"><div class="symbol monospace">enum <a href="-relationship/index.html">Relationship</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a>&lt;<a href="-relationship/index.html">Relationship</a>&gt; <span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><div class="symbol monospace">enum <a href="-relationship/index.html">Relationship</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a>&lt;<a href="-relationship/index.html">Relationship</a>&gt; <span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
                        </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
@@ -265,7 +267,7 @@
                   </div>
                 </div>
 <a data-name="net.mm2d.touchicon/Size///PointingToDeclaration/"></a>
-                <div class="table-row" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main">
+                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
                   <div class="main-subrow "><span><a href="-size/index.html">Size</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="net.mm2d.touchicon/Size///PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
     <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
@@ -276,11 +278,11 @@
                       </span></span></div>
                   <div class="platform-dependent-row keyValue">
                     <div></div>
-                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph">Icon size.</p></div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph">Icon size.</p></div></div>
 <span class="pull-right"></span></div>
 
   <div class="main-subrow">
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon/main"><div class="symbol monospace">data class <a href="-size/index.html">Size</a>(width: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, height: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)<span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><div class="symbol monospace">data class <a href="-size/index.html">Size</a>(width: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, height: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)<span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
                        </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
@@ -291,7 +293,7 @@
                   </div>
                 </div>
 <a data-name="net.mm2d.touchicon/TouchIconExtractor///PointingToDeclaration/"></a>
-                <div class="table-row" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main">
+                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
                   <div class="main-subrow "><span><a href="-touch-icon-extractor/index.html">TouchIconExtractor</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="net.mm2d.touchicon/TouchIconExtractor///PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
     <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
@@ -302,11 +304,11 @@
                       </span></span></div>
                   <div class="platform-dependent-row keyValue">
                     <div></div>
-                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph">Extract information of WebClip icon such as Apple Touch Icon or favicon related to the URL.</p></div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph">Extract information of WebClip icon such as Apple Touch Icon or favicon related to the URL.</p></div></div>
 <span class="pull-right"></span></div>
 
   <div class="main-subrow">
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon/main"><div class="symbol monospace">class <a href="-touch-icon-extractor/index.html">TouchIconExtractor</a>(httpClient: <a href="-http-client-adapter/index.html">HttpClientAdapter</a>, htmlParser: <a href="-html-parser-adapter/index.html">HtmlParserAdapter</a>)<span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><div class="symbol monospace">class <a href="-touch-icon-extractor/index.html">TouchIconExtractor</a>(httpClient: <a href="-http-client-adapter/index.html">HttpClientAdapter</a>, htmlParser: <a href="-html-parser-adapter/index.html">HtmlParserAdapter</a>)<span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
                        </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
@@ -317,7 +319,7 @@
                   </div>
                 </div>
 <a data-name="net.mm2d.touchicon/WebAppIcon///PointingToDeclaration/"></a>
-                <div class="table-row" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main">
+                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
                   <div class="main-subrow "><span><a href="-web-app-icon/index.html">WebAppIcon</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="net.mm2d.touchicon/WebAppIcon///PointingToDeclaration/"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
     <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
@@ -328,11 +330,11 @@
                       </span></span></div>
                   <div class="platform-dependent-row keyValue">
                     <div></div>
-                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon/main" data-filterable-set=":touchicon/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph"><p class="paragraph">Icon information described in Web App Manifest.</p><p class="paragraph">This is described by the following JSON.</p><div class="sample-container"><code class="" theme="idea"><pre>{<br>  &quot;short_name&quot;: &quot;AirHorner&quot;,<br>  &quot;name&quot;: &quot;Kinlan's AirHorner of Infamy&quot;,<br>  &quot;icons&quot;: [<br>    {<br>      &quot;src&quot;: &quot;launcher-icon-1x.png&quot;,<br>      &quot;type&quot;: &quot;image/png&quot;,<br>      &quot;sizes&quot;: &quot;48x48&quot;<br>    },<br>    {<br>      &quot;src&quot;: &quot;launcher-icon-2x.png&quot;,<br>      &quot;type&quot;: &quot;image/png&quot;,<br>      &quot;sizes&quot;: &quot;96x96&quot;<br>    },<br>    {<br>      &quot;src&quot;: &quot;launcher-icon-4x.png&quot;,<br>      &quot;type&quot;: &quot;image/png&quot;,<br>      &quot;sizes&quot;: &quot;192x192&quot;<br>    }<br>  ],<br>  &quot;start_url&quot;: &quot;index.html?launcher=true&quot;<br>}</pre></code></div><p class="paragraph">And it is described as follows in HTML.</p><div class="sample-container"><code class="" theme="idea"><pre>&lt;link rel=&quot;manifest&quot; href=&quot;/manifest.json&quot;&gt;</pre></code></div></p></div></div>
+                    <div class="title"><div class="divergent-group" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main"><div class="brief-with-platform-tags"><div class="inner-brief-with-platform-tags"><div class="brief "><p class="paragraph"><p class="paragraph">Icon information described in Web App Manifest.</p><p class="paragraph">This is described by the following JSON.</p><div class="sample-container"><code class="" theme="idea"><pre>{<br>  &quot;short_name&quot;: &quot;AirHorner&quot;,<br>  &quot;name&quot;: &quot;Kinlan's AirHorner of Infamy&quot;,<br>  &quot;icons&quot;: [<br>    {<br>      &quot;src&quot;: &quot;launcher-icon-1x.png&quot;,<br>      &quot;type&quot;: &quot;image/png&quot;,<br>      &quot;sizes&quot;: &quot;48x48&quot;<br>    },<br>    {<br>      &quot;src&quot;: &quot;launcher-icon-2x.png&quot;,<br>      &quot;type&quot;: &quot;image/png&quot;,<br>      &quot;sizes&quot;: &quot;96x96&quot;<br>    },<br>    {<br>      &quot;src&quot;: &quot;launcher-icon-4x.png&quot;,<br>      &quot;type&quot;: &quot;image/png&quot;,<br>      &quot;sizes&quot;: &quot;192x192&quot;<br>    }<br>  ],<br>  &quot;start_url&quot;: &quot;index.html?launcher=true&quot;<br>}</pre></code></div><p class="paragraph">And it is described as follows in HTML.</p><div class="sample-container"><code class="" theme="idea"><pre>&lt;link rel=&quot;manifest&quot; href=&quot;/manifest.json&quot;&gt;</pre></code></div></p></div></div>
 <span class="pull-right"></span></div>
 
   <div class="main-subrow">
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon/main"><div class="symbol monospace">data class <a href="-web-app-icon/index.html">WebAppIcon</a>(url: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, sizes: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, mimeType: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, density: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>) : <a href="-icon/index.html">Icon</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><div class="symbol monospace">data class <a href="-web-app-icon/index.html">WebAppIcon</a>(url: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, sizes: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, mimeType: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, density: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>) : <a href="-icon/index.html">Icon</a><span class="top-right-position"><span class="copy-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black"/>
                        </svg></span><div class="copy-popup-wrapper popup-to-left"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>

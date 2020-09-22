@@ -1,1 +1,1 @@
-sourceset_dependencies = '{":touchicon/main": []}'
+sourceset_dependencies = '{":touchicon:dokkaHtml/main": []}'
