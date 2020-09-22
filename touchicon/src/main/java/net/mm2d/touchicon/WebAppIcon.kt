@@ -14,26 +14,26 @@ package net.mm2d.touchicon
  *
  * ```json
  * {
- *   "short_name": "AirHorner",
- *   "name": "Kinlan's AirHorner of Infamy",
+ *   "short_name": "short name",
+ *   "name": "long name",
  *   "icons": [
  *     {
- *       "src": "launcher-icon-1x.png",
+ *       "src": "icon-1x.png",
  *       "type": "image/png",
  *       "sizes": "48x48"
  *     },
  *     {
- *       "src": "launcher-icon-2x.png",
+ *       "src": "icon-2x.png",
  *       "type": "image/png",
  *       "sizes": "96x96"
  *     },
  *     {
- *       "src": "launcher-icon-4x.png",
+ *       "src": "icon-4x.png",
  *       "type": "image/png",
  *       "sizes": "192x192"
  *     }
  *   ],
- *   "start_url": "index.html?launcher=true"
+ *   "start_url": "index.html"
  * }
  * ```
  *
