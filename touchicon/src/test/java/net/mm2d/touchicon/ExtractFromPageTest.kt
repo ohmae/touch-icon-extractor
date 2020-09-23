@@ -14,6 +14,7 @@ import net.mm2d.touchicon.html.simple.SimpleHtmlParserAdapterFactory
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import java.io.IOException
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
@@ -65,6 +66,7 @@ class ExtractFromPageTest {
             """
             <html><head>
             <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+            <link rel="shortcut icon">
             </head></html>
             """.trimIndent(),
             false
@@ -252,7 +254,7 @@ class ExtractFromPageTest {
                     "sizes": "192x192",
                     "density": "4.0"
                 }],
-                "start_url": "index.html?launcher=true"
+                "start_url": "index.html"
             }""".trimIndent()
         }
         val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
@@ -267,6 +269,66 @@ class ExtractFromPageTest {
             true
         )
         assertThat(result).hasSize(1)
+    }
+
+    @Test
+    fun extract_web_app_manifest_href_is_empty() {
+        val httpClient: HttpClientAdapter = mockk()
+        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val result = extract.extractFromHtml(
+            "https://www.example.com/",
+            """
+            <html><head>
+            <link rel="stylesheet" href="style.css">
+            <link rel="manifest" href="">
+            </head></html>
+            """.trimIndent(),
+            true
+        )
+        assertThat(result).isEmpty()
+    }
+
+    @Test
+    fun extract_web_app_manifest_bodyString_is_null() {
+        val httpClient: HttpClientAdapter = mockk()
+        every {
+            httpClient.get("https://www.example.com/manifest.json")
+        } returns mockk<HttpResponse>(relaxed = true).also {
+            every { it.isSuccess } returns true
+            every { it.bodyString() } returns null
+        }
+        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val result = extract.extractFromHtml(
+            "https://www.example.com/",
+            """
+            <html><head>
+            <link rel="stylesheet" href="style.css">
+            <link rel="manifest" href="/manifest.json">
+            </head></html>
+            """.trimIndent(),
+            true
+        )
+        assertThat(result).isEmpty()
+    }
+
+    @Test
+    fun extract_web_app_manifest_IOException() {
+        val httpClient: HttpClientAdapter = mockk()
+        every {
+            httpClient.get("https://www.example.com/manifest.json")
+        } throws IOException()
+        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val result = extract.extractFromHtml(
+            "https://www.example.com/",
+            """
+            <html><head>
+            <link rel="stylesheet" href="style.css">
+            <link rel="manifest" href="/manifest.json">
+            </head></html>
+            """.trimIndent(),
+            true
+        )
+        assertThat(result).isEmpty()
     }
 
     @Test
@@ -289,6 +351,47 @@ class ExtractFromPageTest {
         assertThat(result.url).isEqualTo("https://www.example.com/favicon.ico")
         assertThat(result.sizes).isEqualTo("")
         assertThat(result.mimeType).isEqualTo("image/vnd.microsoft.icon")
+    }
+
+    @Test
+    fun extract_from_page_html_fail_get_IOException() {
+        val httpClient: HttpClientAdapter = mockk()
+        every {
+            httpClient.get("https://www.example.com/")
+        } throws IOException()
+        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val result = extract.fromPage("https://www.example.com/", false)
+        assertThat(result).isEmpty()
+    }
+
+    @Test
+    fun extract_from_page_html_fail_body_IOException() {
+        val httpClient: HttpClientAdapter = mockk()
+        every {
+            httpClient.get("https://www.example.com/")
+        } returns mockk<HttpResponse>(relaxed = true).also {
+            every { it.isSuccess } returns true
+            every { it.header("Content-Type") } returns "text/html"
+            every { it.bodyString(any()) } throws IOException()
+        }
+        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val result = extract.fromPage("https://www.example.com/", false)
+        assertThat(result).isEmpty()
+    }
+
+    @Test
+    fun extract_from_page_html_fail_body_is_empty() {
+        val httpClient: HttpClientAdapter = mockk()
+        every {
+            httpClient.get("https://www.example.com/")
+        } returns mockk<HttpResponse>(relaxed = true).also {
+            every { it.isSuccess } returns true
+            every { it.header("Content-Type") } returns "text/html"
+            every { it.bodyString(any()) } returns ""
+        }
+        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val result = extract.fromPage("https://www.example.com/", false)
+        assertThat(result).isEmpty()
     }
 
     @Test
@@ -339,12 +442,49 @@ class ExtractFromPageTest {
     }
 
     @Test
+    fun extract_from_page_fail3() {
+        val httpClient: HttpClientAdapter = mockk()
+        every {
+            httpClient.get("https://www.example.com/")
+        } returns mockk<HttpResponse>(relaxed = true).also {
+            every { it.isSuccess } returns true
+            every { it.header("Content-Type") } returns null
+        }
+        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        assertThat(extract.fromPage("https://www.example.com/", false)).isEmpty()
+    }
+
+    @Test
     fun extract_from_manifest_fail1() {
         val httpClient: HttpClientAdapter = mockk()
         every {
             httpClient.get("https://www.example.com/")
         } returns mockk<HttpResponse>(relaxed = true).also {
             every { it.isSuccess } returns false
+        }
+        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        assertThat(extract.fromManifest("https://www.example.com/")).isEmpty()
+    }
+
+    @Test
+    fun extract_from_manifest_fail2() {
+        val httpClient: HttpClientAdapter = mockk()
+        every {
+            httpClient.get("https://www.example.com/")
+        } throws IOException()
+        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        assertThat(extract.fromManifest("https://www.example.com/")).isEmpty()
+    }
+
+    @Test
+    fun extract_from_manifest_fail3() {
+        val httpClient: HttpClientAdapter = mockk()
+        every {
+            httpClient.get("https://www.example.com/")
+        } returns mockk<HttpResponse>(relaxed = true).also {
+            every { it.isSuccess } returns true
+            every { it.header("Content-Type") } returns "text/html"
+            every { it.bodyString() } returns ""
         }
         val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
         assertThat(extract.fromManifest("https://www.example.com/")).isEmpty()

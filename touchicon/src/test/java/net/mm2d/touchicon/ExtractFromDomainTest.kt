@@ -14,6 +14,8 @@ import io.mockk.verify
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import java.io.IOException
+import java.lang.RuntimeException
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
@@ -74,6 +76,7 @@ class ExtractFromDomainTest {
         } returns mockk(relaxed = true) {
             every { isSuccess } returns true
             every { header("Content-Type") } returns "image/x-icon"
+            every { header("Content-Length") } returns "100"
         }
         val extract = ExtractFromDomain(httpClient)
         val icon = extract.fromDomain("$baseUrl/index.html", true, emptyList())!!
@@ -81,10 +84,61 @@ class ExtractFromDomainTest {
         assertThat(icon.url).isEqualTo("$baseUrl/favicon.ico")
         assertThat(icon.rel).isEqualTo(Relationship.ICON)
         assertThat(icon.precomposed).isFalse()
-        assertThat(icon.length).isLessThan(0)
+        assertThat(icon.length).isEqualTo(100)
         verify(inverse = true) { httpClient.get(any()) }
         verify(exactly = 3) { httpClient.head(any()) }
         verify(exactly = 1) { httpClient.head("$baseUrl/favicon.ico") }
+    }
+
+    @Test
+    fun invoke_success_tryHead_Content_Length_is_null() {
+        val baseUrl = "https://www.example.com"
+        val httpClient = mockk<HttpClientAdapter>(relaxed = true)
+        every {
+            httpClient.head("$baseUrl/favicon.ico")
+        } returns mockk(relaxed = true) {
+            every { isSuccess } returns true
+            every { header("Content-Type") } returns "image/x-icon"
+            every { header("Content-Length") } returns null
+        }
+        val extract = ExtractFromDomain(httpClient)
+        val icon = extract.fromDomain("$baseUrl/index.html", true, emptyList())!!
+        assertThat(icon.mimeType).isEqualTo("image/x-icon")
+        assertThat(icon.url).isEqualTo("$baseUrl/favicon.ico")
+        assertThat(icon.length).isLessThan(0)
+    }
+
+    @Test
+    fun invoke_success_tryHead_Content_Length_is_not_integer() {
+        val baseUrl = "https://www.example.com"
+        val httpClient = mockk<HttpClientAdapter>(relaxed = true)
+        every {
+            httpClient.head("$baseUrl/favicon.ico")
+        } returns mockk(relaxed = true) {
+            every { isSuccess } returns true
+            every { header("Content-Type") } returns "image/x-icon"
+            every { header("Content-Length") } returns "X"
+        }
+        val extract = ExtractFromDomain(httpClient)
+        val icon = extract.fromDomain("$baseUrl/index.html", true, emptyList())!!
+        assertThat(icon.mimeType).isEqualTo("image/x-icon")
+        assertThat(icon.url).isEqualTo("$baseUrl/favicon.ico")
+        assertThat(icon.length).isLessThan(0)
+    }
+
+    @Test
+    fun invoke_failure_tryHead_RuntimeException() {
+        val baseUrl = "https://www.example.com"
+        val httpClient = mockk<HttpClientAdapter>(relaxed = true)
+        every {
+            httpClient.head("$baseUrl/favicon.ico")
+        } returns mockk(relaxed = true) {
+            every { isSuccess } returns true
+            every { header("Content-Type") } throws RuntimeException()
+        }
+        val extract = ExtractFromDomain(httpClient)
+        val icon = extract.fromDomain("$baseUrl/index.html", true, emptyList())
+        assertThat(icon).isNull()
     }
 
     @Test
@@ -117,6 +171,108 @@ class ExtractFromDomainTest {
         val icon = extract.listFromDomain("$baseUrl/index.html", true, emptyList())
         assertThat(icon).isNotEmpty()
         assertThat(icon[0].mimeType).isEqualTo("image/x-icon")
+    }
+
+    @Test
+    fun invoke_failure_tryHead_IOException() {
+        val baseUrl = "https://www.example.com"
+        val httpClient = mockk<HttpClientAdapter>(relaxed = true)
+        every {
+            httpClient.head("$baseUrl/favicon.ico")
+        } throws IOException()
+        val extract = ExtractFromDomain(httpClient)
+        val icon = extract.fromDomain("$baseUrl/index.html", true, emptyList())
+        assertThat(icon).isNull()
+    }
+
+    @Test
+    fun invoke_failure_tryHead_Content_Type_is_null() {
+        val baseUrl = "https://www.example.com"
+        val httpClient = mockk<HttpClientAdapter>(relaxed = true)
+        every {
+            httpClient.head("$baseUrl/favicon.ico")
+        } returns mockk(relaxed = true) {
+            every { isSuccess } returns true
+            every { header("Content-Type") } returns null
+        }
+        val extract = ExtractFromDomain(httpClient)
+        val icon = extract.fromDomain("$baseUrl/index.html", true, emptyList())
+        assertThat(icon).isNull()
+    }
+
+    @Test
+    fun invoke_failure_tryHead_Content_Type_is_not_image() {
+        val baseUrl = "https://www.example.com"
+        val httpClient = mockk<HttpClientAdapter>(relaxed = true)
+        every {
+            httpClient.head("$baseUrl/favicon.ico")
+        } returns mockk(relaxed = true) {
+            every { isSuccess } returns true
+            every { header("Content-Type") } returns "text/html"
+        }
+        val extract = ExtractFromDomain(httpClient)
+        val icon = extract.fromDomain("$baseUrl/index.html", true, emptyList())
+        assertThat(icon).isNull()
+    }
+
+    @Test
+    fun invoke_failure_with_download_get_IOException() {
+        val baseUrl = "https://www.example.com"
+        val httpClient = mockk<HttpClientAdapter>(relaxed = true)
+        every {
+            httpClient.get("$baseUrl/favicon.ico")
+        } throws IOException()
+        val extract = ExtractFromDomain(httpClient)
+        val icon = extract.fromDomainWithDownload("$baseUrl/index.html", true, emptyList())
+        assertThat(icon).isNull()
+    }
+
+    @Test
+    fun invoke_failure_with_download_body_IOException() {
+        val baseUrl = "https://www.example.com"
+        val httpClient = mockk<HttpClientAdapter>(relaxed = true)
+        every {
+            httpClient.get("$baseUrl/favicon.ico")
+        } returns mockk(relaxed = true) {
+            every { isSuccess } returns true
+            every { header("Content-Type") } returns "image/x-icon"
+            every { bodyBytes() } throws IOException()
+        }
+        val extract = ExtractFromDomain(httpClient)
+        val icon = extract.fromDomainWithDownload("$baseUrl/index.html", true, emptyList())
+        assertThat(icon).isNull()
+    }
+
+    @Test
+    fun invoke_failure_with_download_body_is_null() {
+        val baseUrl = "https://www.example.com"
+        val httpClient = mockk<HttpClientAdapter>(relaxed = true)
+        every {
+            httpClient.get("$baseUrl/favicon.ico")
+        } returns mockk(relaxed = true) {
+            every { isSuccess } returns true
+            every { header("Content-Type") } returns "image/x-icon"
+            every { bodyBytes() } returns null
+        }
+        val extract = ExtractFromDomain(httpClient)
+        val icon = extract.fromDomainWithDownload("$baseUrl/index.html", true, emptyList())
+        assertThat(icon).isNull()
+    }
+
+    @Test
+    fun invoke_failure_with_download_Content_Type_is_not_image() {
+        val baseUrl = "https://www.example.com"
+        val httpClient = mockk<HttpClientAdapter>(relaxed = true)
+        every {
+            httpClient.get("$baseUrl/favicon.ico")
+        } returns mockk(relaxed = true) {
+            every { isSuccess } returns true
+            every { header("Content-Type") } returns "text/html"
+            every { bodyBytes() } returns null
+        }
+        val extract = ExtractFromDomain(httpClient)
+        val icon = extract.fromDomainWithDownload("$baseUrl/index.html", true, emptyList())
+        assertThat(icon).isNull()
     }
 
     @Test

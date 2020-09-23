@@ -22,7 +22,7 @@ internal class ExtractFromDomain(
     ): DomainIcon? = createTryDataList(withPrecomposed, sizes)
         .asSequence()
         .mapNotNull { tryHead(siteUrl, it) }
-        .first()
+        .firstOrNull()
 
     internal fun fromDomainWithDownload(
         siteUrl: String,
@@ -31,7 +31,7 @@ internal class ExtractFromDomain(
     ): Pair<DomainIcon, ByteArray>? = createTryDataList(withPrecomposed, sizes)
         .asSequence()
         .mapNotNull { tryGet(siteUrl, it) }
-        .first()
+        .firstOrNull()
 
     internal fun listFromDomain(
         siteUrl: String,
