@@ -28,15 +28,17 @@ And also published in [Play store](https://play.google.com/store/apps/details?id
 ## How to use
 
 Download from jCenter. Add dependencies, as following.
+The latest version is:
+[![Maven metadata URI](https://img.shields.io/maven-metadata/v/https/jcenter.bintray.com/net/mm2d/touchicon/maven-metadata.xml.svg)](https://bintray.com/ohmae/maven/net.mm2d.touchicon)
 
 ```gradle
 repositories {
     jcenter()
 }
 dependencies {
-    implementation "net.mm2d:touchicon:0.8.0"
-    implementation "net.mm2d:touchicon-http-okhttp:0.8.0" // Optional: If use OkHttp for HTTP access
-    implementation "net.mm2d:touchicon-html-jsoup:0.8.0"  // Optional: If use Jsoup for HTML parse
+    implementation("net.mm2d:touchicon:$touchIconVersion")
+    implementation("net.mm2d:touchicon-http-okhttp:$touchIconVersion") // Optional: If use OkHttp for HTTP access
+    implementation("net.mm2d:touchicon-html-jsoup:$touchIconVersion")  // Optional: If use Jsoup for HTML parse
 }
 ```
 
