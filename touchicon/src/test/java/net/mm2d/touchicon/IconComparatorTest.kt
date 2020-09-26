@@ -68,7 +68,7 @@ class IconComparatorTest {
                 url = "8",
                 sizes = "40x40",
                 mimeType = "image/png"
-            )
+            ),
         )
         val sorted = list.sortedWith(IconComparator.SIZE_REL)
         assertThat(sorted[0].url).isEqualTo("8")
@@ -132,7 +132,7 @@ class IconComparatorTest {
                 url = "8",
                 sizes = "40x40",
                 mimeType = "image/png"
-            )
+            ),
         )
         val sorted = list.sortedWith(IconComparator.REL_SIZE)
         assertThat(sorted[0].url).isEqualTo("8")
@@ -172,7 +172,7 @@ class IconComparatorTest {
                 url = "4",
                 sizes = "80x",
                 mimeType = "image/png"
-            )
+            ),
         )
         val sorted = list.sortedWith(IconComparator.SIZE_REL)
         assertThat(sorted[0].url).isEqualTo("4")
@@ -207,7 +207,7 @@ class IconComparatorTest {
                 url = "4",
                 sizes = "70x70",
                 mimeType = "image/png"
-            )
+            ),
         )
         val sorted1 = list.sortedWith(IconComparator.SIZE_REL)
         assertThat(sorted1[0].url).isEqualTo("1")

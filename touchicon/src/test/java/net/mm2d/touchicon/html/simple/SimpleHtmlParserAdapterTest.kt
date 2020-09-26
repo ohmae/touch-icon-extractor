@@ -42,7 +42,7 @@ class SimpleHtmlParserAdapterTest {
             "rel" to "apple-touch-icon",
             "href" to "//www.example.com/apple-touch-icon-57x57.png",
             "sizes" to "57x57"
-        )
+        ),
     )
 
     @Test
