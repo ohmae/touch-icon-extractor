@@ -1,5 +1,4 @@
 import build.*
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
@@ -17,11 +16,14 @@ base.archivesBaseName = "touchicon"
 group = ProjectProperties.groupId
 version = ProjectProperties.versionName
 
-val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions.jvmTarget = "1.8"
-
-val compileTestKotlin: KotlinCompile by tasks
-compileTestKotlin.kotlinOptions.jvmTarget = "1.8"
+tasks {
+    compileKotlin {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+    compileTestKotlin {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+}
 
 dependencies {
     implementation(kotlin("stdlib"))
