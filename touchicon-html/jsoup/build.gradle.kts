@@ -32,7 +32,7 @@ dependencies {
     implementation("org.jsoup:jsoup:1.13.1")
 
     testImplementation("junit:junit:4.13.1")
-    testImplementation("com.google.truth:truth:1.0.1")
+    testImplementation("com.google.truth:truth:1.1")
     testImplementation("io.mockk:mockk:1.10.2")
 }
 
