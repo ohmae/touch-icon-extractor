@@ -9,8 +9,6 @@ package net.mm2d.touchicon
 
 /**
  * Represent HTML element.
- *
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 interface HtmlTag {
     /**

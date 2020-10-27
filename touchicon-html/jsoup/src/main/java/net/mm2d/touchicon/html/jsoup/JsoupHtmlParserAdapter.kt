@@ -11,9 +11,6 @@ import net.mm2d.touchicon.HtmlParserAdapter
 import net.mm2d.touchicon.HtmlTag
 import org.jsoup.Jsoup
 
-/**
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
- */
 internal class JsoupHtmlParserAdapter : HtmlParserAdapter {
     override fun extractLinkTags(html: String): List<HtmlTag> =
         Jsoup.parse(html)

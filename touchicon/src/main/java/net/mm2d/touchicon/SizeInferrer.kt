@@ -9,10 +9,6 @@ package net.mm2d.touchicon
 
 import java.util.regex.Pattern
 
-/**
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
- */
-
 private val INVALID_VALUE = Size(-1, -1)
 
 /**

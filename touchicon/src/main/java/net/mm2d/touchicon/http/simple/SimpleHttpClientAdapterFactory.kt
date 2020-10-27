@@ -11,8 +11,6 @@ import net.mm2d.touchicon.HttpClientAdapter
 
 /**
  * Supply default HttpClientAdapter implementation.
- *
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 object SimpleHttpClientAdapterFactory {
     /**

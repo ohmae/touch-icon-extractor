@@ -23,8 +23,6 @@ package net.mm2d.touchicon
  * val bestIcon: Icon? = TouchIconExtractor.fromPage(url)
  *     .maxWith(IconComparator.REL_SIZE)
  * ```
- *
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 object IconComparator {
     /**

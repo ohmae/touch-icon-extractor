@@ -10,9 +10,6 @@ package net.mm2d.touchicon.html.jsoup
 import net.mm2d.touchicon.HtmlTag
 import org.jsoup.nodes.Element
 
-/**
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
- */
 internal class JsoupHtmlTag(
     private val element: Element
 ) : HtmlTag {

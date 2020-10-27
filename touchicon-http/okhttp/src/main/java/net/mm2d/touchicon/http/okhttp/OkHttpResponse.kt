@@ -14,9 +14,6 @@ import java.io.ByteArrayOutputStream
 import java.io.IOException
 import kotlin.math.min
 
-/**
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
- */
 internal class OkHttpResponse(
     private val response: Response
 ) : HttpResponse {

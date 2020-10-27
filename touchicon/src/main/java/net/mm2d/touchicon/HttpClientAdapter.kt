@@ -11,8 +11,6 @@ import java.io.IOException
 
 /**
  * Interface of HTTP Client
- *
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 interface HttpClientAdapter {
     /**

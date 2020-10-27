@@ -14,9 +14,6 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLConnection
 
-/**
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
- */
 internal class SimpleHttpClientAdapter(
     private val cookieHandler: CookieHandler? = null
 ) : HttpClientAdapter {

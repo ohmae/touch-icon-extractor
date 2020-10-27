@@ -13,8 +13,6 @@ import java.util.*
  * enum of relationship between icon and page.
  *
  * Express the value of rel of the link tag.
- *
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 enum class Relationship(
     /**

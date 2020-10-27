@@ -40,8 +40,6 @@ package net.mm2d.touchicon
  * precomposed=false
  * length=-1             <- always -1
  * ```
- *
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 data class PageIcon(
     /**

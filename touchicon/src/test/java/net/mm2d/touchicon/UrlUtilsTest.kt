@@ -10,9 +10,6 @@ package net.mm2d.touchicon
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-/**
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
- */
 @Suppress("TestFunctionName")
 class UrlUtilsTest {
     @Test

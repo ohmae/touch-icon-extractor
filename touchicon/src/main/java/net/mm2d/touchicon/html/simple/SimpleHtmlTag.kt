@@ -9,9 +9,6 @@ package net.mm2d.touchicon.html.simple
 
 import net.mm2d.touchicon.HtmlTag
 
-/**
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
- */
 internal data class SimpleHtmlTag(
     val name: String,
     private val attrs: List<Pair<String, String>>

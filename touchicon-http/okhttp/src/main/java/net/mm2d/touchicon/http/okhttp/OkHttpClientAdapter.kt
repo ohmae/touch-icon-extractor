@@ -15,9 +15,6 @@ import okhttp3.Request
 import okhttp3.Request.Builder
 import java.io.IOException
 
-/**
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
- */
 internal class OkHttpClientAdapter(
     private val client: OkHttpClient
 ) : HttpClientAdapter {

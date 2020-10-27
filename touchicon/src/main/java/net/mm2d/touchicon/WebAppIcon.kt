@@ -42,8 +42,6 @@ package net.mm2d.touchicon
  * ```html
  * <link rel="manifest" href="/manifest.json">
  * ```
- *
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 data class WebAppIcon(
     override val url: String,

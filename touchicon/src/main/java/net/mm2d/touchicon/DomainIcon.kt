@@ -34,8 +34,6 @@ package net.mm2d.touchicon
  * precomposed=false
  * length=99999            <- Content-Length value of the response from the server
  * ```
- *
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 data class DomainIcon(
     /**

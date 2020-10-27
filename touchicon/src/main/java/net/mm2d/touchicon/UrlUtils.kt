@@ -9,9 +9,6 @@ package net.mm2d.touchicon
 
 import java.net.URL
 
-/**
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
- */
 internal fun makeAbsoluteUrl(baseUrl: String, url: String): String =
     URL(baseUrl).let {
         if (url.startsWith("//")) {

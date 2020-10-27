@@ -11,8 +11,6 @@ import net.mm2d.touchicon.HtmlParserAdapter
 
 /**
  * Supply default HttpParser implementation.
- *
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 object SimpleHtmlParserAdapterFactory {
     /**

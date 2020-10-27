@@ -13,8 +13,6 @@ import net.mm2d.touchicon.http.simple.SimpleHttpClientAdapterFactory
 /**
  * Extract information of WebClip icon such as Apple Touch Icon or favicon related to the URL.
  *
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
- *
  * @constructor
  * Initialize the instance.
  * You can change HttpClientAdapter and HtmlParserAdapter.

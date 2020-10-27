@@ -12,9 +12,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
-/**
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
- */
 @RunWith(JUnit4::class)
 @Suppress("TestFunctionName")
 class IconComparatorTest {

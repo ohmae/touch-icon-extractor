@@ -16,9 +16,6 @@ import org.junit.experimental.runners.Enclosed
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
-/**
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
- */
 @RunWith(Enclosed::class)
 @Suppress("TestFunctionName", "ClassName")
 class TouchIconExtractorTest {

@@ -12,8 +12,6 @@ import okhttp3.OkHttpClient
 
 /**
  * Supply HttpClientAdapter using OkHttp
- *
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
  */
 object OkHttpAdapterFactory {
     /**

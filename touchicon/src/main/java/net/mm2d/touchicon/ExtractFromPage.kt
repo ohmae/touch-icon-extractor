@@ -11,9 +11,6 @@ import net.mm2d.touchicon.json.JsonArray
 import net.mm2d.touchicon.json.JsonObject
 import net.mm2d.touchicon.json.JsonParser
 
-/**
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
- */
 internal class ExtractFromPage(
     private val httpClient: HttpClientAdapter,
     private val htmlParser: HtmlParserAdapter

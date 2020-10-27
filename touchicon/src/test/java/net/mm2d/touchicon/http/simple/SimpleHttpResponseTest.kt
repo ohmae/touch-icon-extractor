@@ -15,9 +15,6 @@ import java.io.IOException
 import java.io.InputStream
 import java.net.HttpURLConnection
 
-/**
- * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
- */
 class SimpleHttpResponseTest {
     @Test
     fun isSuccess() {
