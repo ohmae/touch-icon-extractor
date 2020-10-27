@@ -7,7 +7,7 @@
 
 package net.mm2d.touchicon.http.simple
 
-import net.mm2d.touchicon.HttpResponse
+import net.mm2d.touchicon.http.HttpResponse
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.net.HttpURLConnection

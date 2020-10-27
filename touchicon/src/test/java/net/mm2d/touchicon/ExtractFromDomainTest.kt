@@ -11,11 +11,11 @@ import com.google.common.truth.Truth.assertThat
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import net.mm2d.touchicon.http.HttpClientAdapter
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import java.io.IOException
-import java.lang.RuntimeException
 
 @RunWith(JUnit4::class)
 @Suppress("TestFunctionName")

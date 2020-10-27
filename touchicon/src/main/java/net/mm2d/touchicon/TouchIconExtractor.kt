@@ -7,7 +7,7 @@
 
 package net.mm2d.touchicon
 
-import net.mm2d.touchicon.html.simple.SimpleHtmlParserAdapterFactory
+import net.mm2d.touchicon.http.HttpClientAdapter
 import net.mm2d.touchicon.http.simple.SimpleHttpClientAdapterFactory
 
 /**
@@ -18,13 +18,11 @@ import net.mm2d.touchicon.http.simple.SimpleHttpClientAdapterFactory
  * You can change HttpClientAdapter and HtmlParserAdapter.
  *
  * @param httpClient HttpClientAdapter to use for internal communication. if not specified use default implementation.
- * @param htmlParser HtmlParserAdapter to use for HTML parse. if not specified use default implementation.
  */
 class TouchIconExtractor(
-    private val httpClient: HttpClientAdapter = SimpleHttpClientAdapterFactory.create(),
-    private val htmlParser: HtmlParserAdapter = SimpleHtmlParserAdapterFactory.create()
+    private val httpClient: HttpClientAdapter = SimpleHttpClientAdapterFactory.create()
 ) {
-    private val fromPage = createExtractFromPage(httpClient, htmlParser)
+    private val fromPage = createExtractFromPage(httpClient)
     private val fromDomain = createExtractFromDomain(httpClient)
 
     /**
@@ -212,9 +210,8 @@ class TouchIconExtractor(
 
     companion object {
         internal fun createExtractFromPage(
-            httpClient: HttpClientAdapter,
-            htmlParser: HtmlParserAdapter
-        ): ExtractFromPage = ExtractFromPage(httpClient, htmlParser)
+            httpClient: HttpClientAdapter
+        ): ExtractFromPage = ExtractFromPage(httpClient)
 
         internal fun createExtractFromDomain(
             httpClient: HttpClientAdapter

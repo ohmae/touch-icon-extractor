@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/MIT
  */
 
-package net.mm2d.touchicon
+package net.mm2d.touchicon.http
 
 import java.io.Closeable
 import java.io.IOException

@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/MIT
  */
 
-package net.mm2d.touchicon.html.simple
+package net.mm2d.touchicon.html
 
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
@@ -13,7 +13,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class SimpleHtmlParserAdapterTest {
+class HtmlParserTest {
     private val expected = listOf(
         mapOf(
             "rel" to "icon",
@@ -44,7 +44,7 @@ class SimpleHtmlParserAdapterTest {
 
     @Test
     fun extractLinkTags() {
-        val links = SimpleHtmlParserAdapterFactory.create().extractLinkTags(
+        val links = HtmlParser().extractLinkTags(
             """
             <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
             <html lang="ja">
@@ -70,7 +70,7 @@ class SimpleHtmlParserAdapterTest {
 
     @Test
     fun extractLinkTags_invalid_html() {
-        val links = SimpleHtmlParserAdapter().extractLinkTags(
+        val links = HtmlParser().extractLinkTags(
             """
             <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
             <html lang="ja">
@@ -93,7 +93,7 @@ class SimpleHtmlParserAdapterTest {
 
     @Test
     fun extractLinkTags_non_quote_attribute() {
-        val links = SimpleHtmlParserAdapter().extractLinkTags(
+        val links = HtmlParser().extractLinkTags(
             """
             <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
             <html lang="ja">
@@ -119,7 +119,7 @@ class SimpleHtmlParserAdapterTest {
 
     @Test
     fun extractLinkTags_end1() {
-        val links = SimpleHtmlParserAdapter().extractLinkTags(
+        val links = HtmlParser().extractLinkTags(
             """html lang="ja"><head><link rel=icon href=/favicon.ico type=image/vnd.microsoft.icon><link"""
         )
         assertThat(links).hasSize(1)
@@ -128,7 +128,7 @@ class SimpleHtmlParserAdapterTest {
 
     @Test
     fun extractLinkTags_end2() {
-        val links = SimpleHtmlParserAdapter().extractLinkTags(
+        val links = HtmlParser().extractLinkTags(
             """
             <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
             <html lang="ja">

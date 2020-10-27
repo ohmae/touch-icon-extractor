@@ -9,6 +9,7 @@ package net.mm2d.touchicon
 
 import com.google.common.truth.Truth.assertThat
 import io.mockk.*
+import net.mm2d.touchicon.http.HttpClientAdapter
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -22,7 +23,6 @@ class TouchIconExtractorTest {
     @RunWith(JUnit4::class)
     class `adapter test` {
         private lateinit var httpClientAdapter: HttpClientAdapter
-        private lateinit var htmlParserAdapter: HtmlParserAdapter
         private lateinit var extractFromPage: ExtractFromPage
         private lateinit var extractFromDomain: ExtractFromDomain
         private lateinit var extractor: TouchIconExtractor
@@ -30,13 +30,12 @@ class TouchIconExtractorTest {
         @Before
         fun setUp() {
             httpClientAdapter = mockk(relaxed = true)
-            htmlParserAdapter = mockk(relaxed = true)
             extractFromPage = mockk(relaxed = true)
             extractFromDomain = mockk(relaxed = true)
             mockkObject(TouchIconExtractor.Companion)
-            every { TouchIconExtractor.createExtractFromPage(any(), any()) } returns extractFromPage
+            every { TouchIconExtractor.createExtractFromPage(any()) } returns extractFromPage
             every { TouchIconExtractor.createExtractFromDomain(any()) } returns extractFromDomain
-            extractor = TouchIconExtractor(httpClientAdapter, htmlParserAdapter)
+            extractor = TouchIconExtractor(httpClientAdapter)
             unmockkObject(TouchIconExtractor.Companion)
         }
 

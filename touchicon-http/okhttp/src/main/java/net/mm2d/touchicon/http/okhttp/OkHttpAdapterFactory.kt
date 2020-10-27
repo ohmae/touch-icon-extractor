@@ -7,7 +7,7 @@
 
 package net.mm2d.touchicon.http.okhttp
 
-import net.mm2d.touchicon.HttpClientAdapter
+import net.mm2d.touchicon.http.HttpClientAdapter
 import okhttp3.OkHttpClient
 
 /**

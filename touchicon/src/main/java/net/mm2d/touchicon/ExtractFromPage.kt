@@ -7,14 +7,18 @@
 
 package net.mm2d.touchicon
 
+import net.mm2d.touchicon.html.HtmlParser
+import net.mm2d.touchicon.html.HtmlTag
+import net.mm2d.touchicon.http.HttpClientAdapter
+import net.mm2d.touchicon.http.HttpResponse
 import net.mm2d.touchicon.json.JsonArray
 import net.mm2d.touchicon.json.JsonObject
 import net.mm2d.touchicon.json.JsonParser
 
 internal class ExtractFromPage(
-    private val httpClient: HttpClientAdapter,
-    private val htmlParser: HtmlParserAdapter
+    private val httpClient: HttpClientAdapter
 ) {
+    private val htmlParser: HtmlParser = HtmlParser()
     var downloadLimit: Int = DEFAULT_LIMIT_SIZE
 
     internal fun fromPage(siteUrl: String, withManifest: Boolean): List<Icon> {

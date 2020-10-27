@@ -10,7 +10,8 @@ package net.mm2d.touchicon
 import com.google.common.truth.Truth.assertThat
 import io.mockk.every
 import io.mockk.mockk
-import net.mm2d.touchicon.html.simple.SimpleHtmlParserAdapterFactory
+import net.mm2d.touchicon.http.HttpClientAdapter
+import net.mm2d.touchicon.http.HttpResponse
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -21,7 +22,7 @@ import java.io.IOException
 class ExtractFromPageTest {
     @Test
     fun extract_icon() {
-        val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(mockk())
         val result = extract.extractFromHtml(
             "https://www.example.com/",
             """
@@ -39,7 +40,7 @@ class ExtractFromPageTest {
 
     @Test
     fun extract_icon_with_manifest() {
-        val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(mockk())
         val result = extract.extractFromHtml(
             "https://www.example.com/",
             """
@@ -57,7 +58,7 @@ class ExtractFromPageTest {
 
     @Test
     fun extract_shortcut_icon() {
-        val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(mockk())
         val result = extract.extractFromHtml(
             "https://www.example.com/",
             """
@@ -76,7 +77,7 @@ class ExtractFromPageTest {
 
     @Test
     fun extract_apple_touch_icon() {
-        val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(mockk())
         val result = extract.extractFromHtml(
             "https://www.example.com/",
             """
@@ -94,7 +95,7 @@ class ExtractFromPageTest {
 
     @Test
     fun extract_apple_touch_icon_precomposed() {
-        val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(mockk())
         val result = extract.extractFromHtml(
             "https://www.example.com/",
             """
@@ -112,7 +113,7 @@ class ExtractFromPageTest {
 
     @Test
     fun extract_omitted_scheme() {
-        val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(mockk())
         val result = extract.extractFromHtml(
             "https://www.example.com/",
             """
@@ -130,7 +131,7 @@ class ExtractFromPageTest {
 
     @Test
     fun extract_broken() {
-        val extract = ExtractFromPage(mockk(), SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(mockk())
         val result = extract.extractFromHtml(
             "https://www.example.com/",
             """
@@ -170,7 +171,7 @@ class ExtractFromPageTest {
                 "start_url": "index.html?launcher=true"
             }""".trimIndent()
         }
-        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(httpClient)
         val result = extract.extractFromHtml(
             "https://www.example.com/",
             """
@@ -216,7 +217,7 @@ class ExtractFromPageTest {
                 "start_url": "index.html?launcher=true"
             """.trimIndent()
         }
-        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(httpClient)
         val result = extract.extractFromHtml(
             "https://www.example.com/",
             """
@@ -254,7 +255,7 @@ class ExtractFromPageTest {
                 "start_url": "index.html"
             }""".trimIndent()
         }
-        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(httpClient)
         val result = extract.extractFromHtml(
             "https://www.example.com/",
             """
@@ -271,7 +272,7 @@ class ExtractFromPageTest {
     @Test
     fun extract_web_app_manifest_href_is_empty() {
         val httpClient: HttpClientAdapter = mockk()
-        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(httpClient)
         val result = extract.extractFromHtml(
             "https://www.example.com/",
             """
@@ -294,7 +295,7 @@ class ExtractFromPageTest {
             every { it.isSuccess } returns true
             every { it.bodyString() } returns null
         }
-        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(httpClient)
         val result = extract.extractFromHtml(
             "https://www.example.com/",
             """
@@ -314,7 +315,7 @@ class ExtractFromPageTest {
         every {
             httpClient.get("https://www.example.com/manifest.json")
         } throws IOException()
-        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(httpClient)
         val result = extract.extractFromHtml(
             "https://www.example.com/",
             """
@@ -342,7 +343,7 @@ class ExtractFromPageTest {
             </head></html>
             """.trimIndent()
         }
-        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(httpClient)
         val result = extract.fromPage("https://www.example.com/", false)[0]
         assertThat(result.rel).isEqualTo(Relationship.ICON)
         assertThat(result.url).isEqualTo("https://www.example.com/favicon.ico")
@@ -356,7 +357,7 @@ class ExtractFromPageTest {
         every {
             httpClient.get("https://www.example.com/")
         } throws IOException()
-        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(httpClient)
         val result = extract.fromPage("https://www.example.com/", false)
         assertThat(result).isEmpty()
     }
@@ -371,7 +372,7 @@ class ExtractFromPageTest {
             every { it.header("Content-Type") } returns "text/html"
             every { it.bodyString(any()) } throws IOException()
         }
-        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(httpClient)
         val result = extract.fromPage("https://www.example.com/", false)
         assertThat(result).isEmpty()
     }
@@ -386,7 +387,7 @@ class ExtractFromPageTest {
             every { it.header("Content-Type") } returns "text/html"
             every { it.bodyString(any()) } returns ""
         }
-        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(httpClient)
         val result = extract.fromPage("https://www.example.com/", false)
         assertThat(result).isEmpty()
     }
@@ -405,7 +406,7 @@ class ExtractFromPageTest {
             </head></html>
             """.trimIndent()
         }
-        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(httpClient)
         val result = extract.fromPage("https://www.example.com/", false)[0]
         assertThat(result.rel).isEqualTo(Relationship.ICON)
         assertThat(result.url).isEqualTo("https://www.example.com/favicon.ico")
@@ -421,7 +422,7 @@ class ExtractFromPageTest {
         } returns mockk<HttpResponse>(relaxed = true).also {
             every { it.isSuccess } returns false
         }
-        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(httpClient)
         assertThat(extract.fromPage("https://www.example.com/", false)).isEmpty()
     }
 
@@ -434,7 +435,7 @@ class ExtractFromPageTest {
             every { it.isSuccess } returns true
             every { it.header("Content-Type") } returns "image/png"
         }
-        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(httpClient)
         assertThat(extract.fromPage("https://www.example.com/", false)).isEmpty()
     }
 
@@ -447,7 +448,7 @@ class ExtractFromPageTest {
             every { it.isSuccess } returns true
             every { it.header("Content-Type") } returns null
         }
-        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(httpClient)
         assertThat(extract.fromPage("https://www.example.com/", false)).isEmpty()
     }
 
@@ -459,7 +460,7 @@ class ExtractFromPageTest {
         } returns mockk<HttpResponse>(relaxed = true).also {
             every { it.isSuccess } returns false
         }
-        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(httpClient)
         assertThat(extract.fromManifest("https://www.example.com/")).isEmpty()
     }
 
@@ -469,7 +470,7 @@ class ExtractFromPageTest {
         every {
             httpClient.get("https://www.example.com/")
         } throws IOException()
-        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(httpClient)
         assertThat(extract.fromManifest("https://www.example.com/")).isEmpty()
     }
 
@@ -483,7 +484,7 @@ class ExtractFromPageTest {
             every { it.header("Content-Type") } returns "text/html"
             every { it.bodyString() } returns ""
         }
-        val extract = ExtractFromPage(httpClient, SimpleHtmlParserAdapterFactory.create())
+        val extract = ExtractFromPage(httpClient)
         assertThat(extract.fromManifest("https://www.example.com/")).isEmpty()
     }
 }

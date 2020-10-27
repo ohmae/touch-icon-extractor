@@ -7,7 +7,7 @@
 
 package net.mm2d.touchicon.http.okhttp
 
-import net.mm2d.touchicon.HttpResponse
+import net.mm2d.touchicon.http.HttpResponse
 import okhttp3.Response
 import okhttp3.ResponseBody
 import java.io.ByteArrayOutputStream

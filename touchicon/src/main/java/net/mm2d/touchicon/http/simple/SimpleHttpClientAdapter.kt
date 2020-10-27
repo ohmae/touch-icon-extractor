@@ -7,8 +7,8 @@
 
 package net.mm2d.touchicon.http.simple
 
-import net.mm2d.touchicon.HttpClientAdapter
-import net.mm2d.touchicon.HttpResponse
+import net.mm2d.touchicon.http.HttpClientAdapter
+import net.mm2d.touchicon.http.HttpResponse
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL

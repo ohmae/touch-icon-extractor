@@ -7,6 +7,8 @@
 
 package net.mm2d.touchicon
 
+import net.mm2d.touchicon.http.HttpClientAdapter
+import net.mm2d.touchicon.http.HttpResponse
 import java.net.URL
 
 internal class ExtractFromDomain(

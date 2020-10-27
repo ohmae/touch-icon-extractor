@@ -5,17 +5,22 @@
  * http://opensource.org/licenses/MIT
  */
 
-package net.mm2d.touchicon.html.simple
+package net.mm2d.touchicon.html
 
-import net.mm2d.touchicon.HtmlParserAdapter
-import net.mm2d.touchicon.HtmlTag
-
-internal class SimpleHtmlParserAdapter : HtmlParserAdapter {
-    override fun extractLinkTags(html: String): List<HtmlTag> =
+/**
+ * Html Parser.
+ */
+internal class HtmlParser {
+    /**
+     * Extract the link tag information.
+     *
+     * @return link tags
+     */
+    fun extractLinkTags(html: String): List<HtmlTag> =
         extractElementList(html).filter { it.name.equals("link", true) }
 
-    private fun extractElementList(html: String): List<SimpleHtmlTag> {
-        val result = mutableListOf<SimpleHtmlTag>()
+    private fun extractElementList(html: String): List<HtmlTag> {
+        val result = mutableListOf<HtmlTag>()
         val a = html.toCharArray()
         var i = 0
         while (i < a.size) {
@@ -71,7 +76,7 @@ internal class SimpleHtmlParserAdapter : HtmlParserAdapter {
                 i = attrValueEnd
                 if (quote) i++
             }
-            result.add(SimpleHtmlTag(tagName, attrs))
+            result.add(HtmlTag(tagName, attrs))
             i++
         }
         return result

@@ -5,17 +5,23 @@
  * http://opensource.org/licenses/MIT
  */
 
-package net.mm2d.touchicon
+package net.mm2d.touchicon.html
 
 /**
  * Represent HTML element.
  */
-interface HtmlTag {
+internal class HtmlTag(
+    val name: String,
+    private val attrs: List<Pair<String, String>>
+) {
     /**
      * Return attribute value.
      *
      * @param name attribute name
      * @return attribute value, or empty string if not found
      */
-    fun attr(name: String): String
+    fun attr(name: String): String {
+        val attr = attrs.find { it.first.equals(name, true) } ?: return ""
+        return attr.second
+    }
 }
