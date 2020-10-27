@@ -5,7 +5,7 @@ object ProjectProperties {
 
     private const val versionMajor: Int = 0
     private const val versionMinor: Int = 8
-    private const val versionPatch: Int = 2
+    private const val versionPatch: Int = 3
     const val versionName: String = "$versionMajor.$versionMinor.$versionPatch"
 
     object Url {
