@@ -23,7 +23,8 @@ And also published in [Play store](https://play.google.com/store/apps/details?id
 
 - `net.mm2d:touchicon:` core component. All feature is provided by this. Use `UrlConnection` for HTTP access and its own parser for HTML parse.
 - `net.mm2d:touchicon-http-okhttp:` Adapter to use OkHttp for HTTP access.
-- `net.mm2d:touchicon-html-jsoup:` Adapter to use Jsoup for HTML parse.
+
+`net.mm2d:touchicon-html-jsoup:` is **EOL**. *The last version is [0.8.3](https://github.com/ohmae/touch-icon-extractor/releases/tag/v0.8.3)*
 
 ## How to use
 
@@ -38,7 +39,6 @@ repositories {
 dependencies {
     implementation("net.mm2d:touchicon:$touchIconVersion")
     implementation("net.mm2d:touchicon-http-okhttp:$touchIconVersion") // Optional: If use OkHttp for HTTP access
-    implementation("net.mm2d:touchicon-html-jsoup:$touchIconVersion")  // Optional: If use Jsoup for HTML parse
 }
 ```
 
@@ -48,7 +48,6 @@ Documentation comment is written in KDoc.
 
 - [touchicon](https://ohmae.github.io/touch-icon-extractor/touchicon/touchicon/)
 - [touchicon-http-okhttp](https://ohmae.github.io/touch-icon-extractor/http-okhttp/touchicon-http-okhttp/)
-- [touchicon-html-jsoup](https://ohmae.github.io/touch-icon-extractor/html-jsoup/touchicon-html-jsoup/)
 
 ### Sample code
 
@@ -85,15 +84,6 @@ If you want to use OkHttp, use touchicon-http-okhttp module.
 ```kotlin
 val extractor = TouchIconExtractor(
     httpClient = OkHttpAdapterFactory.create(OkHttpClient())
-)
-```
-
-And, this use a simple in-house parser for HTML parsing.
-If you want to use Jsoup, use touchicon-html-jsoup module.
-
-```kotlin
-val extractor = TouchIconExtractor(
-    htmlParser = JsoupHtmlParserAdapterFactory.create()
 )
 ```
 
@@ -314,12 +304,6 @@ val bestIcon2 = icons.maxWith(IconComparator.REL_SIZE) // Compare by rel, if sam
 - [Kotlin](https://kotlinlang.org/)
   - kotlin-stdlib
 - [OkHttp3](https://square.github.io/okhttp/)
-
-### touchicon-html-jsoup
-
-- [Kotlin](https://kotlinlang.org/)
-  - kotlin-stdlib
-- [Jsoup](https://jsoup.org/)
 
 ## Author
 大前 良介 (OHMAE Ryosuke)
