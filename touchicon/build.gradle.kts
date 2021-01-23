@@ -29,8 +29,8 @@ dependencies {
     implementation(kotlin("stdlib"))
 
     testImplementation("junit:junit:4.13.1")
-    testImplementation("com.google.truth:truth:1.1")
-    testImplementation("io.mockk:mockk:1.10.3")
+    testImplementation("com.google.truth:truth:1.1.1")
+    testImplementation("io.mockk:mockk:1.10.5")
     testImplementation("com.squareup.okhttp3:mockwebserver:4.9.0")
 }
 
