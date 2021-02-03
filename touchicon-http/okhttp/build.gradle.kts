@@ -32,9 +32,9 @@ dependencies {
     compileOnly("com.squareup.okhttp3:okhttp:3.12.10")
 
     testImplementation("junit:junit:4.13.1")
-    testImplementation("com.google.truth:truth:1.1.1")
+    testImplementation("com.google.truth:truth:1.1.2")
     testImplementation("io.mockk:mockk:1.10.5")
-    testImplementation("com.squareup.okhttp3:mockwebserver:4.9.0")
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
 }
 
 tasks.named<DokkaTask>("dokkaHtml") {

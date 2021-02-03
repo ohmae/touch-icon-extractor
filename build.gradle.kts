@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath(kotlin("gradle-plugin", version = "1.4.21-2"))
+        classpath(kotlin("gradle-plugin", version = "1.4.21"))
         classpath("org.jetbrains.dokka:dokka-gradle-plugin:1.4.20")
 
         classpath("com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5")
@@ -24,7 +24,7 @@ plugins {
 }
 
 jacoco {
-    toolVersion = "0.8.5"
+    toolVersion = "0.8.6"
 }
 
 tasks.create("jacocoMerge", JacocoMerge::class) {
