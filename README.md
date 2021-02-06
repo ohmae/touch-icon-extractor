@@ -28,6 +28,8 @@ And also published in [Play store](https://play.google.com/store/apps/details?id
 
 ## How to use
 
+*jCenter will close in May. I am currently considering migrating to another hosting service. Please wait.*
+
 Download from jCenter. Add dependencies, as following.
 The latest version is:
 [![Maven metadata URI](https://img.shields.io/maven-metadata/v/https/jcenter.bintray.com/net/mm2d/touchicon/maven-metadata.xml.svg)](https://bintray.com/ohmae/maven/net.mm2d.touchicon)
