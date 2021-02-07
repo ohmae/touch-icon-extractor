@@ -38,4 +38,18 @@ tasks.named<DokkaTask>("dokkaHtml") {
     outputDirectory.set(File(projectDir, "../docs/touchicon"))
 }
 
-commonSettings()
+tasks.create("sourcesJar", Jar::class) {
+    dependsOn("classes")
+    archiveClassifier.set("sources")
+    from(sourceSets["main"].allSource)
+}
+
+artifacts {
+    archives(tasks.named<Jar>("sourcesJar"))
+}
+
+uploadArchivesSettings()
+publishingSettings()
+bintraySettings()
+jacocoSettings()
+dependencyUpdatesSettings()
