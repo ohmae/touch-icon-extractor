@@ -14,6 +14,8 @@ import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getPluginByName
 import org.gradle.kotlin.dsl.named
+import org.gradle.plugins.signing.SigningExtension
+import java.net.URI
 
 private fun Project.publishing(configure: PublishingExtension.() -> Unit): Unit =
     (this as ExtensionAware).extensions.configure("publishing", configure)
@@ -27,24 +29,39 @@ private val NamedDomainObjectContainer<Configuration>.api: NamedDomainObjectProv
 private val NamedDomainObjectContainer<Configuration>.implementation: NamedDomainObjectProvider<Configuration>
     get() = named<Configuration>("implementation")
 
+fun Project.signing(configure: SigningExtension.() -> Unit): Unit =
+    (this as ExtensionAware).extensions.configure("signing", configure)
+
+val Project.publishing: PublishingExtension
+    get() = (this as ExtensionAware).extensions.getByName("publishing") as PublishingExtension
+
 fun Project.publishingSettings() {
     publishing {
         publications {
-            create<MavenPublication>("bintray") {
+            create<MavenPublication>("mavenJava") {
                 artifact("$buildDir/libs/${base.archivesBaseName}-${version}.jar")
+                artifact(tasks["sourcesJar"])
+                artifact(tasks["javadocJar"])
                 groupId = ProjectProperties.groupId
                 artifactId = base.archivesBaseName
                 version = ProjectProperties.versionName
-                artifact(tasks["sourcesJar"])
                 pom.withXml {
                     val node = asNode()
+                    node.appendNode("name", ProjectProperties.name)
+                    node.appendNode("description", ProjectProperties.description)
+                    node.appendNode("url", ProjectProperties.Url.site)
                     node.appendNode("licenses").appendNode("license").apply {
                         appendNode("name", "The MIT License")
                         appendNode("url", "https://opensource.org/licenses/MIT")
                         appendNode("distribution", "repo")
                     }
+                    node.appendNode("developers").appendNode("developer").apply {
+                        appendNode("id", ProjectProperties.developerId)
+                        appendNode("name", ProjectProperties.developerName)
+                    }
                     node.appendNode("scm").apply {
                         appendNode("connection", ProjectProperties.Url.scm)
+                        appendNode("developerConnection", ProjectProperties.Url.scm)
                         appendNode("url", ProjectProperties.Url.github)
                     }
                     val dependencies = node.appendNode("dependencies")
@@ -69,6 +86,21 @@ fun Project.publishingSettings() {
                 }
             }
         }
+        repositories {
+            maven {
+                url = URI("https://oss.sonatype.org/service/local/staging/deploy/maven2")
+                credentials {
+                    username = project.findProperty("sonatype_username") as? String ?: ""
+                    password = project.findProperty("sonatype_password") as? String ?: ""
+                }
+            }
+        }
+        signing {
+            sign(publishing.publications["mavenJava"])
+        }
+    }
+    tasks.named("publish") {
+        dependsOn("assemble")
     }
 }
 

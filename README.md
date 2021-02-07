@@ -5,8 +5,7 @@
 [![GitHub closed issues](https://img.shields.io/github/issues-closed/ohmae/touch-icon-extractor.svg)](https://github.com/ohmae/touch-icon-extractor/issues?q=is%3Aissue+is%3Aclosed)
 [![Maven Repository](https://img.shields.io/badge/maven-jcenter-brightgreen.svg)](https://bintray.com/ohmae/maven/net.mm2d.touchicon)
 [![Maven metadata URI](https://img.shields.io/maven-metadata/v/https/jcenter.bintray.com/net/mm2d/touchicon/maven-metadata.xml.svg)](https://bintray.com/ohmae/maven/net.mm2d.touchicon)
-[![Actions Status](https://github.com/ohmae/touch-icon-extractor/workflows/ci/badge.svg)](https://github.com/ohmae/touch-icon-extractor/actions)
-[![codecov](https://codecov.io/gh/ohmae/touch-icon-extractor/branch/develop/graph/badge.svg)](https://codecov.io/gh/ohmae/touch-icon-extractor)
+![Maven Central](https://img.shields.io/maven-central/v/net.mm2d.touchicon/touchicon)
 
 This is a library to extract WebClip icon information from the website.
 Available in **JVM** and **Android** as this is written in pure **Kotlin**.
@@ -28,16 +27,32 @@ And also published in [Play store](https://play.google.com/store/apps/details?id
 
 ## How to use
 
-*jCenter will close in May. I am currently considering migrating to another hosting service. Please wait.*
+jCenter will close in May. In 0.9.1 moved to mavenCentral from jcenter.  
+Please note that the **groupID has changed**
 
-Download from jCenter. Add dependencies, as following.
+Download from mavenCentral.  
 The latest version is:
-[![Maven metadata URI](https://img.shields.io/maven-metadata/v/https/jcenter.bintray.com/net/mm2d/touchicon/maven-metadata.xml.svg)](https://bintray.com/ohmae/maven/net.mm2d.touchicon)
+![Maven Central](https://img.shields.io/maven-central/v/net.mm2d.touchicon/touchicon)
+
+```gradle
+dependencies {
+    implementation("net.mm2d.touchicon:touchicon:$touchIconVersion")
+    implementation("net.mm2d.touchicon:touchicon-http-okhttp:$touchIconVersion") // Optional: If use OkHttp for HTTP access
+}
+```
+
+Versions below 0.9.1 were distributed with jCenter.
+However, jCenter will close and old versions are not migrated to mavenCentral.
+If you need an older version, please use the Github Pages repository.
 
 ```gradle
 repositories {
     jcenter()
+    maven { url = URI("https://ohmae.github.com/maven") }
 }
+```
+
+```gradle
 dependencies {
     implementation("net.mm2d:touchicon:$touchIconVersion")
     implementation("net.mm2d:touchicon-http-okhttp:$touchIconVersion") // Optional: If use OkHttp for HTTP access

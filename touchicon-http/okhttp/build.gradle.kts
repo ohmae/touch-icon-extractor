@@ -7,7 +7,7 @@ plugins {
     id("org.jetbrains.dokka")
     maven
     `maven-publish`
-    id("com.jfrog.bintray")
+    signing
     jacoco
     id("com.github.ben-manes.versions")
 }
@@ -46,6 +46,16 @@ tasks.named<DokkaTask>("dokkaHtml") {
     }
 }
 
+tasks.named<DokkaTask>("dokkaJavadoc") {
+    outputDirectory.set(File(buildDir, "docs/javadoc"))
+}
+
+tasks.create("javadocJar", Jar::class) {
+    dependsOn("dokkaJavadoc")
+    archiveClassifier.set("javadoc")
+    from(File(buildDir, "docs/javadoc"))
+}
+
 tasks.create("sourcesJar", Jar::class) {
     dependsOn("classes")
     archiveClassifier.set("sources")
@@ -58,6 +68,5 @@ artifacts {
 
 uploadArchivesSettings()
 publishingSettings()
-bintraySettings()
 jacocoSettings()
 dependencyUpdatesSettings()
