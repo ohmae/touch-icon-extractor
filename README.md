@@ -47,7 +47,6 @@ If you need an older version, please use the Github Pages repository.
 
 ```gradle
 repositories {
-    jcenter()
     maven { url = URI("https://ohmae.github.com/maven") }
 }
 ```
