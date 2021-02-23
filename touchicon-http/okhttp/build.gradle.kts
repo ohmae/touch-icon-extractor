@@ -31,9 +31,9 @@ dependencies {
     implementation(kotlin("stdlib"))
     compileOnly("com.squareup.okhttp3:okhttp:3.12.10")
 
-    testImplementation("junit:junit:4.13.1")
+    testImplementation("junit:junit:4.13.2")
     testImplementation("com.google.truth:truth:1.1.2")
-    testImplementation("io.mockk:mockk:1.10.5")
+    testImplementation("io.mockk:mockk:1.10.6")
     testImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
 }
 
