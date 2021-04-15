@@ -1,5 +1,7 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
-
+$dokka.location:net.mm2d.touchicon.http.okhttp////PointingToDeclaration/touchicon-http-okhttp/net.mm2d.touchicon.http.okhttp/index.html
+$dokka.location:net.mm2d.touchicon.http.okhttp/OkHttpAdapterFactory///PointingToDeclaration/touchicon-http-okhttp/net.mm2d.touchicon.http.okhttp/-ok-http-adapter-factory/index.html
+$dokka.location:net.mm2d.touchicon.http.okhttp/OkHttpAdapterFactory/create/#okhttp3.OkHttpClient/PointingToDeclaration/touchicon-http-okhttp/net.mm2d.touchicon.http.okhttp/-ok-http-adapter-factory/create.html
 net.mm2d.touchicon.http.okhttp
 

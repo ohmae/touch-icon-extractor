@@ -5,7 +5,6 @@ plugins {
     `java-library`
     kotlin("jvm")
     id("org.jetbrains.dokka")
-    maven
     `maven-publish`
     signing
     jacoco
@@ -33,7 +32,7 @@ dependencies {
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("com.google.truth:truth:1.1.2")
-    testImplementation("io.mockk:mockk:1.10.6")
+    testImplementation("io.mockk:mockk:1.11.0")
     testImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
 }
 
@@ -66,7 +65,6 @@ artifacts {
     archives(tasks.named<Jar>("sourcesJar"))
 }
 
-uploadArchivesSettings()
 publishingSettings()
 jacocoSettings()
 dependencyUpdatesSettings()
