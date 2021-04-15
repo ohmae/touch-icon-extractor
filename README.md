@@ -60,8 +60,8 @@ dependencies {
 
 Documentation comment is written in KDoc.
 
-- [touchicon](https://ohmae.github.io/touch-icon-extractor/touchicon/touchicon/)
-- [touchicon-http-okhttp](https://ohmae.github.io/touch-icon-extractor/http-okhttp/touchicon-http-okhttp/)
+- [touchicon](https://ohmae.github.io/touch-icon-extractor/touchicon/)
+- [touchicon-http-okhttp](https://ohmae.github.io/touch-icon-extractor/http-okhttp/)
 
 ### Sample code
 
