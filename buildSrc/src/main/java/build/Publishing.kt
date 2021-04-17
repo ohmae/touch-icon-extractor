@@ -36,6 +36,11 @@ val Project.publishing: PublishingExtension
     get() = (this as ExtensionAware).extensions.getByName("publishing") as PublishingExtension
 
 fun Project.publishingSettings() {
+    tasks.named("publish") {
+        dependsOn("assemble")
+        dependsOn("javadocJar")
+        dependsOn("sourcesJar")
+    }
     publishing {
         publications {
             create<MavenPublication>("mavenJava") {
@@ -98,9 +103,6 @@ fun Project.publishingSettings() {
         signing {
             sign(publishing.publications["mavenJava"])
         }
-    }
-    tasks.named("publish") {
-        dependsOn("assemble")
     }
 }
 
