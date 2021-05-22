@@ -3,7 +3,9 @@
 [![GitHub release](https://img.shields.io/github/release/ohmae/touch-icon-extractor.svg)](https://github.com/ohmae/touch-icon-extractor/releases)
 [![GitHub issues](https://img.shields.io/github/issues/ohmae/touch-icon-extractor.svg)](https://github.com/ohmae/touch-icon-extractor/issues)
 [![GitHub closed issues](https://img.shields.io/github/issues-closed/ohmae/touch-icon-extractor.svg)](https://github.com/ohmae/touch-icon-extractor/issues?q=is%3Aissue+is%3Aclosed)
-![Maven Central](https://img.shields.io/maven-central/v/net.mm2d.touchicon/touchicon)
+[![GitHub Actions](https://github.com/ohmae/touch-icon-extractor/actions/workflows/ci.yml/badge.svg)](https://github.com/ohmae/touch-icon-extractor/actions)
+[![codecov](https://codecov.io/gh/ohmae/touch-icon-extractor/branch/develop/graph/badge.svg)](https://codecov.io/gh/ohmae/touch-icon-extractor)
+[![Maven Central](https://img.shields.io/maven-central/v/net.mm2d.touchicon/touchicon)](https://search.maven.org/artifact/net.mm2d.touchicon/touchicon)
 
 This is a library to extract WebClip icon information from the website.
 Available in **JVM** and **Android** as this is written in pure **Kotlin**.
