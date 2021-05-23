@@ -139,5 +139,21 @@ class HtmlParserTest {
         )
         assertThat(links).hasSize(2)
     }
+
+    @Test
+    fun extractElementList_nitpick() {
+        assertThat(HtmlParser().extractElementList("<")).isEmpty()
+        assertThat(HtmlParser().extractElementList("<a>")[0].name).isEqualTo("a")
+        assertThat(HtmlParser().extractElementList("<a/>")[0].name).isEqualTo("a")
+        assertThat(HtmlParser().extractElementList("<a >")[0].name).isEqualTo("a")
+        assertThat(HtmlParser().extractElementList("<a ")[0].name).isEqualTo("a")
+        assertThat(HtmlParser().extractElementList("<a !")[0].name).isEqualTo("a")
+        assertThat(HtmlParser().extractElementList("<a a")[0].name).isEqualTo("a")
+        assertThat(HtmlParser().extractElementList("<a a=")[0].name).isEqualTo("a")
+        assertThat(HtmlParser().extractElementList("<a a= ")[0].name).isEqualTo("a")
+        assertThat(HtmlParser().extractElementList("<a a=\"a\"")[0].name).isEqualTo("a")
+        assertThat(HtmlParser().extractElementList("<a a=\"")[0].name).isEqualTo("a")
+        assertThat(HtmlParser().extractElementList("""<a a="\"a">""")[0].name).isEqualTo("a")
+    }
 }
 

@@ -19,7 +19,9 @@ internal class HtmlParser {
     fun extractLinkTags(html: String): List<HtmlTag> =
         extractElementList(html).filter { it.name.equals("link", true) }
 
-    private fun extractElementList(html: String): List<HtmlTag> {
+    // VisibleForTesting
+    @Suppress("MemberVisibilityCanBePrivate")
+    internal fun extractElementList(html: String): List<HtmlTag> {
         val result = mutableListOf<HtmlTag>()
         val a = html.toCharArray()
         var i = 0
@@ -48,7 +50,7 @@ internal class HtmlParser {
             val attrs = mutableListOf<Pair<String, String>>()
             while (i < a.size) {
                 i = skip(a, i) { !a[it].isWhitespace() }
-                if (a[i] == '/' || a[i] == '>') {
+                if (i >= a.size || a[i] == '/' || a[i] == '>') {
                     break
                 }
                 val attrNameEnd = skip(a, i) { !a[it].isNameCharacter() }
@@ -91,7 +93,7 @@ internal class HtmlParser {
         return p.indices.none { a[offset + it] != p[it] }
     }
 
-    private inline fun skip(a: CharArray, start: Int, breakCondition: (Int) -> Boolean): Int {
+    private fun skip(a: CharArray, start: Int, breakCondition: (Int) -> Boolean): Int {
         for (i in start until a.size) {
             if (breakCondition(i)) return i
         }
