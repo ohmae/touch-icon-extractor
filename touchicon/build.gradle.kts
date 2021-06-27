@@ -11,7 +11,7 @@ plugins {
     id("com.github.ben-manes.versions")
 }
 
-base.archivesBaseName = "touchicon"
+base.archivesName.set("touchicon")
 group = ProjectProperties.groupId
 version = ProjectProperties.versionName
 

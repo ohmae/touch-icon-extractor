@@ -5,8 +5,7 @@ import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.NamedDomainObjectProvider
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
-import org.gradle.api.internal.HasConvention
-import org.gradle.api.plugins.BasePluginConvention
+import org.gradle.api.plugins.BasePluginExtension
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
@@ -20,8 +19,8 @@ import java.net.URI
 private fun Project.publishing(configure: PublishingExtension.() -> Unit): Unit =
     (this as ExtensionAware).extensions.configure("publishing", configure)
 
-private val Project.base: BasePluginConvention
-    get() = ((this as? Project)?.convention ?: (this as HasConvention).convention).getPluginByName("base")
+private val Project.base: BasePluginExtension
+    get() = (this as ExtensionAware).extensions.getByName("base") as BasePluginExtension
 
 private val NamedDomainObjectContainer<Configuration>.api: NamedDomainObjectProvider<Configuration>
     get() = named<Configuration>("api")

@@ -4,10 +4,10 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath(kotlin("gradle-plugin", version = "1.5.10"))
+        classpath(kotlin("gradle-plugin", version = "1.5.20"))
         classpath("org.jetbrains.dokka:dokka-gradle-plugin:1.4.32")
 
-        classpath("com.github.ben-manes:gradle-versions-plugin:0.38.0")
+        classpath("com.github.ben-manes:gradle-versions-plugin:0.39.0")
     }
 }
 
@@ -46,7 +46,7 @@ tasks.create("jacocoMergedReport", JacocoReport::class) {
     }
     executionData(tasks.named<JacocoMerge>("jacocoMerge").get().destinationFile)
     reports {
-        xml.isEnabled = true
-        html.isEnabled = true
+        xml.required.set(true)
+        html.required.set(true)
     }
 }
