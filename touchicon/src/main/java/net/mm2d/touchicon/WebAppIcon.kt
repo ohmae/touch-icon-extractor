@@ -51,7 +51,7 @@ data class WebAppIcon(
      * pixel densities.
      *
      * this is an optional member.
-     * eg. "3.0"
+     * e.g. "3.0"
      */
     val density: String
 ) : Icon {

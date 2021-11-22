@@ -43,7 +43,7 @@ dependencies {
 
 Versions below 0.9.1 were distributed with jCenter.
 However, jCenter will close and old versions are not migrated to mavenCentral.
-If you need an older version, please use the Github Pages repository.
+If you need an older version, please use the GitHub Pages repository.
 
 ```gradle
 repositories {
@@ -247,9 +247,9 @@ As you guessed, it gets at the same time as PageIcon.
 Simply putting a file with a fixed name like "favicon.ico" in the root of the domain.
 Whether an icon exists or not can not be known until you try HTTP communication.
 
-This is an inefficient, but there are Web sites that are still deployed in this way.
+This is an inefficient, but there are Websites that are still deployed in this way.
 You should try only if you can not get it by the method in the previous section.
-_Please be aware that this method can be annoying to the website administrator._
+Please be aware that this method can be annoying to the website administrator.
 
 If you want this information, as following
 

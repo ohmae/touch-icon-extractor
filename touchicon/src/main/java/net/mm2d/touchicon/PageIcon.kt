@@ -73,7 +73,7 @@ data class PageIcon(
     /**
      * Icon file length.
      *
-     * Negative value means unknown. and in this class always -1.
+     * Negative value means unknown. and in this class, always -1.
      */
     override val length: Int = -1
 ) : Icon {

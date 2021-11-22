@@ -8,7 +8,7 @@
 package net.mm2d.touchicon
 
 /**
- * Icon information associated with the Web site domain.
+ * Icon information associated with the Website domain.
  *
  * e.g.
  * Assuming that the URL of the site is https://www.example.com/index.html

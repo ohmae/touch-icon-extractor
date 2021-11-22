@@ -22,7 +22,7 @@ class DomainIconTest {
                 rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                 mimeType = "image/png",
                 sizes = "50x50",
-                url = "http://example.com/icon-40x40.png",
+                url = "https://example.com/icon-40x40.png",
                 precomposed = true,
                 length = 0
             ).inferSize()
