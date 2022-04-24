@@ -1,183 +1,223 @@
+<!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>Icon</title>
-<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script><script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script><link href="../../../styles/style.css" rel="Stylesheet"><link href="../../../styles/logo-styles.css" rel="Stylesheet"><link href="../../../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../../../styles/main.css" rel="Stylesheet"><script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script><script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script><script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script><script type="text/javascript" src="../../../scripts/main.js" async="async"></script>  </head>
-  <body>
-    <div id="container">
-      <div id="leftColumn"><a href="../../../index.html">
-          <div id="logo"></div>
-        </a>
-        <div id="paneSearch"></div>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+const savedDarkMode = storage ? JSON.parse(storage) : false
+if(savedDarkMode === true){
+    document.getElementsByTagName("html")[0].classList.add("theme-dark")
+}</script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+</head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+            <a href="../../../index.html">
+                    <span>touchicon</span>
+            </a>
+    </div>
+    <div>
+0.9.4    </div>
+    <div class="pull-right d-flex">
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
         <div id="sideMenu"></div>
-      </div>
-      <div id="main">
-        <div id="leftToggler"><span class="icon-toggler"></span></div>
-<script type="text/javascript" src="../../../scripts/main.js"></script>        <div class="main-content" id="content" pageIds="touchicon::net.mm2d.touchicon/Icon///PointingToDeclaration//-156729267">
-          <div class="navigation-wrapper" id="navigation-wrapper">
-            <div class="breadcrumbs"><a href="../../../index.html">touchicon</a>/<a href="../index.html">net.mm2d.touchicon</a>/<a href="index.html">Icon</a></div>
-            <div class="pull-right d-flex">
-              <div id="searchBar"></div>
-            </div>
-          </div>
-          <div class="cover ">
-            <h1 class="cover"><span><span>Icon</span></span></h1>
-            <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><div class="symbol monospace">interface <a href="index.html">Icon</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">Icon information interface.</p></div></div>
-          </div>
-          <div class="tabbedcontent">
-            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Inheritors">Inheritors</button></div>
-            <div class="tabs-section-body">
-              <h2 class="">Functions</h2>
-              <div class="table" data-togglable="Functions"><a data-name="1578752278%2FFunctions%2F-156729267" anchor-label="inferArea" id="1578752278%2FFunctions%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="infer-area.html"><span>infer</span><wbr></wbr><span><span>Area</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1578752278%2FFunctions%2F-156729267"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><div class="symbol monospace">open fun <a href="infer-area.html">inferArea</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+    </div>
+    <div id="main">
+<div class="main-content" id="content" pageIds="touchicon::net.mm2d.touchicon/Icon///PointingToDeclaration//-156729267">
+  <div class="breadcrumbs"><a href="../../../index.html">touchicon</a><span class="delimiter">/</span><a href="../index.html">net.mm2d.touchicon</a><span class="delimiter">/</span><a href="index.html">Icon</a></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Icon</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">Icon</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">Icon information interface.</p></div></div>
   </div>
-<div class="brief "><p class="paragraph">Infer area of this icon.</p></div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1989520350%2FFunctions%2F-156729267" anchor-label="inferSize" id="-1989520350%2FFunctions%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="infer-size.html"><span>infer</span><wbr></wbr><span><span>Size</span></span></a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1989520350%2FFunctions%2F-156729267"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main"><div class="with-platform-tags"><span class="pull-right"></span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><div class="symbol monospace">abstract fun <a href="infer-size.html">inferSize</a>(): <a href="../-size/index.html">Size</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-<div class="brief "><p class="paragraph">Infer display size of this icon.</p></div></div>
-</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <h2 class="">Properties</h2>
-              <div class="table" data-togglable="Properties"><a data-name="-1473205981%2FProperties%2F-156729267" anchor-label="length" id="-1473205981%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="length.html">length</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1473205981%2FProperties%2F-156729267"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><a data-name="-1473205981%2FProperties%2F-156729267" anchor-label="length" id="-1473205981%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><div class="symbol monospace">abstract val <a href="length.html">length</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-1473205981%2FProperties%2F-156729267" anchor-label="length" id="-1473205981%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><p class="paragraph">Icon file length.</p></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1602908037%2FProperties%2F-156729267" anchor-label="mimeType" id="-1602908037%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="mime-type.html">mimeType</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1602908037%2FProperties%2F-156729267"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><a data-name="-1602908037%2FProperties%2F-156729267" anchor-label="mimeType" id="-1602908037%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><div class="symbol monospace">abstract val <a href="mime-type.html">mimeType</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-1602908037%2FProperties%2F-156729267" anchor-label="mimeType" id="-1602908037%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><p class="paragraph">Icon MIME type. e.g. &quot;image/png&quot;</p></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-965079396%2FProperties%2F-156729267" anchor-label="precomposed" id="-965079396%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="precomposed.html">precomposed</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-965079396%2FProperties%2F-156729267"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><a data-name="-965079396%2FProperties%2F-156729267" anchor-label="precomposed" id="-965079396%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><div class="symbol monospace">abstract val <a href="precomposed.html">precomposed</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-965079396%2FProperties%2F-156729267" anchor-label="precomposed" id="-965079396%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><p class="paragraph">true if this is for a precomposed touch icon.</p></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1746496712%2FProperties%2F-156729267" anchor-label="rel" id="-1746496712%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="rel.html">rel</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1746496712%2FProperties%2F-156729267"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><a data-name="-1746496712%2FProperties%2F-156729267" anchor-label="rel" id="-1746496712%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><div class="symbol monospace">abstract val <a href="rel.html">rel</a>: <a href="../-relationship/index.html">Relationship</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-1746496712%2FProperties%2F-156729267" anchor-label="rel" id="-1746496712%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><p class="paragraph">Relationship between icon and page.</p></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-1830864801%2FProperties%2F-156729267" anchor-label="sizes" id="-1830864801%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="sizes.html">sizes</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1830864801%2FProperties%2F-156729267"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><a data-name="-1830864801%2FProperties%2F-156729267" anchor-label="sizes" id="-1830864801%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><div class="symbol monospace">abstract val <a href="sizes.html">sizes</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-1830864801%2FProperties%2F-156729267" anchor-label="sizes" id="-1830864801%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><p class="paragraph">Size information, assumed format is (width)x(height). e.g. &quot;80x80&quot;.</p></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="1400341282%2FProperties%2F-156729267" anchor-label="url" id="1400341282%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="url.html">url</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1400341282%2FProperties%2F-156729267"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><a data-name="1400341282%2FProperties%2F-156729267" anchor-label="url" id="1400341282%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><div class="symbol monospace">abstract val <a href="url.html">url</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="1400341282%2FProperties%2F-156729267" anchor-label="url" id="1400341282%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><p class="paragraph">Icon url.</p></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <h2 class="">Inheritors</h2>
-              <div class="table" data-togglable="Inheritors"><a data-name="2023127570%2FInheritors%2F-156729267" anchor-label="DomainIcon" id="2023127570%2FInheritors%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="../-domain-icon/index.html">DomainIcon</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2023127570%2FInheritors%2F-156729267"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div></div>
-                  </div>
-                </div>
-<a data-name="1910616999%2FInheritors%2F-156729267" anchor-label="PageIcon" id="1910616999%2FInheritors%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="../-page-icon/index.html">PageIcon</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1910616999%2FInheritors%2F-156729267"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div></div>
-                  </div>
-                </div>
-<a data-name="-589771447%2FInheritors%2F-156729267" anchor-label="WebAppIcon" id="-589771447%2FInheritors%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
-                <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="../-web-app-icon/index.html">WebAppIcon</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-589771447%2FInheritors%2F-156729267"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div></div>
-                  </div>
-                </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Inheritors">Inheritors</button></div>
+    <div class="tabs-section-body">
+      <h2 class="">Functions</h2>
+      <div class="table" data-togglable="Functions"><a data-name="1578752278%2FFunctions%2F-156729267" anchor-label="inferArea" id="1578752278%2FFunctions%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="infer-area.html"><span>infer</span><wbr></wbr><span><span>Area</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1578752278%2FFunctions%2F-156729267"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="infer-area.html"><span class="token function">inferArea</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Infer area of this icon.</p></div></div></div>
               </div>
             </div>
           </div>
         </div>
-        <div class="footer"><span class="go-to-top-icon"><a href="#content"></a></span><span>© 2021 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span></div>
+<a data-name="-1989520350%2FFunctions%2F-156729267" anchor-label="inferSize" id="-1989520350%2FFunctions%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="infer-size.html"><span>infer</span><wbr></wbr><span><span>Size</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1989520350%2FFunctions%2F-156729267"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="infer-size.html"><span class="token function">inferSize</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-size/index.html">Size</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Infer display size of this icon.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Properties</h2>
+      <div class="table" data-togglable="Properties"><a data-name="-1473205981%2FProperties%2F-156729267" anchor-label="length" id="-1473205981%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="length.html">length</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1473205981%2FProperties%2F-156729267"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><a data-name="-1473205981%2FProperties%2F-156729267" anchor-label="length" id="-1473205981%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">val </span><a href="length.html">length</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-1473205981%2FProperties%2F-156729267" anchor-label="length" id="-1473205981%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><p class="paragraph">Icon file length.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1602908037%2FProperties%2F-156729267" anchor-label="mimeType" id="-1602908037%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="mime-type.html">mimeType</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1602908037%2FProperties%2F-156729267"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><a data-name="-1602908037%2FProperties%2F-156729267" anchor-label="mimeType" id="-1602908037%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">val </span><a href="mime-type.html">mimeType</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-1602908037%2FProperties%2F-156729267" anchor-label="mimeType" id="-1602908037%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><p class="paragraph">Icon MIME type. e.g. &quot;image/png&quot;</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-965079396%2FProperties%2F-156729267" anchor-label="precomposed" id="-965079396%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="precomposed.html">precomposed</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-965079396%2FProperties%2F-156729267"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><a data-name="-965079396%2FProperties%2F-156729267" anchor-label="precomposed" id="-965079396%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">val </span><a href="precomposed.html">precomposed</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-965079396%2FProperties%2F-156729267" anchor-label="precomposed" id="-965079396%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><p class="paragraph">true if this is for a precomposed touch icon.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1746496712%2FProperties%2F-156729267" anchor-label="rel" id="-1746496712%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="rel.html">rel</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1746496712%2FProperties%2F-156729267"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><a data-name="-1746496712%2FProperties%2F-156729267" anchor-label="rel" id="-1746496712%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">val </span><a href="rel.html">rel</a><span class="token operator">: </span><a href="../-relationship/index.html">Relationship</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-1746496712%2FProperties%2F-156729267" anchor-label="rel" id="-1746496712%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><p class="paragraph">Relationship between icon and page.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1830864801%2FProperties%2F-156729267" anchor-label="sizes" id="-1830864801%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="sizes.html">sizes</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1830864801%2FProperties%2F-156729267"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><a data-name="-1830864801%2FProperties%2F-156729267" anchor-label="sizes" id="-1830864801%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">val </span><a href="sizes.html">sizes</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-1830864801%2FProperties%2F-156729267" anchor-label="sizes" id="-1830864801%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><p class="paragraph">Size information, assumed format is (width)x(height). e.g. &quot;80x80&quot;.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1400341282%2FProperties%2F-156729267" anchor-label="url" id="1400341282%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="url.html">url</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1400341282%2FProperties%2F-156729267"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":touchicon:dokkaHtml/main"><a data-name="1400341282%2FProperties%2F-156729267" anchor-label="url" id="1400341282%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">val </span><a href="url.html">url</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="1400341282%2FProperties%2F-156729267" anchor-label="url" id="1400341282%2FProperties%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a><p class="paragraph">Icon url.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Inheritors</h2>
+      <div class="table" data-togglable="Inheritors"><a data-name="2023127570%2FInheritors%2F-156729267" anchor-label="DomainIcon" id="2023127570%2FInheritors%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-domain-icon/index.html">DomainIcon</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2023127570%2FInheritors%2F-156729267"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div></div>
+          </div>
+        </div>
+<a data-name="1910616999%2FInheritors%2F-156729267" anchor-label="PageIcon" id="1910616999%2FInheritors%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-page-icon/index.html">PageIcon</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1910616999%2FInheritors%2F-156729267"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div></div>
+          </div>
+        </div>
+<a data-name="-589771447%2FInheritors%2F-156729267" anchor-label="WebAppIcon" id="-589771447%2FInheritors%2F-156729267" data-filterable-set=":touchicon:dokkaHtml/main"></a>
+        <div class="table-row" data-filterable-current=":touchicon:dokkaHtml/main" data-filterable-set=":touchicon:dokkaHtml/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-web-app-icon/index.html">WebAppIcon</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-589771447%2FInheritors%2F-156729267"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div></div>
+          </div>
+        </div>
       </div>
     </div>
-  </body>
+  </div>
+</div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2022 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+        </div>
+    </div>
+</div>
+</body>
 </html>
-
