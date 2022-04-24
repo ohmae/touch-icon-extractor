@@ -246,7 +246,7 @@ class ExtractFromPageTest {
                 {
                     "src": "launcher-icon-1x.png",
                     "type": "image/png",
-                    "sizes": "48x48"
+                    "sizes": null
                 }, {
                     "type": "image/png",
                     "sizes": "192x192",
@@ -367,6 +367,7 @@ class ExtractFromPageTest {
         }
         val extract = ExtractFromPage(httpClient)
         extract.downloadLimit = 1
+        assertThat(extract.downloadLimit).isEqualTo(1)
         val result = extract.fromPage("https://www.example.com/", false)[0]
         assertThat(result.rel).isEqualTo(Relationship.ICON)
         assertThat(result.url).isEqualTo("https://www.example.com/favicon.ico")

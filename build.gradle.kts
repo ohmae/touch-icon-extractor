@@ -4,10 +4,10 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath(kotlin("gradle-plugin", version = "1.6.10"))
-        classpath("org.jetbrains.dokka:dokka-gradle-plugin:1.6.10")
+        classpath(kotlin("gradle-plugin", version = "1.6.21"))
+        classpath("org.jetbrains.dokka:dokka-gradle-plugin:1.6.20")
 
-        classpath("com.github.ben-manes:gradle-versions-plugin:0.41.0")
+        classpath("com.github.ben-manes:gradle-versions-plugin:0.42.0")
     }
 }
 
@@ -22,7 +22,7 @@ plugins {
 }
 
 jacoco {
-    toolVersion = "0.8.7"
+    toolVersion = "0.8.8"
 }
 
 tasks.create("jacocoMergedReport", JacocoReport::class) {
