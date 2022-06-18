@@ -23,17 +23,17 @@ internal class OkHttpResponse(
     override fun header(name: String): String? = response.header(name)
 
     @Throws(IOException::class)
-    override fun bodyString(limit: Int): String? = response.body()?.let { body ->
+    override fun bodyString(limit: Int): String? = response.body?.let { body ->
         if (limit <= 0) body.string() else body.fetchString(limit)
     }
 
     @Throws(IOException::class)
-    override fun bodyBytes(limit: Int): ByteArray? = response.body()?.let { body ->
+    override fun bodyBytes(limit: Int): ByteArray? = response.body?.let { body ->
         if (limit <= 0) body.bytes() else body.fetchBytes(limit)
     }
 
     override fun close() {
-        response.body()?.close()
+        response.body?.close()
     }
 
     private fun ResponseBody.fetchString(limit: Int): String = String(fetchBytes(limit))

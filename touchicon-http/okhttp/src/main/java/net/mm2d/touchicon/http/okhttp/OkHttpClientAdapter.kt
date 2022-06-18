@@ -9,7 +9,7 @@ package net.mm2d.touchicon.http.okhttp
 
 import net.mm2d.touchicon.http.HttpClientAdapter
 import net.mm2d.touchicon.http.HttpResponse
-import okhttp3.Headers
+import okhttp3.Headers.Companion.toHeaders
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Request.Builder
@@ -37,7 +37,7 @@ internal class OkHttpClientAdapter(
 
     private fun Builder.appendHeader(): Builder = apply {
         if (headers.isNotEmpty()) {
-            headers(Headers.of(headers))
+            headers(headers.toHeaders())
         }
         if (userAgent.isNotEmpty()) {
             header("User-Agent", userAgent)
