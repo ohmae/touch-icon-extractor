@@ -1,5 +1,4 @@
 plugins {
-    kotlin("jvm") version "1.7.20"
     `kotlin-dsl`
 }
 
@@ -9,8 +8,7 @@ repositories {
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
-    implementation("com.github.ben-manes:gradle-versions-plugin:0.43.0")
+    implementation("com.github.ben-manes:gradle-versions-plugin:0.45.0")
 }
 
 tasks {
