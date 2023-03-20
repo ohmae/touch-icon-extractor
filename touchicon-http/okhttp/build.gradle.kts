@@ -15,13 +15,8 @@ base.archivesName.set("touchicon-http-okhttp")
 group = ProjectProperties.groupId
 version = ProjectProperties.versionName
 
-tasks {
-    compileKotlin {
-        kotlinOptions.jvmTarget = "1.8"
-    }
-    compileTestKotlin {
-        kotlinOptions.jvmTarget = "1.8"
-    }
+kotlin {
+    jvmToolchain(8)
 }
 
 dependencies {
@@ -32,7 +27,7 @@ dependencies {
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("com.google.truth:truth:1.1.3")
-    testImplementation("io.mockk:mockk:1.13.2")
+    testImplementation("io.mockk:mockk:1.13.4")
     testImplementation("com.squareup.okhttp3:mockwebserver:4.10.0")
 }
 
