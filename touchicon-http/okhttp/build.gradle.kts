@@ -16,19 +16,19 @@ group = ProjectProperties.groupId
 version = ProjectProperties.versionName
 
 kotlin {
-    jvmToolchain(8)
+    jvmToolchain(11)
 }
 
 dependencies {
     api(project(":touchicon"))
 
     implementation(kotlin("stdlib"))
-    compileOnly("com.squareup.okhttp3:okhttp:4.10.0")
+    compileOnly("com.squareup.okhttp3:okhttp:4.11.0")
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("com.google.truth:truth:1.1.3")
-    testImplementation("io.mockk:mockk:1.13.4")
-    testImplementation("com.squareup.okhttp3:mockwebserver:4.10.0")
+    testImplementation("io.mockk:mockk:1.13.5")
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.11.0")
 }
 
 tasks.named<DokkaTask>("dokkaHtml") {
