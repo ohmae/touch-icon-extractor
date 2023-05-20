@@ -59,6 +59,8 @@ $dokka.location:net.mm2d.touchicon/Relationship.SHORTCUT_ICON///PointingToDeclar
 $dokka.location:net.mm2d.touchicon/Relationship///PointingToDeclaration/touchicon/net.mm2d.touchicon/-relationship/index.html
 $dokka.location:net.mm2d.touchicon/Relationship/priority/#/PointingToDeclaration/touchicon/net.mm2d.touchicon/-relationship/priority.html
 $dokka.location:net.mm2d.touchicon/Relationship/value/#/PointingToDeclaration/touchicon/net.mm2d.touchicon/-relationship/value.html
+$dokka.location:net.mm2d.touchicon/Relationship/valueOf/#kotlin.String/PointingToDeclaration/touchicon/net.mm2d.touchicon/-relationship/value-of.html
+$dokka.location:net.mm2d.touchicon/Relationship/values/#/PointingToDeclaration/touchicon/net.mm2d.touchicon/-relationship/values.html
 $dokka.location:net.mm2d.touchicon/Size///PointingToDeclaration/touchicon/net.mm2d.touchicon/-size/index.html
 $dokka.location:net.mm2d.touchicon/Size/Size/#kotlin.Int#kotlin.Int/PointingToDeclaration/touchicon/net.mm2d.touchicon/-size/-size.html
 $dokka.location:net.mm2d.touchicon/Size/height/#/PointingToDeclaration/touchicon/net.mm2d.touchicon/-size/height.html
