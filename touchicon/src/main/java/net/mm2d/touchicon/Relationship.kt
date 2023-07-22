@@ -102,7 +102,7 @@ enum class Relationship(
     ;
 
     companion object {
-        private val VALUE_MAP = values().associateBy { it.value }
+        private val VALUE_MAP = entries.associateBy { it.value }
 
         internal fun of(value: String?): Relationship? =
             if (value.isNullOrEmpty()) null else VALUE_MAP[value.lowercase(Locale.US)]
