@@ -99,6 +99,9 @@ fun Project.publishingSettings() {
     signing {
         sign(publishing.publications.getByName("mavenJava"))
     }
+    tasks.named("signMavenJavaPublication") {
+        dependsOn("jar")
+    }
 }
 
 private fun appendDependency(parentNode: Node, groupId: String, artifactId: String, version: String, scope: String) {
