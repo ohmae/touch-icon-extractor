@@ -1,0 +1,29 @@
+[versions]
+kotlin = "1.9.10"
+dokka = "1.9.0"
+gradleVersionsPlugin = "0.49.0"
+
+[libraries]
+# classPath
+kotlinGradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+dokkaGradlePlugin = { group = "org.jetbrains.dokka", name = "dokka-gradle-plugin", version.ref = "dokka" }
+gradleVersionsPlugin = { group = "com.github.ben-manes", name = "gradle-versions-plugin", version.ref = "gradleVersionsPlugin" }
+
+# implementation
+kotlinStdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+
+# compileOnly
+okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version = "4.11.0" }
+
+# testImplementation
+junit = { group = "junit", name = "junit", version = "4.13.2" }
+truth = { group = "com.google.truth", name = "truth", version = "1.1.5" }
+mockk = { group = "io.mockk", name = "mockk", version = "1.13.5" }
+okhttp3Mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version = "4.11.0" }
+
+[plugins]
+
+
+[bundles]
+
+

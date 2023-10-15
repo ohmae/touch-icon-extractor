@@ -22,13 +22,13 @@ kotlin {
 dependencies {
     api(project(":touchicon"))
 
-    implementation(kotlin("stdlib"))
-    compileOnly("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation(libs.kotlinStdlib)
+    compileOnly(libs.okhttp3)
 
-    testImplementation("junit:junit:4.13.2")
-    testImplementation("com.google.truth:truth:1.1.5")
-    testImplementation("io.mockk:mockk:1.13.5")
-    testImplementation("com.squareup.okhttp3:mockwebserver:4.11.0")
+    testImplementation(libs.junit)
+    testImplementation(libs.truth)
+    testImplementation(libs.mockk)
+    testImplementation(libs.okhttp3Mockwebserver)
 }
 
 tasks.named<DokkaTask>("dokkaHtml") {

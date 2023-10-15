@@ -1,13 +1,15 @@
+import org.jetbrains.kotlin.commonizer.OptimisticNumberCommonizationEnabledKey.alias
+
 buildscript {
     repositories {
         mavenCentral()
         gradlePluginPortal()
     }
     dependencies {
-        classpath(kotlin("gradle-plugin", version = "1.9.0"))
-        classpath("org.jetbrains.dokka:dokka-gradle-plugin:1.8.20")
+        classpath(libs.kotlinGradlePlugin)
+        classpath(libs.dokkaGradlePlugin)
 
-        classpath("com.github.ben-manes:gradle-versions-plugin:0.47.0")
+        classpath(libs.gradleVersionsPlugin)
     }
 }
 
