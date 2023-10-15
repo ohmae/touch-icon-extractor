@@ -1,6 +1,6 @@
-package build
+package net.mm2d.touchicon.build
 
-object ProjectProperties {
+object Projects {
     const val groupId: String = "net.mm2d.touchicon"
     const val name: String = "touchicon"
     const val description: String = "This is a library to extract WebClip icon information from the website. Available in JVM and Android as this is written in pure Kotlin."

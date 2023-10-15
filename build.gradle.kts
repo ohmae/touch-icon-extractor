@@ -1,26 +1,8 @@
-import org.jetbrains.kotlin.commonizer.OptimisticNumberCommonizationEnabledKey.alias
-
-buildscript {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    dependencies {
-        classpath(libs.kotlinGradlePlugin)
-        classpath(libs.dokkaGradlePlugin)
-
-        classpath(libs.gradleVersionsPlugin)
-    }
-}
-
-allprojects {
-    repositories {
-        mavenCentral()
-    }
-}
-
 plugins {
-    jacoco
+    alias(libs.plugins.kotlinGradlePlugin) apply false
+    alias(libs.plugins.dokkaGradlePlugin) apply false
+    alias(libs.plugins.gradleVersionsPlugin) apply false
+    id("org.gradle.jacoco")
 }
 
 jacoco {
