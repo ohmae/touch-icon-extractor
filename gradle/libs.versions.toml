@@ -22,9 +22,9 @@ mockk = { group = "io.mockk", name = "mockk", version = "1.13.8" }
 okhttp3Mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version = "4.11.0" }
 
 [plugins]
-kotlinGradlePlugin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-dokkaGradlePlugin = { id = "org.jetbrains.dokka", version.ref = "dokka" }
-gradleVersionsPlugin = { id = "com.github.ben-manes.versions", version.ref = "gradleVersionsPlugin" }
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+gradleVersions = { id = "com.github.ben-manes.versions", version.ref = "gradleVersionsPlugin" }
 
 [bundles]
 plugins = [

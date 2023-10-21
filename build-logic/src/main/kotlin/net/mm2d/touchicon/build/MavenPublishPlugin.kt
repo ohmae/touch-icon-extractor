@@ -24,27 +24,6 @@ class MavenPublishPlugin : Plugin<Project> {
     }
 }
 
-private val Project.sourceSets: SourceSetContainer
-    get() = (this as ExtensionAware).extensions.getByName("sourceSets") as SourceSetContainer
-
-private fun ArtifactHandler.archives(artifactNotation: Any): PublishArtifact =
-    add("archives", artifactNotation)
-
-private val Project.publishing: PublishingExtension
-    get() = (this as ExtensionAware).extensions.getByName("publishing") as PublishingExtension
-
-private fun Project.publishing(configure: Action<PublishingExtension>): Unit =
-    (this as ExtensionAware).extensions.configure("publishing", configure)
-
-private fun Project.signing(configure: Action<SigningExtension>): Unit =
-    (this as ExtensionAware).extensions.configure("signing", configure)
-
-private val NamedDomainObjectContainer<Configuration>.api: NamedDomainObjectProvider<Configuration>
-    get() = named<Configuration>("api")
-
-private val NamedDomainObjectContainer<Configuration>.implementation: NamedDomainObjectProvider<Configuration>
-    get() = named<Configuration>("implementation")
-
 private fun Project.mavenPublishPlugin() {
     with(pluginManager) {
         apply("org.gradle.maven-publish")
@@ -144,3 +123,26 @@ private fun appendDependency(parentNode: Node, groupId: String, artifactId: Stri
         appendNode("scope", scope)
     }
 }
+
+// DSL
+
+private val Project.sourceSets: SourceSetContainer
+    get() = (this as ExtensionAware).extensions.getByName("sourceSets") as SourceSetContainer
+
+private fun ArtifactHandler.archives(artifactNotation: Any): PublishArtifact =
+    add("archives", artifactNotation)
+
+private val Project.publishing: PublishingExtension
+    get() = (this as ExtensionAware).extensions.getByName("publishing") as PublishingExtension
+
+private fun Project.publishing(configure: Action<PublishingExtension>): Unit =
+    (this as ExtensionAware).extensions.configure("publishing", configure)
+
+private fun Project.signing(configure: Action<SigningExtension>): Unit =
+    (this as ExtensionAware).extensions.configure("signing", configure)
+
+private val NamedDomainObjectContainer<Configuration>.api: NamedDomainObjectProvider<Configuration>
+    get() = named<Configuration>("api")
+
+private val NamedDomainObjectContainer<Configuration>.implementation: NamedDomainObjectProvider<Configuration>
+    get() = named<Configuration>("implementation")

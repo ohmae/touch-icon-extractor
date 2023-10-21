@@ -12,9 +12,6 @@ class KotlinJvmPlugin : Plugin<Project> {
     }
 }
 
-private fun Project.kotlin(action: KotlinJvmProjectExtension.() -> Unit): Unit =
-    extensions.configure(action)
-
 private fun Project.kotlinJvmPlugin() {
     with(pluginManager) {
         apply("org.jetbrains.kotlin.jvm")
@@ -26,3 +23,8 @@ private fun Project.kotlinJvmPlugin() {
         implementation(libs.library("kotlinStdlib"))
     }
 }
+
+// DSL
+
+private fun Project.kotlin(action: KotlinJvmProjectExtension.() -> Unit): Unit =
+    extensions.configure(action)

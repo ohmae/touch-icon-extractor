@@ -13,9 +13,6 @@ class JacocoPlugin : Plugin<Project> {
     }
 }
 
-private fun Project.jacoco(configure: Action<JacocoPluginExtension>): Unit =
-    (this as ExtensionAware).extensions.configure("jacoco", configure)
-
 private fun Project.jacocoPlugin() {
     with(pluginManager) {
         apply("org.gradle.jacoco")
@@ -30,3 +27,8 @@ private fun Project.jacocoPlugin() {
         }
     }
 }
+
+// DSL
+
+private fun Project.jacoco(configure: Action<JacocoPluginExtension>): Unit =
+    (this as ExtensionAware).extensions.configure("jacoco", configure)
