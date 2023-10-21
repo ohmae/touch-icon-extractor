@@ -4,7 +4,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 plugins {
     id("org.gradle.java-library")
     id("build.logic.kotlinJvm")
-    id("build.logic.jacoco")
+    id("build.logic.kover")
     id("build.logic.documentationDokka")
     id("build.logic.mavenPublish")
     id("build.logic.gradleVersions")

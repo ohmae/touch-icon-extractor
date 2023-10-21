@@ -27,9 +27,9 @@ gradlePlugin {
             id = "build.logic.kotlinJvm"
             implementationClass = "net.mm2d.touchicon.build.KotlinJvmPlugin"
         }
-        register("jacoco") {
-            id = "build.logic.jacoco"
-            implementationClass = "net.mm2d.touchicon.build.JacocoPlugin"
+        register("kover") {
+            id = "build.logic.kover"
+            implementationClass = "net.mm2d.touchicon.build.KoverPlugin"
         }
         register("mavenPublish") {
             id = "build.logic.mavenPublish"
