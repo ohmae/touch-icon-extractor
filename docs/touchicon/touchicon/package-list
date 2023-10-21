@@ -57,6 +57,7 @@ $dokka.location:net.mm2d.touchicon/Relationship.ICON///PointingToDeclaration/{"o
 $dokka.location:net.mm2d.touchicon/Relationship.MANIFEST///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}touchicon/net.mm2d.touchicon/-relationship/-m-a-n-i-f-e-s-t/index.html
 $dokka.location:net.mm2d.touchicon/Relationship.SHORTCUT_ICON///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}touchicon/net.mm2d.touchicon/-relationship/-s-h-o-r-t-c-u-t_-i-c-o-n/index.html
 $dokka.location:net.mm2d.touchicon/Relationship///PointingToDeclaration/touchicon/net.mm2d.touchicon/-relationship/index.html
+$dokka.location:net.mm2d.touchicon/Relationship/entries/#/PointingToDeclaration/touchicon/net.mm2d.touchicon/-relationship/entries.html
 $dokka.location:net.mm2d.touchicon/Relationship/priority/#/PointingToDeclaration/touchicon/net.mm2d.touchicon/-relationship/priority.html
 $dokka.location:net.mm2d.touchicon/Relationship/value/#/PointingToDeclaration/touchicon/net.mm2d.touchicon/-relationship/value.html
 $dokka.location:net.mm2d.touchicon/Relationship/valueOf/#kotlin.String/PointingToDeclaration/touchicon/net.mm2d.touchicon/-relationship/value-of.html
