@@ -10,7 +10,6 @@ package net.mm2d.touchicon
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-@Suppress("TestFunctionName")
 class UrlUtilsTest {
     @Test
     fun makeAbsoluteUrl() {

@@ -18,7 +18,6 @@ import org.junit.runners.JUnit4
 import java.io.IOException
 
 @RunWith(JUnit4::class)
-@Suppress("TestFunctionName")
 class ExtractFromPageTest {
     @Test
     fun extract_icon() {

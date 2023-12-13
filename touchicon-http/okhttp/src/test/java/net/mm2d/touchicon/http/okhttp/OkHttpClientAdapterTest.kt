@@ -20,7 +20,6 @@ import org.junit.runners.JUnit4
 import java.io.ByteArrayInputStream
 
 @RunWith(JUnit4::class)
-@Suppress("TestFunctionName")
 class OkHttpClientAdapterTest {
     @Test
     fun userAgent() {

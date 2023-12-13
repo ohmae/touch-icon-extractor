@@ -18,7 +18,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(Enclosed::class)
-@Suppress("TestFunctionName", "ClassName")
+@Suppress("ClassName")
 class TouchIconExtractorTest {
     @RunWith(JUnit4::class)
     class `adapter test` {

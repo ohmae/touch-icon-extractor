@@ -20,7 +20,6 @@ internal class HtmlParser {
         extractElementList(html).filter { it.name.equals("link", true) }
 
     // VisibleForTesting
-    @Suppress("MemberVisibilityCanBePrivate")
     internal fun extractElementList(html: String): List<HtmlTag> {
         val result = mutableListOf<HtmlTag>()
         val a = html.toCharArray()
