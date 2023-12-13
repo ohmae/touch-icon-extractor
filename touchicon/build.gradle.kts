@@ -28,5 +28,5 @@ tasks.named<DokkaTask>("dokkaHtml") {
 }
 
 tasks.named<DokkaTask>("dokkaJavadoc") {
-    outputDirectory.set(File(buildDir, "docs/javadoc"))
+    outputDirectory.set(File(layout.buildDirectory.asFile.get(), "docs/javadoc"))
 }
