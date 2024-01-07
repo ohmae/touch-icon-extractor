@@ -5,11 +5,11 @@ import org.gradle.api.Project
 
 class KoverPlugin  : Plugin<Project> {
     override fun apply(target: Project) {
-        target.koverPlugin()
+        target.plugin()
     }
 }
 
-private fun Project.koverPlugin() {
+private fun Project.plugin() {
     with(pluginManager) {
         apply("org.jetbrains.kotlinx.kover")
     }

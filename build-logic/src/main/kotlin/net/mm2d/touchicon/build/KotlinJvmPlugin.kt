@@ -8,11 +8,11 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 
 class KotlinJvmPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        target.kotlinJvmPlugin()
+        target.plugin()
     }
 }
 
-private fun Project.kotlinJvmPlugin() {
+private fun Project.plugin() {
     with(pluginManager) {
         apply("org.jetbrains.kotlin.jvm")
     }
