@@ -12,7 +12,7 @@ package net.mm2d.touchicon.html
  */
 internal class HtmlTag(
     val name: String,
-    private val attrs: List<Pair<String, String>>
+    private val attrs: List<Pair<String, String>>,
 ) {
     /**
      * Return attribute value.

@@ -15,24 +15,28 @@ import java.net.URL
 import java.net.URLConnection
 
 internal class SimpleHttpClientAdapter(
-    private val cookieHandler: CookieHandler? = null
+    private val cookieHandler: CookieHandler? = null,
 ) : HttpClientAdapter {
     override var userAgent: String = ""
     override var headers: Map<String, String> = emptyMap()
 
     @Throws(IOException::class)
-    override fun head(url: String): HttpResponse = SimpleHttpResponse(createConnection(url).also {
-        it.requestMethod = "HEAD"
-        it.connect()
-        it.extractCookie(url)
-    })
+    override fun head(url: String): HttpResponse = SimpleHttpResponse(
+        createConnection(url).also {
+            it.requestMethod = "HEAD"
+            it.connect()
+            it.extractCookie(url)
+        },
+    )
 
     @Throws(IOException::class)
-    override fun get(url: String): HttpResponse = SimpleHttpResponse(createConnection(url).also {
-        it.requestMethod = "GET"
-        it.connect()
-        it.extractCookie(url)
-    })
+    override fun get(url: String): HttpResponse = SimpleHttpResponse(
+        createConnection(url).also {
+            it.requestMethod = "GET"
+            it.connect()
+            it.extractCookie(url)
+        },
+    )
 
     private fun createConnection(url: String): HttpURLConnection = URL(url).openConnection().also {
         headers.forEach { entry ->

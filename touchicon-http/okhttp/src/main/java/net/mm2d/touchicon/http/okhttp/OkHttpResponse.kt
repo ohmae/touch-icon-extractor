@@ -15,7 +15,7 @@ import java.io.IOException
 import kotlin.math.min
 
 internal class OkHttpResponse(
-    private val response: Response
+    private val response: Response,
 ) : HttpResponse {
     override val isSuccess: Boolean
         get() = response.isSuccessful

@@ -26,7 +26,7 @@ enum class Relationship(
     /**
      * Icon tag.
      */
-    internal val isIcon: Boolean
+    internal val isIcon: Boolean,
 ) {
     /**
      * This expresses that the rel value of the link tag is "apple-touch-icon-precomposed".

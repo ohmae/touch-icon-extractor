@@ -12,12 +12,12 @@ import net.mm2d.touchicon.http.HttpResponse
 import java.net.URL
 
 internal class ExtractFromDomain(
-    private val httpClient: HttpClientAdapter
+    private val httpClient: HttpClientAdapter,
 ) {
     internal fun fromDomain(
         siteUrl: String,
         withPrecomposed: Boolean,
-        sizes: List<String>
+        sizes: List<String>,
     ): DomainIcon? = createTryDataList(withPrecomposed, sizes)
         .asSequence()
         .mapNotNull { tryHead(siteUrl, it) }
@@ -26,7 +26,7 @@ internal class ExtractFromDomain(
     internal fun fromDomainWithDownload(
         siteUrl: String,
         withPrecomposed: Boolean,
-        sizes: List<String>
+        sizes: List<String>,
     ): Pair<DomainIcon, ByteArray>? = createTryDataList(withPrecomposed, sizes)
         .asSequence()
         .mapNotNull { tryGet(siteUrl, it) }
@@ -35,7 +35,7 @@ internal class ExtractFromDomain(
     internal fun listFromDomain(
         siteUrl: String,
         withPrecomposed: Boolean,
-        sizes: List<String>
+        sizes: List<String>,
     ): List<DomainIcon> = createTryDataList(withPrecomposed, sizes)
         .mapNotNull { tryHead(siteUrl, it) }
 
@@ -61,7 +61,7 @@ internal class ExtractFromDomain(
     private fun createDomainIcon(
         response: HttpResponse,
         url: String,
-        tryData: TryData
+        tryData: TryData,
     ): DomainIcon? {
         if (!response.isSuccess) return null
         val type = response.header("Content-Type") ?: return null
@@ -75,7 +75,7 @@ internal class ExtractFromDomain(
         val rel: Relationship,
         val name: String,
         val sizes: String,
-        val precomposed: Boolean
+        val precomposed: Boolean,
     )
 
     // VisibleForTesting
@@ -87,14 +87,14 @@ internal class ExtractFromDomain(
                     Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                     "$APPLE_TOUCH_ICON-$it-$PRECOMPOSED.$PNG",
                     it,
-                    true
+                    true,
                 )
             }
             result += TryData(
                 Relationship.APPLE_TOUCH_ICON,
                 "$APPLE_TOUCH_ICON-$it.$PNG",
                 it,
-                false
+                false,
             )
         }
         if (withPrecomposed) {
@@ -102,7 +102,7 @@ internal class ExtractFromDomain(
                 Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                 "$APPLE_TOUCH_ICON-$PRECOMPOSED.$PNG",
                 "",
-                true
+                true,
             )
         }
         result += TryData(Relationship.APPLE_TOUCH_ICON, "$APPLE_TOUCH_ICON.$PNG", "", false)

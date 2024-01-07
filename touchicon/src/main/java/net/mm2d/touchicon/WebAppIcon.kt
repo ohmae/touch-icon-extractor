@@ -53,7 +53,7 @@ data class WebAppIcon(
      * this is an optional member.
      * e.g. "3.0"
      */
-    val density: String
+    val density: String,
 ) : Icon {
     override val rel: Relationship = Relationship.MANIFEST
     override val precomposed: Boolean = true

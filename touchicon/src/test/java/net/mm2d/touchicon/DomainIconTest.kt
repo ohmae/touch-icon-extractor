@@ -23,8 +23,8 @@ class DomainIconTest {
                 sizes = "50x50",
                 url = "https://example.com/icon-40x40.png",
                 precomposed = true,
-                length = 0
-            ).inferSize()
+                length = 0,
+            ).inferSize(),
         ).isEqualTo(Size(50, 50))
     }
 }

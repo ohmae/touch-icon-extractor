@@ -8,7 +8,7 @@
 package net.mm2d.touchicon.json
 
 internal class JsonArray(
-    private val delegate: List<Any?> = emptyList()
+    private val delegate: List<Any?> = emptyList(),
 ) : Iterable<Any?> by delegate {
     override fun hashCode(): Int = delegate.hashCode()
     override fun equals(other: Any?): Boolean = delegate == other

@@ -38,7 +38,8 @@ class JsonParserTest {
             |{}
             |],
             |"escape": "\r\n\b\t\\\u0000\u0001"
-            |}""".trimMargin()
+            |}
+            """.trimMargin(),
         ).parse()
         assertThat(result.get<Boolean>("bool1")).isTrue()
         assertThat(result.get<Boolean>("bool2")).isFalse()
@@ -53,7 +54,7 @@ class JsonParserTest {
         assertThat(result.get<JsonObject>("object").get<String>("a")).isEqualTo("b")
         assertThat(result.get<JsonArray>("empty array")).isEmpty()
         assertThat(
-            result.get<JsonArray>("object array").first()
+            result.get<JsonArray>("object array").first(),
         ).isInstanceOf(JsonObject::class.java)
         assertThat(result.get<String>("escape")).isEqualTo("\r\n\b\t\\\u0000\u0001")
     }

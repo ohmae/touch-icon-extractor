@@ -18,27 +18,27 @@ class HtmlParserTest {
         mapOf(
             "rel" to "icon",
             "href" to "/favicon.ico",
-            "type" to "image/vnd.microsoft.icon"
+            "type" to "image/vnd.microsoft.icon",
         ),
         mapOf(
             "rel" to "shortcut icon",
             "href" to "/favicon.ico",
-            "type" to "image/vnd.microsoft.icon"
+            "type" to "image/vnd.microsoft.icon",
         ),
         mapOf(
             "rel" to "apple-touch-icon",
             "href" to "/apple-touch-icon-57x57.png",
-            "sizes" to "57x57"
+            "sizes" to "57x57",
         ),
         mapOf(
             "rel" to "apple-touch-icon-precomposed",
             "href" to "/apple-touch-icon-57x57.png",
-            "sizes" to "57x57"
+            "sizes" to "57x57",
         ),
         mapOf(
             "rel" to "apple-touch-icon",
             "href" to "//www.example.com/apple-touch-icon-57x57.png",
-            "sizes" to "57x57"
+            "sizes" to "57x57",
         ),
     )
 
@@ -58,7 +58,7 @@ class HtmlParserTest {
                 sizes="57x57"
                 href="//www.example.com/apple-touch-icon-57x57.png"
                 >
-            """.trimIndent()
+            """.trimIndent(),
         )
         assertThat(links).hasSize(5)
         expected.forEachIndexed { index, map ->
@@ -81,7 +81,7 @@ class HtmlParserTest {
             <!-- <link rel="icon"> -->
             <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/apple-touch-icon-57x57.png">
             <link rel="apple-touch-icon" sizes="57x57" href="//www.example.com/apple-touch-icon-57x57.png"" ""
-            """.trimIndent()
+            """.trimIndent(),
         )
         assertThat(links).hasSize(5)
         expected.forEachIndexed { index, map ->
@@ -103,7 +103,7 @@ class HtmlParserTest {
             <link rel=apple-touch-icon sizes=57x57 href=/apple-touch-icon-57x57.png>
             <link rel=apple-touch-icon-precomposed sizes=57x57 href=/apple-touch-icon-57x57.png>
             <link rel=apple-touch-icon sizes=57x57 href=//www.example.com/apple-touch-icon-57x57.png>
-            """.trimIndent()
+            """.trimIndent(),
         )
         assertThat(links).hasSize(5)
         expected.forEachIndexed { index, map ->
@@ -120,7 +120,7 @@ class HtmlParserTest {
     @Test
     fun extractLinkTags_end1() {
         val links = HtmlParser().extractLinkTags(
-            """html lang="ja"><head><link rel=icon href=/favicon.ico type=image/vnd.microsoft.icon><link"""
+            """html lang="ja"><head><link rel=icon href=/favicon.ico type=image/vnd.microsoft.icon><link""",
         )
         assertThat(links).hasSize(1)
         assertThat(links[0].attr("hoge")).isNotNull()
@@ -135,7 +135,8 @@ class HtmlParserTest {
             <head>
             <link rel=icon href=/favicon.ico type=image/vnd.microsoft.icon>
             <link\
-            <link rel='shortcut""".trimIndent()
+            <link rel='shortcut
+            """.trimIndent(),
         )
         assertThat(links).hasSize(2)
     }
@@ -156,4 +157,3 @@ class HtmlParserTest {
         assertThat(HtmlParser().extractElementList("""<a a="\"a">""")[0].name).isEqualTo("a")
     }
 }
-

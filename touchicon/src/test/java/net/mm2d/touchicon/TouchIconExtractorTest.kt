@@ -8,7 +8,11 @@
 package net.mm2d.touchicon
 
 import com.google.common.truth.Truth.assertThat
-import io.mockk.*
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.mockkObject
+import io.mockk.unmockkObject
+import io.mockk.verify
 import net.mm2d.touchicon.http.HttpClientAdapter
 import org.junit.After
 import org.junit.Before
@@ -49,7 +53,6 @@ class TouchIconExtractorTest {
             extractor.userAgent = ua
             verify { httpClientAdapter.userAgent = ua }
         }
-
 
         @Test
         fun getUserAgent() {

@@ -18,73 +18,73 @@ class SizeInferrerTest {
     fun inferSizeFromUrl() {
         assertThat(
             inferSizeFromUrl(
-                "https://www.example.com/apple-touch-icon-48x48.png"
-            )
+                "https://www.example.com/apple-touch-icon-48x48.png",
+            ),
         ).isEqualTo(
-            Size(48, 48)
+            Size(48, 48),
         )
         assertThat(
             inferSizeFromUrl(
-                "https://www.example.com/48x48.png"
-            )
+                "https://www.example.com/48x48.png",
+            ),
         ).isEqualTo(
-            Size(48, 48)
+            Size(48, 48),
         )
         assertThat(
             inferSizeFromUrl(
-                "https://www.example.com/apple-touch-icon48x48.png"
-            )
+                "https://www.example.com/apple-touch-icon48x48.png",
+            ),
         ).isEqualTo(
-            Size(48, 48)
+            Size(48, 48),
         )
         assertThat(
             inferSizeFromUrl(
-                "https://www.example.com/apple-touch-icon_48x48.png"
-            )
+                "https://www.example.com/apple-touch-icon_48x48.png",
+            ),
         ).isEqualTo(
-            Size(48, 48)
+            Size(48, 48),
         )
         assertThat(
             inferSizeFromUrl(
-                "https://www.example.com/apple-touch-icon2-48x48.png"
-            )
+                "https://www.example.com/apple-touch-icon2-48x48.png",
+            ),
         ).isEqualTo(
-            Size(48, 48)
+            Size(48, 48),
         )
         assertThat(
             inferSizeFromUrl(
-                "https://www.example.com/apple-touch-iconx2-48x48.png"
-            )
+                "https://www.example.com/apple-touch-iconx2-48x48.png",
+            ),
         ).isEqualTo(
-            Size(48, 48)
+            Size(48, 48),
         )
         assertThat(
             inferSizeFromUrl(
-                "https://www.example.com/apple-touch-icon.48x48.png"
-            )
+                "https://www.example.com/apple-touch-icon.48x48.png",
+            ),
         ).isEqualTo(
-            Size(48, 48)
+            Size(48, 48),
         )
         assertThat(
             inferSizeFromUrl(
-                "https://www.example.com/apple-touch-icon.4Bx48.png"
-            )
+                "https://www.example.com/apple-touch-icon.4Bx48.png",
+            ),
         ).isEqualTo(
-            Size(-1, -1)
+            Size(-1, -1),
         )
         assertThat(
             inferSizeFromUrl(
-                "https://www.example.com/"
-            )
+                "https://www.example.com/",
+            ),
         ).isEqualTo(
-            Size(-1, -1)
+            Size(-1, -1),
         )
         assertThat(
             inferSizeFromUrl(
-                ""
-            )
+                "",
+            ),
         ).isEqualTo(
-            Size(-1, -1)
+            Size(-1, -1),
         )
     }
 

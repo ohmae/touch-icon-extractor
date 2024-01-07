@@ -8,7 +8,7 @@
 package net.mm2d.touchicon.json
 
 internal class JsonParser(
-    private val input: String
+    private val input: String,
 ) {
     private var pos: Int = 0
 
@@ -91,8 +91,9 @@ internal class JsonParser(
                         escape = false
                         when (c) {
                             'u' -> {
-                                if (p + 4 > string.length)
+                                if (p + 4 > string.length) {
                                     throw JsonException("unterminated unicode")
+                                }
                                 val code = string.substring(p, p + 4).toIntOrNull(16)
                                     ?: throw JsonException("escaped unicode error")
                                 p += 4

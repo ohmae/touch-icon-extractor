@@ -21,32 +21,32 @@ class PageIconTest {
                 rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                 mimeType = "image/png",
                 sizes = "50x50",
-                url = "https://example.com/icon-40x40.png"
-            ).inferSize()
+                url = "https://example.com/icon-40x40.png",
+            ).inferSize(),
         ).isEqualTo(Size(50, 50))
         assertThat(
             PageIcon(
                 rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                 mimeType = "image/png",
                 sizes = "50x50",
-                url = "https://example.com/icon.png"
-            ).inferSize()
+                url = "https://example.com/icon.png",
+            ).inferSize(),
         ).isEqualTo(Size(50, 50))
         assertThat(
             PageIcon(
                 rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                 mimeType = "image/png",
                 sizes = "0x5C",
-                url = "https://example.com/icon-40x40.png"
-            ).inferSize()
+                url = "https://example.com/icon-40x40.png",
+            ).inferSize(),
         ).isEqualTo(Size(40, 40))
         assertThat(
             PageIcon(
                 rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                 mimeType = "image/png",
                 sizes = "0x5C",
-                url = "https://example.com/icon.png"
-            ).inferSize()
+                url = "https://example.com/icon.png",
+            ).inferSize(),
         ).isEqualTo(Size(-1, -1))
     }
 }

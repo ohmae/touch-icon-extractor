@@ -29,7 +29,7 @@ class ExtractFromPageTest {
             <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
             </head></html>
             """.trimIndent(),
-            false
+            false,
         )[0]
         assertThat(result.rel).isEqualTo(Relationship.ICON)
         assertThat(result.url).isEqualTo("https://www.example.com/favicon.ico")
@@ -47,7 +47,7 @@ class ExtractFromPageTest {
             <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
             </head></html>
             """.trimIndent(),
-            true
+            true,
         )[0]
         assertThat(result.rel).isEqualTo(Relationship.ICON)
         assertThat(result.url).isEqualTo("https://www.example.com/favicon.ico")
@@ -66,7 +66,7 @@ class ExtractFromPageTest {
             <link rel="shortcut icon">
             </head></html>
             """.trimIndent(),
-            false
+            false,
         )[0]
         assertThat(result.rel).isEqualTo(Relationship.SHORTCUT_ICON)
         assertThat(result.url).isEqualTo("https://www.example.com/favicon.ico")
@@ -84,7 +84,7 @@ class ExtractFromPageTest {
             <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
             </head></html>
             """.trimIndent(),
-            false
+            false,
         )[0]
         assertThat(result.rel).isEqualTo(Relationship.APPLE_TOUCH_ICON)
         assertThat(result.url).isEqualTo("https://www.example.com/apple-touch-icon-57x57.png")
@@ -102,7 +102,7 @@ class ExtractFromPageTest {
             <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/apple-touch-icon-57x57.png">
             </head></html>
             """.trimIndent(),
-            false
+            false,
         )[0]
         assertThat(result.rel).isEqualTo(Relationship.APPLE_TOUCH_ICON_PRECOMPOSED)
         assertThat(result.url).isEqualTo("https://www.example.com/apple-touch-icon-57x57.png")
@@ -120,7 +120,7 @@ class ExtractFromPageTest {
             <link rel="apple-touch-icon" sizes="57x57" href="//www.example.com/apple-touch-icon-57x57.png">
             </head></html>
             """.trimIndent(),
-            false
+            false,
         )[0]
         assertThat(result.rel).isEqualTo(Relationship.APPLE_TOUCH_ICON)
         assertThat(result.url).isEqualTo("https://www.example.com/apple-touch-icon-57x57.png")
@@ -138,7 +138,7 @@ class ExtractFromPageTest {
             <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
             </hea
             """.trimIndent(),
-            false
+            false,
         )[0]
         assertThat(result.rel).isEqualTo(Relationship.APPLE_TOUCH_ICON)
         assertThat(result.url).isEqualTo("https://www.example.com/apple-touch-icon-57x57.png")
@@ -168,7 +168,8 @@ class ExtractFromPageTest {
                     "density": "4.0"
                 }],
                 "start_url": "index.html?launcher=true"
-            }""".trimIndent()
+            }
+            """.trimIndent()
         }
         val extract = ExtractFromPage(httpClient)
         val result = extract.extractFromHtml(
@@ -179,7 +180,7 @@ class ExtractFromPageTest {
             <link rel="manifest" href="/manifest.json">
             </head></html>
             """.trimIndent(),
-            true
+            true,
         )
         assertThat(result[0].rel).isEqualTo(Relationship.MANIFEST)
         assertThat(result[0].mimeType).isEqualTo("image/png")
@@ -225,7 +226,7 @@ class ExtractFromPageTest {
             <link rel="manifest" href="/manifest.json">
             </head></html>
             """.trimIndent(),
-            true
+            true,
         )
         assertThat(result).isEmpty()
     }
@@ -252,7 +253,8 @@ class ExtractFromPageTest {
                     "density": "4.0"
                 }],
                 "start_url": "index.html"
-            }""".trimIndent()
+            }
+            """.trimIndent()
         }
         val extract = ExtractFromPage(httpClient)
         val result = extract.extractFromHtml(
@@ -263,7 +265,7 @@ class ExtractFromPageTest {
             <link rel="manifest" href="/manifest.json">
             </head></html>
             """.trimIndent(),
-            true
+            true,
         )
         assertThat(result).hasSize(1)
     }
@@ -280,7 +282,7 @@ class ExtractFromPageTest {
             <link rel="manifest" href="">
             </head></html>
             """.trimIndent(),
-            true
+            true,
         )
         assertThat(result).isEmpty()
     }
@@ -303,7 +305,7 @@ class ExtractFromPageTest {
             <link rel="manifest" href="/manifest.json">
             </head></html>
             """.trimIndent(),
-            true
+            true,
         )
         assertThat(result).isEmpty()
     }
@@ -323,7 +325,7 @@ class ExtractFromPageTest {
             <link rel="manifest" href="/manifest.json">
             </head></html>
             """.trimIndent(),
-            true
+            true,
         )
         assertThat(result).isEmpty()
     }

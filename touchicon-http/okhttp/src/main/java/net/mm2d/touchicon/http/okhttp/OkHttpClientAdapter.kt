@@ -16,7 +16,7 @@ import okhttp3.Request.Builder
 import java.io.IOException
 
 internal class OkHttpClientAdapter(
-    private val client: OkHttpClient
+    private val client: OkHttpClient,
 ) : HttpClientAdapter {
     override var userAgent: String = ""
     override var headers: Map<String, String> = emptyMap()

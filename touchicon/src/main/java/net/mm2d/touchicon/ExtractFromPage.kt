@@ -16,7 +16,7 @@ import net.mm2d.touchicon.json.JsonObject
 import net.mm2d.touchicon.json.JsonParser
 
 internal class ExtractFromPage(
-    private val httpClient: HttpClientAdapter
+    private val httpClient: HttpClientAdapter,
 ) {
     private val htmlParser: HtmlParser = HtmlParser()
     var downloadLimit: Int = DEFAULT_LIMIT_SIZE
@@ -56,7 +56,7 @@ internal class ExtractFromPage(
     internal fun extractFromHtml(
         siteUrl: String,
         html: String,
-        withManifest: Boolean
+        withManifest: Boolean,
     ): List<Icon> = if (!withManifest) {
         htmlParser.extractLinkTags(html)
             .mapNotNull { createPageIcon(siteUrl, it) }
@@ -103,7 +103,7 @@ internal class ExtractFromPage(
                 makeAbsoluteUrl(baseUrl, icon.get("src")),
                 icon.getOrDefault("sizes", ""),
                 icon.getOrDefault("type", ""),
-                icon.getOrDefault("density", "")
+                icon.getOrDefault("density", ""),
             )
         }.getOrNull()
 

@@ -20,7 +20,7 @@ import net.mm2d.touchicon.http.simple.SimpleHttpClientAdapterFactory
  * @param httpClient HttpClientAdapter to use for internal communication. if not specified use default implementation.
  */
 class TouchIconExtractor(
-    private val httpClient: HttpClientAdapter = SimpleHttpClientAdapterFactory.create()
+    private val httpClient: HttpClientAdapter = SimpleHttpClientAdapterFactory.create(),
 ) {
     private val fromPage = createExtractFromPage(httpClient)
     private val fromDomain = createExtractFromDomain(httpClient)
@@ -146,7 +146,7 @@ class TouchIconExtractor(
     fun fromDomain(
         siteUrl: String,
         withPrecomposed: Boolean = true,
-        sizes: List<String> = emptyList()
+        sizes: List<String> = emptyList(),
     ): Icon? = fromDomain.fromDomain(siteUrl, withPrecomposed, sizes)
 
     /**
@@ -177,7 +177,7 @@ class TouchIconExtractor(
     fun fromDomainWithDownload(
         siteUrl: String,
         withPrecomposed: Boolean = true,
-        sizes: List<String> = emptyList()
+        sizes: List<String> = emptyList(),
     ): Pair<Icon, ByteArray>? = fromDomain.fromDomainWithDownload(siteUrl, withPrecomposed, sizes)
 
     /**
@@ -205,16 +205,16 @@ class TouchIconExtractor(
     fun listFromDomain(
         siteUrl: String,
         withPrecomposed: Boolean = true,
-        sizes: List<String> = emptyList()
+        sizes: List<String> = emptyList(),
     ): List<Icon> = fromDomain.listFromDomain(siteUrl, withPrecomposed, sizes)
 
     companion object {
         internal fun createExtractFromPage(
-            httpClient: HttpClientAdapter
+            httpClient: HttpClientAdapter,
         ): ExtractFromPage = ExtractFromPage(httpClient)
 
         internal fun createExtractFromDomain(
-            httpClient: HttpClientAdapter
+            httpClient: HttpClientAdapter,
         ): ExtractFromDomain = ExtractFromDomain(httpClient)
     }
 }

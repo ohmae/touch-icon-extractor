@@ -18,7 +18,7 @@ data class Size(
     /**
      * height.
      */
-    val height: Int
+    val height: Int,
 ) {
     /**
      * Returns whether this has a valid value.

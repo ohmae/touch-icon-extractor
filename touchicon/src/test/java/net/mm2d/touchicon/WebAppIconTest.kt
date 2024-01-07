@@ -21,9 +21,8 @@ class WebAppIconTest {
                 mimeType = "image/png",
                 sizes = "50x50",
                 url = "https://example.com/icon-40x40.png",
-                density = "3.0"
-            ).inferSize()
+                density = "3.0",
+            ).inferSize(),
         ).isEqualTo(Size(50, 50))
     }
 }
-

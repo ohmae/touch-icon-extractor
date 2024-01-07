@@ -13,7 +13,7 @@ import java.io.InputStream
 import java.net.HttpURLConnection
 
 internal class SimpleHttpResponse(
-    private val connection: HttpURLConnection
+    private val connection: HttpURLConnection,
 ) : HttpResponse {
     override val isSuccess: Boolean = connection.responseCode in 200 until 300
     private val inputStream: InputStream? = try {

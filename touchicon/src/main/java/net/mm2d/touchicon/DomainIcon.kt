@@ -72,7 +72,7 @@ data class DomainIcon(
      * "Content-Length" value of HTTP header.
      * Negative value means unknown.
      */
-    override val length: Int
+    override val length: Int,
 ) : Icon {
     private val size: Size by lazy {
         inferSizeFromSizes(sizes)

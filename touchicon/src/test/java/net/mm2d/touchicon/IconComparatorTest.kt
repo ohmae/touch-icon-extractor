@@ -13,7 +13,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-@Suppress("TestFunctionName")
+@Suppress("TestFunctionName", "ktlint:standard:function-naming")
 class IconComparatorTest {
     @Test
     fun SIZE_REL() {
@@ -22,49 +22,49 @@ class IconComparatorTest {
                 rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                 url = "1",
                 sizes = "80x80",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                 url = "2",
                 sizes = "40x40",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.APPLE_TOUCH_ICON,
                 url = "3",
                 sizes = "80x80",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.APPLE_TOUCH_ICON,
                 url = "4",
                 sizes = "40x40",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.ICON,
                 url = "5",
                 sizes = "80x80",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.ICON,
                 url = "6",
                 sizes = "40x40",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.SHORTCUT_ICON,
                 url = "7",
                 sizes = "80x80",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.SHORTCUT_ICON,
                 url = "8",
                 sizes = "40x40",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
         )
         val sorted = list.sortedWith(IconComparator.SIZE_REL)
@@ -86,49 +86,49 @@ class IconComparatorTest {
                 rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                 url = "1",
                 sizes = "80x80",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                 url = "2",
                 sizes = "40x40",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.APPLE_TOUCH_ICON,
                 url = "3",
                 sizes = "80x80",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.APPLE_TOUCH_ICON,
                 url = "4",
                 sizes = "40x40",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.ICON,
                 url = "5",
                 sizes = "80x80",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.ICON,
                 url = "6",
                 sizes = "40x40",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.SHORTCUT_ICON,
                 url = "7",
                 sizes = "80x80",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.SHORTCUT_ICON,
                 url = "8",
                 sizes = "40x40",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
         )
         val sorted = list.sortedWith(IconComparator.REL_SIZE)
@@ -150,25 +150,25 @@ class IconComparatorTest {
                 rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                 url = "1",
                 sizes = "80x80",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                 url = "2",
                 sizes = "20x80",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                 url = "3",
                 sizes = "80x40",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                 url = "4",
                 sizes = "80x",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
         )
         val sorted = list.sortedWith(IconComparator.SIZE_REL)
@@ -185,25 +185,25 @@ class IconComparatorTest {
                 rel = Relationship.APPLE_TOUCH_ICON_PRECOMPOSED,
                 url = "1",
                 sizes = "40x40",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.APPLE_TOUCH_ICON,
                 url = "2",
                 sizes = "50x50",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.ICON,
                 url = "3",
                 sizes = "60x60",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
             PageIcon(
                 rel = Relationship.SHORTCUT_ICON,
                 url = "4",
                 sizes = "70x70",
-                mimeType = "image/png"
+                mimeType = "image/png",
             ),
         )
         val sorted1 = list.sortedWith(IconComparator.SIZE_REL)
