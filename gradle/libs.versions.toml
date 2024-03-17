@@ -1,7 +1,7 @@
 [versions]
-kotlin = "1.9.21"
-dokka = "1.9.10"
-gradleVersionsPlugin = "0.50.0"
+kotlin = "1.9.22"
+dokka = "1.9.20"
+gradleVersionsPlugin = "0.51.0"
 okhttp = "4.12.0"
 
 [libraries]
@@ -18,13 +18,13 @@ okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okht
 
 # testImplementation
 junit = { group = "junit", name = "junit", version = "4.13.2" }
-truth = { group = "com.google.truth", name = "truth", version = "1.2.0" }
-mockk = { group = "io.mockk", name = "mockk", version = "1.13.8" }
+truth = { group = "com.google.truth", name = "truth", version = "1.4.2" }
+mockk = { group = "io.mockk", name = "mockk", version = "1.13.10" }
 okhttp3Mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "okhttp" }
 
 [plugins]
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-kover = { id = "org.jetbrains.kotlinx.kover", version = "0.7.4" }
+kover = { id = "org.jetbrains.kotlinx.kover", version = "0.7.6" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 gradleVersions = { id = "com.github.ben-manes.versions", version.ref = "gradleVersionsPlugin" }
 

@@ -9,7 +9,6 @@ repositories {
     gradlePluginPortal()
 }
 
-
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions.jvmTarget = "11"
 
