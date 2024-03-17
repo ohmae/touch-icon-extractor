@@ -16,7 +16,7 @@ group = Projects.groupId
 version = Projects.versionName
 
 dependencies {
-    api(project(":touchicon"))
+    api(projects.touchicon)
 
     compileOnly(libs.okhttp3)
 
