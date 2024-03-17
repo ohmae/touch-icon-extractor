@@ -3,11 +3,12 @@ import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
     id("org.gradle.java-library")
-    id("build.logic.kotlinJvm")
-    id("build.logic.kover")
-    id("build.logic.documentationDokka")
-    id("build.logic.mavenPublish")
-    id("build.logic.gradleVersions")
+    alias(libs.plugins.build.logic.kotlinJvm)
+    alias(libs.plugins.build.logic.kover)
+    alias(libs.plugins.build.logic.documentationDokka)
+    alias(libs.plugins.build.logic.mavenPublish)
+    alias(libs.plugins.build.logic.gradleVersions)
+    alias(libs.plugins.build.logic.dependencyGuard)
 }
 
 base.archivesName.set("touchicon-http-okhttp")

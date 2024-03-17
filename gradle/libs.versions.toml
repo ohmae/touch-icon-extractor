@@ -3,12 +3,15 @@ kotlin = "1.9.22"
 dokka = "1.9.20"
 gradleVersionsPlugin = "0.51.0"
 okhttp = "4.12.0"
+dependencyGuard = "0.5.0"
 
 [libraries]
 # classPath
-kotlinGradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
-dokkaGradlePlugin = { group = "org.jetbrains.dokka", name = "dokka-gradle-plugin", version.ref = "dokka" }
+kotlinPlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+dokkaPlugin = { group = "org.jetbrains.dokka", name = "dokka-gradle-plugin", version.ref = "dokka" }
 gradleVersionsPlugin = { group = "com.github.ben-manes", name = "gradle-versions-plugin", version.ref = "gradleVersionsPlugin" }
+dependencyGuardPlugin = { group = "com.dropbox.dependency-guard", name = "dependency-guard", version.ref = "dependencyGuard" }
+ktlint = { group = "com.pinterest.ktlint", name = "ktlint-cli", version = "1.2.1" }
 
 # implementation
 kotlinStdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
@@ -27,10 +30,20 @@ kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kover = { id = "org.jetbrains.kotlinx.kover", version = "0.7.6" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 gradleVersions = { id = "com.github.ben-manes.versions", version.ref = "gradleVersionsPlugin" }
+dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
+
+# build-logic
+build-logic-kotlinJvm = { id = "build.logic.kotlinJvm", version = "unspecified" }
+build-logic-kover = { id = "build.logic.kover", version = "unspecified" }
+build-logic-documentationDokka = { id = "build.logic.documentationDokka", version = "unspecified" }
+build-logic-mavenPublish = { id = "build.logic.mavenPublish", version = "unspecified" }
+build-logic-gradleVersions = { id = "build.logic.gradleVersions", version = "unspecified" }
+build-logic-dependencyGuard = { id = "build.logic.dependencyGuard", version = "unspecified" }
 
 [bundles]
 plugins = [
-    "kotlinGradlePlugin",
-    "dokkaGradlePlugin",
+    "kotlinPlugin",
+    "dokkaPlugin",
     "gradleVersionsPlugin",
+    "dependencyGuardPlugin",
 ]

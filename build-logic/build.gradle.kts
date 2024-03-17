@@ -42,5 +42,9 @@ gradlePlugin {
             id = "build.logic.gradleVersions"
             implementationClass = "net.mm2d.touchicon.build.GradleVersionsPlugin"
         }
+        register("dependencyGuard") {
+            id = "build.logic.dependencyGuard"
+            implementationClass = "net.mm2d.touchicon.build.DependencyGuardPlugin"
+        }
     }
 }
