@@ -4,6 +4,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 
 class KotlinJvmPlugin : Plugin<Project> {
@@ -17,7 +18,9 @@ private fun Project.plugin() {
         apply("org.jetbrains.kotlin.jvm")
     }
     kotlin {
-        jvmToolchain(11)
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_1_8)
+        }
     }
     dependencies {
         implementation(libs.library("kotlinStdlib"))
@@ -25,6 +28,5 @@ private fun Project.plugin() {
 }
 
 // DSL
-
 private fun Project.kotlin(action: KotlinJvmProjectExtension.() -> Unit): Unit =
     extensions.configure(action)

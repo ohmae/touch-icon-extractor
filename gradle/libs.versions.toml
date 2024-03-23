@@ -33,6 +33,7 @@ gradleVersions = { id = "com.github.ben-manes.versions", version.ref = "gradleVe
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
 
 # build-logic
+build-logic-javaLibrary = { id = "build.logic.javaLibrary", version = "unspecified" }
 build-logic-kotlinJvm = { id = "build.logic.kotlinJvm", version = "unspecified" }
 build-logic-kover = { id = "build.logic.kover", version = "unspecified" }
 build-logic-documentationDokka = { id = "build.logic.documentationDokka", version = "unspecified" }

@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     `kotlin-dsl`
 }
@@ -9,19 +7,16 @@ repositories {
     gradlePluginPortal()
 }
 
-val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions.jvmTarget = "11"
-
-kotlin {
-    jvmToolchain(11)
-}
-
 dependencies {
     implementation(libs.bundles.plugins)
 }
 
 gradlePlugin {
     plugins {
+        register("javaLibrary") {
+            id = "build.logic.javaLibrary"
+            implementationClass = "net.mm2d.touchicon.build.JavaLibraryPlugin"
+        }
         register("kotlinJvm") {
             id = "build.logic.kotlinJvm"
             implementationClass = "net.mm2d.touchicon.build.KotlinJvmPlugin"

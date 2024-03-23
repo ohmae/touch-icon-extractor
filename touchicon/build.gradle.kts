@@ -2,7 +2,7 @@ import net.mm2d.touchicon.build.Projects
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
-    id("org.gradle.java-library")
+    alias(libs.plugins.build.logic.javaLibrary)
     alias(libs.plugins.build.logic.kotlinJvm)
     alias(libs.plugins.build.logic.kover)
     alias(libs.plugins.build.logic.documentationDokka)
@@ -21,7 +21,7 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.okhttp3Mockwebserver)
 
-    kover(project(":touchicon-http:okhttp"))
+    kover(projects.touchiconHttp.okhttp)
 }
 
 tasks.named<DokkaTask>("dokkaHtml") {
