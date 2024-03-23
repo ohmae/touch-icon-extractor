@@ -9,7 +9,7 @@ object Projects {
 
     private const val versionMajor: Int = 0
     private const val versionMinor: Int = 9
-    private const val versionPatch: Int = 7
+    private const val versionPatch: Int = 8
     const val versionName: String = "$versionMajor.$versionMinor.$versionPatch"
 
     object Url {
