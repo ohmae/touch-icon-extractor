@@ -1,9 +1,14 @@
 [versions]
-kotlin = "1.9.22"
+kotlin = "1.9.23"
 dokka = "1.9.20"
 gradleVersionsPlugin = "0.51.0"
 okhttp = "4.12.0"
 dependencyGuard = "0.5.0"
+
+junit = "4.13.2"
+truth = "1.4.2"
+mockk = "1.13.10"
+kover = "0.7.6"
 
 [libraries]
 # classPath
@@ -20,14 +25,14 @@ kotlinStdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version
 okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 
 # testImplementation
-junit = { group = "junit", name = "junit", version = "4.13.2" }
-truth = { group = "com.google.truth", name = "truth", version = "1.4.2" }
-mockk = { group = "io.mockk", name = "mockk", version = "1.13.10" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 okhttp3Mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "okhttp" }
 
 [plugins]
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-kover = { id = "org.jetbrains.kotlinx.kover", version = "0.7.6" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 gradleVersions = { id = "com.github.ben-manes.versions", version.ref = "gradleVersionsPlugin" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
