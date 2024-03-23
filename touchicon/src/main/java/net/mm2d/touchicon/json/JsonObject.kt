@@ -21,6 +21,6 @@ internal class JsonObject(
         getOrDefault(name, default, T::class.java)
 
     override fun hashCode(): Int = delegate.hashCode()
-    override fun equals(other: Any?): Boolean = delegate == other
+    override fun equals(other: Any?): Boolean = other is JsonObject && delegate == other
     override fun toString(): String = delegate.toString()
 }

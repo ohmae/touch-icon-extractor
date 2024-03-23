@@ -26,6 +26,7 @@ class JsonArrayTest {
         val delegate: List<Any> = mockk(relaxed = true)
         val jsonArray = JsonArray(delegate)
         jsonArray.equals(mockk())
+        jsonArray.equals(mockk<JsonArray>())
         verify { delegate.equals(any()) }
     }
 

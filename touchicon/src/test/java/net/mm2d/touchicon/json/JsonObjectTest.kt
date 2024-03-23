@@ -26,6 +26,7 @@ class JsonObjectTest {
         val delegate: Map<String, Any> = mockk(relaxed = true)
         val jsonObject = JsonObject(delegate)
         jsonObject.equals(mockk())
+        jsonObject.equals(mockk<JsonObject>())
         verify { delegate.equals(any()) }
     }
 

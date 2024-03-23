@@ -103,7 +103,7 @@ internal class HtmlParser {
         var escape = false
         for (i in start until a.size) {
             if (!escape && a[i] == quote) return i
-            escape = if (escape) false else a[i] == '\\'
+            escape = !escape && a[i] == '\\'
         }
         return a.size
     }
