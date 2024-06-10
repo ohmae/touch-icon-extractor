@@ -198,11 +198,10 @@ class SimpleHttpClientAdapterTest {
         val cookie2 = "name=value; HttpOnly"
         val server = MockWebServer()
         server.dispatcher = object : Dispatcher() {
-            override fun dispatch(request: RecordedRequest): MockResponse {
-                return MockResponse().setResponseCode(200)
+            override fun dispatch(request: RecordedRequest): MockResponse =
+                MockResponse().setResponseCode(200)
                     .addHeader("Set-Cookie", cookie1)
                     .addHeader("Set-Cookie", cookie2)
-            }
         }
         server.start()
         val cookieHandler: CookieHandler = mockk()
