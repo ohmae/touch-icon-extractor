@@ -6,7 +6,7 @@ okhttp = "4.12.0"
 dependencyGuard = "0.5.0"
 
 junit = "4.13.2"
-truth = "1.4.2"
+truth = "1.4.4"
 mockk = "1.13.11"
 kover = "0.7.6"
 
