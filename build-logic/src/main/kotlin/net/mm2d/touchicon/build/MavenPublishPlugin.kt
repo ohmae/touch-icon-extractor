@@ -86,8 +86,8 @@ private fun Project.plugin() {
                 maven {
                     url = URI("https://oss.sonatype.org/service/local/staging/deploy/maven2")
                     credentials {
-                        username = project.findProperty("sonatype_username") as? String ?: ""
-                        password = project.findProperty("sonatype_password") as? String ?: ""
+                        username = project.findProperty("ossrh_username") as? String ?: ""
+                        password = project.findProperty("ossrh_password") as? String ?: ""
                     }
                 }
             }
