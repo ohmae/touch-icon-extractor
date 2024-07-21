@@ -3,8 +3,6 @@ package net.mm2d.build
 import org.gradle.api.Action
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.artifacts.PublishArtifact
-import org.gradle.api.artifacts.dsl.ArtifactHandler
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
@@ -12,9 +10,7 @@ import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.get
-import org.gradle.kotlin.dsl.named
 import org.gradle.plugins.signing.SigningExtension
-import java.io.File
 import java.net.URI
 
 class MavenPublishPlugin : Plugin<Project> {
@@ -31,15 +27,11 @@ private fun Project.plugin() {
     tasks.create("javadocJar", Jar::class) {
         dependsOn("dokkaJavadoc")
         archiveClassifier.set("javadoc")
-        from(File(layout.buildDirectory.asFile.get(), "docs/javadoc"))
     }
     tasks.create("sourcesJar", Jar::class) {
         dependsOn("classes")
         archiveClassifier.set("sources")
         from(sourceSets["main"].allSource)
-    }
-    artifacts {
-        archives(tasks.named<Jar>("sourcesJar"))
     }
     tasks.named("publish") {
         dependsOn("assemble")
@@ -61,8 +53,8 @@ private fun Project.plugin() {
                 maven {
                     url = URI("https://oss.sonatype.org/service/local/staging/deploy/maven2")
                     credentials {
-                        username = project.findProperty("ossrh_username") as? String ?: ""
-                        password = project.findProperty("ossrh_password") as? String ?: ""
+                        username = findPropertyString("ossrh_username")
+                        password = findPropertyString("ossrh_password")
                     }
                 }
             }
@@ -106,12 +98,8 @@ private fun MavenPublication.applyProjectProperty(project: Project) {
 }
 
 // DSL
-
 private val Project.sourceSets: SourceSetContainer
     get() = (this as ExtensionAware).extensions.getByName("sourceSets") as SourceSetContainer
-
-private fun ArtifactHandler.archives(artifactNotation: Any): PublishArtifact =
-    add("archives", artifactNotation)
 
 private val Project.publishing: PublishingExtension
     get() = (this as ExtensionAware).extensions.getByName("publishing") as PublishingExtension
