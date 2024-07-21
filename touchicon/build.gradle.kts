@@ -13,10 +13,10 @@ plugins {
 }
 
 base.archivesName.set("touchicon")
-group = Projects.groupId
-version = Projects.versionName
+group = Projects.GROUP_ID
+version = Projects.VERSION_NAME
 pomName = "Touch icon extractor"
-pomDescription = "Touch icon extractor"
+pomDescription = "This is a library to extract WebClip icon information from the website. Available in JVM and Android as this is written in pure Kotlin."
 
 dependencies {
     testImplementation(libs.junit)

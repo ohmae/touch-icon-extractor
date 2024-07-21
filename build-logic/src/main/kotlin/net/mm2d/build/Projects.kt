@@ -1,20 +1,18 @@
 package net.mm2d.build
 
 object Projects {
-    const val groupId: String = "net.mm2d.touchicon"
-    const val name: String = "touchicon"
-    const val description: String = "This is a library to extract WebClip icon information from the website. Available in JVM and Android as this is written in pure Kotlin."
-    const val developerId: String = "ryo"
-    const val developerName: String = "ryosuke"
+    const val GROUP_ID: String = "net.mm2d.touchicon"
+    const val DEVELOPER_ID: String = "ryo"
+    const val DEVELOPER_NAME: String = "ryosuke"
 
-    private const val versionMajor: Int = 0
-    private const val versionMinor: Int = 9
-    private const val versionPatch: Int = 9
-    const val versionName: String = "$versionMajor.$versionMinor.$versionPatch"
+    private const val VERSION_MAJOR: Int = 0
+    private const val VERSION_MINOR: Int = 9
+    private const val VERSION_PATCH: Int = 9
+    const val VERSION_NAME: String = "$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH"
 
     object Url {
-        const val site: String = "https://github.com/ohmae/touch-icon-extractor"
-        const val github: String = "https://github.com/ohmae/touch-icon-extractor"
-        const val scm: String = "scm:git@github.com:ohmae/touch-icon-extractor.git"
+        const val SITE: String = "https://github.com/ohmae/touch-icon-extractor"
+        const val GITHUB: String = "https://github.com/ohmae/touch-icon-extractor"
+        const val SCM: String = "scm:git@github.com:ohmae/touch-icon-extractor.git"
     }
 }

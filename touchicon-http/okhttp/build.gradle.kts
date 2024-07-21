@@ -13,8 +13,8 @@ plugins {
 }
 
 base.archivesName.set("touchicon-http-okhttp")
-group = Projects.groupId
-version = Projects.versionName
+group = Projects.GROUP_ID
+version = Projects.VERSION_NAME
 pomName = "Touch icon extractor OkHttp adapter"
 pomDescription = "An adapter that replaces Touch icon extractor's Http client with OkHttp"
 
