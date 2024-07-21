@@ -1,4 +1,4 @@
-package net.mm2d.touchicon.build
+package net.mm2d.build
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project

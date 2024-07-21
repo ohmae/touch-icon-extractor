@@ -1,4 +1,4 @@
-package net.mm2d.touchicon.build
+package net.mm2d.build
 
 object Projects {
     const val groupId: String = "net.mm2d.touchicon"

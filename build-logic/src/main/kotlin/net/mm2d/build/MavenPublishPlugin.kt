@@ -1,4 +1,4 @@
-package net.mm2d.touchicon.build
+package net.mm2d.build
 
 import org.gradle.api.Action
 import org.gradle.api.Plugin
@@ -54,32 +54,7 @@ private fun Project.plugin() {
                     artifact(tasks.getByName("sourcesJar"))
                     artifact(tasks.getByName("javadocJar"))
 
-                    groupId = Projects.groupId
-                    artifactId = base.archivesName.get()
-                    version = Projects.versionName
-                    pom {
-                        name.set(Projects.name)
-                        description.set(Projects.description)
-                        url.set(Projects.Url.site)
-                        licenses {
-                            license {
-                                name.set("The MIT License")
-                                url.set("https://opensource.org/licenses/MIT")
-                                distribution.set("repo")
-                            }
-                        }
-                        developers {
-                            developer {
-                                id.set(Projects.developerId)
-                                name.set(Projects.developerName)
-                            }
-                        }
-                        scm {
-                            connection.set(Projects.Url.scm)
-                            developerConnection.set(Projects.Url.scm)
-                            url.set(Projects.Url.github)
-                        }
-                    }
+                    applyProjectProperty(this@plugin)
                 }
             }
             repositories {
@@ -101,6 +76,35 @@ private fun Project.plugin() {
     }
 }
 
+private fun MavenPublication.applyProjectProperty(project: Project) {
+    groupId = project.group.toString()
+    artifactId = project.base.archivesName.get()
+    version = project.version.toString()
+    pom {
+        name.set(project.pomName)
+        description.set(project.pomDescription)
+        url.set(Projects.Url.site)
+        licenses {
+            license {
+                name.set("The MIT License")
+                url.set("https://opensource.org/licenses/MIT")
+                distribution.set("repo")
+            }
+        }
+        developers {
+            developer {
+                id.set(Projects.developerId)
+                name.set(Projects.developerName)
+            }
+        }
+        scm {
+            connection.set(Projects.Url.scm)
+            developerConnection.set(Projects.Url.scm)
+            url.set(Projects.Url.github)
+        }
+    }
+}
+
 // DSL
 
 private val Project.sourceSets: SourceSetContainer
@@ -117,3 +121,16 @@ private fun Project.publishing(configure: Action<PublishingExtension>): Unit =
 
 private fun Project.signing(configure: Action<SigningExtension>): Unit =
     (this as ExtensionAware).extensions.configure("signing", configure)
+
+private fun Project.findPropertyString(name: String, defaultValue: String = ""): String =
+    (findProperty(name) as String?).let {
+        if (it.isNullOrBlank()) defaultValue else it
+    }
+
+var Project.pomName: String
+    get() = findPropertyString("POM_NAME", Projects.name)
+    set(value) = setProperty("POM_NAME", value)
+
+var Project.pomDescription: String
+    get() = findPropertyString("POM_DESCRIPTION", Projects.description)
+    set(value) = setProperty("POM_DESCRIPTION", value)

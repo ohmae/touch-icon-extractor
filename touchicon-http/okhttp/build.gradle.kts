@@ -1,4 +1,6 @@
-import net.mm2d.touchicon.build.Projects
+import net.mm2d.build.Projects
+import net.mm2d.build.pomDescription
+import net.mm2d.build.pomName
 
 plugins {
     alias(libs.plugins.build.logic.javaLibrary)
@@ -13,6 +15,8 @@ plugins {
 base.archivesName.set("touchicon-http-okhttp")
 group = Projects.groupId
 version = Projects.versionName
+pomName = "Touch icon extractor OkHttp adapter"
+pomDescription = "An adapter that replaces Touch icon extractor's Http client with OkHttp"
 
 dependencies {
     api(projects.touchicon)

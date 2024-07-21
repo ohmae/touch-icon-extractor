@@ -1,4 +1,6 @@
-import net.mm2d.touchicon.build.Projects
+import net.mm2d.build.Projects
+import net.mm2d.build.pomDescription
+import net.mm2d.build.pomName
 
 plugins {
     alias(libs.plugins.build.logic.javaLibrary)
@@ -13,6 +15,8 @@ plugins {
 base.archivesName.set("touchicon")
 group = Projects.groupId
 version = Projects.versionName
+pomName = "Touch icon extractor"
+pomDescription = "Touch icon extractor"
 
 dependencies {
     testImplementation(libs.junit)
