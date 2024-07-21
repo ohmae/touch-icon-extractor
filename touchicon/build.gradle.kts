@@ -1,5 +1,4 @@
 import net.mm2d.touchicon.build.Projects
-import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
     alias(libs.plugins.build.logic.javaLibrary)
@@ -22,12 +21,4 @@ dependencies {
     testImplementation(libs.okhttp3Mockwebserver)
 
     kover(projects.touchiconHttp.okhttp)
-}
-
-tasks.named<DokkaTask>("dokkaHtml") {
-    outputDirectory.set(File(projectDir, "../docs/touchicon"))
-}
-
-tasks.named<DokkaTask>("dokkaJavadoc") {
-    outputDirectory.set(File(layout.buildDirectory.asFile.get(), "docs/javadoc"))
 }
