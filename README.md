@@ -62,8 +62,8 @@ dependencies {
 
 Documentation comment is written in KDoc.
 
-- [touchicon](https://ohmae.github.io/touch-icon-extractor/touchicon/)
-- [touchicon-http-okhttp](https://ohmae.github.io/touch-icon-extractor/http-okhttp/)
+- [touchicon](https://ohmae.github.io/touch-icon-extractor/dokka/touchicon/)
+- [touchicon-http-okhttp](https://ohmae.github.io/touch-icon-extractor/dokka/http-okhttp/)
 
 ### Sample code
 
@@ -310,16 +310,8 @@ val bestIcon2 = icons.maxWith(IconComparator.REL_SIZE) // Compare by rel, if sam
 
 ## Dependent OSS
 
-### touchicon
-
-- [Kotlin](https://kotlinlang.org/)
-  - kotlin-stdlib
-
-### touchicon-http-okhttp
-
-- [Kotlin](https://kotlinlang.org/)
-  - kotlin-stdlib
-- [OkHttp3](https://square.github.io/okhttp/)
+- [touchicon](./touchicon/dependencies/runtimeClasspath.txt)
+- [touchicon-http-okhttp](./touchicon-http/okhttp/dependencies/runtimeClasspath.txt)
 
 ## Author
 大前 良介 (OHMAE Ryosuke)

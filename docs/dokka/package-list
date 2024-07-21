@@ -1,0 +1,9 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+module:touchicon
+net.mm2d.touchicon
+net.mm2d.touchicon.http
+net.mm2d.touchicon.http.simple
+module:touchicon-http-okhttp
+net.mm2d.touchicon.http.okhttp
