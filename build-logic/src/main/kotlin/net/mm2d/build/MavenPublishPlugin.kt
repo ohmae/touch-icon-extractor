@@ -25,8 +25,9 @@ private fun Project.plugin() {
         apply("org.gradle.signing")
     }
     tasks.create("javadocJar", Jar::class) {
-        dependsOn("dokkaJavadoc")
+        dependsOn("dokkaGenerateModuleJavadoc")
         archiveClassifier.set("javadoc")
+        from(layout.buildDirectory.dir("dokka-module/javadoc/module"))
     }
     tasks.create("sourcesJar", Jar::class) {
         dependsOn("classes")

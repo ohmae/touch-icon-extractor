@@ -62,8 +62,7 @@ dependencies {
 
 Documentation comment is written in KDoc.
 
-- [touchicon](https://ohmae.github.io/touch-icon-extractor/dokka/touchicon/)
-- [touchicon-http-okhttp](https://ohmae.github.io/touch-icon-extractor/dokka/http-okhttp/)
+- [Dokka](https://ohmae.github.io/touch-icon-extractor/dokka/html/)
 
 ### Sample code
 

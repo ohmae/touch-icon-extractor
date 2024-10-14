@@ -6,8 +6,13 @@ plugins {
     alias(libs.plugins.dependencyGuard) apply false
 }
 
-tasks.dokkaHtmlMultiModule {
-    outputDirectory.set(File(projectDir, "docs/dokka"))
+dependencies {
+    dokka(projects.touchicon)
+    dokka(projects.touchiconHttp.okhttp)
+}
+
+dokka {
+    dokkaPublicationDirectory.set(File(projectDir, "docs/dokka"))
 }
 
 val ktlint: Configuration by configurations.creating
