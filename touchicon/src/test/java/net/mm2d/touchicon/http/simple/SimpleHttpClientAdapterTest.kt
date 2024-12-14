@@ -27,7 +27,9 @@ class SimpleHttpClientAdapterTest {
         var recordedRequest: RecordedRequest? = null
         val server = MockWebServer()
         server.dispatcher = object : Dispatcher() {
-            override fun dispatch(request: RecordedRequest): MockResponse {
+            override fun dispatch(
+                request: RecordedRequest,
+            ): MockResponse {
                 recordedRequest = request
                 return MockResponse().setResponseCode(200)
             }
@@ -47,7 +49,9 @@ class SimpleHttpClientAdapterTest {
         var recordedRequest: RecordedRequest? = null
         val server = MockWebServer()
         server.dispatcher = object : Dispatcher() {
-            override fun dispatch(request: RecordedRequest): MockResponse {
+            override fun dispatch(
+                request: RecordedRequest,
+            ): MockResponse {
                 recordedRequest = request
                 return MockResponse().setResponseCode(200)
             }
@@ -67,7 +71,9 @@ class SimpleHttpClientAdapterTest {
     fun head() {
         val server = MockWebServer()
         server.dispatcher = object : Dispatcher() {
-            override fun dispatch(request: RecordedRequest): MockResponse {
+            override fun dispatch(
+                request: RecordedRequest,
+            ): MockResponse {
                 if (request.method != "HEAD") {
                     return MockResponse().setResponseCode(404)
                 }
@@ -93,7 +99,9 @@ class SimpleHttpClientAdapterTest {
     fun get() {
         val server = MockWebServer()
         server.dispatcher = object : Dispatcher() {
-            override fun dispatch(request: RecordedRequest): MockResponse {
+            override fun dispatch(
+                request: RecordedRequest,
+            ): MockResponse {
                 if (request.method != "GET") {
                     return MockResponse().setResponseCode(404)
                 }
@@ -119,7 +127,9 @@ class SimpleHttpClientAdapterTest {
     fun get_limit_bytes() {
         val server = MockWebServer()
         server.dispatcher = object : Dispatcher() {
-            override fun dispatch(request: RecordedRequest): MockResponse {
+            override fun dispatch(
+                request: RecordedRequest,
+            ): MockResponse {
                 if (request.method != "GET") {
                     return MockResponse().setResponseCode(404)
                 }
@@ -149,7 +159,9 @@ class SimpleHttpClientAdapterTest {
     fun get_limit_string() {
         val server = MockWebServer()
         server.dispatcher = object : Dispatcher() {
-            override fun dispatch(request: RecordedRequest): MockResponse {
+            override fun dispatch(
+                request: RecordedRequest,
+            ): MockResponse {
                 if (request.method != "GET") {
                     return MockResponse().setResponseCode(404)
                 }
@@ -177,7 +189,9 @@ class SimpleHttpClientAdapterTest {
         var recordedRequest: RecordedRequest? = null
         val server = MockWebServer()
         server.dispatcher = object : Dispatcher() {
-            override fun dispatch(request: RecordedRequest): MockResponse {
+            override fun dispatch(
+                request: RecordedRequest,
+            ): MockResponse {
                 recordedRequest = request
                 return MockResponse().setResponseCode(200)
             }
@@ -198,7 +212,9 @@ class SimpleHttpClientAdapterTest {
         val cookie2 = "name=value; HttpOnly"
         val server = MockWebServer()
         server.dispatcher = object : Dispatcher() {
-            override fun dispatch(request: RecordedRequest): MockResponse =
+            override fun dispatch(
+                request: RecordedRequest,
+            ): MockResponse =
                 MockResponse().setResponseCode(200)
                     .addHeader("Set-Cookie", cookie1)
                     .addHeader("Set-Cookie", cookie2)

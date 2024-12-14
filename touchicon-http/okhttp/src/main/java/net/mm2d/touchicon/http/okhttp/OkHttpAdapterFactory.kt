@@ -19,5 +19,7 @@ object OkHttpAdapterFactory {
      *
      * @return instance
      */
-    fun create(client: OkHttpClient): HttpClientAdapter = OkHttpClientAdapter(client)
+    fun create(
+        client: OkHttpClient,
+    ): HttpClientAdapter = OkHttpClientAdapter(client)
 }

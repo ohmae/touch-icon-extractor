@@ -22,14 +22,20 @@ internal class SimpleHttpResponse(
         null
     }
 
-    override fun header(name: String): String? = connection.getHeaderField(name)
+    override fun header(
+        name: String,
+    ): String? = connection.getHeaderField(name)
 
-    override fun bodyString(limit: Int): String? {
+    override fun bodyString(
+        limit: Int,
+    ): String? {
         val stream = inputStream ?: return null
         return String(fetchBytes(stream, limit))
     }
 
-    override fun bodyBytes(limit: Int): ByteArray? {
+    override fun bodyBytes(
+        limit: Int,
+    ): ByteArray? {
         val stream = inputStream ?: return null
         return fetchBytes(stream, limit)
     }
@@ -40,7 +46,10 @@ internal class SimpleHttpResponse(
         }
     }
 
-    private fun fetchBytes(stream: InputStream, limit: Int): ByteArray {
+    private fun fetchBytes(
+        stream: InputStream,
+        limit: Int,
+    ): ByteArray {
         if (limit <= 0) {
             return stream.readBytes()
         }

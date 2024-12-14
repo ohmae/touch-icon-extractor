@@ -20,7 +20,10 @@ interface CookieHandler {
      * @param url URL
      * @param value cookie value
      */
-    fun saveCookie(url: String, value: String)
+    fun saveCookie(
+        url: String,
+        value: String,
+    )
 
     /**
      * Called to read cookie.
@@ -30,5 +33,7 @@ interface CookieHandler {
      * @param url URL
      * @return Cookie
      */
-    fun loadCookie(url: String): String?
+    fun loadCookie(
+        url: String,
+    ): String?
 }

@@ -25,7 +25,9 @@ interface HttpResponse : Closeable {
      * @param name header name
      * @return header value, null if does not exist
      */
-    fun header(name: String): String?
+    fun header(
+        name: String,
+    ): String?
 
     /**
      * Read body as string
@@ -34,7 +36,9 @@ interface HttpResponse : Closeable {
      * @return download result
      */
     @Throws(IOException::class)
-    fun bodyString(limit: Int = 0): String?
+    fun bodyString(
+        limit: Int = 0,
+    ): String?
 
     /**
      * Read body as byteArray
@@ -43,5 +47,7 @@ interface HttpResponse : Closeable {
      * @return download result
      */
     @Throws(IOException::class)
-    fun bodyBytes(limit: Int = 0): ByteArray?
+    fun bodyBytes(
+        limit: Int = 0,
+    ): ByteArray?
 }

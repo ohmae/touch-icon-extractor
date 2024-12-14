@@ -9,7 +9,10 @@ package net.mm2d.touchicon
 
 import java.net.URL
 
-internal fun makeAbsoluteUrl(baseUrl: String, url: String): String =
+internal fun makeAbsoluteUrl(
+    baseUrl: String,
+    url: String,
+): String =
     URL(baseUrl).let {
         if (url.startsWith("//")) {
             it.protocol + ":" + url

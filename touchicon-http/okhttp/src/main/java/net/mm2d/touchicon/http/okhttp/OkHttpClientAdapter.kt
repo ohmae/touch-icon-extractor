@@ -22,28 +22,34 @@ internal class OkHttpClientAdapter(
     override var headers: Map<String, String> = emptyMap()
 
     @Throws(IOException::class)
-    override fun head(url: String): HttpResponse = Builder().head()
-        .url(url)
-        .appendHeader()
-        .build()
-        .execute()
+    override fun head(
+        url: String,
+    ): HttpResponse =
+        Builder().head()
+            .url(url)
+            .appendHeader()
+            .build()
+            .execute()
 
     @Throws(IOException::class)
-    override fun get(url: String): HttpResponse = Builder().get()
-        .url(url)
-        .appendHeader()
-        .build()
-        .execute()
+    override fun get(
+        url: String,
+    ): HttpResponse =
+        Builder().get()
+            .url(url)
+            .appendHeader()
+            .build()
+            .execute()
 
-    private fun Builder.appendHeader(): Builder = apply {
-        if (headers.isNotEmpty()) {
-            headers(headers.toHeaders())
+    private fun Builder.appendHeader(): Builder =
+        apply {
+            if (headers.isNotEmpty()) {
+                headers(headers.toHeaders())
+            }
+            if (userAgent.isNotEmpty()) {
+                header("User-Agent", userAgent)
+            }
         }
-        if (userAgent.isNotEmpty()) {
-            header("User-Agent", userAgent)
-        }
-    }
 
-    private fun Request.execute(): HttpResponse =
-        OkHttpResponse(client.newCall(this).execute())
+    private fun Request.execute(): HttpResponse = OkHttpResponse(client.newCall(this).execute())
 }

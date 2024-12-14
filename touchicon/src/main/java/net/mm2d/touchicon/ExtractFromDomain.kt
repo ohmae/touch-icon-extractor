@@ -18,34 +18,43 @@ internal class ExtractFromDomain(
         siteUrl: String,
         withPrecomposed: Boolean,
         sizes: List<String>,
-    ): DomainIcon? = createTryDataList(withPrecomposed, sizes)
-        .asSequence()
-        .mapNotNull { tryHead(siteUrl, it) }
-        .firstOrNull()
+    ): DomainIcon? =
+        createTryDataList(withPrecomposed, sizes)
+            .asSequence()
+            .mapNotNull { tryHead(siteUrl, it) }
+            .firstOrNull()
 
     internal fun fromDomainWithDownload(
         siteUrl: String,
         withPrecomposed: Boolean,
         sizes: List<String>,
-    ): Pair<DomainIcon, ByteArray>? = createTryDataList(withPrecomposed, sizes)
-        .asSequence()
-        .mapNotNull { tryGet(siteUrl, it) }
-        .firstOrNull()
+    ): Pair<DomainIcon, ByteArray>? =
+        createTryDataList(withPrecomposed, sizes)
+            .asSequence()
+            .mapNotNull { tryGet(siteUrl, it) }
+            .firstOrNull()
 
     internal fun listFromDomain(
         siteUrl: String,
         withPrecomposed: Boolean,
         sizes: List<String>,
-    ): List<DomainIcon> = createTryDataList(withPrecomposed, sizes)
-        .mapNotNull { tryHead(siteUrl, it) }
+    ): List<DomainIcon> =
+        createTryDataList(withPrecomposed, sizes)
+            .mapNotNull { tryHead(siteUrl, it) }
 
-    private fun tryHead(baseUrl: String, tryData: TryData): DomainIcon? =
+    private fun tryHead(
+        baseUrl: String,
+        tryData: TryData,
+    ): DomainIcon? =
         runCatching {
             val url = makeUrl(baseUrl, tryData)
             httpClient.head(url).use { createDomainIcon(it, url, tryData) }
         }.getOrNull()
 
-    private fun tryGet(baseUrl: String, tryData: TryData): Pair<DomainIcon, ByteArray>? =
+    private fun tryGet(
+        baseUrl: String,
+        tryData: TryData,
+    ): Pair<DomainIcon, ByteArray>? =
         runCatching {
             val url = makeUrl(baseUrl, tryData)
             httpClient.get(url).use {
@@ -55,8 +64,10 @@ internal class ExtractFromDomain(
             }
         }.getOrNull()
 
-    private fun makeUrl(baseUrl: String, tryData: TryData): String =
-        URL(URL(baseUrl), "/" + tryData.name).toString()
+    private fun makeUrl(
+        baseUrl: String,
+        tryData: TryData,
+    ): String = URL(URL(baseUrl), "/" + tryData.name).toString()
 
     private fun createDomainIcon(
         response: HttpResponse,
@@ -79,7 +90,10 @@ internal class ExtractFromDomain(
     )
 
     // VisibleForTesting
-    internal fun createTryDataList(withPrecomposed: Boolean, sizes: List<String>): List<TryData> {
+    internal fun createTryDataList(
+        withPrecomposed: Boolean,
+        sizes: List<String>,
+    ): List<TryData> {
         val result: MutableList<TryData> = mutableListOf()
         sizes.forEach {
             if (withPrecomposed) {

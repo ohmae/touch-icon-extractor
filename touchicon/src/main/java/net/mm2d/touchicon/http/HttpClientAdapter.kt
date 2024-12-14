@@ -35,7 +35,9 @@ interface HttpClientAdapter {
      * @throws IOException if an I/O error occurs
      */
     @Throws(IOException::class)
-    fun head(url: String): HttpResponse
+    fun head(
+        url: String,
+    ): HttpResponse
 
     /**
      * Execute HTTP GET method
@@ -45,5 +47,7 @@ interface HttpClientAdapter {
      * @throws IOException if an I/O error occurs
      */
     @Throws(IOException::class)
-    fun get(url: String): HttpResponse
+    fun get(
+        url: String,
+    ): HttpResponse
 }

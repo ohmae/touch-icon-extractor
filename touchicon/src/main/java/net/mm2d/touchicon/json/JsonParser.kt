@@ -12,20 +12,22 @@ internal class JsonParser(
 ) {
     private var pos: Int = 0
 
-    fun parse(): JsonObject = when (nextElementChar("unexpected end of stream")) {
-        '{' -> nextObject()
-        else -> throw JsonException("")
-    }
-
-    private fun nextValue(): Any? = when (nextElementChar("unexpected end of stream")) {
-        '{' -> nextObject()
-        '[' -> nextArray()
-        '"' -> nextString()
-        else -> {
-            pos--
-            nextLiteral()
+    fun parse(): JsonObject =
+        when (nextElementChar("unexpected end of stream")) {
+            '{' -> nextObject()
+            else -> throw JsonException("")
         }
-    }
+
+    private fun nextValue(): Any? =
+        when (nextElementChar("unexpected end of stream")) {
+            '{' -> nextObject()
+            '[' -> nextArray()
+            '"' -> nextString()
+            else -> {
+                pos--
+                nextLiteral()
+            }
+        }
 
     private fun nextObject(): JsonObject {
         if (nextElementChar("unterminated object") == '}') {
@@ -139,7 +141,9 @@ internal class JsonParser(
         return input.substring(start)
     }
 
-    private fun nextElementChar(errorMessage: String): Char {
+    private fun nextElementChar(
+        errorMessage: String,
+    ): Char {
         while (pos < input.length) {
             val c = input[pos++]
             if (!SPACE.contains(c)) return c

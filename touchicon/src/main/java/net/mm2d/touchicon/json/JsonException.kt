@@ -6,4 +6,6 @@
  */
 package net.mm2d.touchicon.json
 
-internal class JsonException(message: String) : Exception(message)
+internal class JsonException(
+    message: String,
+) : Exception(message)

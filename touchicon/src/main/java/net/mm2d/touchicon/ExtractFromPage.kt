@@ -21,7 +21,10 @@ internal class ExtractFromPage(
     private val htmlParser: HtmlParser = HtmlParser()
     var downloadLimit: Int = DEFAULT_LIMIT_SIZE
 
-    internal fun fromPage(siteUrl: String, withManifest: Boolean): List<Icon> {
+    internal fun fromPage(
+        siteUrl: String,
+        withManifest: Boolean,
+    ): List<Icon> {
         val html = runCatching { fetch(siteUrl) }.getOrNull()
         return if (html.isNullOrEmpty()) {
             emptyList()
@@ -30,7 +33,9 @@ internal class ExtractFromPage(
         }
     }
 
-    internal fun fromManifest(siteUrl: String): List<Icon> {
+    internal fun fromManifest(
+        siteUrl: String,
+    ): List<Icon> {
         val html = runCatching { fetch(siteUrl) }.getOrNull()
         return if (html.isNullOrEmpty()) {
             emptyList()
@@ -41,9 +46,12 @@ internal class ExtractFromPage(
         }
     }
 
-    private fun fetch(url: String): String? = httpClient.get(url).use {
-        if (it.hasHtml()) it.bodyString(downloadLimit) else null
-    }
+    private fun fetch(
+        url: String,
+    ): String? =
+        httpClient.get(url).use {
+            if (it.hasHtml()) it.bodyString(downloadLimit) else null
+        }
 
     private fun HttpResponse.hasHtml(): Boolean {
         if (!isSuccess) return false
@@ -57,18 +65,22 @@ internal class ExtractFromPage(
         siteUrl: String,
         html: String,
         withManifest: Boolean,
-    ): List<Icon> = if (!withManifest) {
-        htmlParser.extractLinkTags(html)
-            .mapNotNull { createPageIcon(siteUrl, it) }
-    } else {
-        htmlParser.extractLinkTags(html).let { tags ->
-            tags.mapNotNull { createPageIcon(siteUrl, it) } +
-                tags.filter { Relationship.of(it.attr("rel")) == Relationship.MANIFEST }
-                    .flatMap { extractFromManifest(siteUrl, it.attr("href")) }
+    ): List<Icon> =
+        if (!withManifest) {
+            htmlParser.extractLinkTags(html)
+                .mapNotNull { createPageIcon(siteUrl, it) }
+        } else {
+            htmlParser.extractLinkTags(html).let { tags ->
+                tags.mapNotNull { createPageIcon(siteUrl, it) } +
+                    tags.filter { Relationship.of(it.attr("rel")) == Relationship.MANIFEST }
+                        .flatMap { extractFromManifest(siteUrl, it.attr("href")) }
+            }
         }
-    }
 
-    private fun createPageIcon(siteUrl: String, linkTag: HtmlTag): PageIcon? {
+    private fun createPageIcon(
+        siteUrl: String,
+        linkTag: HtmlTag,
+    ): PageIcon? {
         val rel = Relationship.of(linkTag.attr("rel")) ?: return null
         if (!rel.isIcon) return null
         val href = linkTag.attr("href")
@@ -79,7 +91,10 @@ internal class ExtractFromPage(
         return PageIcon(rel, url, sizes, mimeType)
     }
 
-    private fun extractFromManifest(siteUrl: String, href: String): List<Icon> {
+    private fun extractFromManifest(
+        siteUrl: String,
+        href: String,
+    ): List<Icon> {
         if (href.isEmpty()) return emptyList()
         val url = makeAbsoluteUrl(siteUrl, href)
         return runCatching {
@@ -89,7 +104,9 @@ internal class ExtractFromPage(
         }.getOrNull() ?: emptyList()
     }
 
-    private fun String.extractFromManifestJson(baseUrl: String): List<Icon>? =
+    private fun String.extractFromManifestJson(
+        baseUrl: String,
+    ): List<Icon>? =
         runCatching {
             JsonParser(this).parse()
                 .get<JsonArray>("icons")
@@ -97,7 +114,10 @@ internal class ExtractFromPage(
                 .mapNotNull { createWebAppIcon(baseUrl, it) }
         }.getOrNull()
 
-    private fun createWebAppIcon(baseUrl: String, icon: JsonObject): WebAppIcon? =
+    private fun createWebAppIcon(
+        baseUrl: String,
+        icon: JsonObject,
+    ): WebAppIcon? =
         runCatching {
             WebAppIcon(
                 makeAbsoluteUrl(baseUrl, icon.get("src")),

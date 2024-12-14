@@ -62,7 +62,8 @@ interface Icon {
      *
      * @return area
      */
-    fun inferArea(): Int = inferSize().let {
-        if (it.isValid()) it.width * it.height else 0
-    }
+    fun inferArea(): Int =
+        inferSize().let {
+            if (it.isValid()) it.width * it.height else 0
+        }
 }

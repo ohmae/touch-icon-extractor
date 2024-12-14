@@ -16,11 +16,14 @@ internal class HtmlParser {
      *
      * @return link tags
      */
-    fun extractLinkTags(html: String): List<HtmlTag> =
-        extractElementList(html).filter { it.name.equals("link", true) }
+    fun extractLinkTags(
+        html: String,
+    ): List<HtmlTag> = extractElementList(html).filter { it.name.equals("link", true) }
 
     // VisibleForTesting
-    internal fun extractElementList(html: String): List<HtmlTag> {
+    internal fun extractElementList(
+        html: String,
+    ): List<HtmlTag> {
         val result = mutableListOf<HtmlTag>()
         val a = html.toCharArray()
         var i = 0
@@ -83,23 +86,34 @@ internal class HtmlParser {
         return result
     }
 
-    private fun Char.isNameCharacter(): Boolean =
-        this.isLetterOrDigit() || ":-_.".contains(this)
+    private fun Char.isNameCharacter(): Boolean = this.isLetterOrDigit() || ":-_.".contains(this)
 
-    private fun match(a: CharArray, offset: Int, pattern: String): Boolean {
+    private fun match(
+        a: CharArray,
+        offset: Int,
+        pattern: String,
+    ): Boolean {
         val p = pattern.toCharArray()
         if (a.size < offset + p.size) return false
         return p.indices.none { a[offset + it] != p[it] }
     }
 
-    private fun skip(a: CharArray, start: Int, breakCondition: (Int) -> Boolean): Int {
+    private fun skip(
+        a: CharArray,
+        start: Int,
+        breakCondition: (Int) -> Boolean,
+    ): Int {
         for (i in start until a.size) {
             if (breakCondition(i)) return i
         }
         return a.size
     }
 
-    private fun skipQuoteValue(a: CharArray, start: Int, quote: Char): Int {
+    private fun skipQuoteValue(
+        a: CharArray,
+        start: Int,
+        quote: Char,
+    ): Int {
         var escape = false
         for (i in start until a.size) {
             if (!escape && a[i] == quote) return i

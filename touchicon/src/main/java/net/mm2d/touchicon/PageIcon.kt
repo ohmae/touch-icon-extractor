@@ -90,7 +90,8 @@ data class PageIcon(
      */
     override fun inferSize(): Size = size
 
-    private fun inferSizeInner(): Size = inferSizeFromSizes(sizes).let { size ->
-        if (size.isValid()) size else inferSizeFromUrl(url)
-    }
+    private fun inferSizeInner(): Size =
+        inferSizeFromSizes(sizes).let { size ->
+            if (size.isValid()) size else inferSizeFromUrl(url)
+        }
 }

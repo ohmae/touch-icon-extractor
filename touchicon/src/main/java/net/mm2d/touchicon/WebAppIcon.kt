@@ -72,7 +72,8 @@ data class WebAppIcon(
      */
     override fun inferSize(): Size = size
 
-    private fun inferSizeInner(): Size = inferSizeFromSizes(sizes).let {
-        if (it.isValid()) it else inferSizeFromUrl(url)
-    }
+    private fun inferSizeInner(): Size =
+        inferSizeFromSizes(sizes).let {
+            if (it.isValid()) it else inferSizeFromUrl(url)
+        }
 }
