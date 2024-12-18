@@ -21,7 +21,7 @@ jobs:
     - name: run unit test and send report
       run: |
         chmod +x gradlew
-        ./gradlew :touchicon:koverXmlReport
+        ./gradlew :touchicon:koverXmlReport --warning-mode all
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
