@@ -7,12 +7,16 @@ plugins {
 }
 
 dependencies {
-    dokka(projects.touchicon)
-    dokka(projects.touchiconHttp.okhttp)
+    val dokkaPluginId = libs.plugins.build.logic.documentationDokka.get().pluginId
+    subprojects {
+        plugins.withId(dokkaPluginId) {
+            dokka(this@subprojects)
+        }
+    }
 }
 
 dokka {
-    dokkaPublicationDirectory.set(File(projectDir, "docs/dokka"))
+    basePublicationsDirectory.set(File(projectDir, "docs/dokka"))
 }
 
 val ktlint: Configuration by configurations.creating
