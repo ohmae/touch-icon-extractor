@@ -17,7 +17,7 @@ private fun Project.plugin() {
         apply("org.gradle.java-library")
     }
     java {
-        targetCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_11
     }
 }
 
