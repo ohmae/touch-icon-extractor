@@ -1,5 +1,6 @@
 import net.mm2d.build.Projects
 import net.mm2d.build.pomDescription
+import net.mm2d.build.pomInceptionYear
 import net.mm2d.build.pomName
 
 plugins {
@@ -17,6 +18,7 @@ group = Projects.GROUP_ID
 version = Projects.VERSION_NAME
 pomName = "Touch icon extractor"
 pomDescription = "This is a library to extract WebClip icon information from the website. Available in JVM and Android as this is written in pure Kotlin."
+pomInceptionYear = "2018"
 
 dependencies {
     testImplementation(libs.junit)

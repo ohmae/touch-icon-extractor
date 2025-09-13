@@ -1,5 +1,6 @@
 import net.mm2d.build.Projects
 import net.mm2d.build.pomDescription
+import net.mm2d.build.pomInceptionYear
 import net.mm2d.build.pomName
 
 plugins {
@@ -17,6 +18,7 @@ group = Projects.GROUP_ID
 version = Projects.VERSION_NAME
 pomName = "Touch icon extractor OkHttp adapter"
 pomDescription = "An adapter that replaces Touch icon extractor's Http client with OkHttp"
+pomInceptionYear = "2018"
 
 dependencies {
     api(projects.touchicon)

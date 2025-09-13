@@ -1,12 +1,13 @@
 [versions]
-kotlin = "2.2.0"
+kotlin = "2.2.20"
 dokka = "2.0.0"
 gradleVersionsPlugin = "0.52.0"
 okhttp = "5.1.0"
 dependencyGuard = "0.5.0"
+vanniktechMavenPublish = "0.34.0"
 
 junit = "4.13.2"
-truth = "1.4.4"
+truth = "1.4.5"
 mockk = "1.14.5"
 kover = "0.9.1"
 
@@ -17,6 +18,7 @@ dokkaPlugin = { group = "org.jetbrains.dokka", name = "dokka-gradle-plugin", ver
 gradleVersionsPlugin = { group = "com.github.ben-manes", name = "gradle-versions-plugin", version.ref = "gradleVersionsPlugin" }
 dependencyGuardPlugin = { group = "com.dropbox.dependency-guard", name = "dependency-guard", version.ref = "dependencyGuard" }
 ktlint = { group = "com.pinterest.ktlint", name = "ktlint-cli", version = "1.5.0" }
+vanniktechMavenPublish = { group = "com.vanniktech", name = "gradle-maven-publish-plugin", version.ref = "vanniktechMavenPublish" }
 
 # implementation
 kotlinStdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
@@ -37,6 +39,7 @@ dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 dokkaJavadoc = { id = "org.jetbrains.dokka-javadoc", version.ref = "dokka" }
 gradleVersions = { id = "com.github.ben-manes.versions", version.ref = "gradleVersionsPlugin" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
+vanniktechMavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "vanniktechMavenPublish" }
 
 # build-logic
 build-logic-javaLibrary = { id = "build.logic.javaLibrary", version = "unspecified" }
@@ -53,4 +56,5 @@ plugins = [
     "dokkaPlugin",
     "gradleVersionsPlugin",
     "dependencyGuardPlugin",
+    "vanniktechMavenPublish",
 ]

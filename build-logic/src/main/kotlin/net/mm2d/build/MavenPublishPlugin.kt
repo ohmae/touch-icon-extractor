@@ -1,17 +1,11 @@
 package net.mm2d.build
 
+import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import org.gradle.api.Action
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
-import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
-import org.gradle.api.tasks.SourceSetContainer
-import org.gradle.api.tasks.bundling.Jar
-import org.gradle.kotlin.dsl.get
-import org.gradle.kotlin.dsl.register
-import org.gradle.plugins.signing.SigningExtension
-import java.net.URI
 
 class MavenPublishPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -21,50 +15,41 @@ class MavenPublishPlugin : Plugin<Project> {
 
 private fun Project.plugin() {
     with(pluginManager) {
-        apply("org.gradle.maven-publish")
-        apply("org.gradle.signing")
+        apply("com.vanniktech.maven.publish")
     }
-    tasks.register("javadocJar", Jar::class) {
-        dependsOn("dokkaGenerateModuleJavadoc")
-        archiveClassifier.set("javadoc")
-        from(layout.buildDirectory.dir("dokka-module/javadoc/module"))
-    }
-    tasks.register("sourcesJar", Jar::class) {
-        dependsOn("classes")
-        archiveClassifier.set("sources")
-        from(sourceSets["main"].allSource)
-    }
-    tasks.named("publish") {
-        dependsOn("assemble")
-        dependsOn("javadocJar")
-        dependsOn("sourcesJar")
-    }
-    afterEvaluate {
-        publishing {
-            publications {
-                register<MavenPublication>("mavenJava") {
-                    from(components["java"])
-                    artifact(tasks.getByName("sourcesJar"))
-                    artifact(tasks.getByName("javadocJar"))
-
-                    applyProjectProperty(this@plugin)
+    mavenPublishing {
+        publishToMavenCentral()
+        signAllPublications()
+        afterEvaluate {
+            coordinates(
+                groupId = project.group.toString(),
+                artifactId = project.base.archivesName.get(),
+                version = project.version.toString()
+            )
+        }
+        pom {
+            name.set(project.pomName)
+            description.set(project.pomDescription)
+            url.set(Projects.Url.SITE)
+            inceptionYear.set(project.pomInceptionYear)
+            licenses {
+                license {
+                    name.set("The MIT License")
+                    url.set("https://opensource.org/licenses/MIT")
+                    distribution.set("repo")
                 }
             }
-            repositories {
-                maven {
-                    url = URI("https://oss.sonatype.org/service/local/staging/deploy/maven2")
-                    credentials {
-                        username = findPropertyString("ossrh_username")
-                        password = findPropertyString("ossrh_password")
-                    }
+            developers {
+                developer {
+                    id.set(Projects.DEVELOPER_ID)
+                    name.set(Projects.DEVELOPER_NAME)
                 }
             }
-        }
-        signing {
-            sign(publishing.publications.getByName("mavenJava"))
-        }
-        tasks.named("signMavenJavaPublication") {
-            dependsOn("jar")
+            scm {
+                connection.set(Projects.Url.SCM)
+                developerConnection.set(Projects.Url.SCM)
+                url.set(Projects.Url.GITHUB)
+            }
         }
     }
 }
@@ -99,17 +84,8 @@ private fun MavenPublication.applyProjectProperty(project: Project) {
 }
 
 // DSL
-private val Project.sourceSets: SourceSetContainer
-    get() = (this as ExtensionAware).extensions.getByName("sourceSets") as SourceSetContainer
-
-private val Project.publishing: PublishingExtension
-    get() = (this as ExtensionAware).extensions.getByName("publishing") as PublishingExtension
-
-private fun Project.publishing(configure: Action<PublishingExtension>): Unit =
-    (this as ExtensionAware).extensions.configure("publishing", configure)
-
-private fun Project.signing(configure: Action<SigningExtension>): Unit =
-    (this as ExtensionAware).extensions.configure("signing", configure)
+private fun Project.mavenPublishing(configure: Action<MavenPublishBaseExtension>): Unit =
+    (this as ExtensionAware).extensions.configure("mavenPublishing", configure)
 
 private fun Project.findPropertyString(name: String): String {
     val value = findProperty(name) as? String
@@ -124,3 +100,7 @@ var Project.pomName: String
 var Project.pomDescription: String
     get() = findPropertyString("POM_DESCRIPTION")
     set(value) = setProperty("POM_DESCRIPTION", value)
+
+var Project.pomInceptionYear: String
+    get() = findPropertyString("POM_INCEPTION_YEAR")
+    set(value) = setProperty("POM_INCEPTION_YEAR", value)

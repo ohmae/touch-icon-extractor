@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.gradleVersions) apply false
     alias(libs.plugins.kover) apply false
     alias(libs.plugins.dependencyGuard) apply false
+    alias(libs.plugins.vanniktechMavenPublish) apply false
 }
 
 dependencies {

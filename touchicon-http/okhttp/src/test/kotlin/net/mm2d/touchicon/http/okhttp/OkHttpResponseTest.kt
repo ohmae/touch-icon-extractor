@@ -11,6 +11,7 @@ import com.google.common.truth.Truth.assertThat
 import io.mockk.every
 import io.mockk.mockk
 import okhttp3.Response
+import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -20,23 +21,23 @@ class OkHttpResponseTest {
     @Test
     fun `bodyString Don't crash even if body is null`() {
         val response: Response = mockk()
-        every { response.body } returns null
+        every { response.body } returns "".toResponseBody()
         val okHttpResponse = OkHttpResponse(response)
-        assertThat(okHttpResponse.bodyString()).isNull()
+        assertThat(okHttpResponse.bodyString()).isEmpty()
     }
 
     @Test
     fun `bodyBytes Don't crash even if body is null`() {
         val response: Response = mockk()
-        every { response.body } returns null
+        every { response.body } returns "".toResponseBody()
         val okHttpResponse = OkHttpResponse(response)
-        assertThat(okHttpResponse.bodyBytes()).isNull()
+        assertThat(okHttpResponse.bodyBytes()).isEmpty()
     }
 
     @Test
     fun `close Don't crash even if body is null`() {
         val response: Response = mockk()
-        every { response.body } returns null
+        every { response.body } returns "".toResponseBody()
         val okHttpResponse = OkHttpResponse(response)
         okHttpResponse.close()
     }

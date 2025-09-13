@@ -27,16 +27,16 @@ internal class OkHttpResponse(
     @Throws(IOException::class)
     override fun bodyString(
         limit: Int,
-    ): String? =
-        response.body?.let { body ->
+    ): String =
+        response.body.let { body ->
             if (limit <= 0) body.string() else body.fetchString(limit)
         }
 
     @Throws(IOException::class)
     override fun bodyBytes(
         limit: Int,
-    ): ByteArray? =
-        response.body?.let { body ->
+    ): ByteArray =
+        response.body.let { body ->
             if (limit <= 0) body.bytes() else body.fetchBytes(limit)
         }
 
