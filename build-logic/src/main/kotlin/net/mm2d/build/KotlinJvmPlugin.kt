@@ -3,7 +3,6 @@ package net.mm2d.build
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.dependencies
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 
@@ -21,9 +20,6 @@ private fun Project.plugin() {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
-    }
-    dependencies {
-        implementation(libs.library("kotlinStdlib"))
     }
 }
 
