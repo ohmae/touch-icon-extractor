@@ -9,7 +9,6 @@ plugins {
     alias(libs.plugins.build.logic.kover)
     alias(libs.plugins.build.logic.documentationDokka)
     alias(libs.plugins.build.logic.mavenPublish)
-    alias(libs.plugins.build.logic.gradleVersions)
     alias(libs.plugins.build.logic.dependencyGuard)
 }
 
