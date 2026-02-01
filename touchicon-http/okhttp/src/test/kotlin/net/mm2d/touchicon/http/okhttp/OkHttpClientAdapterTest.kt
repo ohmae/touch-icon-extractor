@@ -79,6 +79,7 @@ class OkHttpClientAdapterTest {
                     "/favicon.ico" -> MockResponse()
                         .setResponseCode(200)
                         .addHeader("Content-Type", "image/png")
+
                     else -> MockResponse().setResponseCode(404)
                 }
             }
@@ -107,6 +108,7 @@ class OkHttpClientAdapterTest {
                     "/favicon.ico" -> MockResponse()
                         .setResponseCode(200)
                         .addHeader("Content-Type", "image/png")
+
                     else -> MockResponse().setResponseCode(404)
                 }
             }
@@ -135,6 +137,7 @@ class OkHttpClientAdapterTest {
                     "/favicon.ico" -> MockResponse()
                         .setResponseCode(200)
                         .setBody(Buffer().readFrom(ByteArrayInputStream(ByteArray(1024))))
+
                     else -> MockResponse().setResponseCode(404)
                 }
             }
@@ -167,6 +170,7 @@ class OkHttpClientAdapterTest {
                     "/favicon.ico" -> MockResponse()
                         .setResponseCode(200)
                         .setBody(Buffer().readFrom(ByteArrayInputStream("12345678901234567890".toByteArray())))
+
                     else -> MockResponse().setResponseCode(404)
                 }
             }

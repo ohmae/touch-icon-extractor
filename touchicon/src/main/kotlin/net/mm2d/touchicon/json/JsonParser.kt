@@ -21,8 +21,11 @@ internal class JsonParser(
     private fun nextValue(): Any? =
         when (nextElementChar("unexpected end of stream")) {
             '{' -> nextObject()
+
             '[' -> nextArray()
+
             '"' -> nextString()
+
             else -> {
                 pos--
                 nextLiteral()
@@ -101,14 +104,21 @@ internal class JsonParser(
                                 p += 4
                                 append(code.toChar())
                             }
+
                             't' -> append('\t')
+
                             'n' -> append('\n')
+
                             'r' -> append('\r')
+
                             'b' -> append('\b')
+
                             else -> append(c)
                         }
                     }
+
                     c == '\\' -> escape = true
+
                     else -> append(c)
                 }
             }

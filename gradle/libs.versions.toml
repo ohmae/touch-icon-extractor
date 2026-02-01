@@ -3,20 +3,20 @@ kotlin = "2.3.0"
 dokka = "2.1.0"
 okhttp = "5.3.2"
 dependencyGuard = "0.5.0"
-vanniktechMavenPublish = "0.34.0"
+vanniktechMavenPublish = "0.36.0"
 versionCatalogUpdate = "1.0.1"
 
 junit = "4.13.2"
 truth = "1.4.5"
-mockk = "1.14.7"
-kover = "0.9.4"
+mockk = "1.14.9"
+kover = "0.9.5"
 
 [libraries]
 # classPath
 kotlinPlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 dokkaPlugin = { group = "org.jetbrains.dokka", name = "dokka-gradle-plugin", version.ref = "dokka" }
 dependencyGuardPlugin = { group = "com.dropbox.dependency-guard", name = "dependency-guard", version.ref = "dependencyGuard" }
-ktlint = { group = "com.pinterest.ktlint", name = "ktlint-cli", version = "1.5.0" }
+ktlint = { group = "com.pinterest.ktlint", name = "ktlint-cli", version = "1.8.0" }
 vanniktechMavenPublish = { group = "com.vanniktech", name = "gradle-maven-publish-plugin", version.ref = "vanniktechMavenPublish" }
 
 # implementation
