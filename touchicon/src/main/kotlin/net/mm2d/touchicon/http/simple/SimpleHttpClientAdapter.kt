@@ -11,7 +11,7 @@ import net.mm2d.touchicon.http.HttpClientAdapter
 import net.mm2d.touchicon.http.HttpResponse
 import java.io.IOException
 import java.net.HttpURLConnection
-import java.net.URL
+import java.net.URI
 import java.net.URLConnection
 
 internal class SimpleHttpClientAdapter(
@@ -47,7 +47,7 @@ internal class SimpleHttpClientAdapter(
     private fun createConnection(
         url: String,
     ): HttpURLConnection =
-        URL(url).openConnection().also {
+        URI(url).toURL().openConnection().also {
             headers.forEach { entry ->
                 it.setRequestProperty(entry.key, entry.value)
             }

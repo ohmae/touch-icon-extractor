@@ -9,7 +9,7 @@ package net.mm2d.touchicon
 
 import net.mm2d.touchicon.http.HttpClientAdapter
 import net.mm2d.touchicon.http.HttpResponse
-import java.net.URL
+import java.net.URI
 
 internal class ExtractFromDomain(
     private val httpClient: HttpClientAdapter,
@@ -67,7 +67,7 @@ internal class ExtractFromDomain(
     private fun makeUrl(
         baseUrl: String,
         tryData: TryData,
-    ): String = URL(URL(baseUrl), "/" + tryData.name).toString()
+    ): String = URI(baseUrl).resolve("/" + tryData.name).toString()
 
     private fun createDomainIcon(
         response: HttpResponse,

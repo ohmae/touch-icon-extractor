@@ -7,16 +7,16 @@
 
 package net.mm2d.touchicon
 
-import java.net.URL
+import java.net.URI
 
 internal fun makeAbsoluteUrl(
     baseUrl: String,
     url: String,
 ): String =
-    URL(baseUrl).let {
+    URI(baseUrl).let {
         if (url.startsWith("//")) {
-            it.protocol + ":" + url
+            it.scheme + ":" + url
         } else {
-            URL(it, url).toString()
+            it.resolve(url).toString()
         }
     }
