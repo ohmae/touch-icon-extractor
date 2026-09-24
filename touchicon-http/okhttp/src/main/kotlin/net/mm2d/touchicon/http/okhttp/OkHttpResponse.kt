@@ -41,7 +41,7 @@ internal class OkHttpResponse(
         }
 
     override fun close() {
-        response.body?.close()
+        response.body.close()
     }
 
     private fun ResponseBody.fetchString(
