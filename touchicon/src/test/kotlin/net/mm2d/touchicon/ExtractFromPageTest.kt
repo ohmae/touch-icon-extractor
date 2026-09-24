@@ -13,6 +13,9 @@ import io.mockk.mockk
 import io.mockk.verify
 import net.mm2d.touchicon.http.HttpClientAdapter
 import net.mm2d.touchicon.http.HttpResponse
+import net.mm2d.touchicon.http.simple.SimpleHttpClientAdapterFactory
+import okhttp3.mockwebserver.MockResponse
+import okhttp3.mockwebserver.MockWebServer
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -20,6 +23,64 @@ import java.io.IOException
 
 @RunWith(JUnit4::class)
 class ExtractFromPageTest {
+    @Test
+    fun manifest_error_response_is_not_read() {
+        val httpClient: HttpClientAdapter = mockk()
+        val response = mockk<HttpResponse>(relaxed = true) {
+            every { isSuccess } returns false
+        }
+        every { httpClient.get("https://www.example.com/manifest.json") } returns response
+        val icons = ExtractFromPage(httpClient).extractFromHtml(
+            "https://www.example.com/",
+            """<link rel="manifest" href="/manifest.json">""",
+            true,
+        )
+        assertThat(icons).isEmpty()
+        verify(exactly = 0) { response.bodyBytes(any()) }
+    }
+
+    @Test
+    fun page_icons_use_redirected_page_url() {
+        val server = MockWebServer()
+        server.start()
+        try {
+            server.enqueue(MockResponse().setResponseCode(302).addHeader("Location", "/new/page.html"))
+            server.enqueue(
+                MockResponse().setResponseCode(200).addHeader("Content-Type", "text/html")
+                    .setBody("""<link rel="icon" href="icon.png">"""),
+            )
+            val icons = ExtractFromPage(SimpleHttpClientAdapterFactory.create())
+                .fromPage(server.url("/old/page.html").toString(), false)
+            assertThat(icons).hasSize(1)
+            assertThat(icons[0].url).isEqualTo(server.url("/new/icon.png").toString())
+        } finally {
+            server.shutdown()
+        }
+    }
+
+    @Test
+    fun manifest_icons_use_redirected_manifest_url() {
+        val server = MockWebServer()
+        server.start()
+        try {
+            server.enqueue(
+                MockResponse().setResponseCode(200).addHeader("Content-Type", "text/html")
+                    .setBody("""<link rel="manifest" href="/old/manifest.json">"""),
+            )
+            server.enqueue(MockResponse().setResponseCode(302).addHeader("Location", "/new/manifest.json"))
+            server.enqueue(
+                MockResponse().setResponseCode(200)
+                    .setBody("""{"icons":[{"src":"icon.png"}]}"""),
+            )
+            val icons = ExtractFromPage(SimpleHttpClientAdapterFactory.create())
+                .fromManifest(server.url("/index.html").toString())
+            assertThat(icons).hasSize(1)
+            assertThat(icons[0].url).isEqualTo(server.url("/new/icon.png").toString())
+        } finally {
+            server.shutdown()
+        }
+    }
+
     @Test
     fun manifest_on_other_origin_is_not_requested() {
         val httpClient: HttpClientAdapter = mockk()

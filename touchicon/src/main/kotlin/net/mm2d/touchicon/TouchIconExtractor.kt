@@ -65,6 +65,8 @@ class TouchIconExtractor(
      * **Do not call from main thread** to avoid NetworkOnMainThreadException
      *
      * The HTML file is downloaded up to the maximum [downloadLimit] and analyzed within that range.
+     * Relative icon URLs are resolved against the URL of the downloaded page after redirects
+     * when the HTTP adapter exposes that URL.
      * Manifests are fetched only from the page's origin and read up to 1 MiB.
      *
      * @param siteUrl
@@ -87,6 +89,8 @@ class TouchIconExtractor(
      * **Do not call from main thread** to avoid NetworkOnMainThreadException
      *
      * The HTML file is downloaded up to the maximum [downloadLimit] and analyzed within that range.
+     * Relative icon URLs are resolved against the URL of the downloaded page or Manifest after redirects
+     * when the HTTP adapter exposes those URLs.
      * Manifests are fetched only from the page's origin and read up to 1 MiB.
      *
      * @param siteUrl

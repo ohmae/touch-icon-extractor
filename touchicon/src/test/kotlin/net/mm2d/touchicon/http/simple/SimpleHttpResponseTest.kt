@@ -10,6 +10,7 @@ package net.mm2d.touchicon.http.simple
 import com.google.common.truth.Truth.assertThat
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import org.junit.Test
 import java.io.IOException
 import java.io.InputStream
@@ -51,6 +52,7 @@ class SimpleHttpResponseTest {
         every { connection.responseCode } returns 200
         every { connection.disconnect() } returns Unit
         SimpleHttpResponse(connection).close()
+        verify(exactly = 1) { connection.disconnect() }
     }
 
     @Test
@@ -62,5 +64,6 @@ class SimpleHttpResponseTest {
         every { connection.responseCode } returns 200
         every { connection.disconnect() } returns Unit
         SimpleHttpResponse(connection).close()
+        verify(exactly = 1) { connection.disconnect() }
     }
 }

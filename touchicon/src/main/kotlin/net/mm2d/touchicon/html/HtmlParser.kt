@@ -58,21 +58,22 @@ internal class HtmlParser {
                 val attrNameEnd = skip(a, i) { !a[it].isNameCharacter() }
                 if (attrNameEnd == i || attrNameEnd >= a.size) break
                 val attrName = String(a, i, attrNameEnd - i)
-                i = attrNameEnd
+                i = skip(a, attrNameEnd) { !a[it].isWhitespace() }
+                if (i >= a.size) break
                 if (a[i] != '=') {
                     attrs.add(attrName to "")
                     continue
                 }
-                if (++i >= a.size) break
+                i = skip(a, i + 1) { !a[it].isWhitespace() }
+                if (i >= a.size) break
                 val c = a[i]
-                if (c.isWhitespace()) continue
                 val quote = c == '"' || c == '\''
                 val attrValueEnd = if (quote) {
                     skipQuoteValue(a, ++i, c)
                 } else {
                     skip(a, i) { a[it].isWhitespace() || a[it] == '>' }
                 }
-                if (attrValueEnd == i || attrValueEnd >= a.size) {
+                if (attrValueEnd >= a.size) {
                     break
                 }
                 val attrValue = String(a, i, attrValueEnd - i)

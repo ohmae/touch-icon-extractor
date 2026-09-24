@@ -87,6 +87,8 @@ adapters follow at most five same-origin redirects and do not forward configured
 headers to a different origin through a redirect. Applications that accept
 untrusted site URLs must validate the initial URL and its resolved address.
 Custom HTTP adapters must enforce the same redirect restriction themselves.
+To resolve relative icon paths after a redirect, a custom adapter can implement
+`EffectiveUrlHttpResponse` on its responses. Both built-in adapters implement it.
 
 If in RxJava
 

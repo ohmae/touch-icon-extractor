@@ -8,6 +8,7 @@
 package net.mm2d.touchicon.http.okhttp
 
 import com.google.common.truth.Truth.assertThat
+import net.mm2d.touchicon.http.EffectiveUrlHttpResponse
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
@@ -34,7 +35,11 @@ class OkHttpClientAdapterTest {
             val client = OkHttpClientAdapter(OkHttpClient()).apply {
                 headers = mapOf("Cookie" to "session=secret")
             }
-            client.get(server.url("/start").toString()).use { assertThat(it.isSuccess).isTrue() }
+            client.get(server.url("/start").toString()).use {
+                assertThat(it.isSuccess).isTrue()
+                assertThat((it as EffectiveUrlHttpResponse).effectiveUrl)
+                    .isEqualTo(server.url("/icon.png").toString())
+            }
             client.get(server.url("/redirect-away").toString()).use { assertThat(it.isSuccess).isFalse() }
             assertThat(server.requestCount).isEqualTo(3)
             assertThat(other.requestCount).isEqualTo(0)

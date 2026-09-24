@@ -76,16 +76,22 @@ internal class SimpleHttpClientAdapter(
 
     private fun createConnection(
         url: String,
-    ): HttpURLConnection =
-        URI(url).toURL().openConnection().also {
+    ): HttpURLConnection {
+        val connection = URI(url).toURL().openConnection() as HttpURLConnection
+        return try {
             headers.forEach { entry ->
-                it.setRequestProperty(entry.key, entry.value)
+                connection.setRequestProperty(entry.key, entry.value)
             }
-            it.setRequestProperty(KEY_USER_AGENT, userAgent)
-            it.setCookie(url)
-            it.connectTimeout = TIMEOUT
-            it.readTimeout = TIMEOUT
-        } as HttpURLConnection
+            connection.setRequestProperty(KEY_USER_AGENT, userAgent)
+            connection.setCookie(url)
+            connection.connectTimeout = TIMEOUT
+            connection.readTimeout = TIMEOUT
+            connection
+        } catch (e: Exception) {
+            connection.disconnect()
+            throw e
+        }
+    }
 
     private fun URLConnection.setCookie(
         url: String,

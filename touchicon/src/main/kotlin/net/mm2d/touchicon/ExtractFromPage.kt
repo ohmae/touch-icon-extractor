@@ -9,6 +9,7 @@ package net.mm2d.touchicon
 
 import net.mm2d.touchicon.html.HtmlParser
 import net.mm2d.touchicon.html.HtmlTag
+import net.mm2d.touchicon.http.EffectiveUrlHttpResponse
 import net.mm2d.touchicon.http.HttpClientAdapter
 import net.mm2d.touchicon.http.HttpResponse
 import net.mm2d.touchicon.json.JsonArray
@@ -21,36 +22,47 @@ internal class ExtractFromPage(
     private val htmlParser: HtmlParser = HtmlParser()
     var downloadLimit: Int = DEFAULT_LIMIT_SIZE
 
+    private data class FetchedHtml(
+        val url: String,
+        val html: String,
+    )
+
     internal fun fromPage(
         siteUrl: String,
         withManifest: Boolean,
     ): List<Icon> {
-        val html = runCatching { fetch(siteUrl) }.getOrNull()
-        return if (html.isNullOrEmpty()) {
+        val page = runCatching { fetch(siteUrl) }.getOrNull()
+        return if (page == null || page.html.isEmpty()) {
             emptyList()
         } else {
-            extractFromHtml(siteUrl, html, withManifest)
+            extractFromHtml(page.url, page.html, withManifest)
         }
     }
 
     internal fun fromManifest(
         siteUrl: String,
     ): List<Icon> {
-        val html = runCatching { fetch(siteUrl) }.getOrNull()
-        return if (html.isNullOrEmpty()) {
+        val page = runCatching { fetch(siteUrl) }.getOrNull()
+        return if (page == null || page.html.isEmpty()) {
             emptyList()
         } else {
-            htmlParser.extractLinkTags(html)
+            htmlParser.extractLinkTags(page.html)
                 .filter { Relationship.of(it.attr("rel")) == Relationship.MANIFEST }
-                .flatMap { extractFromManifest(siteUrl, it.attr("href")) }
+                .flatMap { extractFromManifest(page.url, it.attr("href")) }
         }
     }
 
     private fun fetch(
         url: String,
-    ): String? =
+    ): FetchedHtml? =
         httpClient.get(url).use {
-            if (it.hasHtml()) it.bodyString(downloadLimit) else null
+            if (it.hasHtml()) {
+                it.bodyString(downloadLimit)?.let { html ->
+                    FetchedHtml((it as? EffectiveUrlHttpResponse)?.effectiveUrl ?: url, html)
+                }
+            } else {
+                null
+            }
         }
 
     private fun HttpResponse.hasHtml(): Boolean {
@@ -101,9 +113,11 @@ internal class ExtractFromPage(
         return runCatching {
             httpClient.get(url).use {
                 if (!it.isSuccess) return@use null
+                val effectiveUrl = (it as? EffectiveUrlHttpResponse)?.effectiveUrl ?: url
+                if (!isSameOrigin(siteUrl, effectiveUrl)) return@use null
                 val bytes = it.bodyBytes(MAX_MANIFEST_BYTES + 1)
                 if (bytes != null && bytes.size <= MAX_MANIFEST_BYTES) {
-                    String(bytes).extractFromManifestJson(url)
+                    String(bytes).extractFromManifestJson(effectiveUrl)
                 } else {
                     null
                 }

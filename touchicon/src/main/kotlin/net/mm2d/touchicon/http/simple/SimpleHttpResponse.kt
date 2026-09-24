@@ -7,14 +7,16 @@
 
 package net.mm2d.touchicon.http.simple
 
-import net.mm2d.touchicon.http.HttpResponse
+import net.mm2d.touchicon.http.EffectiveUrlHttpResponse
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.net.HttpURLConnection
 
 internal class SimpleHttpResponse(
     private val connection: HttpURLConnection,
-) : HttpResponse {
+) : EffectiveUrlHttpResponse {
+    override val effectiveUrl: String
+        get() = connection.url.toString()
     override val isSuccess: Boolean = connection.responseCode in 200 until 300
     private val inputStream: InputStream? = try {
         connection.inputStream

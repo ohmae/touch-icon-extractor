@@ -14,6 +14,17 @@ import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
 class HtmlParserTest {
+    @Test
+    fun extractLinkTags_with_spaces_around_equals() {
+        val links = HtmlParser().extractLinkTags(
+            """<link rel = "icon" href = '/favicon.ico' type= "image/x-icon">""",
+        )
+        assertThat(links).hasSize(1)
+        assertThat(links[0].attr("rel")).isEqualTo("icon")
+        assertThat(links[0].attr("href")).isEqualTo("/favicon.ico")
+        assertThat(links[0].attr("type")).isEqualTo("image/x-icon")
+    }
+
     private val expected = listOf(
         mapOf(
             "rel" to "icon",

@@ -10,6 +10,7 @@ package net.mm2d.touchicon.http.simple
 import com.google.common.truth.Truth.assertThat
 import io.mockk.every
 import io.mockk.mockk
+import net.mm2d.touchicon.http.EffectiveUrlHttpResponse
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -33,7 +34,11 @@ class SimpleHttpClientAdapterTest {
             server.enqueue(MockResponse().setResponseCode(200).addHeader("Content-Type", "image/png"))
             server.enqueue(MockResponse().setResponseCode(302).addHeader("Location", other.url("/secret")))
             val client = SimpleHttpClientAdapter().apply { headers = mapOf("Cookie" to "session=secret") }
-            client.get(server.url("/start").toString()).use { assertThat(it.isSuccess).isTrue() }
+            client.get(server.url("/start").toString()).use {
+                assertThat(it.isSuccess).isTrue()
+                assertThat((it as EffectiveUrlHttpResponse).effectiveUrl)
+                    .isEqualTo(server.url("/icon.png").toString())
+            }
             client.get(server.url("/redirect-away").toString()).use { assertThat(it.isSuccess).isFalse() }
             assertThat(server.requestCount).isEqualTo(3)
             assertThat(other.requestCount).isEqualTo(0)

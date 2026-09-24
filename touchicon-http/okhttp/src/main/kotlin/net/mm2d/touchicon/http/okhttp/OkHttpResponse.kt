@@ -7,7 +7,7 @@
 
 package net.mm2d.touchicon.http.okhttp
 
-import net.mm2d.touchicon.http.HttpResponse
+import net.mm2d.touchicon.http.EffectiveUrlHttpResponse
 import okhttp3.Response
 import okhttp3.ResponseBody
 import java.io.ByteArrayOutputStream
@@ -16,7 +16,9 @@ import kotlin.math.min
 
 internal class OkHttpResponse(
     private val response: Response,
-) : HttpResponse {
+) : EffectiveUrlHttpResponse {
+    override val effectiveUrl: String
+        get() = response.request.url.toString()
     override val isSuccess: Boolean
         get() = response.isSuccessful
 
