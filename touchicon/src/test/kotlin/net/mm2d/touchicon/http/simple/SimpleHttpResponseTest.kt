@@ -49,6 +49,7 @@ class SimpleHttpResponseTest {
         val connection: HttpURLConnection = mockk()
         every { connection.inputStream } returns null
         every { connection.responseCode } returns 200
+        every { connection.disconnect() } returns Unit
         SimpleHttpResponse(connection).close()
     }
 
@@ -59,6 +60,7 @@ class SimpleHttpResponseTest {
         every { inputStream.close() } throws IOException()
         every { connection.inputStream } returns inputStream
         every { connection.responseCode } returns 200
+        every { connection.disconnect() } returns Unit
         SimpleHttpResponse(connection).close()
     }
 }

@@ -14,10 +14,13 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Request.Builder
 import java.io.IOException
+import java.net.URI
 
 internal class OkHttpClientAdapter(
-    private val client: OkHttpClient,
+    client: OkHttpClient,
 ) : HttpClientAdapter {
+    private val followRedirects = client.followRedirects
+    private val redirectClient = client.newBuilder().followRedirects(false).followSslRedirects(false).build()
     override var userAgent: String = ""
     override var headers: Map<String, String> = emptyMap()
 
@@ -51,5 +54,40 @@ internal class OkHttpClientAdapter(
             }
         }
 
-    private fun Request.execute(): HttpResponse = OkHttpResponse(client.newCall(this).execute())
+    private fun Request.execute(): HttpResponse {
+        var request = this
+        repeat(MAX_REDIRECTS + 1) { redirects ->
+            val response = redirectClient.newCall(request).execute()
+            val location = if (response.code in 300..399) response.header("Location") else null
+            val nextUrl = location?.let { runCatching { request.url.toUri().resolve(it).toString() }.getOrNull() }
+            if (!followRedirects || redirects == MAX_REDIRECTS || nextUrl == null ||
+                !sameOrigin(request.url.toString(), nextUrl)
+            ) {
+                return OkHttpResponse(response)
+            }
+            response.close()
+            request = request.newBuilder().url(nextUrl).build()
+        }
+        error("unreachable")
+    }
+
+    private fun sameOrigin(
+        first: String,
+        second: String,
+    ): Boolean =
+        runCatching {
+            val a = URI(first)
+            val b = URI(second)
+            fun port(
+                uri: URI,
+            ): Int = uri.port.takeIf { it >= 0 } ?: if (uri.scheme.equals("https", true)) 443 else 80
+            a.scheme.equals(b.scheme, true) &&
+                (a.scheme.equals("http", true) || a.scheme.equals("https", true)) &&
+                a.host != null && a.host.equals(b.host, true) &&
+                a.userInfo == null && b.userInfo == null && port(a) == port(b)
+        }.getOrDefault(false)
+
+    companion object {
+        private const val MAX_REDIRECTS = 5
+    }
 }

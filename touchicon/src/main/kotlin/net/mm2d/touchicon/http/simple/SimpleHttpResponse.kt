@@ -18,7 +18,7 @@ internal class SimpleHttpResponse(
     override val isSuccess: Boolean = connection.responseCode in 200 until 300
     private val inputStream: InputStream? = try {
         connection.inputStream
-    } catch (e: Exception) {
+    } catch (_: Exception) {
         null
     }
 
@@ -41,8 +41,10 @@ internal class SimpleHttpResponse(
     }
 
     override fun close() {
-        runCatching {
-            inputStream?.close()
+        try {
+            runCatching { inputStream?.close() }
+        } finally {
+            connection.disconnect()
         }
     }
 

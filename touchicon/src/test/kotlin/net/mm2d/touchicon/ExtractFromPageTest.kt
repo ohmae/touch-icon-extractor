@@ -10,6 +10,7 @@ package net.mm2d.touchicon
 import com.google.common.truth.Truth.assertThat
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import net.mm2d.touchicon.http.HttpClientAdapter
 import net.mm2d.touchicon.http.HttpResponse
 import org.junit.Test
@@ -19,6 +20,33 @@ import java.io.IOException
 
 @RunWith(JUnit4::class)
 class ExtractFromPageTest {
+    @Test
+    fun manifest_on_other_origin_is_not_requested() {
+        val httpClient: HttpClientAdapter = mockk()
+        val result = ExtractFromPage(httpClient).extractFromHtml(
+            "https://www.example.com/",
+            """<link rel="manifest" href="https://other.example/manifest.json">""",
+            true,
+        )
+        assertThat(result).isEmpty()
+        verify(exactly = 0) { httpClient.get(any()) }
+    }
+
+    @Test
+    fun oversized_manifest_is_rejected() {
+        val httpClient: HttpClientAdapter = mockk()
+        every { httpClient.get("https://www.example.com/manifest.json") } returns mockk(relaxed = true) {
+            every { isSuccess } returns true
+            every { bodyBytes(1024 * 1024 + 1) } returns ByteArray(1024 * 1024 + 1)
+        }
+        val result = ExtractFromPage(httpClient).extractFromHtml(
+            "https://www.example.com/",
+            """<link rel="manifest" href="/manifest.json">""",
+            true,
+        )
+        assertThat(result).isEmpty()
+    }
+
     @Test
     fun extract_icon() {
         val extract = ExtractFromPage(mockk())
@@ -153,7 +181,7 @@ class ExtractFromPageTest {
             httpClient.get("https://www.example.com/manifest.json")
         } returns mockk<HttpResponse>(relaxed = true).also {
             every { it.isSuccess } returns true
-            every { it.bodyString() } returns """
+            every { it.bodyBytes(any()) } returns """
             {
                 "short_name": "short_name",
                 "name": "name",
@@ -169,7 +197,7 @@ class ExtractFromPageTest {
                 }],
                 "start_url": "index.html?launcher=true"
             }
-            """.trimIndent()
+            """.trimIndent().toByteArray()
         }
         val extract = ExtractFromPage(httpClient)
         val result = extract.extractFromHtml(
@@ -200,7 +228,7 @@ class ExtractFromPageTest {
             httpClient.get("https://www.example.com/manifest.json")
         } returns mockk<HttpResponse>(relaxed = true).also {
             every { it.isSuccess } returns true
-            every { it.bodyString() } returns """
+            every { it.bodyBytes(any()) } returns """
             {
                 "short_name": "short_name",
                 "name": "name",
@@ -215,7 +243,7 @@ class ExtractFromPageTest {
                     "density": "4.0"
                 }],
                 "start_url": "index.html?launcher=true"
-            """.trimIndent()
+            """.trimIndent().toByteArray()
         }
         val extract = ExtractFromPage(httpClient)
         val result = extract.extractFromHtml(
@@ -238,7 +266,7 @@ class ExtractFromPageTest {
             httpClient.get("https://www.example.com/manifest.json")
         } returns mockk<HttpResponse>(relaxed = true).also {
             every { it.isSuccess } returns true
-            every { it.bodyString() } returns """
+            every { it.bodyBytes(any()) } returns """
             {
                 "short_name": "short_name",
                 "name": "name",
@@ -254,7 +282,7 @@ class ExtractFromPageTest {
                 }],
                 "start_url": "index.html"
             }
-            """.trimIndent()
+            """.trimIndent().toByteArray()
         }
         val extract = ExtractFromPage(httpClient)
         val result = extract.extractFromHtml(
@@ -294,7 +322,7 @@ class ExtractFromPageTest {
             httpClient.get("https://www.example.com/manifest.json")
         } returns mockk<HttpResponse>(relaxed = true).also {
             every { it.isSuccess } returns true
-            every { it.bodyString() } returns null
+            every { it.bodyBytes(any()) } returns null
         }
         val extract = ExtractFromPage(httpClient)
         val result = extract.extractFromHtml(
@@ -500,7 +528,7 @@ class ExtractFromPageTest {
             httpClient.get("https://www.example.com/manifest.json")
         } returns mockk<HttpResponse>(relaxed = true).also {
             every { it.isSuccess } returns true
-            every { it.bodyString(any()) } returns """
+            every { it.bodyBytes(any()) } returns """
                 {
                   "icons": [{
                     "src": "images/touch48.png",
@@ -512,7 +540,7 @@ class ExtractFromPageTest {
                     "type": "image/png"
                   }]
                 }
-            """.trimIndent()
+            """.trimIndent().toByteArray()
         }
         val extract = ExtractFromPage(httpClient)
         val results = extract.fromManifest("https://www.example.com/")

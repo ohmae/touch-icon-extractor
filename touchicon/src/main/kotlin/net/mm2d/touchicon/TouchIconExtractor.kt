@@ -65,6 +65,7 @@ class TouchIconExtractor(
      * **Do not call from main thread** to avoid NetworkOnMainThreadException
      *
      * The HTML file is downloaded up to the maximum [downloadLimit] and analyzed within that range.
+     * Manifests are fetched only from the page's origin and read up to 1 MiB.
      *
      * @param siteUrl
      * URL of analysis target page
@@ -86,6 +87,7 @@ class TouchIconExtractor(
      * **Do not call from main thread** to avoid NetworkOnMainThreadException
      *
      * The HTML file is downloaded up to the maximum [downloadLimit] and analyzed within that range.
+     * Manifests are fetched only from the page's origin and read up to 1 MiB.
      *
      * @param siteUrl
      * URL of analysis target page
@@ -162,6 +164,7 @@ class TouchIconExtractor(
      * In this method, HTTP GET is used to confirm the existence of the icon,
      * and if there is an icon, download is also done.
      * The result is returned with icon information and binary Pair.
+     * Icon files larger than 10 MiB are ignored.
      *
      * Do not call from main thread.
      *

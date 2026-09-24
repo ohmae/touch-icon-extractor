@@ -22,6 +22,29 @@ import java.io.ByteArrayInputStream
 @RunWith(JUnit4::class)
 class OkHttpClientAdapterTest {
     @Test
+    fun redirects_only_within_same_origin() {
+        val server = MockWebServer()
+        val other = MockWebServer()
+        server.start()
+        other.start()
+        try {
+            server.enqueue(MockResponse().setResponseCode(302).addHeader("Location", "/icon.png"))
+            server.enqueue(MockResponse().setResponseCode(200).addHeader("Content-Type", "image/png"))
+            server.enqueue(MockResponse().setResponseCode(302).addHeader("Location", other.url("/secret")))
+            val client = OkHttpClientAdapter(OkHttpClient()).apply {
+                headers = mapOf("Cookie" to "session=secret")
+            }
+            client.get(server.url("/start").toString()).use { assertThat(it.isSuccess).isTrue() }
+            client.get(server.url("/redirect-away").toString()).use { assertThat(it.isSuccess).isFalse() }
+            assertThat(server.requestCount).isEqualTo(3)
+            assertThat(other.requestCount).isEqualTo(0)
+        } finally {
+            server.shutdown()
+            other.shutdown()
+        }
+    }
+
+    @Test
     fun userAgent() {
         var recordedRequest: RecordedRequest? = null
         val server = MockWebServer()

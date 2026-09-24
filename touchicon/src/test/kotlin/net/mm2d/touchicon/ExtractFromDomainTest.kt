@@ -20,6 +20,22 @@ import java.io.IOException
 @RunWith(JUnit4::class)
 class ExtractFromDomainTest {
     @Test
+    fun oversized_icon_is_rejected() {
+        val httpClient = mockk<HttpClientAdapter>(relaxed = true)
+        every { httpClient.get(any()) } returns mockk(relaxed = true) {
+            every { isSuccess } returns true
+            every { header("Content-Type") } returns "image/png"
+            every { bodyBytes(10 * 1024 * 1024 + 1) } returns ByteArray(10 * 1024 * 1024 + 1)
+        }
+        val result = ExtractFromDomain(httpClient).fromDomainWithDownload(
+            "https://www.example.com/",
+            false,
+            emptyList(),
+        )
+        assertThat(result).isNull()
+    }
+
+    @Test
     fun invoke_success_precomposed() {
         val baseUrl = "https://www.example.com"
         val httpClient = mockk<HttpClientAdapter>(relaxed = true)
@@ -146,7 +162,7 @@ class ExtractFromDomainTest {
         } returns mockk(relaxed = true) {
             every { isSuccess } returns true
             every { header("Content-Type") } returns "image/x-icon"
-            every { bodyBytes() } returns byteArrayOf(0)
+            every { bodyBytes(any()) } returns byteArrayOf(0)
         }
         val extract = ExtractFromDomain(httpClient)
         val icon = extract.fromDomainWithDownload("$baseUrl/index.html", true, emptyList())!!
@@ -232,7 +248,7 @@ class ExtractFromDomainTest {
         } returns mockk(relaxed = true) {
             every { isSuccess } returns true
             every { header("Content-Type") } returns "image/x-icon"
-            every { bodyBytes() } throws IOException()
+            every { bodyBytes(any()) } throws IOException()
         }
         val extract = ExtractFromDomain(httpClient)
         val icon = extract.fromDomainWithDownload("$baseUrl/index.html", true, emptyList())
@@ -248,7 +264,7 @@ class ExtractFromDomainTest {
         } returns mockk(relaxed = true) {
             every { isSuccess } returns true
             every { header("Content-Type") } returns "image/x-icon"
-            every { bodyBytes() } returns null
+            every { bodyBytes(any()) } returns null
         }
         val extract = ExtractFromDomain(httpClient)
         val icon = extract.fromDomainWithDownload("$baseUrl/index.html", true, emptyList())
@@ -264,7 +280,7 @@ class ExtractFromDomainTest {
         } returns mockk(relaxed = true) {
             every { isSuccess } returns true
             every { header("Content-Type") } returns "text/html"
-            every { bodyBytes() } returns null
+            every { bodyBytes(any()) } returns null
         }
         val extract = ExtractFromDomain(httpClient)
         val icon = extract.fromDomainWithDownload("$baseUrl/index.html", true, emptyList())

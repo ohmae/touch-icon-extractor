@@ -20,3 +20,19 @@ internal fun makeAbsoluteUrl(
             it.resolve(url).toString()
         }
     }
+
+internal fun isSameOrigin(
+    first: String,
+    second: String,
+): Boolean =
+    runCatching {
+        val a = URI(first)
+        val b = URI(second)
+        fun port(
+            uri: URI,
+        ): Int = uri.port.takeIf { it >= 0 } ?: if (uri.scheme.equals("https", true)) 443 else 80
+        a.scheme.equals(b.scheme, true) &&
+            (a.scheme.equals("http", true) || a.scheme.equals("https", true)) &&
+            a.host != null && a.host.equals(b.host, true) &&
+            a.userInfo == null && b.userInfo == null && port(a) == port(b)
+    }.getOrDefault(false)

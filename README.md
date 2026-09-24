@@ -81,6 +81,13 @@ GlobalScope.launch(Dispatchers.Main) {
 }
 ```
 
+Web App Manifests are fetched only from the page's origin and are limited to 1 MiB.
+`fromDomainWithDownload` ignores icon files larger than 10 MiB. The built-in HTTP
+adapters follow at most five same-origin redirects and do not forward configured
+headers to a different origin through a redirect. Applications that accept
+untrusted site URLs must validate the initial URL and its resolved address.
+Custom HTTP adapters must enforce the same redirect restriction themselves.
+
 If in RxJava
 
 ```kotlin

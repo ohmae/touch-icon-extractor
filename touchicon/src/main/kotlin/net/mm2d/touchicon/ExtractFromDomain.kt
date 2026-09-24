@@ -59,8 +59,9 @@ internal class ExtractFromDomain(
             val url = makeUrl(baseUrl, tryData)
             httpClient.get(url).use {
                 val icon = createDomainIcon(it, url, tryData)
-                val bytes = it.bodyBytes()
-                if (icon != null && bytes != null) icon to bytes else null
+                if (icon == null) return@use null
+                val bytes = it.bodyBytes(MAX_ICON_BYTES + 1)
+                if (bytes != null && bytes.size <= MAX_ICON_BYTES) icon to bytes else null
             }
         }.getOrNull()
 
@@ -129,5 +130,6 @@ internal class ExtractFromDomain(
         private const val APPLE_TOUCH_ICON = "apple-touch-icon"
         private const val PNG = "png"
         private const val PRECOMPOSED = "precomposed"
+        private const val MAX_ICON_BYTES = 10 * 1024 * 1024
     }
 }

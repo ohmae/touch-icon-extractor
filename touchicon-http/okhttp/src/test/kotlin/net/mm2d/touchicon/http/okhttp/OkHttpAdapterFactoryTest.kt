@@ -8,7 +8,7 @@
 package net.mm2d.touchicon.http.okhttp
 
 import com.google.common.truth.Truth.assertThat
-import io.mockk.mockk
+import okhttp3.OkHttpClient
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -17,7 +17,7 @@ import org.junit.runners.JUnit4
 class OkHttpAdapterFactoryTest {
     @Test
     fun create() {
-        assertThat(OkHttpAdapterFactory.create(mockk()))
+        assertThat(OkHttpAdapterFactory.create(OkHttpClient()))
             .isInstanceOf(OkHttpClientAdapter::class.java)
     }
 }

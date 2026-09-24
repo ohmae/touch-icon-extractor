@@ -97,9 +97,16 @@ internal class ExtractFromPage(
     ): List<Icon> {
         if (href.isEmpty()) return emptyList()
         val url = makeAbsoluteUrl(siteUrl, href)
+        if (!isSameOrigin(siteUrl, url)) return emptyList()
         return runCatching {
             httpClient.get(url).use {
-                it.bodyString()?.extractFromManifestJson(url)
+                if (!it.isSuccess) return@use null
+                val bytes = it.bodyBytes(MAX_MANIFEST_BYTES + 1)
+                if (bytes != null && bytes.size <= MAX_MANIFEST_BYTES) {
+                    String(bytes).extractFromManifestJson(url)
+                } else {
+                    null
+                }
             }
         }.getOrNull() ?: emptyList()
     }
@@ -129,5 +136,6 @@ internal class ExtractFromPage(
 
     companion object {
         private const val DEFAULT_LIMIT_SIZE = 1024 * 64
+        private const val MAX_MANIFEST_BYTES = 1024 * 1024
     }
 }

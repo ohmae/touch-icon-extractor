@@ -23,26 +23,56 @@ internal class SimpleHttpClientAdapter(
     @Throws(IOException::class)
     override fun head(
         url: String,
-    ): HttpResponse =
-        SimpleHttpResponse(
-            createConnection(url).also {
-                it.requestMethod = "HEAD"
-                it.connect()
-                it.extractCookie(url)
-            },
-        )
+    ): HttpResponse = execute(url, "HEAD")
 
     @Throws(IOException::class)
     override fun get(
         url: String,
-    ): HttpResponse =
-        SimpleHttpResponse(
-            createConnection(url).also {
-                it.requestMethod = "GET"
-                it.connect()
-                it.extractCookie(url)
-            },
-        )
+    ): HttpResponse = execute(url, "GET")
+
+    private fun execute(
+        url: String,
+        method: String,
+    ): HttpResponse {
+        var currentUrl = url
+        repeat(MAX_REDIRECTS + 1) { redirects ->
+            val connection = createConnection(currentUrl)
+            try {
+                connection.requestMethod = method
+                connection.instanceFollowRedirects = false
+                connection.connect()
+                connection.extractCookie(currentUrl)
+                val response = SimpleHttpResponse(connection)
+                val location = if (connection.responseCode in 300..399) response.header("Location") else null
+                val nextUrl = location?.let { URI(currentUrl).resolve(it).toString() }
+                if (redirects == MAX_REDIRECTS || nextUrl == null || !sameOrigin(currentUrl, nextUrl)) {
+                    return response
+                }
+                response.close()
+                currentUrl = nextUrl
+            } catch (e: Exception) {
+                connection.disconnect()
+                throw e
+            }
+        }
+        error("unreachable")
+    }
+
+    private fun sameOrigin(
+        first: String,
+        second: String,
+    ): Boolean =
+        runCatching {
+            val a = URI(first)
+            val b = URI(second)
+            fun port(
+                uri: URI,
+            ): Int = uri.port.takeIf { it >= 0 } ?: if (uri.scheme.equals("https", true)) 443 else 80
+            a.scheme.equals(b.scheme, true) &&
+                (a.scheme.equals("http", true) || a.scheme.equals("https", true)) &&
+                a.host != null && a.host.equals(b.host, true) &&
+                a.userInfo == null && b.userInfo == null && port(a) == port(b)
+        }.getOrDefault(false)
 
     private fun createConnection(
         url: String,
@@ -79,5 +109,6 @@ internal class SimpleHttpClientAdapter(
         private const val KEY_USER_AGENT = "User-Agent"
         private const val KEY_SET_COOKIE = "Set-Cookie"
         private const val KEY_COOKIE = "Cookie"
+        private const val MAX_REDIRECTS = 5
     }
 }
