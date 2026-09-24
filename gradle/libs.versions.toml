@@ -1,10 +1,10 @@
 [versions]
-kotlin = "2.4.10"
+kotlin = "2.4.20"
 dokka = "2.2.0"
-okhttp = "5.4.0"
+okhttp = "5.5.0"
 dependencyGuard = "0.5.0"
 vanniktechMavenPublish = "0.37.0"
-versionCatalogUpdate = "1.1.0"
+versionCatalogUpdate = "1.1.1"
 
 junit = "4.13.2"
 truth = "1.4.5"
